@@ -99,7 +99,7 @@ $query_builder = TRUE;
 // );
 
 
-// DB CONFIG LOCAL
+// DB CONFIG DEVELOP
 
 $db['default'] = array(
 	'dsn'	=> '',

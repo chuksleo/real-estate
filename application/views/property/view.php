@@ -1,4 +1,20 @@
+<?php
+$number = 235000;
+setlocale(LC_MONETARY,"de_DE");
+?> 
 
+<script type="text/javascript">
+  
+
+    function setView()
+    {
+      
+      $('#number').show();
+      $('#view-p-text').hide();
+    }
+
+
+</script>
 <?php
 //Loading header
 $data['title'] = 'Login';
@@ -12,17 +28,37 @@ $this->load->view('section/header', $data);
 //  $link_text = $this->campaign_model->cleanTitle($campaign->Title);
 
 
-
+ if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')   
+         $url = "https://";   
+    else  
+         $url = "http://";   
+    // Append the host(domain name, ip) to the URL.   
+    $url.= $_SERVER['HTTP_HOST'];   
+    
+    // Append the requested resource location to the URL   
+    $url.= $_SERVER['REQUEST_URI'];    
 
 
 ?>
 
- <!-- End Site Header --> 
-  <!-- Site Showcase -->
-  <div class="site-showcase"> 
-    <!-- Start Google Map -->
-    <div class="clearfix map-single-page" id="gmap"></div>
-    <!-- End Google Map --> 
+
+
+
+ 
+
+ <!-- Site Showcase -->
+  <div class="site-showcase">
+    <!-- Start Page Header -->
+    <div class="parallax page-header" style="background-image:url(<?= base_url() ?>assets/images/file2.jpg);">
+          <div class="container">
+              <div class="row">
+                  <div class="col-md-12">
+                      <h1>Property Simple Listing</h1>
+                  </div>
+             </div>
+         </div>
+    </div>
+    <!-- End Page Header -->
   </div>
   <!-- Start Content -->
   <div class="main" role="main">
@@ -32,7 +68,7 @@ $this->load->view('section/header', $data);
           <div class="col-md-8">
             <div class="single-property">
               <h2 class="page-title"><?= $property->title ?>, <span class="location"><?= $property->location_title ?></span></h2>
-              <div class="price"><strong>$</strong><span><?= $property->price ?></span></div>
+              <div class="price"><strong>$</strong><span><?= $price = $this->property_model->getMoneyFormat($property->price) ?></span></div>
               <div class="property-amenities clearfix"> <span class="area"><strong>For</strong><?= $property->property_option ?></span> <span class="area"><strong><?= $property->size_sqm ?></strong>Area</span> <span class="baths"><strong><?= $property->bathrooms ?></strong>Baths</span> <span class="beds"><strong><?= $property->bedrooms ?></strong>Beds</span> <span class="parking"><strong><?= $property->agreement_fee ?></strong>Fees</span> </div>
               <div class="property-slider">
                 <div id="property-images" class="flexslider">
@@ -95,31 +131,46 @@ $this->load->view('section/header', $data);
           <div class="sidebar right-sidebar col-md-4">
               <div class="widget">
                   <h3 class="widgettitle">Agent</h3>
+
+                   <div class="col-md-12 col-sm-12 featured-block"> <img src="http://placehold.it/600x600&amp;text=IMAGE+PLACEHOLDER" alt="Search Anywhere" class="img-thumbnail">
+              <h3>Chukwuka Chime</h3>
+              <p></p>
+              </div>
                   <div class="agent">
-                    <img src="http://placehold.it/600x400&amp;text=IMAGE+PLACEHOLDER" alt="Mia Kennedy" class="margin-20">
-                      <h4><a href="agent-single.html">Mia Keneddy</a></h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi vehicula dapibus mauris, quis ullamcorper enim aliquet sed. Maecenas quis eget tellus dui. Vivamus condimentum egestas.</p>
+
                     <div class="agent-contacts clearfix">
-                      <a href="#" class="btn btn-primary pull-right btn-sm">Contact Agent</a>
-                        <ul>
+
+
+
+
+
+
+
+                      <a href="#" onclick="setView()" class="contact-btn btn btn-primary btn-block btn-lg pull-left"><span id="view-p-text" >View Contact</span><span id="number" style="display: none;">09087654321</span></a>
+
+                      <br><br><br><br>
+                      <a href="#" class="btn btn-primary btn-block btn-lg pull-left">Send Message</a>
+                        <!-- <ul>
                             <li><a href="#"><i class="fa fa-facebook"></i></a></li>
                               <li><a href="#"><i class="fa fa-twitter"></i></a></li>
                             <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
                           <li><a href="#"><i class="fa fa-envelope"></i></a></li>
-                        </ul>
+                        </ul> -->
+
+                        
                       </div>
                   </div>
               </div>
-              <div class="widget">
+                 <div class="widget">
                   <h3 class="widgettitle">Description</h3>
                   <div id="description">
                     <?= $property->description ?>
                   </div>
-
-
-                  
                </div>
-              <div class="widget">
+
+
+
+               <div class="widget">
                   <h3 class="widgettitle">Additional Amenities</h3>
                   <div id="amenities">
                     <div class="additional-amenities">
@@ -141,6 +192,61 @@ $this->load->view('section/header', $data);
                      </div>
                   </div>
               </div>
+
+
+
+
+               <div class="widget">
+                  <h3 class="widgettitle">Share</h3>
+                  <div class="agent">
+                   <div class="agent-contacts clearfix">
+                     <ul>
+                        <li class="share-list">
+
+
+                              <a  href="http://twitter.com/share?url=<?php echo $url ?>&text=<?php echo $property->title ?>&hashtags=impactalifethroughDonofund" target="_blank"><img src="<?php echo base_url() ?>assets/images/icon/twitter.png"></a>
+                              
+                        </li>
+
+
+
+                        <li class="share-list"> <a href="http://www.facebook.com/sharer.php?u=<?php echo $url ?>" target="_blank"><img src="<?php echo base_url() ?>assets/images/icon/facebook.png"></a>
+                          
+                          </li>            
+
+
+                        <li class="share-list"> <a href="#" target="_blank"><img src="<?php echo base_url() ?>assets/images/icon/print.png"></a>
+                           
+                        </li>
+
+          </ul>
+                      </div>
+                  </div>
+              </div>
+
+
+
+             
+
+
+               <div class="widget">
+                  <h3 class="widgettitle">Safty Tips</h3>
+                  <div id="description">
+                   <ul class="b-advert-safety-list">
+                      <li>Do not submit any upfront fees for a real estate inspection.</li>
+                      <li> Do not go to unfamiliar places alone.</li>
+                      <li>Double check real estate agency background and reviews </li>
+                </ul>
+                  </div>
+
+
+
+
+
+
+                  
+               </div>
+             
            </div>
         </div>
       </div>

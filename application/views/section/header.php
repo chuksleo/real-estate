@@ -200,10 +200,7 @@ function contact_us()
                  <a href="<?php echo base_url() ?>#"><?php  echo "Lets Build For You" ?></a>
                                   
                 </li>
-                <li class="">
-                 <a href="<?php echo base_url() ?>#"><?php  echo "Blog" ?></a>
-                                  
-                </li>
+                
 
 
                 <li class="">
@@ -217,7 +214,10 @@ function contact_us()
                                   
                  </li>
 
-
+                <!--  <li class="">
+                 <a href="<?php echo base_url() ?>blog"><?php  echo "Blog" ?></a>
+                                  
+                </li> -->
                 
                   
               </ul>

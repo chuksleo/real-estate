@@ -21,6 +21,7 @@ class Property extends CI_Controller {
         $this->load->helper('form');
         $this->load->model("property_model");
         $this->load->model("location_model");
+        $this->load->model('Property_facility_model');
 
         $this->load->model('property_category_model');
         $this->load->model('inspection_request_model');
@@ -135,6 +136,8 @@ class Property extends CI_Controller {
         $data['action'] = "create";
         if($this->ion_auth->logged_in()){
              if($this->input->post()){
+
+                $locid = $this->location_model->getLocationIdWithTitle($this->input->post("location"));
                 $uid = $this->ion_auth->get_user_id();
                 
                
@@ -146,7 +149,7 @@ class Property extends CI_Controller {
                 $category = $this->input->post("category");
                 $price = $this->input->post('price');
                 $description = $this->input->post("description");
-                $location_id = $this->input->post("location");
+                $location_id = $locid;
                 $address = $this->input->post("address");
                 $property_type_id = $this->input->post("type");
                 $property_condition = $this->input->post("condition");
@@ -168,7 +171,28 @@ class Property extends CI_Controller {
                 $property_option = $this->input->post("options");
                  
                 $status = "Unpublished";
-                $this->property_model->create_property($title, $uid, $image, $end_date, $category, $price, $description, $location_id, $address, $property_type_id, $property_condition, $furnishing='Unfurnished', $size_sqm, $bedrooms, $bathrooms, $pets='No Pets', $property_use='Residential', $smoking='No Smoking', $parties='No Parties', $negotiable, $parking_space='20', $agent_fee='No', $agreement_fee='No', $capacity="100", $video_link='thisisi.mp3', $duration='None', $property_option='Rent', $status);
+                $propertyid = $this->property_model->create_property($title, $uid, $image, $end_date, $category, $price, $description, $location_id, $address, $property_type_id, $property_condition, $furnishing='Unfurnished', $size_sqm, $bedrooms, $bathrooms, $pets='No Pets', $property_use='Residential', $smoking='No Smoking', $parties='No Parties', $negotiable, $parking_space='20', $agent_fee='No', $agreement_fee='No', $capacity="100", $video_link='thisisi.mp3', $duration='None', $property_option='Rent', $status);
+
+
+                if($propertyid){
+                    $data['facilities'] = $this->Property_facility_model->getAllFacilities();
+                    foreach ($data['facilities'] as $facility) {
+                    $clean_title = $this->property_model->cleanTitle($facility->name);
+                    if($this->input->post($clean_title)){
+                        
+                        $facilityid = $this->input->post($clean_title);
+                        if(!$this->property_category_map_model->checkfacilityMap($propertyid, $facilityid)){
+
+                            $this->property_category_map_model->setMap($catid, $typeid);
+
+                        }
+                     
+                    }
+                    
+                      
+                }
+
+                }
                 if($this->ion_auth->is_admin()){ 
                     redirect('/admin/properties', 'refresh');
                 }else{
@@ -181,7 +205,8 @@ class Property extends CI_Controller {
         $width = '850px';
         $data['categories'] = $this->property_category_model->getAllCategories();
         $this->editor($path, $width);
-        $data['locations'] = $this->location_model->getAllLocations();
+        $data['locations'] = $this->location_model->mapLocation();
+        $data['facilities'] = $this->Property_facility_model->getAllFacilities();
 
         
         $this->load->view("property/create" , $data);
@@ -192,6 +217,9 @@ class Property extends CI_Controller {
         }
        
     }
+
+
+
       /**
      * Sets up the CkEditior
      * @param type $path Relative path to the ckeditor files

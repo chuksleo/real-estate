@@ -17,7 +17,7 @@ class Category extends CI_Controller {
     public function __construct() {
         parent::__construct();
       
-        $this->load->model('project_category_model');
+        $this->load->model('property_category_map_model');
     }
     
     public function index () {
@@ -169,6 +169,62 @@ class Category extends CI_Controller {
 
 
      }
+
+
+
+
+    public function get_subcat()
+        {
+
+        $make_id = $this->input->post('makes');
+
+        $data['models'] = "";   
+        $this->load->view('search/drop_subcat', $data);
+
+
+        }
+
+
+    public function get_types()
+        {
+        $page = $this->input->post('page_val');
+
+
+        $catid = $this->input->post('catid');
+
+        $data['types'] = $this->property_category_map_model->getAllCategoriesMap($catid);
+
+
+        if($page == "create"){
+            $this->load->view('category/cat_types_create_property', $data);
+        }else{
+            $this->load->view('category/cat_types', $data);
+
+        }
+        
+
+
+        }
+
+
+
+    public function delete_type()
+        {
+
+        $typeid = $this->input->post('typeid_val');
+        $catid = $this->input->post('catid_val');
+        if($this->property_category_map_model->deletetypeFromCategory($typeid, $catid)){
+
+            print("Deleted successufully!!");
+
+        }else{
+            print("Error Deleting Type");
+        }
+        
+
+
+        }
+
      
 
 }

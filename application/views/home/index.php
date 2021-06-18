@@ -1,8 +1,8 @@
-<style type="text/css">
-  
+<?php 
+      $categories = $this->property_category_model->getAllCategories();
 
 
-</style>
+?>
   <!-- Site Showcase -->
   <div class="site-showcase">
     <div class="slider-mask overlay-transparent"></div>
@@ -25,22 +25,23 @@
             <div class="form-group">
               <div class="row">
                 <div class="col-md-2">
-                    <select name="propery type" class="form-control input-lg selectpicker">
-                        <option selected>Type</option>
-                        <option>Villa</option>
-                        <option>Family House</option>
-                        <option>Single Home</option>
-                        <option>Cottage</option>
-                        <option>Apartment</option>
+                    <select id="select-category"  name="propery-category" class="form-control input-lg selectpicker" onchange="subCatList()">
+                        <option selected>Category ... </option>
+
+                      <?php foreach ($categories as $cat): ?>
+                      <?php  $link_text = $this->property_model->cleanTitle($cat->title);?>
+                     <option value="<?= $cat->catId ?>"><?= $cat->title ?></option>
+                    <?php endforeach ?>
+                        
                     </select>
                 </div>
-                <div class="col-md-3">
-                    <select name="propery contract type" class="form-control input-lg selectpicker">
-                        <option selected>Contract</option>
-                      <option>Rent</option>
-                      <option>Buy</option>
+                 <div class="col-md-2">
+                    <select id="select-subcategory" name="properytype" class="form-control input-lg selectpicker" onchange="show_clips()">
+                        <option selected="selected"></option>
+                       
                     </select>
                 </div>
+               
                 <div class="col-md-3">
                     <select name="propery location" class="form-control input-lg selectpicker">
                         <option selected>Location</option>

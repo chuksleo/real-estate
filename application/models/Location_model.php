@@ -19,7 +19,16 @@ class Location_model extends CI_Model {
         
     public function getAllLocations(){
         $this->db->select()->from('locations AS l')->order_by('l.parentid', 'title');    
-        // $query = $this->db->get("locations AS lo")->group_by('lo.parentid');; 
+        
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+
+    public function getAllParentLocations(){
+        $pid = 0;
+        $this->db->select()->from('locations AS l')->where('l.parentid =',$pid);   
+        
         $query = $this->db->get();
         return $query->result();
     }
@@ -42,6 +51,29 @@ class Location_model extends CI_Model {
             $query = $this->db->get();
             
             return $query->row();
+    
+    }
+
+    public function getLocationByTitle($title) {
+
+            $this->db->select()->from('locations AS l')->where('l.location_title =',$title);
+            
+            
+            $query = $this->db->get();
+            
+            return $query->row();
+    
+    }
+
+
+    public function getLocationByParentId($id) {
+
+            $this->db->select()->from('locations AS l')->where('l.parentid =',$id);
+            
+            
+            $query = $this->db->get();
+            
+            return $query->result();
     
     }
     
@@ -107,5 +139,62 @@ class Location_model extends CI_Model {
 
             return $this->db->delete('locations', $where);
     }
+
+
+
+    public function getLocationIdWithTitle($title){
+
+        $locid = $this->getLocationByTitle($title);
+
+        return $locid;
+    }
+
+
+
+    public function mapLocation(){
+        $data = array();
+        $locations = $this->getAllParentLocations();
+        $i = 0;
+        foreach ($locations as $location) {
+            $toplocation =  null;
+            
+            $toplocation['location'] = $location->location_title;
+            
+            $sublocations = $this->getLocationByParentId($location->lid);
+            $toplocation['sublocation'] = "";
+            if($sublocations){
+                $l = 0;
+                foreach ($sublocations as  $sublocation) {
+
+                    $lastsublocations = $this->getLocationByParentId($sublocation->lid);
+
+                    $toplocation['sublocation'][$l] = $sublocation->location_title;
+                    $toplocation['lastsublocations'] = "";
+                    if($lastsublocations){
+                        $m = 0;
+                        foreach ($lastsublocations as  $lsublocation) {
+                            $toplocation['lastsublocations'][$m] = $lsublocation->location_title;
+
+                        $m++;
+                        }
+                    }
+                    
+                    
+                $l++; 
+                } 
+            }
+            
+            // array_push($data, $toplocation) ; 
+            $data[$i] = $toplocation;
+        
+         $i++;
+        }      
+    // print_r($data);
+
+    return $data;
+    }
+
+
+    
 
 }

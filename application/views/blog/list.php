@@ -1,28 +1,26 @@
-<?php if (!isset($page)):?>
+ 
+ <div class="site-showcase">
+    <!-- Start Page Header -->
+    <div class="parallax page-header" style="background-image:url(<?php echo base_url()?>assets/images/backgrounds/blog.png);">
+          <div class="container">
+              <div class="row">
+                  <div class="col-md-12">
+                      <h1><?php echo $page_name ?></h1>
+                  </div>
+             </div>
+         </div>
+    </div>
 
- <!--Page Header Start-->
-        <section class="page-header" style="background-image: url(<?php echo base_url()?>assets/images/backgrounds/blog.png);">
-            <div class="container">
-                <h2><?php echo $page_name ?></h2>
-                <ul class="thm-breadcrumb list-unstyled">
-                    <li><a href="<?php echo base_url()?>">Home</a></li>
-                    <li><span><?php echo $page_name ?></span></li>
-                </ul>
-            </div>
-        </section>
+ <!-- Start Content -->
+  <div class="main" role="main">
+    <div id="content" class="content full">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-9 posts-archive">
 
-  <?php endif ?>
+           <?php if(!$posts){ ?>
 
-
-
-
-        <section class="blog_one">
-            <div class="container">
-                <div class="row">
-
-                 <?php if(!$posts){ ?>
-
-                <article>
+                <article class="post">
 
 
                    <p class="alert alert-warning">Opps!! Sorry No results Found</p>
@@ -31,43 +29,31 @@
 
 
       <?php } ?>
-              <?php foreach($posts as $post):?>     
-                    <div class="col-xl-4">
-                        <!--Blog One Single-->
-                        <div class="blog_one_single wow fadeInDown animated" data-wow-delay="200ms"
-                            style="visibility: visible; animation-delay: 200ms; animation-name: fadeInDown;">
-                            <div class="blog_one_image">
-                                <img src="<?php echo base_url() ?>assets/uploads/blog/<?php echo $post['post_image'] ?>" alt="">
-                            </div>
-                            <div class="blog-one__content">
-                                <ul class="list-unstyled blog-one__meta">
-                                    <li><a href="news-detail.html"><i class="far fa-user-circle"></i> Admin</a></li>
-                                    <li><a href="news-detail.html"><i class="far fa-comments"></i> 2 Comments</a>
-                                    </li>
-                                </ul>
-                                <div class="blog_one_title">
-                                    <h3><a href="<?php echo base_url() ?>donofund-blog/<?php echo $post['post_id'] ?>/<?php echo str_replace(' ', '-', $post['post_title']) ?>"><?php echo $post['post_title']?></a></h3>
-                                </div>
-                                <div class="blog_one_text">
-                                   <?php echo $post['intro_text']?>
-                                </div>
-                                <div class="date_btn">
-                                <a href="<?php echo base_url() ?>donofund-blog/<?php echo $post['post_id'] ?>/<?php echo str_replace(' ', '-', $post['post_title']) ?>" class="btn btn-gray btn-xs">Read more</a>
-                                   
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-               
-
-<?php endforeach ?>
-
-
+      <?php foreach($posts as $post):?>     
+            <article class="post">
+              <div class="row">
+                <div class="col-md-4 col-sm-4"> <a href="#"><img src="<?= base_url() ?>assets/images/file2.jpg" alt="" class="img-thumbnail"></a> </div>
+                <div class="col-md-8 col-sm-8">
+                  <h3><a href="<?php echo base_url() ?>blog/<?php echo $post['post_id'] ?>/<?php echo str_replace(' ', '-', $post['post_title']) ?>"><?php echo $post['post_title']?></a></h3>
+                  <span class="post-meta meta-data"> <span><i class="fa fa-calendar"></i> 28th Jan, 2014</span><span><i class="fa fa-archive"></i> <a href="#">Uncategorized</a></span> <span><a href="#"><i class="fa fa-comment"></i> 12</a></span></span>
+                 <?php echo $post['intro_text']?>
+                  <p><a href="<?php echo base_url() ?>blog/<?php echo $post['post_id'] ?>/<?php echo str_replace(' ', '-', $post['post_title']) ?>" class="btn btn-primary">Continue reading <i class="fa fa-long-arrow-right"></i></a></p>
                 </div>
-            </div>
-        </section>
+              </div>
+            </article>
+    <?php endforeach ?>
 
-
+           
+            <ul class="pagination">
+              <li><a href="#"><i class="fa fa-chevron-left"></i></a></li>
+              <li class="active"><a href="#">1</a></li>
+              <li><a href="#">2</a></li>
+              <li><a href="#">3</a></li>
+              <li><a href="#">4</a></li>
+              <li><a href="#">5</a></li>
+              <li><a href="#"><i class="fa fa-chevron-right"></i></a></li>
+            </ul>
+          </div>
 
 
 

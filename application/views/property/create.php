@@ -167,7 +167,7 @@ echo validation_errors('<span class="error">', '</span>');
 
             <div class="form-group col-md-6">
               <label for="state">Select Category</label>
-                  <select name="category" class="form-control" required>
+                  <select name="category" id="select-category" onchange="getCategoryTypes('create')" class="form-control" required>
                                                       <option value="" selected>Choose...</option>
                                                       <?php foreach($categories as $cat):?>
                                                       <option value="<?php echo $cat->catId ?>"><?php echo $cat->title ?></option>
@@ -180,12 +180,10 @@ echo validation_errors('<span class="error">', '</span>');
 
 
             <div class="form-group col-md-6">
-              <label for="state">Select Type</label>
-                  <select name="type" class="form-control" required>
+              <label for="state">Select Property  Type</label>
+                  <select name="type" id="types" class="form-control" required>
                                                       <option value="None" selected>Choose...</option>
-                                                       <option value="Rent">Rent</option>
-                                                        <option value="Sale">Sale</option>
-                                                     
+                                                       
                  </select>
                  <div class="valid-feedback">Looks good!</div>
                   <div class="invalid-feedback">Please select a type.</div>
@@ -276,12 +274,15 @@ echo validation_errors('<span class="error">', '</span>');
                         <div class="card-body">
 
                                   <div class="row">
-                                      <div class="col-sm-6 col-md-3">
+
+                                  <?php foreach($facilities as $facility): ?>
+                                    <?php $title =  $this->property_model->cleanTitle($facility->name)?>
+                                      <div class="col-sm-3 col-md-3">
                                           <div class="form-group">
                                            <?php
                                                 $data = array(
-                                                'name'        => 'abscheck',
-                                                'id'          => 'check-abs',
+                                                'name'        => 'check'.$title,
+                                                'id'          => 'check-'.$title,
                                                  'value'       => '1',
                                                  'checked'     => FALSE,
 
@@ -291,361 +292,19 @@ echo validation_errors('<span class="error">', '</span>');
                                               echo form_checkbox($data);
 
                                           ?>
-                                          <label for="check-abs">ABS</label>
+                                          <label for="check-<?= $title ?>"><?= $facility->name ?></label>
                                           </div>
 
-                                          <div class="form-group">
-                                            <?php
-                                              $data = array(
-                                              'name'        => 'edscheck',
-                                              'id'          => 'check-eds',
-                                               'value'       => '1',
-                                              'checked'     => FALSE,
 
-                                              );
+                                         </div><!--end Col -->
 
-                                                echo form_checkbox($data);
-
-                                            ?>
-
-
-                                              <label for="check-eds">EDS</label>
-                                        </div>
-
-                                        <div class="form-group">
-                                                                               <?php
-                                            $data = array(
-                                            'name'        => 'espcheck',
-                                            'id'          => 'check-esp',
-                                             'value'       => '1',
-                                            'checked'     => FALSE,
-
-                                            );
-
-                                              echo form_checkbox($data);
-
-                                          ?>
-                                      <label for="check-esp">ESP</label>
-                                                                            </div>
-
-                                        <div class="form-group">
-                                                                                <?php
-                                            $data = array(
-                                            'name'        => 'airconcheck',
-                                            'id'          => 'check-air-conditioning',
-                                             'value'       => '1',
-                                            'checked'     => FALSE,
-
-                                            );
-
-                                              echo form_checkbox($data);
-
-                                          ?>
-                                            <label for="check-air-conditioning">Air conditioning</label>
-                                       </div>
-
-
-                                        <div class="form-group">
-                                          <?php
-                                                $data = array(
-                                                'name'        => 'parkcheck',
-                                                'id'          => 'check-parking-guide',
-                                                 'value'       => '1',
-                                                'checked'     => FALSE,
-
-                                                );
-
-                                                  echo form_checkbox($data);
-
-                                              ?>
-                                          <label for="checkbox-steering-wheel">parking sensors</label>
-                                            </div>
+                                         <?php endforeach ?>
                                 </div>
-
-
-
-            
-                                <!-- Second Row -->
-
-
-
-                                                   <div class="col-sm-6 col-md-3">
-                                          <div class="form-group">
-                                           <?php
-                                                $data = array(
-                                                'name'        => 'abscheck',
-                                                'id'          => 'check-abs',
-                                                 'value'       => '1',
-                                                 'checked'     => FALSE,
-
-
-                                                  );
-
-                                              echo form_checkbox($data);
-
-                                          ?>
-                                          <label for="check-abs">ABS</label>
-                                          </div>
-
-                                          <div class="form-group">
-                                            <?php
-                                              $data = array(
-                                              'name'        => 'edscheck',
-                                              'id'          => 'check-eds',
-                                               'value'       => '1',
-                                              'checked'     => FALSE,
-
-                                              );
-
-                                                echo form_checkbox($data);
-
-                                            ?>
-
-
-                                              <label for="check-eds">EDS</label>
-                                        </div>
-
-                                        <div class="form-group">
-                                                                               <?php
-                                            $data = array(
-                                            'name'        => 'espcheck',
-                                            'id'          => 'check-esp',
-                                             'value'       => '1',
-                                            'checked'     => FALSE,
-
-                                            );
-
-                                              echo form_checkbox($data);
-
-                                          ?>
-                                      <label for="check-esp">ESP</label>
-                                                                            </div>
-
-                                        <div class="form-group">
-                                                                                <?php
-                                            $data = array(
-                                            'name'        => 'airconcheck',
-                                            'id'          => 'check-air-conditioning',
-                                             'value'       => '1',
-                                            'checked'     => FALSE,
-
-                                            );
-
-                                              echo form_checkbox($data);
-
-                                          ?>
-                                            <label for="check-air-conditioning">Air conditioning</label>
-                                       </div>
-
-
-                                        <div class="form-group">
-                                          <?php
-                                                $data = array(
-                                                'name'        => 'parkcheck',
-                                                'id'          => 'check-parking-guide',
-                                                 'value'       => '1',
-                                                'checked'     => FALSE,
-
-                                                );
-
-                                                  echo form_checkbox($data);
-
-                                              ?>
-                                          <label for="checkbox-steering-wheel">parking sensors</label>
-                                            </div>
-                                </div>
-
-
-
-                                <!-- Third Row -->
-
-
-
-                                                   <div class="col-sm-6 col-md-3">
-                                          <div class="form-group">
-                                           <?php
-                                                $data = array(
-                                                'name'        => 'abscheck',
-                                                'id'          => 'check-abs',
-                                                 'value'       => '1',
-                                                 'checked'     => FALSE,
-
-
-                                                  );
-
-                                              echo form_checkbox($data);
-
-                                          ?>
-                                          <label for="check-abs">ABS</label>
-                                          </div>
-
-                                          <div class="form-group">
-                                            <?php
-                                              $data = array(
-                                              'name'        => 'edscheck',
-                                              'id'          => 'check-eds',
-                                               'value'       => '1',
-                                              'checked'     => FALSE,
-
-                                              );
-
-                                                echo form_checkbox($data);
-
-                                            ?>
-
-
-                                              <label for="check-eds">EDS</label>
-                                        </div>
-
-                                        <div class="form-group">
-                                                                               <?php
-                                            $data = array(
-                                            'name'        => 'espcheck',
-                                            'id'          => 'check-esp',
-                                             'value'       => '1',
-                                            'checked'     => FALSE,
-
-                                            );
-
-                                              echo form_checkbox($data);
-
-                                          ?>
-                                      <label for="check-esp">ESP</label>
-                                                                            </div>
-
-                                        <div class="form-group">
-                                                                                <?php
-                                            $data = array(
-                                            'name'        => 'airconcheck',
-                                            'id'          => 'check-air-conditioning',
-                                             'value'       => '1',
-                                            'checked'     => FALSE,
-
-                                            );
-
-                                              echo form_checkbox($data);
-
-                                          ?>
-                                            <label for="check-air-conditioning">Air conditioning</label>
-                                       </div>
-
-
-                                        <div class="form-group">
-                                          <?php
-                                                $data = array(
-                                                'name'        => 'parkcheck',
-                                                'id'          => 'check-parking-guide',
-                                                 'value'       => '1',
-                                                'checked'     => FALSE,
-
-                                                );
-
-                                                  echo form_checkbox($data);
-
-                                              ?>
-                                          <label for="checkbox-steering-wheel">parking sensors</label>
-                                            </div>
-                                </div>
-
-
-                                <!-- Fourth Row -->
-
-                                                   <div class="col-sm-6 col-md-3">
-                                          <div class="form-group">
-                                           <?php
-                                                $data = array(
-                                                'name'        => 'abscheck',
-                                                'id'          => 'check-abs',
-                                                 'value'       => '1',
-                                                 'checked'     => FALSE,
-
-
-                                                  );
-
-                                              echo form_checkbox($data);
-
-                                          ?>
-                                          <label for="check-abs">ABS</label>
-                                          </div>
-
-                                          <div class="form-group">
-                                            <?php
-                                              $data = array(
-                                              'name'        => 'edscheck',
-                                              'id'          => 'check-eds',
-                                               'value'       => '1',
-                                              'checked'     => FALSE,
-
-                                              );
-
-                                                echo form_checkbox($data);
-
-                                            ?>
-
-
-                                              <label for="check-eds">EDS</label>
-                                        </div>
-
-                                        <div class="form-group">
-                                                                               <?php
-                                            $data = array(
-                                            'name'        => 'espcheck',
-                                            'id'          => 'check-esp',
-                                             'value'       => '1',
-                                            'checked'     => FALSE,
-
-                                            );
-
-                                              echo form_checkbox($data);
-
-                                          ?>
-                                      <label for="check-esp">ESP</label>
-                                                                            </div>
-
-                                        <div class="form-group">
-                                                                                <?php
-                                            $data = array(
-                                            'name'        => 'airconcheck',
-                                            'id'          => 'check-air-conditioning',
-                                             'value'       => '1',
-                                            'checked'     => FALSE,
-
-                                            );
-
-                                              echo form_checkbox($data);
-
-                                          ?>
-                                            <label for="check-air-conditioning">Air conditioning</label>
-                                       </div>
-
-
-                                        <div class="form-group">
-                                          <?php
-                                                $data = array(
-                                                'name'        => 'parkcheck',
-                                                'id'          => 'check-parking-guide',
-                                                 'value'       => '1',
-                                                'checked'     => FALSE,
-
-                                                );
-
-                                                  echo form_checkbox($data);
-
-                                              ?>
-                                          <label for="checkbox-steering-wheel">parking sensors</label>
-                                            </div>
-                                </div>
-
-
-
-
-
-
 
 
                                             </div><!-- end row -->
 
-                        </div></div>
+                        </div>
 
 
 
@@ -669,8 +328,29 @@ echo validation_errors('<span class="error">', '</span>');
                   <select name="location" class="form-control" required>
                                                       <option value="" selected>Choose...</option>
                                                       <?php foreach($locations as $location):?>
-                                                      <option value="<?php echo $location->lid ?>"><?php echo $location->location_title ?></option>
-                                                     <?php endforeach ?>
+                                                      <option value="<?php echo $location['location'] ?>">
+                                                      <?php echo $location['location'] ?></option>
+
+                                                        <?php if($location['sublocation']){?>
+
+
+                                                          <?php $i=0;  foreach($location['sublocation'] as $sublocation): ?>
+                                                              <option value="<?php echo $sublocation[$i] ?>">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            <?php echo $sublocation ?></option>
+
+                                                                <?php $i=0;  foreach($location['lastsublocations'] as $lsublocation): ?>
+                                                              <option value="<?php echo $lsublocation[$i] ?>">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            <?php echo $lsublocation ?></option>
+
+
+
+                                                          <?php endforeach ?>
+
+
+                                                          <?php endforeach ?>
+
+                                                        <?php } ?>
+                                                       <?php endforeach ?>
                  </select>
                  <div class="valid-feedback">Looks good!</div>
                   <div class="invalid-feedback">Please select a Location.</div>

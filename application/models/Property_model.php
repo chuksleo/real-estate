@@ -320,4 +320,16 @@ class Property_model extends CI_Model {
         return $string;
     }
 
+
+
+
+
+    public  function getMoneyFormat($price) {
+        
+        setlocale(LC_MONETARY,"de_DE");
+        $formated_price = number_format(($price), 2, '.', ',');
+
+        return $formated_price;
+    }
+
 }

@@ -13,7 +13,7 @@ class Blog extends CI_Controller {
 	public function index($start=0)
         {
 
-        $data['categories'] = $this->project_category_model->getCategories($num=10);
+        // $data['categories'] = $this->project_category_model->getCategories($num=10);
 
 
 		$num =12;
@@ -54,13 +54,14 @@ class Blog extends CI_Controller {
 		$data['active_about'] = "";
 		$data['active_blog'] = "current";			
 		$data['active_contact'] = "";
-		$data['page_title'] = "DONOFUND: Blog";
+		$data['page_title'] = " Blog";
 
 
 
 		$this->load->view('section/header', $data);
 		$this->load->view('blog/list', $data);
-		$this->load->view('section/footer');
+		$this->load->view('blog/blog_block', $data);
+		// $this->load->view('section/footer');
 
 	    }
 
@@ -71,7 +72,7 @@ class Blog extends CI_Controller {
 	public function post($id, $title)
         {
 
-         $data['categories'] = $this->project_category_model->getCategories();
+         // $data['categories'] = $this->project_category_model->getCategories();
         $data['page_name'] = "Blog";
 		$data['feturedpost'] = $this->blog_model->get_featured_post();
 		$data['latestpost'] = $this->blog_model->get_latest_post($num=4);
@@ -82,7 +83,7 @@ class Blog extends CI_Controller {
 		$data['comment_count'] = $this->blog_model->get_commentcount_by_post_id($id);
 		$data['site_description'] = lang('quote_descripion') ;
 
-		$data['page_title'] = "DONOFUND: Blog - ". $data['post_details']['post_title'];
+		$data['page_title'] = "". $data['post_details']['post_title'];
 
 		$data['home'] = FALSE;
 		$data['active_home'] = "";
@@ -99,7 +100,7 @@ class Blog extends CI_Controller {
 		$this->load->view('section/header', $data);
 		$this->load->view('blog/details', $data);
 		$this->load->view('blog/blog_block', $data);
-		$this->load->view('section/footer');
+		
 
 	    }
 

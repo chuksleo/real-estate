@@ -122,6 +122,65 @@ readImage(F[i]);
 });
 
 
+
+var page;
+function getCategoryTypes(page){
+    console.log(page);
+
+    var page_val = page;
+    var catId = $('select#select-category').val();
+       
+    
+      $.ajax({
+        type: 'POST',
+        url: '<?php echo base_url(); ?>category/get_types',
+        data: {'catid':catId,'page_val':page_val},
+        success: function(resp) {
+          //Activate and fill in the model list
+          // $('#select-subcategory').html(resp); //With the ".html()" method we include the html code returned by AJAX into the matches list
+          document.getElementById('types').innerHTML = resp
+        }
+      });
+
+
+}
+
+var typeid;
+function deleteType(typeid){
+
+
+      var catId = $('select#select-category').val();
+        console.log(typeid);
+        console.log(catId);
+      $.ajax({
+        type: 'POST',
+        url: '<?php echo base_url(); ?>category/delete_type',
+         data: {'typeid_val':typeid,'catid_val':catId},
+        success: function(resp) {
+         
+          document.getElementById('response').innerHTML = resp
+        }
+      });
+}
+
+
+
+function subCatList()
+    {
+
+      var make_id = $('select#select-category').val();
+       console.log("GEtting subcat");
+        console.log(make_id);
+      $.ajax({
+        type: 'POST',
+        url: '<?php echo base_url(); ?>category/get_subcat',
+        data: 'catid='+make_id,
+        success: function(resp) {
+          //Activate and fill in the model list
+          $('select#select-subcategory').html(resp); //With the ".html()" method we include the html code returned by AJAX into the matches list
+        }
+      });
+    }
     </script>
 </head>
 
@@ -181,6 +240,10 @@ readImage(F[i]);
                             <a href="<?php echo base_url() ?>admin/properties/add"><i class="fas fa-file"></i> Add Property</a>
                         </li>
 
+                        <li>
+                            <a href="<?php echo base_url() ?>admin/properties/facilities"><i class="fas fa-file"></i> Property Facilities</a>
+                        </li>
+
                          <li>
                             <a href="<?php echo base_url() ?>admin/properties/categories"><i class="fas fa-file"></i> Property Categories</a>
                         </li>
@@ -188,6 +251,11 @@ readImage(F[i]);
 
                          <li>
                             <a href="<?php echo base_url() ?>admin/properties/types"><i class="fas fa-file"></i>Property Types</a>
+                        </li>
+
+
+                        <li>
+                            <a href="<?php echo base_url() ?>admin/properties/category-type-map"><i class="fas fa-file"></i>Category Mapping</a>
                         </li>
 
 

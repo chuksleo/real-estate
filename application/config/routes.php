@@ -82,7 +82,14 @@ $route['admin/properties/categories/edit/(:num)'] = 'admin/categoryedit/$1';
 $route['admin/properties/categories/add'] = 'admin/categoryadd';
 $route['admin/properties/category/delete/(:num)'] = 'admin/categorydelete/$1';
 
+
+$route['admin/properties/facilities'] = 'admin/facilitylist';
+$route['admin/properties/facilities/edit/(:num)'] = 'admin/facilityedit/$1';
+$route['admin/properties/facilities/add'] = 'admin/facilityadd';
+$route['admin/properties/facility/delete/(:num)'] = 'admin/facilitydelete/$1';
+
 $route['admin/properties/types'] = 'admin/propertyTypeList';
+$route['admin/properties/category-type-map'] = 'admin/categoryMap';
 $route['admin/properties/types/edit/(:num)'] = 'admin/propertyTypeEdit/$1';
 $route['admin/properties/types/add'] = 'admin/propertyTypeAdd';
 $route['admin/properties/types/delete/(:num)'] = 'admin/propertyTypeDelete/$1';

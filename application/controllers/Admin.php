@@ -23,6 +23,9 @@ class Admin extends CI_Controller {
         $this->load->model('inspection_request_model');
         $this->load->model('property_category_model');
         $this->load->model('property_types_model');
+        $this->load->model('Property_facility_model');
+
+        $this->load->model('property_category_map_model');
 
         if (!$this->ion_auth->logged_in() && !$this->ion_auth->is_admin()) {
             $data['is_loggedin'] = $this->ion_auth->logged_in();
@@ -409,6 +412,115 @@ class Admin extends CI_Controller {
 
 
 
+ public function facilitylist () {
+        
+       
+
+        if($this->ion_auth->logged_in() == true){
+            $data['is_loggedin'] = $this->ion_auth->logged_in();
+            $uid = $this->ion_auth->get_user_id();
+            $data['facilities'] = $this->Property_facility_model->getAllFacilities();
+            $this->load->view("facility/index" , $data);
+
+        }else{
+
+            redirect('/auth/login', 'refresh');
+        }
+       
+    }
+
+ public function facilityadd() {
+            
+        if($this->ion_auth->logged_in() == true){
+            if($this->input->post()){
+           
+            
+                $uid = $this->ion_auth->get_user_id();
+           
+            
+           
+                $this->Property_facility_model->setFacility(
+                    $this->input->post('title'), 
+                    $this->input->post('status'));
+
+            redirect('/admin/properties/facilities', 'refresh');
+        }else{
+            $data['action'] = "add";
+             $path = './js/ckfinder';
+            $width = '850px';
+            $this->editor($path, $width);
+            $this->load->view("facility/create", $data);
+
+        }
+
+       }else{
+
+            redirect('/auth/login', 'refresh');
+        }
+
+    }
+
+
+
+
+
+
+    public function facilityedit($fid) {
+            
+       if($this->ion_auth->logged_in() == true){
+            if($this->input->post()){
+           
+            
+                $uid = $this->ion_auth->get_user_id();
+           
+            
+           
+                $this->property_category_model->updateCategory(
+                    $fid,
+                    $this->input->post('title'), 
+                    $this->input->post('status'));
+
+            redirect('/admin/properties/facilities', 'refresh');
+        }else{
+            $data['action'] = "add";
+             $path = './js/ckfinder';
+            $width = '850px';
+            $this->editor($path, $width);
+            $data['facility'] = $this->Property_facility_model->getFacilityById($fid);
+            $this->load->view("facility/edit", $data);
+
+        }
+
+       }else{
+
+            redirect('/auth/login', 'refresh');
+        }
+
+
+   }
+        
+
+
+
+   public function facilitydelete($fid) {
+            
+       if($this->ion_auth->logged_in() == true){ 
+
+
+            if($this->Property_facility_model->deleteFacility($fid)){ 
+
+                redirect('/admin/properties/facilities', 'refresh');
+
+            }
+            
+
+
+        }
+
+
+    }
+
+
 
 
 
@@ -523,6 +635,65 @@ class Admin extends CI_Controller {
 
 
     }
+
+
+
+    public function categoryMap() {
+            
+        if($this->ion_auth->logged_in() == true){
+            $data['types'] = $this->property_types_model->getAllPropertyTypes();
+            if($this->input->post()){
+                $catid = $this->input->post('category');
+            
+                $uid = $this->ion_auth->get_user_id();
+                foreach ($data['types'] as $typs) {
+                    $clean_title = $this->property_model->cleanTitle($typs->title);
+                    if($this->input->post($clean_title)){
+                        
+                        $typeid = $this->input->post($clean_title);
+                        if(!$this->property_category_map_model->checkCatMap($catid, $typeid)){
+
+                            $this->property_category_map_model->setMap($catid, $typeid);
+
+                        }
+                     
+                    }
+                    
+                      
+                }
+            
+           
+           
+            redirect('/admin/properties/category-type-map', 'refresh');
+
+        }else{
+            $data['action'] = "add";
+            $path = './js/ckfinder';
+            $width = '850px';
+            $this->editor($path, $width);
+
+            $data['categories'] = $this->property_category_model->getAllCategories();
+
+            $this->load->view("category/map", $data);
+
+        }
+
+       }else{
+
+            redirect('/auth/login', 'refresh');
+        }
+
+    }
+
+
+
+
+     public function locationMap() {
+
+
+        $this->location_model->mapLocation();
+     }
+
 
 
               /**
