@@ -54,10 +54,9 @@ class Location_model extends CI_Model {
     
     }
 
-    public function getLocationByTitle($title) {
+    public function getLocationByTitleKey($title) {
 
-            $this->db->select()->from('locations AS l')->where('l.location_title =',$title);
-            
+            $this->db->select()->from('locations AS l')->where('l.title_key', $title);
             
             $query = $this->db->get();
             
@@ -93,9 +92,10 @@ class Location_model extends CI_Model {
 
     
     
-    public function setLocation($title, $banner, $parentid, $description, $featured, $status){  
+    public function setLocation($title,$title_key, $banner, $parentid, $description, $featured, $status){  
         $this->parentid = $parentid; 
         $this->location_title = $title; 
+        $this->title_key = $title_key; 
         $this->description = $description;
         $this->featured = $featured; 
         $this->status = $status; 
@@ -111,11 +111,12 @@ class Location_model extends CI_Model {
 
 
 
-     public function updateLocation($lid, $title, $banner, $parentid, $description, $featured, $status, $date_val){  
+     public function updateLocation($lid, $title, $title_key, $banner, $parentid, $description, $featured, $status, $date_val){  
          $data = array(
 
                 'parentid' => $parentid,
                 'location_title' =>$title,
+                'title_key' => $title_key,
                 'description' => $description,
                 'featured' => $featured,
                 'status' => $status,
@@ -144,9 +145,10 @@ class Location_model extends CI_Model {
 
     public function getLocationIdWithTitle($title){
 
-        $locid = $this->getLocationByTitle($title);
-
-        return $locid;
+        $locid = $this->getLocationByTitleKey($title);
+        print("THISIS ");
+        print_r($locid);
+        // return $locid->id;
     }
 
 

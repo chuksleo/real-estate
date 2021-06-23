@@ -18,28 +18,30 @@ class Dashboard extends CI_Controller {
 
      public function __construct() {
         parent::__construct();
-        $this->load->library('ion_auth');    
-        $this->load->model("campaign_model");
-         $this->load->model("donation_model");
-       
+        $this->load->library('ion_auth');   
+         $this->load->model('reviews_model');
+        $this->load->model('location_model');
+        $this->load->model('inspection_request_model');
+        $this->load->model('property_category_model');
+        $this->load->model('property_types_model');
+        $this->load->model('Property_facility_model');
+
+        $this->load->model('property_category_map_model'); 
+        
         
     }
     //put your code here
     public function index() {
 
        $uid = $this->ion_auth->get_user_id();
-       $data['total_donations'] = $this->donation_model->getTotalUserDonations($uid);
-       $funds= $this->donation_model->getTotalUserDonationAmounts($uid);
+       $data['total_members'] = 20;
+        $data['total_properties'] = $this->property_model->getTotalProperties();
+        $data['total_reviews'] = $this->reviews_model->getTotalProperties();
+        $data['total_inspection_request'] = $this->inspection_request_model->getTotalInspectionRequest();
 
-       $amount = 0;
-       foreach($funds as $fund){
-            $amount = ($amount + $fund->amount);
-       }
+      
 
        
-        $data['total_campaigns'] = $this->campaign_model->getTotalUserCampaigns($uid);
-        $data['total_raised'] = $amount;
-
         $data['is_loggedin'] = $this->ion_auth->logged_in();
         $this->load->view('section/admin/header', $data);
         $this->load->view('section/dashboard', $data);

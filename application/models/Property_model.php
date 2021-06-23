@@ -144,7 +144,7 @@ class Property_model extends CI_Model {
 
 
     
-    public function create_property($title, $uid, $image, $end_date, $category, $price, $description, $location_id, $address, $property_type_id, $property_condition, $furnishing, $size_sqm, $bedrooms, $bathrooms, $pets, $property_use, $smoking, $parties, $negotiable, $parking_space, $agent_fee, $agreement_fee, $capacity, $video_link, $duration, $property_option, $status){ 
+    public function create_property($title, $uid, $image, $end_date, $category, $price, $description, $location_id, $address, $property_type_id, $property_condition, $furnishing, $size_sqm, $bedrooms, $bathrooms, $pets, $property_use, $smoking, $parties, $negotiable, $parking_space, $agent_fee, $agreement_fee, $capacity, $video_link, $duration, $status){ 
 
 
 
@@ -175,7 +175,6 @@ class Property_model extends CI_Model {
         $this->video_link = $video_link;
 
         $this->duration = $duration;
-        $this->property_option = $property_option;
         $this->date_created = new DateTime();
         $this->last_updated = new DateTime();
         $this->status = $status;

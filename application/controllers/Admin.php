@@ -184,9 +184,12 @@ class Admin extends CI_Controller {
                 $image = $pic['file_name'];
             }
             
+
+            $title_key = $this->property_model->cleanTitle($this->input->post('title'));
            
             $this->location_model->setLocation(
                 $this->input->post('title'), 
+                $title_key,
                 $image, 
                 $this->input->post('parentid'), 
                 $this->input->post('description'),
@@ -238,11 +241,12 @@ class Admin extends CI_Controller {
             }else{
                 $image = $pic['file_name'];
             }
-            
+            $title_key = $this->property_model->cleanTitle($this->input->post('title'));
            
             $this->location_model->updateLocation(
                 $lid,
                 $this->input->post('title'), 
+                $title_key,
                 $image, 
                 $this->input->post('parentid'), 
                 $this->input->post('description'),

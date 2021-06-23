@@ -1,99 +1,25 @@
 <script src="<?php echo base_url() ?>js/app.js"></script>
 <script type="text/javascript">
-  
 
 
 
-function readURL(input) {
-  if (input.files && input.files[0]) {
-
-    var reader = new FileReader();
-
-    reader.onload = function(e) {
-      $('.image-upload-wrap').hide();
-
-      $('.file-upload-image').attr('src', e.target.result);
-      $('.file-upload-content').show();
-
-      $('.image-title').html(input.files[0].name);
-    };
-
-    reader.readAsDataURL(input.files[0]);
-
-  } else {
-    removeUpload();
-  }
-}
-
-function removeUpload() {
-  $('.file-upload-input').replaceWith($('.file-upload-input').clone());
-  $('.file-upload-content').hide();
-  $('.image-upload-wrap').show();
-}
-$('.image-upload-wrap').bind('dragover', function () {
-    $('.image-upload-wrap').addClass('image-dropping');
-  });
-  $('.image-upload-wrap').bind('dragleave', function () {
-    $('.image-upload-wrap').removeClass('image-dropping');
-});
-
-
-
-
-function imgUpload() {
-
-    
-      $.ajax({
-      url       :'./uploadFile/', 
-      secureuri   :false,
-      fileElementId :'userfile',
-      dataType    : 'json',
-      data      : {  },
-      success : function (data, status)
-      {
-        if(data.status != 'error')
-        {
-          $('#files').html('<p>Reloading files...</p>');
-          refresh_files();
-          $('#title').val('');
-        }
-        alert(data.msg);
-      }
+$(document).ready(function(){
+        $('#submit').submit(function(e){
+            e.preventDefault(); 
+ $.ajax({
+ url:'<?php echo base_url();?>upload_image/ajax_upload',
+ type:"post",
+ data:new FormData(this),
+ processData:false,
+ contentType:false,
+ cache:false,
+ async:false,
+ success: function(data){
+ $('#uploaded_image').html(data); 
+ }
+ });
+        });
     });
-
-
-}
-
-
-
-$(function() {
-  $('#upload_file').click(function(e) {
-    e.preventDefault();
-    $.ajaxFileUpload({
-      url       :'./upload/upload_file/', 
-      secureuri   :false,
-      fileElementId :'userfile',
-      dataType    : 'json',
-      data      : {
-        'title'       : $('#title').val()
-      },
-      success : function (data, status)
-      {
-        if(data.status != 'error')
-        {
-          $('#files').html('<p>Reloading files...</p>');
-          refresh_files();
-          $('#title').val('');
-        }
-        alert(data.msg);
-      }
-    });
-    return false;
-  });
-});
-
-
-
 
 
 
@@ -124,29 +50,13 @@ echo validation_errors('<span class="error">', '</span>');
 
         <?= form_open_multipart(base_url() . 'property/'. $action) ?>
 
-                  <!--    <?php $val = $this->session->flashdata('image_errors'); echo '<div class="alert-success">'.$val.'</div>'; ?>
-         <div class="media-object">
-            <div class="media-object-section main-section img-preview">
-                <div class="form-group">   
-                <?= form_label('Campaign Photo', 'pro_pic', array('class' => '')) ?> <br>
-                <?= form_upload('userfile1', 'pro_pic', array('class' => 'btn btn-primary ', 'accept' => 'image/*', 'onchange' => 'previewFile()')) ?>
-                 </div>
-                <img id="Pro_prev" src="<?php echo isset($campaign->image) ? $campaign->image : "" ?>"  width="100%" alt="Image preview..." class="hide thumbnail img-preview">
-
-            </div>           
-        </div> -->
-     
-
-
-
-
-
-
         <div class="file-upload">
               <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Add Image</button>
 
             <div class="image-upload-wrap">
+            <form id="imgupload">
             <input id="userfile" class="file-upload-input" name="userfile" type='file' onchange="readURL(this);" accept="image/*" />
+            
             <div class="drag-text">
               <h3>Drag and drop a file or select add Image</h3>
             </div>
@@ -157,6 +67,7 @@ echo validation_errors('<span class="error">', '</span>');
             <button type="button" onclick="imgUpload()" class="remove-image">Upload </button>
             </div>
           </div>
+          </form>
         </div>
 
         <div class="form-group">            
@@ -281,9 +192,9 @@ echo validation_errors('<span class="error">', '</span>');
                                           <div class="form-group">
                                            <?php
                                                 $data = array(
-                                                'name'        => 'check'.$title,
-                                                'id'          => 'check-'.$title,
-                                                 'value'       => '1',
+                                                'name' => $title,
+                                                'id'   => 'check-'.$title,
+                                                'value'    => $facility->facility_id,
                                                  'checked'     => FALSE,
 
 
@@ -335,11 +246,11 @@ echo validation_errors('<span class="error">', '</span>');
 
 
                                                           <?php $i=0;  foreach($location['sublocation'] as $sublocation): ?>
-                                                              <option value="<?php echo $sublocation[$i] ?>">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                              <option value="<?php echo $sublocation ?>">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                             <?php echo $sublocation ?></option>
 
                                                                 <?php $i=0;  foreach($location['lastsublocations'] as $lsublocation): ?>
-                                                              <option value="<?php echo $lsublocation[$i] ?>">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                              <option value="<?php echo $lsublocation ?>">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                             <?php echo $lsublocation ?></option>
 
 

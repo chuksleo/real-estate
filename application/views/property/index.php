@@ -25,7 +25,6 @@ $this->load->view('section/admin/header', $data);
                                                 <th>Title</th>
                                                 <th>Price</th>
                                                 <th>Address</th>
-                                                <th>Property Option</th>
                                                 <th>Status</th>
                                                 <th>Date Created</th>
                                                 <th>Last Updated</th>
@@ -40,7 +39,6 @@ $this->load->view('section/admin/header', $data);
                                                 <td><?php echo $property->title ?></td>
                                                  <td><?php echo $property->price?></td>
                                                 <td><?php echo $property->address?></td>
-                                                <td><?php echo $property->property_option ?></td>
                                                 <td><?php echo $property->status ?></td>
                                                  <td><?php echo $property->date_created?></td>
                                                   <td><?php echo $property->last_updated ?></td>

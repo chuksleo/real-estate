@@ -38,91 +38,47 @@
     </style>
 
 
-<script
-  src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script type="text/javascript">
 
 
-    <script type="text/javascript">
-        
-  
-$(document).ready(function(){  
-$('#upload_form').on('submit', function(e){  
-e.preventDefault();  
-if($('#image_file').val() == '')  
-{  
-alert("Please Select the File");  
-}  
-else 
-{  
-var form_data = new FormData();
-var ins = document.getElementById('image_file').files.length;
-for (var x = 0; x < ins; x++) {
-form_data.append("files[]", document.getElementById('image_file').files[x]);
-}
-$.ajax({  
-url:"<?php echo base_url(); ?>ajax/multipleImageStore",   
-method:"POST",  
-data:form_data,  
-contentType: false,  
-cache: false,  
-processData:false,  
-dataType: "json",
-success:function(res)  
-{  
-console.log(res.success);
-if(res.success == true){
-$('#image_file').val('');
-$('#uploadPreview').html('');   
-$('#msg').html(res.msg);   
-$('#divMsg').show();   
-}
-else if(res.success == false){
-$('#msg').html(res.msg); 
-$('#divMsg').show(); 
-}
-setTimeout(function(){
-$('#msg').html('');
-$('#divMsg').hide(); 
-}, 3000);
-}  
-});  
-}  
-});  
-}); 
-// var url = window.URL || window.webkitURL; // alternate use
-function readImage(file) {
-var reader = new FileReader();
-var image  = new Image();
-reader.readAsDataURL(file);  
-reader.onload = function(_file) {
-image.src = _file.target.result; // url.createObjectURL(file);
-image.onload = function() {
-var w = this.width,
-h = this.height,
-t = file.type, // ext only: // file.type.split('/')[1],
-n = file.name,
-s = ~~(file.size/1024) +'KB';
-$('#uploadPreview').append('<img src="' + this.src + '" class="thumb">');
-};
-image.onerror= function() {
-alert('Invalid file type: '+ file.type);
-};      
-};
-}
-$("#image_file").change(function (e) {
-if(this.disabled) {
-return alert('File upload not supported!');
-}
-var F = this.files;
-if (F && F[0]) {
-for (var i = 0; i < F.length; i++) {
-readImage(F[i]);
-}
-}
+$(document).ready(function(){
+console.log("hhh");
+    $("#but_upload").click(function(){
+
+        var fd = new FormData();
+        var files = $('#file')[0].files;
+        console.log(fd);
+        // Check file selected or not
+        if(files.length > 0 ){
+           fd.append('file',files[0]);
+
+           // $.ajax({
+           //    url: 'upload.php',
+           //    type: 'post',
+           //    data: fd,
+           //    contentType: false,
+           //    processData: false,
+           //    success: function(response){
+           //       if(response != 0){
+           //          $("#img").attr("src",response); 
+           //          $(".preview img").show(); // Display image element
+           //       }else{
+           //          alert('file not uploaded');
+           //       }
+           //    },
+           // });
+        }else{
+           alert("Please select a file.");
+        }
+    });
 });
+       
 
 
+     
 
+// 
 var page;
 function getCategoryTypes(page){
     console.log(page);
@@ -181,6 +137,64 @@ function subCatList()
         }
       });
     }
+
+
+
+function readURL(input) {
+  if (input.files && input.files[0]) {
+
+    var reader = new FileReader();
+
+    reader.onload = function(e) {
+
+      $('.image-upload-wrap').hide();
+
+      $('.file-upload-image').attr('src', e.target.result);
+      $('.file-upload-content').show();
+
+      $('.image-title').html(input.files[0].name);
+    };
+
+    reader.readAsDataURL(input.files[0]);
+
+  } else {
+    removeUpload();
+  }
+}
+
+
+
+
+function imgUpload() {
+    console.log("all data");
+    var fd = new FormData();
+        var files = $('#userfile')[0];
+        console.log(fd);
+    console.log(files);
+    // $.ajax({
+    //     type: 'POST',
+    //     url: '<?php echo base_url(); ?>image/uploadFile',
+    //     data:formData,
+    //     success: function(resp) {
+    //       console.log(resp);
+    //       document.getElementById('response').innerHTML = resp
+    //     }
+    //   });
+    
+   
+
+
+}
+
+
+
+
+
+
+
+
+
+
     </script>
 </head>
 
@@ -196,20 +210,60 @@ function subCatList()
                     <a href="<?php echo base_url() ?>dashboard"><i class="fas fa-home"></i> Dashboard</a>
                 </li>
 
+
                  
                 <li>
-                    <a href="<?php echo base_url() ?>campaign"><i class="fas fa-file-alt"></i> Campigns</a>
+                    <a href="#pagesmenu3" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle no-caret-down"><i class="fas fa-home"></i> My Properties</a>
+                    <ul class="collapse list-unstyled" id="pagesmenu3">
+                        <li>
+                            <a href="<?php echo base_url() ?>admin/properties"><i class="fas fa-file"></i> List My Properties</a>
+                        </li>
+
+                        <li>
+                            <a href="<?php echo base_url() ?>admin/properties/add"><i class="fas fa-file"></i> Add Property</a>
+                        </li>
+
+                        <li>
+                            <a href="<?php echo base_url() ?>admin/properties/add"><i class="fas fa-file"></i> Inspection Request</a>
+                        </li>
+
+
+                    </ul>
+                </li>
+
+               <li>
+                    <a href="#pagesmenu4" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle no-caret-down"><i class="fas fa-cog"></i>Account Settings</a>
+
+                    <ul class="collapse list-unstyled" id="pagesmenu4">
+                        <li>
+                            <a href="<?php echo base_url() ?>admin/properties"><i class="fas fa-file"></i> Contact Details</a>
+                        </li>
+
+                        <li>
+                            <a href="<?php echo base_url() ?>admin/properties/add"><i class="fas fa-file"></i> Company Details</a>
+                        </li>
+
+                        <li>
+                            <a href="<?php echo base_url() ?>admin/properties/add"><i class="fas fa-file"></i> Change Password</a>
+                        </li>
+
+                        <li>
+                            <a href="<?php echo base_url() ?>admin/properties/add"><i class="fas fa-file"></i>About Realestate9ja</a>
+                        </li>
+
+                        <li>
+                            <a href="<?php echo base_url() ?>admin/properties/add"><i class="fas fa-file"></i>FAQs</a>
+                        </li>
+                         <li>
+                            <a href="<?php echo base_url() ?>admin/properties/add"><i class="fas fa-file"></i> Logout</a>
+                        </li>
+                    </ul>
                 </li>
                 <li>
-                    <a href="<?php echo base_url() ?>donation"><i class="fas fa-table"></i> Donation</a>
+                    <a href="<?php echo base_url() ?>admin/dashboard"><i class="fas fa-home"></i> FAQs</a> 
                 </li>
-                <li>
-                    <a href="<?php echo base_url() ?>withdrawal"><i class="fas fa-chart-bar"></i> Withdrawals</a>
-                </li>
-               <!--  <li>
-                    <a href="<?php echo base_url() ?>#"><i class="fas fa-cog"></i>Account Settings</a>
-                </li>
- -->
+
+
                 <?php }else{?>
                <li>
                     <a href="<?php echo base_url() ?>admin/dashboard"><i class="fas fa-home"></i> Dashboard</a> 

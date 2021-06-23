@@ -31,8 +31,8 @@ class Property_facility_map_model extends CI_Model {
 
      public function checkFacilityMap($propertyid, $facilityid) {
 
-        $this->db->select()->from('property_facility_map AS pcm')->where('pcm.pcategory_id =',$catid);
-        $this->db->where('pcm.ptypeid =',$type_id);
+        $this->db->select()->from('property_facility_map AS pcm')->where('pcm.propertyid =',$propertyid);
+        $this->db->where('pcm.facilityid =',$facilityid);
             
         $query = $this->db->get();
             
@@ -45,8 +45,8 @@ class Property_facility_map_model extends CI_Model {
     
     public function setFacilityMap($propertyid, $facilityid){  
       
-        $this->pcategory_id = $propertyid; 
-        $this->ptypeid = $facilityid;      
+        $this->propertyid = $propertyid; 
+        $this->facilityid = $facilityid;      
        
         $this->db->insert('property_facility_map', $this);
         // return $this->db->insert_id();
@@ -60,11 +60,11 @@ class Property_facility_map_model extends CI_Model {
      
 
 
-    public function deletetypeFromCategory($typeid, $catid){  
+    public function deletetypeFromCategory($propertyid, $facilityid){  
          
-            $where = "ptypeid = ".$typeid." and pcategory_id = ".$catid."";
+            $where = "facilityid = ".$facilityid." and propertyid = ".$propertyid."";
 
-            return $this->db->delete('property_category_type_map', $where);
+            return $this->db->delete('property_facility_map', $where);
     }
 
 }
