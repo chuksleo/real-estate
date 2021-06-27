@@ -34,7 +34,7 @@ class Property_model extends CI_Model {
     public function get_all_properties(){
          $this->db->select()->from('properties AS p');
          $this->db->join('users AS u', 'u.id = p.uid');
-        $this->db->join('locations AS l', 'l.lid = p.location_id','left')->group_by('p.location_id');
+         $this->db->join('locations AS l', 'l.lid = p.location_id','left')->group_by('p.location_id');
          // $this->db->join('property_statuses AS cs', 'cs.propertystatusId = c.StatusId');
          // $this->db->join('property_categories AS ca', 'ca.catId = c.CategoryId','left')->group_by('c.CampaignId');
          $query = $this->db->get();
@@ -119,7 +119,19 @@ class Property_model extends CI_Model {
         $sid = 1;
         $this->db->select()->from('properties AS c')->where('c.category_id =',$catId);
                 $this->db->join('users AS u', 'u.id = c.uid');
-                $this->db->join('locations AS l', 'l.lid = c.location_id','left')->group_by('c.location_id');
+                $this->db->join('locations AS l', 'l.lid = c.location_id','left')->group_by('c.id');
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+
+
+
+    public function getPropertyByLocation($locationid) {
+        $sid = 1;
+        $this->db->select()->from('properties AS c')->where('c.location_id =',$locationid);
+                $this->db->join('users AS u', 'u.id = c.uid');
+                $this->db->join('locations AS l', 'l.lid = c.location_id','left')->group_by('c.id');
         $query = $this->db->get();
         return $query->result();
     }
@@ -240,23 +252,41 @@ class Property_model extends CI_Model {
 
 
 
-     public function updateAmountRaised($campaignid, $amount){
 
 
-        $this->db->where('CampaignId', $campaignid);
-        $this->db->set('Current', 'Current+'.$amount.'', FALSE);
-        return $this->db->update('properties');
 
-       //      $data = array(
+    public  function getPropertySearchResult($s_data)  
+    {  
 
-               
-       //          'Current' => $amount
+        print_r($s_data);
+        $this->db->select('p.*, l.*, u.*');
+        $this->db->from('properties as p');        
+        $this->db->join('users as u', 'u.id = p.uid','left');
+        $this->db->join('locations as l', 'l.lid = p.location_id','left');        
+        if($s_data['category'])
+           $this->db->where('p.category_id',$s_data['category']);
+        if($s_data['type'])
+           $this->db->where('p.property_type_id',$s_data['type']);
+        if($s_data['location'])
+           $this->db->where('p.location_id', $s_data['location']);
+        if($s_data['condition'] != "Any")
+           $this->db->where('p.property_condition', $s_data['condition']);
+        if($s_data['bedroom'] !="Any")
+           $this->db->where('p.bedrooms', $s_data['bedroom']);
+        if($s_data['bathroom'] !="Any")
+           $this->db->where('p.bathrooms', $s_data['bathroom']);
+        // if($s_data['minprice'] and $s_data['maxprice'])
+        //    $this->db->where('p.price >=', $s_data['minprice']); 
+        //    $this->db->where('p.price <=', $s_data['maxprice']); 
+        // if($s_data['minprice'] =="Any" and $s_data['maxprice'] !="Any"  )
+        //    $this->db->where('p.price <=', $s_data['maxprice']);
+        // if($s_data['minprice'] !="Any" and $s_data['maxprice'] =="Any"  )
+        //    $this->db->where('p.price >=', $s_data['minprice']); 
 
-       //      );
 
-       //  $carid = $this->input->post('car_val');
-       //  $where = "car_id = ".$carid."";
-       // return $this->db->update('car', $data, $where);
+        
+        $query = $this->db->get();
+        return $query->result();
     }
 
 

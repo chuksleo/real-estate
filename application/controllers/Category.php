@@ -195,7 +195,7 @@ class Category extends CI_Controller {
         $data['types'] = $this->property_category_map_model->getAllCategoriesMap($catid);
 
 
-        if($page == "create"){
+        if($page == "create" || $page == "search"){
             $this->load->view('category/cat_types_create_property', $data);
         }else{
             $this->load->view('category/cat_types', $data);

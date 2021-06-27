@@ -65,6 +65,7 @@ $route['all-properties'] = 'property/listProperties';
 $route['property/add'] = 'property/create';
 $route['property-category/(:any)/(:num)'] = 'property/category/$1/$2';
 $route['property/(:any)/(:num)'] = 'property/view/$1/$2';
+$route['property/location/(:any)/(:num)'] = 'property/locationView/$1/$2';
 $route['user-property/edit/(:num)'] = 'property/edit/$1';
 $route['user-property/publish/(:num)'] = 'property/publish/$1';
 $route['donate/(:any)/(:num)'] = 'donation/pay/$1/$2';

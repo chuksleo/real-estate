@@ -32,6 +32,7 @@ class Home extends CI_Controller {
         $data['featured_properties'] = $this->property_model->getFeaturedProperty();
         // $data['testimonials'] = $this->testimonial_model->get_front_testimony();
         $data['is_loggedin'] = $this->ion_auth->logged_in();
+        $data['locations'] = $this->location_model->mapLocation();
         $data['page_title'] = "REALESTATE9JA: Africa #1 Housing Platform ";
 
         $this->load->view('section/header', $data);

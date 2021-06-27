@@ -61,6 +61,60 @@ class Property extends CI_Controller {
 
 
 
+    public function locationView($title, $locationid){
+
+        $data['cat_title'] = $title;  
+        $data['is_loggedin'] = $this->ion_auth->logged_in();       
+        $data['properties'] = $this->property_model->getPropertyByLocation($locationid);
+        
+        $this->load->view("property/list" , $data);
+
+
+
+    }
+
+
+    public function searchProperty () {
+
+            
+
+       
+            $data['is_loggedin'] = $this->ion_auth->logged_in();
+            $location = ""; 
+            if($this->input->post("plocation")){
+                $title = $this->property_model->cleanTitle($this->input->post("plocation"));
+                $result = $this->location_model->getLocationByTitleKey($title);
+                $location = $result->lid;
+            }      
+            
+           
+            $s_data = array(
+
+               'category' => $this->input->post("propery-category"), 
+               'type' => $this->input->post("types"),     
+               'location' => $location, 
+               'condition' => $this->input->post("condition"),
+               'bedroom' => $this->input->post("beds"), 
+               'bathroom' => $this->input->post("baths"),       
+               'maxprice' => $this->input->post("maxprice"),
+               'minprice' => $this->input->post("minprice"),
+               
+
+            );
+
+            $data['properties'] = $this->property_model->getPropertySearchResult($s_data);
+
+            // print_r($data);
+            $this->load->view("property/list" , $data);
+            
+
+
+        
+       
+    }
+
+
+
 
 
      public function listProperties () {
@@ -343,6 +397,13 @@ class Property extends CI_Controller {
         $this->editor($path, $width);
         $this->load->view("property/report_property" , $data);
     }
+
+
+
+
+
+
+
      
 
 }

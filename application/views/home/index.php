@@ -21,12 +21,12 @@
     <div class="site-search-module">
       <div class="container">
         <div class="site-search-module-inside">
-          <form action="#">
+          <form action="<?php echo base_url() ?>property/searchProperty" method="POST">
             <div class="form-group">
               <div class="row">
                 <div class="col-md-2">
-                    <select id="select-category"  name="propery-category" class="form-control input-lg selectpicker" onchange="subCatList()">
-                        <option selected>Category ... </option>
+                    <select id="select-category"  name="propery-category" class="form-control input-lg selectpicker" onchange="getCategoryTypes('search')">
+                        <option value="" selected>Category ... </option>
 
                       <?php foreach ($categories as $cat): ?>
                       <?php  $link_text = $this->property_model->cleanTitle($cat->title);?>
@@ -36,22 +36,57 @@
                     </select>
                 </div>
                  <div class="col-md-2">
-                    <select id="select-subcategory" name="properytype" class="form-control input-lg selectpicker" onchange="show_clips()">
-                        <option selected="selected"></option>
+                    <select id="types" name="types" class="form-control input-lg" >
+                           <option value="" selected>Choose...</option>
                        
                     </select>
                 </div>
                
                 <div class="col-md-3">
-                    <select name="propery location" class="form-control input-lg selectpicker">
-                        <option selected>Location</option>
-                      <option>New York</option>
+                    <select name="plocation" id="locations" class="form-control input-lg ">
+                        <option value="" selected>Set Location</option>
+                    
+                                                      <?php foreach($locations as $location):?>
+                                                      <option value="<?php echo $location['location'] ?>">
+                                                      <?php echo $location['location'] ?></option>
+
+                                                        <?php if($location['sublocation']){?>
+
+
+                                                            <?php $i=0;  foreach($location['sublocation'] as $sublocation): ?>
+                                                                  <option value="<?php echo $sublocation ?>">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                <?php echo $sublocation ?></option>
+                                                                          <?php if($location['lastsublocations']): ?>
+                                                                            <?php $i=0;  foreach($location['lastsublocations'] as $lsublocation): ?>
+                                                                          <option value="<?php echo $lsublocation ?>">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                        <?php echo $lsublocation ?></option>
+
+
+
+                                                                          <?php endforeach ?>
+                                                                          <?php endif ?>
+
+                                                            <?php endforeach ?>
+
+                                                        <?php } ?>
+                                                       <?php endforeach ?>
                     </select>
                 </div>
                 <div class="col-md-2"> <button type="submit" class="btn btn-primary btn-block btn-lg"><i class="fa fa-search"></i> Search</button> </div>
                 <div class="col-md-2"> <a href="#" id="ads-trigger" class="btn btn-default btn-block"><i class="fa fa-plus"></i> <span>Advanced</span></a> </div>
               </div>
               <div class="row hidden-xs hidden-sm">
+               <div class="col-md-2">
+                  <label>Condition</label>
+                    <select name="condition" class="form-control input-lg selectpicker">
+                      <option>Any</option>
+                      <option>Fairly Used</option>
+                      <option>Newly Built</option>
+                      <option>Old</option>
+                      <option>Renovated</option>
+                      
+                    </select>
+                </div>
                 <div class="col-md-2">
                   <label>Min Beds</label>
                     <select name="beds" class="form-control input-lg selectpicker">
@@ -70,7 +105,7 @@
                 </div>
                 <div class="col-md-2">
                   <label>Min Baths</label>
-                    <select name="beds" class="form-control input-lg selectpicker">
+                    <select name="baths" class="form-control input-lg selectpicker">
                       <option>Any</option>
                       <option>1</option>
                       <option>2</option>
@@ -86,23 +121,25 @@
                 </div>
                 <div class="col-md-2">
                   <label>Min Price</label>
-                    <select name="beds" class="form-control input-lg selectpicker">
+                   <input type="text" class="form-control input-lg" name="minprice" placeholder="500000" >
+                    <!-- <select name="minprice" class="form-control input-lg selectpicker">
                       <option>Any</option>
-                      <option>$1000</option>
-                      <option>$5000</option>
-                      <option>$10000</option>
-                      <option>$50000</option>
-                      <option>$100000</option>
-                      <option>$500000</option>
-                      <option>$1000000</option>
-                      <option>$3000000</option>
-                      <option>$5000000</option>
-                      <option>$10000000</option>
-                    </select>
+                      <option value="">$1000</option>
+                      <option value="">$5000</option>
+                      <option value="">$10000</option>
+                      <option value="">$50000</option>
+                      <option value="">$100000</option>
+                      <option value="">$500000</option>
+                      <option value="">$1000000</option>
+                      <option value="">$3000000</option>
+                      <option value="">$5000000</option>
+                      <option value="">$10000000</option>
+                    </select> -->
                 </div>
                 <div class="col-md-2">
                   <label>Max Price</label>
-                    <select name="beds" class="form-control input-lg selectpicker">
+                   <input type="text" class="form-control input-lg" name="maxprice" placeholder="500000">
+                   <!--  <select name="maxprice" class="form-control input-lg selectpicker">
                       <option>Any</option>
                       <option>$1000</option>
                       <option>$5000</option>
@@ -114,16 +151,13 @@
                       <option>$3000000</option>
                       <option>$5000000</option>
                       <option>$10000000</option>
-                    </select>
+                    </select> -->
                 </div>
                 <div class="col-md-2">
                   <label>Min Area (Sq Ft)</label>
                   <input type="text" class="form-control input-lg" placeholder="Any">
                 </div>
-                <div class="col-md-2">
-                  <label>Max Area (Sq Ft)</label>
-                  <input type="text" class="form-control input-lg" placeholder="Any">
-                </div>
+                
               </div>
             </div>
           </form>
@@ -208,7 +242,7 @@
                       <a href="property-detail.html" class="property-featured-image">
                       <img src="<?php echo base_url() ?>assets/images/home.jpg" alt="">
                       <span class="images-count"><i class="fa fa-picture-o"></i> 2</span>
-                      <span class="badges"><?php echo $property_item->property_option  ?></span>
+                      <span class="badges">Buy</span>
                       </a>
                       <div class="property-info">
                           <h4><a href="property-detail.html"><?php echo $property_item->title ?></a></h4>
@@ -253,8 +287,9 @@
                   <div class="row">
 
                   <?php foreach($featured_location as $location):?>
+                     <?php  $link_text = $this->property_model->cleanTitle($location->location_title);?>
                       <div class="col-lg-6 col-md-8">
-                          <a href="#">
+                          <a href="<?= base_url() ?>property/location/<?= $link_text ?>/<?= $location->lid ?>">
                           <div class="team-item">
                               <div class="team-img">
                                   <?php if(!$location->banner_image){?>
@@ -276,7 +311,7 @@
                                          
                                           <div class="team-details">
                                               <h4 class="team-name">
-                                                  <a class="btn btn-primary" href="<?= base_url() ?>properties/<?= $location->location_title ?>/<?= $location->lid ?>">View <?php echo $location->location_title ?> Properties</a>
+                                                  <a class="btn btn-primary" href="<?= base_url() ?>property/location/<?= $link_text ?>/<?= $location->lid ?>">View <?php echo $location->location_title ?> Properties</a>
                                               </h4>
                                               
                                           </div>

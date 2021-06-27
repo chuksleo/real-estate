@@ -108,6 +108,26 @@ function contact_us()
         }
 
        
+var page;
+function getCategoryTypes(page){
+    console.log(page);
+
+    var page_val = page;
+    var catId = $('select#select-category').val();
+       
+    
+      $.ajax({
+        type: 'POST',
+        url: '<?php echo base_url(); ?>category/get_types',
+        data: {'catid':catId,'page_val':page_val},
+        success: function(resp) {
+          
+          document.getElementById('types').innerHTML = resp
+        }
+      });
+
+
+}
 
     </script>
 
