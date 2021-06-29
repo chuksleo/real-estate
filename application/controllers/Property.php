@@ -74,11 +74,11 @@ class Property extends CI_Controller {
     }
 
 
-    public function searchProperty () {
+    public function search () {
 
-            
+       $data['properties'] = Null;
+       if(!$this->input->post("ptitle")){
 
-       
             $data['is_loggedin'] = $this->ion_auth->logged_in();
             $location = ""; 
             if($this->input->post("plocation")){
@@ -98,13 +98,33 @@ class Property extends CI_Controller {
                'bathroom' => $this->input->post("baths"),       
                'maxprice' => $this->input->post("maxprice"),
                'minprice' => $this->input->post("minprice"),
-               
+                   
 
-            );
+                );
 
             $data['properties'] = $this->property_model->getPropertySearchResult($s_data);
 
+
+       }else{
+
+             $s_data = array(
+
+               'title' => $this->input->post("ptitle"),
+              
+
+                );
+             $data['properties'] = $this->property_model->getPropertySearchResult($s_data);
+
+
+
+       }
+       
+        
             // print_r($data);
+            
+
+
+
             $this->load->view("property/list" , $data);
             
 

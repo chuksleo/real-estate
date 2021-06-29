@@ -21,7 +21,7 @@
     <div class="site-search-module">
       <div class="container">
         <div class="site-search-module-inside">
-          <form action="<?php echo base_url() ?>property/searchProperty" method="POST">
+          <form action="<?php echo base_url() ?>property/search" method="POST">
             <div class="form-group">
               <div class="row">
                 <div class="col-md-2">

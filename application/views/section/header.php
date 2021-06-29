@@ -201,6 +201,11 @@ function getCategoryTypes(page){
       <div class="container">
         <div class="row">
           <div class="col-md-12">
+
+
+
+       
+    
             <nav class="navigation">
               <ul class="sf-menu">
                 <li><a href="<?php echo base_url() ?>">Home</a></li>
@@ -243,6 +248,8 @@ function getCategoryTypes(page){
               </ul>
 
               <a href="<?php echo base_url() ?>property/add" class="btn btn-primary btn-block btn-lg top-btn-add">+Add Listing </a>
+
+                  
             </nav>
 
 

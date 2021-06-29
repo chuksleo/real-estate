@@ -10,7 +10,7 @@
                       <div class="widget sidebar-widget">
                       <h3 class="widgettitle">Search Properties</h3>
                           <div class="full-search-form">
-                              <form action="<?php echo base_url() ?>property/searchProperty" method="POST">
+                              <form action="<?php echo base_url() ?>property/search" method="POST">
                               <select id="select-category"  name="propery-category" class="form-control input-lg selectpicker" onchange="getCategoryTypes('search')">
                                 <option value="" selected>Category ... </option>
 
@@ -74,7 +74,7 @@
                            
                                                     <select name="beds" class="form-control input-lg selectpicker">
                                                         <option value="Any" selected>Bedroom</option>
-                                                        <option value="Any">Any</option>
+                                                        
                                                                 <option>1 - 4 ads</option>
                                                                 <option>2 - 4 ads</option>
                                                                 <option>3 - 4 ads</option>
@@ -91,7 +91,7 @@
 
                                                      <select name="baths" class="form-control input-lg selectpicker">
                                                         <option value="Any" selected>BathRooms</option>
-                                                        <option value="Any">Any</option>
+                                                        
                                                                 <option>1 - 4 ads</option>
                                                                 <option>2 - 4 ads</option>
                                                                 <option>3 - 4 ads</option>

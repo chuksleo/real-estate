@@ -259,30 +259,38 @@ class Property_model extends CI_Model {
     {  
 
         print_r($s_data);
+
+
         $this->db->select('p.*, l.*, u.*');
         $this->db->from('properties as p');        
         $this->db->join('users as u', 'u.id = p.uid','left');
-        $this->db->join('locations as l', 'l.lid = p.location_id','left');        
-        if($s_data['category'])
-           $this->db->where('p.category_id',$s_data['category']);
-        if($s_data['type'])
-           $this->db->where('p.property_type_id',$s_data['type']);
-        if($s_data['location'])
-           $this->db->where('p.location_id', $s_data['location']);
-        if($s_data['condition'] != "Any")
-           $this->db->where('p.property_condition', $s_data['condition']);
-        if($s_data['bedroom'] !="Any")
-           $this->db->where('p.bedrooms', $s_data['bedroom']);
-        if($s_data['bathroom'] !="Any")
-           $this->db->where('p.bathrooms', $s_data['bathroom']);
-        // if($s_data['minprice'] and $s_data['maxprice'])
-        //    $this->db->where('p.price >=', $s_data['minprice']); 
-        //    $this->db->where('p.price <=', $s_data['maxprice']); 
-        // if($s_data['minprice'] =="Any" and $s_data['maxprice'] !="Any"  )
-        //    $this->db->where('p.price <=', $s_data['maxprice']);
-        // if($s_data['minprice'] !="Any" and $s_data['maxprice'] =="Any"  )
-        //    $this->db->where('p.price >=', $s_data['minprice']); 
+        $this->db->join('locations as l', 'l.lid = p.location_id','left'); 
+        if(isset($s_data['title'])){
+            $this->db->like('p.title',$s_data['title']);
+        }else{
+            if($s_data['category'])
+               $this->db->where('p.category_id',$s_data['category']);
+            if($s_data['type'])
+               $this->db->where('p.property_type_id',$s_data['type']);
+            if($s_data['location'])
+               $this->db->where('p.location_id', $s_data['location']);
+            if($s_data['condition'] != "Any")
+               $this->db->where('p.property_condition', $s_data['condition']);
+            if($s_data['bedroom'] !="Any")
+               $this->db->where('p.bedrooms', $s_data['bedroom']);
+            if($s_data['bathroom'] !="Any")
+               $this->db->where('p.bathrooms', $s_data['bathroom']);
+            if($s_data['minprice'] and $s_data['maxprice'])
+               $this->db->where('p.price >=', $s_data['minprice']); 
+               $this->db->where('p.price <=', $s_data['maxprice']); 
+            if($s_data['minprice'] =="" and $s_data['maxprice'] !=""  )
+               $this->db->where('p.price <=', $s_data['maxprice']);
+            if($s_data['minprice'] !="" and $s_data['maxprice'] ==""  )
+               $this->db->where('p.price >=', $s_data['minprice']); 
 
+
+        }   
+        
 
         
         $query = $this->db->get();

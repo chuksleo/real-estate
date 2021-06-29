@@ -36,14 +36,41 @@ $this->load->view('section/header', $data);
                   <div class="col-md-9">
                       <div class="block-heading">
                           <h4><span class="heading-icon"><i class="fa fa-th-list"></i></span>Property Listing</h4>
+
+
                           <div class="toggle-view pull-right">
                               
                               <a href="/" class="active"><i class="fa fa-th-list"></i></a>
                           </div>
                       </div>
-                    <div class="property-listing">
 
-                    <?php if(!$properties){ echo "No properties Found.....";    } ?>
+                      <!--  <div class="block-heading">
+
+                       </div> -->
+
+
+
+                       <div id="custom-search-input">
+                            <div class="input-group col-md-12">
+                            <form action="<?php echo base_url() ?>property/search" method="POST">
+                                <input type="text" name="ptitle" class="search-query form-control input-lg" placeholder="Search For Property for Sale" />
+                                <span class="input-group-btn">
+                                    <button class="" type="button">
+                                        <span class="fa fa-search"></span>
+                                    </button>
+                                </span>
+                                </form>
+                            </div>
+                        </div>
+
+                      
+                    <div class="property-listing">
+                     
+
+
+
+
+                    <?php if(!$properties){ echo ' <div class="alert alert-warning fade in"> <a class="close" data-dismiss="alert" href="#">×</a> <strong> Sorry!</strong>No Properties Found .... </div>';    } ?>
                         <ul>
 
                 <?php foreach($properties as $property_item):?>
