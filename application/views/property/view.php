@@ -61,6 +61,7 @@ $this->load->view('section/header', $data);
     <!-- End Page Header -->
   </div>
   <!-- Start Content -->
+
   <div class="main" role="main">
     <div id="content" class="content full">
       <div class="container">
@@ -73,18 +74,21 @@ $this->load->view('section/header', $data);
               <div class="property-slider">
                 <div id="property-images" class="flexslider">
                   <ul class="slides">
-                    <li class="item"> <img src="http://placehold.it/600x400&amp;text=IMAGE+PLACEHOLDER" alt=""> </li>
-                    <li class="item"> <img src="http://placehold.it/600x400&amp;text=IMAGE+PLACEHOLDER" alt=""> </li>
-                    <li class="item"> <img src="http://placehold.it/600x400&amp;text=IMAGE+PLACEHOLDER" alt=""> </li>
-                    <li class="item"> <img src="http://placehold.it/600x400&amp;text=IMAGE+PLACEHOLDER" alt=""> </li>
+
+                  <?php foreach($images as $img):?>
+                    <li class="item"> <img  src="<?php echo base_url() ?>assets/uploads/property/<?php echo $img->filename ?>" alt=""> </li>
+                    
+
+                  <?php endforeach ?>
                   </ul>
                 </div>
                 <div id="property-thumbs" class="flexslider">
                   <ul class="slides">
-                    <li class="item"> <img src="http://placehold.it/600x400&amp;text=IMAGE+PLACEHOLDER" alt=""> </li>
-                    <li class="item"> <img src="http://placehold.it/600x400&amp;text=IMAGE+PLACEHOLDER" alt=""> </li>
-                    <li class="item"> <img src="http://placehold.it/600x400&amp;text=IMAGE+PLACEHOLDER" alt=""> </li>
-                    <li class="item"> <img src="http://placehold.it/600x400&amp;text=IMAGE+PLACEHOLDER" alt=""> </li>
+                      <?php foreach($images as $imgs):?>
+                        <li class="item"> <img class="thumbnail" src="<?php echo base_url() ?>assets/uploads/property/<?php echo $imgs->filename ?>" alt=""> </li>
+                    
+
+                      <?php endforeach ?>
                   </ul>
                 </div>
               </div>

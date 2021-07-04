@@ -75,6 +75,12 @@ echo validation_errors('<span class="error">', '</span>');
         </div>
 
 
+         <div class="form-group col-md-6">            
+        <label for="title">Working Hours</label>
+                <input type="text" name="work" placeholder="Ex:9am-5pm"  value="<?php echo isset($settings['working_hours']) ? $settings['working_hours'] : "" ?>" class="form-control" required>
+        </div>
+
+
         <div class="form-group col-md-6">            
         <label for="title">Twitter Link</label>
                 <input type="text" name="twitter" placeholder="Enter Twitter Link"  value="<?php echo isset($settings['twitter_link']) ? $settings['twitter_link'] : "" ?>" class="form-control" required>
@@ -112,7 +118,7 @@ echo validation_errors('<span class="error">', '</span>');
 
         <?= form_fieldset_close() ?>
          <div class="form-group col-md-6">
-        <?= form_submit('submit', 'Save Campaign', array("class" => "btn btn-primary")) ?>
+        <?= form_submit('submit', 'Save Settings', array("class" => "btn btn-primary")) ?>
          <div class="form-group">
         <?= form_close() ?>
 

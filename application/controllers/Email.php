@@ -74,13 +74,10 @@ class Email extends CI_Controller {
 	public function contact()
         {
 
-        	echo "SENDING";
-
-
-		
+        		
 		$this->form_validation->set_rules('fname_val', 'Name', 'trim|required');
 		$this->form_validation->set_rules('email_val', 'E-mail', 'trim|required|valid_email');
-		$this->form_validation->set_rules('subject_val', 'Subject', 'trim|required');
+		$this->form_validation->set_rules('phone_val', 'Phone', 'trim|required');
 		$this->form_validation->set_rules('message_val', 'Message', 'trim|required');
 		if ($this->form_validation->run() == FALSE)
 		{
@@ -96,7 +93,8 @@ class Email extends CI_Controller {
 
 
 			$this->emails_model->user_contact();
-            $message_resp = '<div class="alert-box success radius" data-alert="">You contact message was sent succesfully. Our Online Agent will respond Soon 	<a class="close" href="#">×</a></div>';
+            $message_resp = '<div class="alert alert-success fade in"> <a class="close" data-dismiss="alert" href="#">x</a> <strong>Your message has been sent 
+successfully!</strong> Our online representative will reach out to you shortly. </div>';
 
             echo $message_resp;
 			 

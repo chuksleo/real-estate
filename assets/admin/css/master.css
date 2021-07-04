@@ -725,3 +725,17 @@ table.dataTable>tbody>tr.child ul.dtr-details {
 .tag-btn{
   margin-bottom: 20px;
 }
+
+#uploaded_image {
+
+    margin-top: 1px;
+    margin-bottom: 70px;
+
+}
+
+
+#uploaded_image img {
+
+    margin-left: 5px;
+
+}

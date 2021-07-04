@@ -83,21 +83,19 @@ function subscribe_bottom()
 
             });
 }
-
+ 
 
 function contact_us()
         {
             //$('input#loader').show();
             var fname = $('input#contact_fname').val();
-            var lname = $('input#contact_lname').val();
             var email = $('input#contact_email').val();
             var phone = $('input#contact_phone').val();
-            var subject = $('input#contact_subject').val();
             var message = $('textarea#contact_message').val();
             $.ajax({
                 type: 'POST',
                 url: '<?php echo base_url(); ?>email/contact',
-                data: {'fname_val':fname,'lname_val':lname,'email_val':email,'phone_val':phone,'subject_val':subject,'message_val':message},
+                data: {'fname_val':fname,'email_val':email,'phone_val':phone,'message_val':message},
                 success: function(resp) {
 
                     //$('#prog').hide();
@@ -189,7 +187,7 @@ function getCategoryTypes(page){
                 </div>
                   <div>
                       <i class="fa fa-clock-o"></i> Working Hours
-                    <span><?php echo($settings['site_name']); ?></span>
+                    <span><?php echo($settings['working_hours']); ?></span>
                 </div>
              </div>
               <a href="#" class="visible-sm visible-xs menu-toggle"><i class="fa fa-bars"></i></a>
@@ -229,13 +227,13 @@ function getCategoryTypes(page){
 
 
                 <li class="">
-                 <a href="<?php echo base_url() ?>#"><?php  echo "About us" ?></a>
+                 <a href="<?php echo base_url() ?>about-us"><?php  echo "About us" ?></a>
                                   
                 </li>
                                 
 
                  <li class="">
-                      <a href="<?php echo base_url() ?>#""><?php  echo "Contact us" ?></a>
+                      <a href="<?php echo base_url() ?>contact-us""><?php  echo "Contact us" ?></a>
                                   
                  </li>
 

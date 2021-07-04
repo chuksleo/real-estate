@@ -171,17 +171,17 @@
       <div class="featured-blocks">
         <div class="container">
           <div class="row">
-            <div class="col-md-4 col-sm-4 featured-block"> <img src="http://placehold.it/600x600&amp;text=IMAGE+PLACEHOLDER" alt="Search Anywhere" class="img-thumbnail">
-              <h3>Search From Anywhere</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla convallis egestas rhoncus. Donec facilisis fermentum sem, ac viverra ante luctus vel.</p>
+            <div class="col-md-4 col-sm-4 featured-block"> <img src="<?php echo base_url() ?>assets/images/property.png" alt="Search Anywhere" class="img-thumbnail">
+              <h3><?php echo ($this->settings_model->getStaticContent('home_header_one')) ?></h3>
+              <?php echo ($this->settings_model->getStaticContent('home_text_one')) ?>    
             </div>
-            <div class="col-md-4 col-sm-4 featured-block"> <img src="http://placehold.it/600x600&amp;text=IMAGE+PLACEHOLDER" alt="Friendly Agents" class="img-thumbnail">
-              <h3>Verified Agents</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla convallis egestas rhoncus. Donec facilisis fermentum sem, ac viverra ante luctus vel.</p>
+            <div class="col-md-4 col-sm-4 featured-block"> <img src="<?php echo base_url() ?>assets/images/search.png" alt="Friendly Agents" class="img-thumbnail">
+              <h3><?php echo ($this->settings_model->getStaticContent('home_header_two')) ?></h3>
+               <?php echo ($this->settings_model->getStaticContent('home_text_two')) ?>
             </div>
-            <div class="col-md-4 col-sm-4 featured-block"> <img src="http://placehold.it/600x600&amp;text=IMAGE+PLACEHOLDER" alt="Search Anywhere" class="img-thumbnail">
-              <h3>Buy or Rent</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla convallis egestas rhoncus. Donec facilisis fermentum sem, ac viverra ante luctus vel.</p>
+            <div class="col-md-4 col-sm-4 featured-block"> <img src="<?php echo base_url() ?>assets/images/price.jpeg" alt="Search Anywhere" class="img-thumbnail">
+              <h3> <?php echo ($this->settings_model->getStaticContent('home_header_three')) ?></h3>
+               <?php echo ($this->settings_model->getStaticContent('home_text_three')) ?>
             </div>
           </div>
         </div>
@@ -206,7 +206,7 @@
                               <span class="badges">Rent</span>
                           </a>
                       <div class="property-info">
-                              <h4><a href="property-detail.html"><?php echo $property_item->title ?></a></h4>
+                              <h4><a href="" title="<?php echo $property_item->title ?>"><?php echo substr($property_item->title, 0, 30); if(strlen($property_item->title) > 30){ echo "...";}?> </a></h4>
                               <span class="location"><?php echo $property_item->location_title ?></span>
                               <div class="price"><strong>N</strong><span><?php echo $property_item->price ?></span></div>
                       </div>

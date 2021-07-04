@@ -1,27 +1,6 @@
 <script src="<?php echo base_url() ?>js/app.js"></script>
+
 <script type="text/javascript">
-
-
-
-$(document).ready(function(){
-        $('#submit').submit(function(e){
-            e.preventDefault(); 
- $.ajax({
- url:'<?php echo base_url();?>upload_image/ajax_upload',
- type:"post",
- data:new FormData(this),
- processData:false,
- contentType:false,
- cache:false,
- async:false,
- success: function(data){
- $('#uploaded_image').html(data); 
- }
- });
-        });
-    });
-
-
 
 
 </script>
@@ -48,14 +27,18 @@ echo validation_errors('<span class="error">', '</span>');
                         <div class="card-header">Basic Info</div>
                         <div class="card-body">
 
-        <?= form_open_multipart(base_url() . 'property/'. $action) ?>
+
+
+
+      <form method="post" id="upload_form" align="center" enctype="multipart/form-data">  
 
         <div class="file-upload">
               <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Add Image</button>
 
-            <div class="image-upload-wrap">
-            <form id="imgupload">
-            <input id="userfile" class="file-upload-input" name="userfile" type='file' onchange="readURL(this);" accept="image/*" />
+           
+
+            
+            <input id="image_file" class="file-upload-input" name="image_file" type='file' onchange="readURL(this);" accept="image/*" />
             
             <div class="drag-text">
               <h3>Drag and drop a file or select add Image</h3>
@@ -64,12 +47,23 @@ echo validation_errors('<span class="error">', '</span>');
           <div class="file-upload-content">
             <img class="file-upload-image" src="#" alt="your image" />
             <div class="image-title-wrap">
-            <button type="button" onclick="imgUpload()" class="remove-image">Upload </button>
+            <input type="button" name="upload" id="upload" value="Upload" class="remove-image" />  
             </div>
           </div>
-          </form>
-        </div>
+     
 
+
+        </form>
+
+
+
+        <?php $attributes = array('class' => '', 'id' => 'propertyform'); ?>
+        <?= form_open_multipart(base_url() . 'property/'. $action, $attributes) ?>
+
+         <div id="uploaded_image" class="col-lg-12">  
+
+         
+           </div>  
         <div class="form-group">            
           <label for="title">Title</label>
           <input type="text" name="title" placeholder="Enter Title"  value="<?php echo isset($campaign->Title) ? $campaign->Title : "" ?>" class="form-control" required>

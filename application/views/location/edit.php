@@ -99,7 +99,7 @@ echo validation_errors('<span class="error">', '</span>');
 
         <?= form_fieldset_close() ?>
          <div class="form-group col-md-6">
-        <?= form_submit('submit', 'Update Campaign', array("class" => "btn btn-primary")) ?>
+        <?= form_submit('submit', 'Update Location', array("class" => "btn btn-primary")) ?>
          <div class="form-group">
         <?= form_close() ?>
 

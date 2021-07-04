@@ -24,6 +24,8 @@ class Property extends CI_Controller {
         $this->load->model('Property_facility_model');
         $this->load->model('property_facility_map_model');
         $this->load->model('property_category_model');
+        $this->load->model('property_images');
+
         $this->load->model('inspection_request_model');
         
     }
@@ -163,9 +165,10 @@ class Property extends CI_Controller {
 
    
 
-    public function view ($title, $propertyid) {
+    public function viewproperty ($title, $propertyid) {
         $data['is_loggedin'] = $this->ion_auth->logged_in();  
         $data['property'] = $this->property_model->getPropertyById($propertyid);
+        $data['images'] = $this->property_images->getImagesByPropertyId($propertyid);
         
        
         $this->load->view("property/view" , $data);
@@ -215,12 +218,13 @@ class Property extends CI_Controller {
                 $location = $this->location_model->getLocationByTitleKey($title);
                 
                 $uid = $this->ion_auth->get_user_id();
+                $pImages = $_POST['result'];
+                $main_image = $pImages[0];
                 
-               
                
 
                 $title = $this->input->post("title");            
-                $image= "file.jpg";
+                $image= $main_image;
                 $end_date = new DateTime();
                 $category = $this->input->post("category");
                 $price = $this->input->post('price');
@@ -258,8 +262,12 @@ class Property extends CI_Controller {
                         
                         $facilityid = $this->input->post($clean_title);
                         if(!$this->property_facility_map_model->checkFacilityMap($propertyid, $facilityid)){
-
-                            $this->property_facility_map_model->setFacilityMap($propertyid, $facilityid);
+                            try {
+                                $this->property_facility_map_model->setFacilityMap($propertyid, $facilityid);
+                            } catch (Exception $e) {
+                                echo 'Message: ' .$e->getMessage();
+                            }
+                            
 
                         }
                      
@@ -268,12 +276,25 @@ class Property extends CI_Controller {
                       
                 }
 
+                if($pImages){
+                    foreach($pImages as $image){
+                        try {
+                            $this->property_images->setPropertyImage($image, $propertyid);
+
+                        } catch (Exception $e) {
+                            echo 'Message: ' .$e->getMessage();
+                            
+                        }
+                    } 
                 }
-                if($this->ion_auth->is_admin()){ 
-                    redirect('/admin/properties', 'refresh');
-                }else{
-                    redirect('/properties', 'refresh');
+                
+
                 }
+                // if($this->ion_auth->is_admin()){ 
+                //     redirect('/admin/properties', 'refresh');
+                // }else{
+                //     redirect('/properties', 'refresh');
+                // }
               
                 
             }else{

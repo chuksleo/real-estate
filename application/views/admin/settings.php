@@ -45,6 +45,10 @@ $this->load->view('section/admin/header', $data);
                                                 <td>Phone</td>
                                                 <td><?php echo $settings['phone2']?></td>
                                             </tr>
+                                              <tr>
+                                                <td>Working Hours</td>
+                                                <td><?php echo $settings['working_hours']?></td>
+                                            </tr>
                                             <tr>
                                                 <td>Twitter</td>
                                                 <td><?php echo $settings['twitter_link']?></td>

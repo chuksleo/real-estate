@@ -28,8 +28,10 @@
           <div class="row">
             <div class="col-md-6 col-sm-6">
               <h3>Quick Contact Form</h3>
+              <p>Please fill out this form as our online representive will answer any questions you have</p>
               <div class="row">
-                <form method="post" id="contactform" name="contactform" class="contact-form" action="mail/contact.php">
+              <div id="contact_rmessage"></div>
+                <form id="contactform" name="contactform" class="contact-form" >
                   <div class="col-md-6 margin-15">
                     <div class="form-group">
                       <input type="text" id="contact_fname" name="name"  class="form-control input-lg" placeholder="Name*">

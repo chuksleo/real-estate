@@ -32,12 +32,15 @@ class Property_model extends CI_Model {
 
     
     public function get_all_properties(){
-         $this->db->select()->from('properties AS p');
-         $this->db->join('users AS u', 'u.id = p.uid');
-         $this->db->join('locations AS l', 'l.lid = p.location_id','left')->group_by('p.location_id');
-         // $this->db->join('property_statuses AS cs', 'cs.propertystatusId = c.StatusId');
-         // $this->db->join('property_categories AS ca', 'ca.catId = c.CategoryId','left')->group_by('c.CampaignId');
-         $query = $this->db->get();
+        $num = 20;
+        $start = 0;
+        $pub ="Published";
+         
+        $this->db->select()->from('properties AS p')->limit($num, $start)->where('p.status =',$pub)->order_by('last_updated','desc');
+        $this->db->join('users AS u', 'u.id = p.uid');
+        $this->db->join('locations AS l', 'l.lid = p.location_id','left');
+        $this->db->join('property_images AS im', 'im.property_id = p.pid','left')->group_by('p.pid');
+        $query = $this->db->get();
         return $query->result();
     }
 
@@ -105,9 +108,10 @@ class Property_model extends CI_Model {
     
     public function getPropertyById($id) {
 
-            $this->db->select()->from('properties AS c')->where('c.id =',$id);
-            $this->db->join('users AS u', 'u.id = c.uid');
-            $this->db->join('locations AS l', 'l.lid = c.location_id','left');
+            $this->db->select()->from('properties AS p')->where('p.pid =',$id);
+            $this->db->join('users AS u', 'u.id = p.uid');
+            $this->db->join('locations AS l', 'l.lid = p.location_id','left');
+
             // $this->db->join('categories AS ca', 'ca.catId = c.CategoryId','left');
             $query = $this->db->get();
             
@@ -244,7 +248,7 @@ class Property_model extends CI_Model {
 
             );
 
-            $where = "id = ".$pid."";
+            $where = "pid = ".$pid."";
 
             return $this->db->update('properties', $data, $where);
     }
@@ -265,6 +269,8 @@ class Property_model extends CI_Model {
         $this->db->from('properties as p');        
         $this->db->join('users as u', 'u.id = p.uid','left');
         $this->db->join('locations as l', 'l.lid = p.location_id','left'); 
+        $this->db->join('property_images AS im', 'im.property_id = p.pid', 'left')->group_by('p.pid');
+
         if(isset($s_data['title'])){
             $this->db->like('p.title',$s_data['title']);
         }else{
@@ -280,14 +286,18 @@ class Property_model extends CI_Model {
                $this->db->where('p.bedrooms', $s_data['bedroom']);
             if($s_data['bathroom'] !="Any")
                $this->db->where('p.bathrooms', $s_data['bathroom']);
-            if($s_data['minprice'] and $s_data['maxprice'])
-               $this->db->where('p.price >=', $s_data['minprice']); 
-               $this->db->where('p.price <=', $s_data['maxprice']); 
+            
             if($s_data['minprice'] =="" and $s_data['maxprice'] !=""  )
                $this->db->where('p.price <=', $s_data['maxprice']);
             if($s_data['minprice'] !="" and $s_data['maxprice'] ==""  )
                $this->db->where('p.price >=', $s_data['minprice']); 
 
+            if($s_data['minprice'] !="" and $s_data['maxprice'] !=""){
+                $this->db->where('p.price >=', $s_data['minprice']); 
+               $this->db->where('p.price <=', $s_data['maxprice']); 
+
+            }
+               
 
         }   
         

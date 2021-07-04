@@ -37,44 +37,57 @@
         .mdtp__wrapper.inline .mdtp__time_holder {width: auto;}
     </style>
 
+    <script src="<?php echo base_url() ?>assets/admin/vendor/jquery/jquery.min.js"></script>
 
 
 <script type="text/javascript">
+var images = [];
+$(document).on('click','#upload',function(e){
+      console.log("CLIKECC______++");
+           e.preventDefault();  
+           
+                var myForm = $("#upload_form")[0]
+                $.ajax({  
+                     url:"<?php echo base_url(); ?>main/ajax_upload",   
+                     //base_url() = http://localhost/tutorial/codeigniter  
+                     method:"POST",  
+                     data:new FormData(myForm),  
+                     contentType: false,  
+                     cache: false,  
+                     processData:false,  
+                     success:function(data)  
+                     {  
+                        $('.file-upload-content').hide();
+                        const myImage = JSON.parse(data);
+
+                       var filename = myImage.filename;
+                       addInputField(filename);
 
 
-$(document).ready(function(){
-console.log("hhh");
-    $("#but_upload").click(function(){
+                        document.getElementById('uploaded_image').innerHTML += myImage.image; 
 
-        var fd = new FormData();
-        var files = $('#file')[0].files;
-        console.log(fd);
-        // Check file selected or not
-        if(files.length > 0 ){
-           fd.append('file',files[0]);
+                       console.log(images)
+                     }  
+                });  
+           
+      });  
 
-           // $.ajax({
-           //    url: 'upload.php',
-           //    type: 'post',
-           //    data: fd,
-           //    contentType: false,
-           //    processData: false,
-           //    success: function(response){
-           //       if(response != 0){
-           //          $("#img").attr("src",response); 
-           //          $(".preview img").show(); // Display image element
-           //       }else{
-           //          alert('file not uploaded');
-           //       }
-           //    },
-           // });
-        }else{
-           alert("Please select a file.");
-        }
-    });
-});
-       
 
+
+
+
+  function addInputField(filename){
+
+    var input = document.createElement("input");
+
+    input.setAttribute("type", "hidden");
+
+    input.setAttribute("name", "result[]");
+
+    input.setAttribute("value", filename);
+
+    document.getElementById("propertyform").appendChild(input);
+  }
 
      
 
@@ -216,15 +229,15 @@ function imgUpload() {
                     <a href="#pagesmenu3" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle no-caret-down"><i class="fas fa-home"></i> My Properties</a>
                     <ul class="collapse list-unstyled" id="pagesmenu3">
                         <li>
-                            <a href="<?php echo base_url() ?>admin/properties"><i class="fas fa-file"></i> List My Properties</a>
+                            <a href="<?php echo base_url() ?>agent/properties"><i class="fas fa-file"></i> List My Properties</a>
                         </li>
 
                         <li>
-                            <a href="<?php echo base_url() ?>admin/properties/add"><i class="fas fa-file"></i> Add Property</a>
+                            <a href="<?php echo base_url() ?>agent/properties/add"><i class="fas fa-file"></i> Add Property</a>
                         </li>
 
                         <li>
-                            <a href="<?php echo base_url() ?>admin/properties/add"><i class="fas fa-file"></i> Inspection Request</a>
+                            <a href="<?php echo base_url() ?>agent/messages"><i class="fas fa-file"></i> Messages</a>
                         </li>
 
 

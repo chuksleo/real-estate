@@ -19,10 +19,10 @@ class Emails_model extends CI_Model {
 		$data = array(
 
 			'first_name' => $this->input->post('fname_val'),
-			'last_name' => $this->input->post('lname_val'),
+			'last_name' => "none",
 			'contact_email' => $this->input->post('email_val'),
 			'phone' => $this->input->post('phone_val'),
-			'subject' => $this->input->post('subject_val'),
+			'subject' => "none",
 			'contact_message' => $this->input->post('message_val'),
 			'date_created' => $cur_date,
 			'last_updated' => $cur_date,

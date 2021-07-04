@@ -130,6 +130,7 @@ class Admin extends CI_Controller {
                 $this->input->post('address'), 
                 $this->input->post('phone'), 
                 $this->input->post('phone2'), 
+                $this->input->post('work'), 
                 $this->input->post('twitter'), 
                 $this->input->post('facebook'), 
                 $this->input->post('linkedin'), 
