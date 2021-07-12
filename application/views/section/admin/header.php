@@ -1,7 +1,9 @@
 <?php 
       $settings = $this->settings_model->get_all_settings();
-
+      // $messages = $this->message_model->getAllUnreadMessages();
 ?>
+
+
 <!doctype html>
 <!-- 
 * Bootstrap Simple Admin Template
@@ -114,6 +116,47 @@ function getCategoryTypes(page){
 
 }
 
+
+
+var pid;
+function publishProperty(pid){
+    console.log(pid);
+
+   
+      $.ajax({
+        type: 'POST',
+        url: '<?php echo base_url(); ?>property/publish',
+        data: {'pid':pid},
+        success: function(resp) {
+          
+          document.getElementById('message').innerHTML = resp
+        }
+      });
+
+
+}
+
+
+var pid;
+function unPublishProperty(pid){
+    console.log(page);
+
+   
+      $.ajax({
+        type: 'POST',
+        url: '<?php echo base_url(); ?>property/unpublish',
+        data: {'pid':pid},
+        success: function(resp) {
+          
+          document.getElementById('message').innerHTML = resp
+        }
+      });
+
+
+}
+
+
+
 var typeid;
 function deleteType(typeid){
 
@@ -178,32 +221,35 @@ function readURL(input) {
 
 
 
-function imgUpload() {
-    console.log("all data");
-    var fd = new FormData();
-        var files = $('#userfile')[0];
-        console.log(fd);
-    console.log(files);
-    // $.ajax({
-    //     type: 'POST',
-    //     url: '<?php echo base_url(); ?>image/uploadFile',
-    //     data:formData,
-    //     success: function(resp) {
-    //       console.log(resp);
-    //       document.getElementById('response').innerHTML = resp
-    //     }
-    //   });
-    
+
+
+
+var mid;
+function viewMessage(mid){
+    console.log(mid);
+    $('#inbox').hide();
+    $('#messageContent').show();
+
    
+      $.ajax({
+        type: 'POST',
+        url: '<?php echo base_url(); ?>admin/messagesView',
+        data: {'mid':mid},
+        success: function(resp) {
+
+          
+          document.getElementById('messageContent').innerHTML = resp
+        }
+      });
 
 
 }
 
+function showInbox(){
 
-
-
-
-
+    $('#inbox').show();
+    $('#messageContent').hide();
+}
 
 
 
@@ -281,6 +327,29 @@ function imgUpload() {
                <li>
                     <a href="<?php echo base_url() ?>admin/dashboard"><i class="fas fa-home"></i> Dashboard</a> 
                 </li>
+                <li>
+                    <a href="#pagesmenu6" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle no-caret-down"><i class="fas fa-map-marker-alt"></i> Front Banners</a>
+                    <ul class="collapse list-unstyled" id="pagesmenu6">
+                        <li>
+                            <a href="<?php echo base_url() ?>admin/banners"><i class="fas fa-file"></i> List All Banners</a>
+                        </li>
+                        
+                    </ul>
+                </li>
+
+
+                <li>
+                    <a href="#pagesmenu7" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle no-caret-down"><i class="fas fa-map-marker-alt"></i> Messages</a>
+                    <ul class="collapse list-unstyled" id="pagesmenu7">
+                        <li>
+                            <a href="<?php echo base_url() ?>admin/property/messages"><i class="fas fa-file"></i> Property Inbox</a>
+                        </li>
+                        <li>
+                            <a href="<?php echo base_url() ?>admin/contact-messages"><i class="fas fa-file"></i> Contact us Inbox</a>
+                        </li>
+                        
+                    </ul>
+                </li>
 
 
                 <li>
@@ -302,6 +371,12 @@ function imgUpload() {
                         <li>
                             <a href="<?php echo base_url() ?>admin/properties"><i class="fas fa-file"></i> List All Properties</a>
                         </li>
+
+                         <li>
+                            <a href="<?php echo base_url() ?>admin/properties/unpublished"><i class="fas fa-file"></i> Pending Properties</a>
+                        </li>
+
+                        
 
                         <li>
                             <a href="<?php echo base_url() ?>admin/properties/add"><i class="fas fa-file"></i> Add Property</a>
@@ -362,13 +437,31 @@ function imgUpload() {
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="nav navbar-nav ml-auto">
                         <li  ><a href="<?php echo base_url()?>" class="btn btn-outline-secondary mb-2 set-btn"><i class="fas fa-home"></i> Back To Site</a></li>
+
+
+                        <li class="nav-item dropdown">
+                            <div class="nav-dropdown">
+                                <a href="" class="nav-item nav-link dropdown-toggle text-secondary" data-toggle="dropdown"><i class="fas fa-envelope"></i> <span>Messages</span> <i style="font-size: .8em;" class="fas fa-caret-down"></i></a>
+                                <div class="dropdown-menu dropdown-menu-right nav-link-menu">
+                                    <ul class="nav-list">
+                                       <?php foreach($messages as $mesage):?>
+                                        <li><a href="<?php echo base_url() ?>#" class="dropdown-item"><i class="fas fa-envelope"></i> <?php echo $mesage->content?></a></li>
+                                     <?php endforeach ?>
+                                      
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+
+
+
                         <li class="nav-item dropdown">
                             <div class="nav-dropdown">
                                 <a href="" class="nav-item nav-link dropdown-toggle text-secondary" data-toggle="dropdown"><i class="fas fa-user"></i> <span><?php echo $firstname ?></span> <i style="font-size: .8em;" class="fas fa-caret-down"></i></a>
                                 <div class="dropdown-menu dropdown-menu-right nav-link-menu">
                                     <ul class="nav-list">
                                        
-                                        <li><a href="<?php echo base_url() ?>#" class="dropdown-item"><i class="fas fa-envelope"></i> Notification</a></li>
+                                        
                                         <li><a href="<?php echo base_url() ?>#" class="dropdown-item"><i class="fas fa-cog"></i> Account Settings</a></li>
                                         <div class="dropdown-divider"></div>
                                         <li><a href="<?php echo base_url() ?>auth/logout" class="dropdown-item"><i class="fas fa-sign-out-alt"></i> Logout</a></li>

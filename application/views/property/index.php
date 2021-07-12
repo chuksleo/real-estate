@@ -17,6 +17,7 @@ $this->load->view('section/admin/header', $data);
                             <div class="card">
                                 <div class="card-header"><a href="<?php echo base_url() ?>admin/properties/add" class="btn btn-square btn-primary mb-2"> + Add Property </a></div>
                                 <div class="card-body">
+
                                     <p class="card-title"></p>
                                     <table class="table table-hover" id="dataTables-example" width="100%">
                                         <thead>
@@ -38,12 +39,19 @@ $this->load->view('section/admin/header', $data);
                                                
                                                 <td><?php echo $property->title ?></td>
                                                  <td><?php echo $property->price?></td>
-                                                <td><?php echo $property->address?></td>
-                                                <td><?php echo $property->status ?></td>
+                                                <td><?php echo $property->property_address?></td>
+                                                <td><?php echo $property->property_status ?></td>
                                                  <td><?php echo $property->date_created?></td>
                                                   <td><?php echo $property->last_updated ?></td>
                                                    <td>
                                                    <?php  $link_text = $this->property_model->cleanTitle($property->title);?>
+
+                                                   <?php if($property->property_status == "Unpublished" ){?>
+                                                    <button class="btn btn-square btn-primary mb-2" onclick="publishProperty(<?php echo $property->pid ?>)" >Publish</button>  
+                                                  <?php }else{ ?>
+                                                  <a href="#" onclick="publishProperty()($property->pid)" class="btn btn-square btn-primary mb-2"> Unpublish</a>
+
+                                                    <?php } ?>
                                                   <a href="<?php echo base_url() ?>properties/<?php echo $link_text ?>/<?php echo $property->id ?>" class="btn btn-square btn-primary mb-2" target="_blank"> View</a>  
 
 

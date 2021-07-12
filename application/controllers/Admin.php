@@ -19,11 +19,14 @@ class Admin extends CI_Controller {
         parent::__construct();
         $this->load->library('ion_auth');
         $this->load->model('reviews_model');
+        $this->load->model('banners_model');
         $this->load->model('location_model');
         $this->load->model('inspection_request_model');
         $this->load->model('property_category_model');
         $this->load->model('property_types_model');
         $this->load->model('Property_facility_model');
+                $this->load->model('message_model');
+
 
         $this->load->model('property_category_map_model');
 
@@ -144,9 +147,212 @@ class Admin extends CI_Controller {
 
 
 
+    public function contactmessages () {
+        
+       
+
+        if($this->ion_auth->logged_in() == true){
+            $data['is_loggedin'] = $this->ion_auth->logged_in();
+            
+            
+            $data['messages'] = $this->message_model->getAllContactMessages();
+
+            $data['total_unread'] = $this->message_model->getCountUnreadContactMessages();
+            $this->load->view("messages/contact_message" , $data);
 
 
-      public function locationlist () {
+        }else{
+
+            redirect('/', 'refresh');
+        }
+       
+    }
+
+
+     public function messages () {
+        
+       
+
+        if($this->ion_auth->logged_in() == true){
+            $data['is_loggedin'] = $this->ion_auth->logged_in();
+            
+            
+            $data['messages'] = $this->message_model->getAllMessages();
+
+            $data['total_unread'] = $this->message_model->getCountUnreadMessages();
+            $this->load->view("messages/inbox" , $data);
+
+
+        }else{
+
+            redirect('/', 'refresh');
+        }
+       
+    }
+
+
+
+     public function messagesView () {
+        
+       
+
+      
+            $mid = $this->input->post('mid');
+            $data['message'] = $this->message_model->getMessageById($mid);
+
+            if($data['message']){
+                $this->load->view("messages/message_view" , $data);
+            }else{
+
+                echo "Error No Item found for message";
+            }
+            
+
+
+    }
+
+
+
+
+
+
+
+
+      public function bannerlist () {
+        
+       
+
+        if($this->ion_auth->logged_in() == true){
+            $data['is_loggedin'] = $this->ion_auth->logged_in();
+            $uid = $this->ion_auth->get_user_id();
+            $data['banners'] = $this->banners_model->getAllBanners();
+            $this->load->view("banners/list" , $data);
+
+
+        }else{
+
+            redirect('/', 'refresh');
+        }
+       
+    }
+
+
+
+     public function banneradd() {
+            
+       if($this->ion_auth->logged_in() == true){
+            if($this->input->post()){
+           
+            
+            $uid = $this->ion_auth->get_user_id();
+            $config['upload_path'] = './assets/uploads/banners/';
+            $config['allowed_types'] = 'gif|jpg|png|jpeg';
+            $config['max_size'] = 20048; // Need to define properly              
+            $config['file_name'] = time().$uid;       
+            $this->load->library('upload', $config);
+            $this->upload->do_upload('userfile1');
+            $image = "";
+            $pic = $this->upload->data();
+            if($_FILES['userfile1']['size'] == 0){
+                $image = $image;
+            }else{
+                $image = $pic['file_name'];
+            }
+            
+
+            
+            $this->banners_model->setBanner(
+                $this->input->post('title'), 
+                $this->input->post('slug'), 
+                $image,
+                $this->input->post('status'));
+
+            redirect('/admin/banners', 'refresh');
+        }else{
+            $data['action'] = "add"; 
+            $this->load->view("banners/add", $data);
+
+        }
+
+       }else{
+
+            redirect('/auth/login', 'refresh');
+        }
+
+    }
+
+
+
+     public function banneredit($bid) {
+            
+       if($this->ion_auth->logged_in() == true){
+            $data['banner'] = $this->banner_model->getLocationById($lid);
+
+            if($this->input->post()){
+           
+            
+            $uid = $this->ion_auth->get_user_id();
+            $config['upload_path'] = './assets/uploads/banners/';
+            $config['allowed_types'] = 'gif|jpg|png|jpeg';
+            $config['max_size'] = 20048; // Need to define properly              
+            $config['file_name'] = time().$uid;       
+            $this->load->library('upload', $config);
+            $this->upload->do_upload('userfile1');
+            $image = "";
+            $pic = $this->upload->data();
+            if($_FILES['userfile1']['size'] == 0){
+                $image = $data['loc']->banner_image;
+            }else{
+                $image = $pic['file_name'];
+            }
+
+
+
+           $this->banners_model->updateBanner(
+                $this->input->post('title'), 
+                $this->input->post('slug'), 
+                $image);
+            
+
+            redirect('/admin/front-banners', 'refresh');
+        }else{
+            $data['action'] = "edit";            
+                      
+            $this->load->view("banners/edit", $data);
+
+        }
+
+       }else{
+
+            redirect('/auth/login', 'refresh');
+        }
+
+
+   }
+        
+
+
+
+   public function bannerdelete($bid) {
+            
+       if($this->ion_auth->logged_in() == true){ 
+
+
+            if($this->banners_model->deleteBanner($bid)){ 
+
+                redirect('/admin/banners', 'refresh');
+
+            }
+            
+
+
+        }
+
+
+    }
+
+
+     public function locationlist () {
         
        
 

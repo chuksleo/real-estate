@@ -67,4 +67,14 @@ class Property_facility_map_model extends CI_Model {
             return $this->db->delete('property_facility_map', $where);
     }
 
+
+
+
+     public function getPropertyFacilities($pid){
+        $this->db->select()->from('property_facility_map AS p')->where('p.propertyid =',$pid);
+        $this->db->join('property_facilities AS pf', 'pf.facility_id = p.facilityid');
+        $query = $this->db->get();
+        return $query->result();
+    }
+
 }

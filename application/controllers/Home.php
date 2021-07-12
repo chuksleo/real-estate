@@ -20,6 +20,8 @@ class Home extends CI_Controller {
         $this->load->library('ion_auth');
         $this->load->model('property_model');
         $this->load->model('location_model');
+        $this->load->model('banners_model');
+
         $this->load->model('blog_model');
         
         $this->load->model('testimonial_model');
@@ -34,6 +36,7 @@ class Home extends CI_Controller {
         $data['is_loggedin'] = $this->ion_auth->logged_in();
         $data['locations'] = $this->location_model->mapLocation();
         $data['page_title'] = "REALESTATE9JA: Africa #1 Housing Platform ";
+         $data['banners'] = $this->banners_model->getAllBanners();
 
         $this->load->view('section/header', $data);
         $this->load->view('home/index', $data);

@@ -9,11 +9,12 @@
     <!-- Start Hero Slider -->
     <div class="hero-slider flexslider clearfix" data-autoplay="yes" data-pagination="no" data-arrows="yes" data-style="fade" data-pause="yes">
       <ul class="slides">
-        <li class=" parallax" style="background-image:url(<?php echo base_url() ?>assets/uploads/banners/file1.jpg);">
+      <?php foreach($banners as $banner):?>
+        <li class=" parallax" style="background-image:url(<?php echo base_url() ?>assets/uploads/banners/<?php echo $banner->banner_image ?>);"> <p>dfsfsdfhksdfbksd sdfksdfbksdbfksdf sd fksd fsdk f</p>
         </li>
-        <li class="parallax" style="background-image:url(<?php echo base_url() ?>assets/uploads/banners/file2.jpg);">
-          
-        </li>
+      <?php endforeach ?>
+
+
       </ul>
     </div>
     <!-- End Hero Slider --> 
@@ -193,20 +194,21 @@
               <div class="col-md-12">
                 <div class="block-heading">
                   <h4><span class="heading-icon"><i class="fa fa-leaf"></i></span>Recently Listed</h4>
-                  <a href="simple-listing-fw.html" class="btn btn-primary btn-sm pull-right">View more properties <i class="fa fa-long-arrow-right"></i></a>
+                  <a href="<?= base_url() ?>all-properties" class="btn btn-primary btn-sm pull-right">View more properties <i class="fa fa-long-arrow-right"></i></a>
                 </div>
               </div>
               <ul>
                 <?php foreach($properties as $property_item):?>
                 <li class="col-md-4 col-sm-6 type-rent">
                       <div class="property-block">
-                          <a href="property-detail.html" class="property-featured-image">
-                              <img src="<?php echo base_url() ?>assets/images/home.jpg" alt="">
+                       <?php  $link_text = $this->property_model->cleanTitle($property_item->title);?>
+                          <a href="<?= base_url() ?>property/<?= $link_text ?>/<?=  $property_item->pid ?>" class="property-featured-image">
+                              <img src="<?php echo base_url() ?>assets/uploads/property/<?php echo $property_item->image ?>" alt="">
                               <span class="images-count"><i class="fa fa-picture-o"></i> 2</span>
-                              <span class="badges">Rent</span>
+                              <span class="badges">Buy</span>
                           </a>
                       <div class="property-info">
-                              <h4><a href="" title="<?php echo $property_item->title ?>"><?php echo substr($property_item->title, 0, 30); if(strlen($property_item->title) > 30){ echo "...";}?> </a></h4>
+                              <h4><a href="<?= base_url() ?>property/<?= $link_text ?>/<?=  $property_item->pid ?>" title="<?php echo $property_item->title ?>"><?php echo substr($property_item->title, 0, 30); if(strlen($property_item->title) > 30){ echo "...";}?> </a></h4>
                               <span class="location"><?php echo $property_item->location_title ?></span>
                               <div class="price"><strong>N</strong><span><?php echo $property_item->price ?></span></div>
                       </div>

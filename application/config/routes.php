@@ -75,6 +75,13 @@ $route['admin/dashboard'] = 'admin';
 
 
 $route['admin/properties'] = 'property/allPropertyAdmin';
+$route['admin/properties/unpublished'] = 'property/allUnPublishedPropertyAdmin';
+
+
+$route['admin/property/messages'] = 'admin/messages';
+$route['admin/contact-messages'] = 'admin/contactmessages';
+$route['admin/properties/unpublished'] = 'property/allUnPublishedPropertyAdmin';
+
 $route['admin/properties/add'] = 'property/create';
 $route['admin/properties/edit/(:num)'] = 'property/edit/$1';
 
@@ -100,6 +107,12 @@ $route['admin/locations'] = 'admin/locationlist';
 $route['admin/locations/add'] = 'admin/locationadd';
 $route['admin/locations/edit/(:num)'] = 'admin/locationedit/$1';
 $route['admin/locations/delete/(:num)'] = 'admin/locationdelete/$1';
+
+$route['admin/banners'] = 'admin/bannerlist';
+$route['admin/banners/add'] = 'admin/banneradd';
+$route['admin/banners/edit/(:num)'] = 'admin/banneredit/$1';
+$route['admin/banners/delete/(:num)'] = 'admin/bannerdelete/$1';
+
 
 $route['admin/members'] = 'auth/index';
 

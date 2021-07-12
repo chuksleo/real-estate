@@ -48,7 +48,10 @@ contactForm.addEventListener('submit', contact_us, false);
 
 
 
+function showFields(){
+    $('#pmessage').show();
 
+}
 function copyLink() {
   /* Get the text field */
   var copyText = document.getElementById("pagelink");
@@ -98,6 +101,33 @@ function contact_us()
                 data: {'fname_val':fname,'email_val':email,'phone_val':phone,'message_val':message},
                 success: function(resp) {
 
+                    //$('#prog').hide();
+                     $("#contact_rmessage").html(resp);
+                }
+
+            });
+        }
+
+function sendMessage()
+        {
+
+
+         
+          $('#btnsending').show();
+          $('#btnsend').hide();
+            //$('input#loader').show();
+            var fname = $('input#fullname').val();
+            var email = $('input#emailc').val();
+            var phone = $('input#phone').val();
+            var property = $('input#property').val();
+            var message = $('textarea#contact_message').val();
+            $.ajax({
+                type: 'POST',
+                url: '<?php echo base_url(); ?>property/sendMessage',
+                data: {'name_val':fname,'email_val':email,'phone_val':phone,'property_val':property,'message_val':message},
+                success: function(resp) {
+                    $('#btnsending').hide();
+                    $('#btnsend').show(); 
                     //$('#prog').hide();
                      $("#contact_rmessage").html(resp);
                 }

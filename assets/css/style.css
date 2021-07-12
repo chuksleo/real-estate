@@ -1438,12 +1438,12 @@ html[xmlns] .slides {
 	color:#999;
 }
 .site-footer{
-	background-color:#f8f8f8;
+	background-color:#141414;
 	padding:30px 0 0 0;
 	box-shadow:inset 0 2px 2px rgba(0,0,0,.07);
 }
 .site-footer-bottom{
-	background-color:#eee;
+	background-color:#3d3d3d;
 	border-top:1px solid #e1e1e1;
 	padding:20px 0;
 	font-size:12px;
@@ -3522,3 +3522,44 @@ span.progress-bar-tooltip:after {
         z-index: 3;   
     }
 
+
+
+/**
+*
+* Style for Inbox PAge
+**/
+
+
+
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 0 solid transparent;
+    border-radius: 0;
+}
+.mailbox-widget .custom-tab .nav-item .nav-link {
+    border: 0;
+    color: #fff;
+    border-bottom: 3px solid transparent;
+}
+.mailbox-widget .custom-tab .nav-item .nav-link.active {
+    background: 0 0;
+    color: #fff;
+    border-bottom: 3px solid #2cd07e;
+}
+.no-wrap td, .no-wrap th {
+    white-space: nowrap;
+}
+.table td, .table th {
+    padding: .9375rem .4rem;
+    vertical-align: top;
+    border-top: 1px solid rgba(120,130,140,.13);
+}
+.font-light {
+    font-weight: 300;
+}

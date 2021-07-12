@@ -36,7 +36,21 @@ class Property_model extends CI_Model {
         $start = 0;
         $pub ="Published";
          
-        $this->db->select()->from('properties AS p')->limit($num, $start)->where('p.status =',$pub)->order_by('last_updated','desc');
+        $this->db->select()->from('properties AS p')->limit($num, $start)->where('p.property_status =',$pub)->order_by('last_updated','desc');
+        $this->db->join('users AS u', 'u.id = p.uid');
+        $this->db->join('locations AS l', 'l.lid = p.location_id','left');
+        $this->db->join('property_images AS im', 'im.property_id = p.pid','left')->group_by('p.pid');
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+
+
+     public function get_all_unpublished_properties(){
+       
+        $pub ="Unpublished";
+         
+        $this->db->select()->from('properties AS p')->where('p.property_status =',$pub)->order_by('last_updated','desc');
         $this->db->join('users AS u', 'u.id = p.uid');
         $this->db->join('locations AS l', 'l.lid = p.location_id','left');
         $this->db->join('property_images AS im', 'im.property_id = p.pid','left')->group_by('p.pid');
@@ -172,7 +186,7 @@ class Property_model extends CI_Model {
         $this->price = $price;       
         $this->description = $description;
         $this->location_id = $location_id;
-        $this->address = $address;
+        $this->property_address = $address;
         $this->property_type_id = $property_type_id;
         $this->property_condition = $property_condition;
         $this->furnishing = $furnishing;
@@ -193,7 +207,7 @@ class Property_model extends CI_Model {
         $this->duration = $duration;
         $this->date_created = new DateTime();
         $this->last_updated = new DateTime();
-        $this->status = $status;
+        $this->property_status = $status;
      
 
 
@@ -222,8 +236,8 @@ class Property_model extends CI_Model {
            'price' => $price,       
            'description' => $description,
            'location_id' => $location_id,
-           'address' => $address,
-           'property_type_id' => $property_type_id,
+           'property_address' => $address,
+           'proproperty_perty_type_id' => $property_type_id,
            'property_condition' => $property_condition,
            'furnishing' => $furnishing,
            'size_sqm' => $size_sqm,
@@ -244,7 +258,7 @@ class Property_model extends CI_Model {
            'property_option' => $property_option,
            'date_created' => $date_created,
            'last_updated' => new DateTime(),
-           'status' => $fullname,
+           'property_status' => $fullname,
 
             );
 
@@ -313,42 +327,42 @@ class Property_model extends CI_Model {
 
 
 
-     public function publish_campaign($cid){
+     public function publish_property($pid){
 
 
-        $cur_date = date('Y-m-d H:i:s');
+      
 
-            $publish_val = 1;
+            $publish_val = "Published";
             $data = array(
 
-                'StatusId' => $publish_val,
-                'DateModified' => $cur_date
+                'property_status' => $publish_val
+                
 
             );
 
        
-        $where = "CampaignId = ".$cid."";
+        $where = "pid = ".$pid."";
         return $this->db->update('properties', $data, $where);
        
     }
 
 
 
-    public function unpublish_campaign($cid){
+    public function unpublish_property($pid){
 
 
-        $cur_date = date('Y-m-d H:i:s');
+        
 
-            $publish_val = 4 ;
+            $publish_val = "Unpublished" ;
             $data = array(
 
-                'statusId' => $publish_val,
-                'DateModified' => $cur_date
+                'property_status' => $publish_val
+                
 
             );
 
        
-        $where = "CampaignId = ".$cid."";
+        $where = "pid = ".$pid."";
         return $this->db->update('properties', $data, $where);
        
     }

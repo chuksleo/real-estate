@@ -25,6 +25,7 @@ class Property extends CI_Controller {
         $this->load->model('property_facility_map_model');
         $this->load->model('property_category_model');
         $this->load->model('property_images');
+         $this->load->model('message_model');
 
         $this->load->model('inspection_request_model');
         
@@ -54,6 +55,18 @@ class Property extends CI_Controller {
         if ($this->ion_auth->logged_in() && $this->ion_auth->is_admin()) {
             $data['is_loggedin'] = $this->ion_auth->logged_in();       
             $data['properties'] = $this->property_model->get_all_properties();
+            $this->load->view("property/index" , $data);
+
+
+        }
+       
+    }
+
+
+    public function allUnPublishedPropertyAdmin () {
+        if ($this->ion_auth->logged_in() && $this->ion_auth->is_admin()) {
+            $data['is_loggedin'] = $this->ion_auth->logged_in();       
+            $data['properties'] = $this->property_model->get_all_unpublished_properties();
             $this->load->view("property/index" , $data);
 
 
@@ -169,8 +182,8 @@ class Property extends CI_Controller {
         $data['is_loggedin'] = $this->ion_auth->logged_in();  
         $data['property'] = $this->property_model->getPropertyById($propertyid);
         $data['images'] = $this->property_images->getImagesByPropertyId($propertyid);
+        $data['facilities'] = $this->property_facility_map_model->getPropertyFacilities($propertyid);
         
-       
         $this->load->view("property/view" , $data);
     }
 
@@ -290,11 +303,11 @@ class Property extends CI_Controller {
                 
 
                 }
-                // if($this->ion_auth->is_admin()){ 
-                //     redirect('/admin/properties', 'refresh');
-                // }else{
-                //     redirect('/properties', 'refresh');
-                // }
+                if($this->ion_auth->is_admin()){ 
+                    redirect('/admin/properties', 'refresh');
+                }else{
+                    redirect('/properties', 'refresh');
+                }
               
                 
             }else{
@@ -393,10 +406,22 @@ class Property extends CI_Controller {
 
 
 
-    public function publish($id) {
+    public function publish() {
+
+            $pid = $this->input->post("pid");  
           
-            $propertyId = $this->property_model->publish_property($id);
-            redirect('/admin/all-property', 'refresh');
+            $propertyId = $this->property_model->publish_property($pid);
+            
+       
+      
+    }
+
+    public function unpublish() {
+
+            $pid = $this->input->post("pid");  
+          
+            $propertyId = $this->property_model->unpublish_property($pid);
+            
        
       
     }
@@ -437,6 +462,48 @@ class Property extends CI_Controller {
         $data['categories'] = $this->project_category_model->getCategories($num=10);
         $this->editor($path, $width);
         $this->load->view("property/report_property" , $data);
+    }
+
+
+
+    public function sendMessage () {
+       $this->form_validation->set_rules('name_val', 'Full Name', 'trim|required');
+        $this->form_validation->set_rules('email_val', 'E-mail', 'trim|required|valid_email');
+        $this->form_validation->set_rules('phone_val', 'Phone', 'trim|required');
+        $this->form_validation->set_rules('message_val', 'Message', 'trim|required');
+        if ($this->form_validation->run() == FALSE)
+        {
+            $this->form_validation->set_error_delimiters('<div class="alert-box alert radius" data-alert="">', '<a class="close" href="#"><small>&times;</small></a></div>');
+            $name_error = form_error('name_val');
+            $email_error = form_error('email_val');
+            $phone_error = form_error('phone_val');
+            $messsage_error = form_error('message_val');
+            echo validation_errors();
+
+
+        }else
+        {
+            $fullname = $this->input->post('name_val');
+            $email = $this->input->post('email_val');
+            $phone = $this->input->post('phone_val');
+            $propertyid = $this->input->post('property_val');
+            $message = $this->input->post('message_val');
+
+            $message_resp="";
+            $message_sent = $this->message_model->createMessage($fullname,$email,$phone,$propertyid,$message);
+
+            if($message_sent){
+                $message_resp = '<div class="alert alert-success fade in"> <a class="close" data-dismiss="alert" href="#">x</a> <strong>Your message has been sent 
+successfully!</strong> Our online representative will reach out to you shortly. </div>';
+
+            }else{
+                $message_resp = '<div class="alert alert-danger fade in"> <a class="close" data-dismiss="alert" href="#">x</a> <strong>Error Sending Contact site administrator!! </div>';
+
+            }
+         echo($message_resp);
+
+        }
+
     }
 
 

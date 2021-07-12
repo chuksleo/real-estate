@@ -61,7 +61,6 @@ $this->load->view('section/header', $data);
     <!-- End Page Header -->
   </div>
   <!-- Start Content -->
-
   <div class="main" role="main">
     <div id="content" class="content full">
       <div class="container">
@@ -153,7 +152,21 @@ $this->load->view('section/header', $data);
                       <a href="#" onclick="setView()" class="contact-btn btn btn-primary btn-block btn-lg pull-left"><span id="view-p-text" >View Contact</span><span id="number" style="display: none;">09087654321</span></a>
 
                       <br><br><br><br>
-                      <a href="#" class="btn btn-primary btn-block btn-lg pull-left">Send Message</a>
+                      
+                      <div id="pmessage" style="display: none;">
+                        <input type="text" id="fullname" name="fullname" placeholder="Enter Full Name" class="form-control input-lg" required>
+                        <input type="email" id="emailc" name="emailc" placeholder="Enter Email" class="form-control input-lg" required>
+                        <input type="tel" id="phone" name="phone" placeholder="Phone e.g 07000011111" class="form-control input-lg" required>
+                        <input type="hidden" id="property" name="property"  value="<?= $property->pid ?>" class="form-control input-lg" required>
+
+
+                      </div>
+                      <textarea cols="6" rows="5" id="contact_message" name="comments" class="form-control input-lg" onfocus="showFields()" placeholder="Message" required></textarea>
+                       <div id="contact_rmessage"></div>
+                      <button id="btnsend" class="btn btn-primary btn-block btn-lg pull-left" onclick="sendMessage()" >Send Message</button>
+
+
+                       <button id="btnsending" class="btn btn-primary btn-block btn-lg pull-left" style="display: none">Sending ...</button>
                         <!-- <ul>
                             <li><a href="#"><i class="fa fa-facebook"></i></a></li>
                               <li><a href="#"><i class="fa fa-twitter"></i></a></li>
@@ -178,21 +191,9 @@ $this->load->view('section/header', $data);
                   <h3 class="widgettitle">Additional Amenities</h3>
                   <div id="amenities">
                     <div class="additional-amenities">
-                        <span class="available"><i class="fa fa-check-square"></i> Air Conditioning</span>
-                         <span class="available"><i class="fa fa-check-square"></i> Heating</span>
-                         <span class="navailable"><i class="fa fa-check-square"></i> Balcony</span>
-                         <span class="available"><i class="fa fa-check-square"></i> Dishwasher</span>
-                         <span class="navailable"><i class="fa fa-check-square"></i> Pool</span>
-                         <span class="available"><i class="fa fa-check-square"></i> Internet</span>
-                         <span class="navailable"><i class="fa fa-check-square"></i> Terrace</span>
-                         <span class="available"><i class="fa fa-check-square"></i> Microwave</span>
-                         <span class="navailable"><i class="fa fa-check-square"></i> Fridge</span>
-                         <span class="navailable"><i class="fa fa-check-square"></i> Cable TV</span>
-                         <span class="available"><i class="fa fa-check-square"></i> Security Camera</span>
-                         <span class="available"><i class="fa fa-check-square"></i> Toaster</span>
-                         <span class="navailable"><i class="fa fa-check-square"></i> Grill</span>
-                         <span class="navailable"><i class="fa fa-check-square"></i> Oven</span>
-                         <span class="available"><i class="fa fa-check-square"></i> Fans</span>
+                      <?php foreach($facilities as $facility): ?>
+                        <span class="available"><i class="fa fa-check-square"></i> <?=  $facility->name ?></span>
+                      <?php endforeach ?>
                      </div>
                   </div>
               </div>
