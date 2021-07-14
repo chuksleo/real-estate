@@ -92,11 +92,17 @@ class Message_model extends CI_Model {
 
 
 
-    public function deleteMessage($mid){  
-         
-            $where = "mid = ".$mid."";
+    public function deleteMessage($mid, $type){  
+            $idfield = "";
+            if($type == "contact_us"){
+                $idfield = "id";
 
-            return $this->db->delete('messages', $where);
+            }else{
+                 $idfield = "mid";
+            }         
+            $where =  $idfield." = ".$mid."";
+
+            return $this->db->delete($type, $where);
     }
 
 

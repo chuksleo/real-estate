@@ -39,6 +39,7 @@ $this->load->view('section/admin/header', $data);
                             </div>
                             <!-- Mail list-->
                             <div class="table-responsive">
+                            <div id="response"></div>
                                 <table class="table email-table no-wrap table-hover v-middle mb-0 font-14">
 
                                 <thead>
@@ -60,7 +61,7 @@ $this->load->view('section/admin/header', $data);
                                         <?php foreach($messages as $message_item):?>
 
                                             <?php $property = $this->property_model->getPropertyById($message_item->propertyid)?>
-                                        <tr>
+                                        <tr id="item-<?= $message_item->mid ?>">
                                             <!-- label -->
                                             
                                             <!-- star -->
@@ -80,7 +81,7 @@ $this->load->view('section/admin/header', $data);
                                             <!-- Time -->
                                             <td class="text-muted"><?= $message_item->date_created ?></td>
 
-                                             <td><a href="<?php echo base_url(); ?>admin/messageDelete/<?php echo $message_item->mid ?>" class="btn btn-square btn-primary mb-2"> Delete</a></td>
+                                             <td><a onclick="deleteMessage(<?= $message_item->mid ?>, 'messages')" href="" class="btn btn-square btn-primary mb-2"> Delete</a></td>
                                         </tr>
                                         <!-- row -->
 

@@ -177,6 +177,28 @@ function deleteType(typeid){
 
 
 
+var mid;
+var type;
+function deleteMessage(mid, type){
+
+
+      
+        console.log(mid);
+        console.log(type);
+      $.ajax({
+        type: 'POST',
+        url: '<?php echo base_url(); ?>admin/messageDelete',
+         data: {'mid_val':mid,'type_val':type},
+        success: function(resp) {
+          $('#item-'+mid).hide();
+
+          document.getElementById('response').innerHTML = resp
+        }
+      });
+}
+
+
+
 function subCatList()
     {
 

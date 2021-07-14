@@ -213,6 +213,30 @@ class Admin extends CI_Controller {
 
 
 
+    public function messageDelete() {
+            
+       if($this->ion_auth->logged_in() == true){ 
+
+            $mid = $this->input->post('mid_val');
+            $type = $this->input->post('type_val');
+            if($this->message_model->deleteMessage($mid, $type)){ 
+
+               echo "Message Deleted Succefully!";
+
+            }else{
+                 echo "Error Deleting message! Contact Site admin";
+            }
+            
+
+
+        }
+
+
+    }
+
+
+
+
 
 
 

@@ -172,18 +172,20 @@
       <div class="featured-blocks">
         <div class="container">
           <div class="row">
-            <div class="col-md-4 col-sm-4 featured-block"> <img src="<?php echo base_url() ?>assets/images/property.png" alt="Search Anywhere" class="img-thumbnail">
+          <div class="col-md-4 col-sm-4 featured-block"> <img src="<?php echo base_url() ?>assets/images/search.png" alt="Search Anywhere" class="">
               <h3><?php echo ($this->settings_model->getStaticContent('home_header_one')) ?></h3>
               <?php echo ($this->settings_model->getStaticContent('home_text_one')) ?>    
             </div>
-            <div class="col-md-4 col-sm-4 featured-block"> <img src="<?php echo base_url() ?>assets/images/search.png" alt="Friendly Agents" class="img-thumbnail">
+            <div class="col-md-4 col-sm-4 featured-block"> <img src="<?php echo base_url() ?>assets/images/verify.png" alt="Friendly Agents" class="">
               <h3><?php echo ($this->settings_model->getStaticContent('home_header_two')) ?></h3>
                <?php echo ($this->settings_model->getStaticContent('home_text_two')) ?>
             </div>
-            <div class="col-md-4 col-sm-4 featured-block"> <img src="<?php echo base_url() ?>assets/images/price.jpeg" alt="Search Anywhere" class="img-thumbnail">
+            <div class="col-md-4 col-sm-4 featured-block"> <img src="<?php echo base_url() ?>assets/images/best-price.png" alt="Search Anywhere" class="">
               <h3> <?php echo ($this->settings_model->getStaticContent('home_header_three')) ?></h3>
                <?php echo ($this->settings_model->getStaticContent('home_text_three')) ?>
             </div>
+
+           
           </div>
         </div>
       </div>
