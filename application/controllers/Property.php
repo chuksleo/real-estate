@@ -93,6 +93,8 @@ class Property extends CI_Controller {
     public function search () {
 
        $data['properties'] = Null;
+
+       
        if(!$this->input->post("ptitle")){
 
             
