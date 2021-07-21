@@ -250,7 +250,7 @@ function getCategoryTypes(page){
                 </li>
 
                 <li class="">
-                 <a href="<?php echo base_url() ?>#"><?php  echo "Lets Build For You" ?></a>
+                 <a href="<?php echo base_url() ?>lets-build"><?php  echo "Lets Build For You" ?></a>
                                   
                 </li>
                 
@@ -262,11 +262,11 @@ function getCategoryTypes(page){
                 </li>
                                 
 
-                 <li class="">
+                <!--  <li class="">
                       <a href="<?php echo base_url() ?>contact-us""><?php  echo "Contact us" ?></a>
                                   
                  </li>
-
+ -->
                 <!--  <li class="">
                  <a href="<?php echo base_url() ?>blog"><?php  echo "Blog" ?></a>
                                   
@@ -275,7 +275,7 @@ function getCategoryTypes(page){
                   
               </ul>
 
-              <a href="<?php echo base_url() ?>property/add" class="btn btn-primary btn-block btn-lg top-btn-add">+Add Listing </a>
+              <a href="<?php echo base_url() ?>property/add" class="btn btn-primary btn-block btn-lg top-btn-add">+Sell With us </a>
 
                   
             </nav>

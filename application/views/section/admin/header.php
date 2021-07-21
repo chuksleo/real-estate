@@ -297,16 +297,14 @@ function showInbox(){
                     <a href="#pagesmenu3" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle no-caret-down"><i class="fas fa-home"></i> My Properties</a>
                     <ul class="collapse list-unstyled" id="pagesmenu3">
                         <li>
-                            <a href="<?php echo base_url() ?>agent/properties"><i class="fas fa-file"></i> List My Properties</a>
+                            <a href="<?php echo base_url() ?>user/properties"><i class="fas fa-file"></i> List My Properties</a>
                         </li>
 
-                        <li>
-                            <a href="<?php echo base_url() ?>agent/properties/add"><i class="fas fa-file"></i> Add Property</a>
+                        <li> 
+                            <a href="<?php echo base_url() ?>user/properties/add"><i class="fas fa-file"></i> Add Property</a>
                         </li>
 
-                        <li>
-                            <a href="<?php echo base_url() ?>agent/messages"><i class="fas fa-file"></i> Messages</a>
-                        </li>
+                       
 
 
                     </ul>
@@ -320,9 +318,6 @@ function showInbox(){
                             <a href="<?php echo base_url() ?>admin/properties"><i class="fas fa-file"></i> Contact Details</a>
                         </li>
 
-                        <li>
-                            <a href="<?php echo base_url() ?>admin/properties/add"><i class="fas fa-file"></i> Company Details</a>
-                        </li>
 
                         <li>
                             <a href="<?php echo base_url() ?>admin/properties/add"><i class="fas fa-file"></i> Change Password</a>

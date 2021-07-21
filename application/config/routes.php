@@ -56,12 +56,14 @@ $route['about-us'] = "pages/about";
 
 $route['blog'] = "blog";
 $route['contact-us'] = "pages/contact";
+$route['lets-build'] = "pages/contact";
 $route['categories'] = "category/public_list";
 $route['category/(:any)/(:num)'] = 'property/category/$1/$2';
 $route['blog/(:num)/(:any)'] = 'blog/post/$1/$2';
 
 
 $route['all-properties'] = 'property/listProperties';
+$route['all-properties/(:num)'] = 'property/listProperties';
 $route['property/add'] = 'property/create';
 $route['property-category/(:any)/(:num)'] = 'property/category/$1/$2';
 $route['property/(:any)/(:num)'] = 'property/viewproperty/$1/$2';
@@ -69,10 +71,12 @@ $route['property/location/(:any)/(:num)'] = 'property/locationView/$1/$2';
 $route['user-property/edit/(:num)'] = 'property/edit/$1';
 $route['user-property/publish/(:num)'] = 'property/publish/$1';
 $route['donate/(:any)/(:num)'] = 'donation/pay/$1/$2';
-
+ 
 
 $route['admin/dashboard'] = 'admin';
 
+$route['user/properties'] = 'property';
+$route['user/properties/add'] = 'property/create';
 
 $route['admin/properties'] = 'property/allPropertyAdmin';
 $route['admin/properties/unpublished'] = 'property/allUnPublishedPropertyAdmin';

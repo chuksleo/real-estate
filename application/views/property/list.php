@@ -65,9 +65,9 @@ $this->load->view('section/header', $data);
 
                       
                     <div class="property-listing">
-                     
+                     <p>Showing: <?php echo $s_val ?> - <?php echo $num ?> of <?php echo $total?> Total result</p>
 
-
+                       <?php $val = $this->session->flashdata('message'); if($val){echo '<div class="alert alert-warning fade in">'.$val.'</div>'; }?>
 
                     <?php if(!$properties){ echo ' <div class="alert alert-warning fade in"> <a class="close" data-dismiss="alert" href="#">×</a> <strong> Sorry!</strong>No Properties Found .... </div>';    } ?>
                         <ul>
@@ -94,7 +94,8 @@ $this->load->view('section/header', $data);
 
                         </ul>
                     </div>
-                    <ul class="pagination">
+                    <?php echo $pages ?>
+                   <!--  <ul class="pagination">
                       <li><a href="#"><i class="fa fa-chevron-left"></i></a></li>
                       <li class="active"><a href="#">1</a></li>
                       <li><a href="#">2</a></li>
@@ -102,7 +103,7 @@ $this->load->view('section/header', $data);
                       <li><a href="#">4</a></li>
                       <li><a href="#">5</a></li>
                       <li><a href="#"><i class="fa fa-chevron-right"></i></a></li>
-                    </ul>
+                    </ul> -->
                   </div>
 
 

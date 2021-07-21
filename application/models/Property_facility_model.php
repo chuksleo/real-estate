@@ -19,8 +19,7 @@ class Property_facility_model extends CI_Model {
         
     public function getAllFacilities(){
         $query = $this->db->get("property_facilities");
-        $query = $this->db->get();
-            
+          
         return $query->result();
     }
 

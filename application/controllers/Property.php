@@ -12,7 +12,7 @@
  * @author Green Lenovo
  */
 class Property extends CI_Controller {
-    //put your code here
+    
     
     public function __construct() {
         parent::__construct();
@@ -28,9 +28,10 @@ class Property extends CI_Controller {
          $this->load->model('message_model');
 
         $this->load->model('inspection_request_model');
+       
         
     }
-    
+   
     public function index () {
         
        
@@ -94,7 +95,7 @@ class Property extends CI_Controller {
        $data['properties'] = Null;
        if(!$this->input->post("ptitle")){
 
-            $data['is_loggedin'] = $this->ion_auth->logged_in();
+            
             $location = ""; 
             if($this->input->post("plocation")){
                 $title = $this->property_model->cleanTitle($this->input->post("plocation"));
@@ -152,25 +153,74 @@ class Property extends CI_Controller {
 
 
 
-     public function listProperties () {
+     public function listProperties ($start=0) {
       
-      
+        $num = 1;
         $data['is_loggedin'] = $this->ion_auth->logged_in();       
-        $data['properties'] = $this->property_model->get_all_properties();
+        $data['properties'] = $this->property_model->get_all_properties($num,$start);
+
+        $config['base_url'] = base_url().'all-properties';
+        $config['total_rows'] = $this->property_model->getTotalProperties();
+        
+        $config['per_page'] = $num;
+        $config['uri_segment'] = 2;
+        $config['full_tag_open'] = '<ul class="pagination">';
+        $config['full_tag_close'] = '</ul>';
+        // $config['cur_tag_open'] = '<li class="active">';
+        // $config['cur_tag_close'] = '</a></li>';
+        $config['display_pages'] = TRUE;
+
+        $cur_page = $this->pagination->cur_page;
+        $total = $this->property_model->getTotalProperties();
+        $data['s_val'] = $start + 1;
+        $check = $start + $num;
+        if($check > $total ){
+            $data['num'] = $total;
+        }else{
+        $data['num'] = $start + $num;
+        }
+        $this->pagination->initialize($config);
+        $data['pages'] = $this->pagination->create_links();
+        $data['total'] = $total;
+        $data['per_page'] = $num;
         
         $this->load->view("property/list" , $data);
-        // $this->load->view("property/sidebar" , $data);
+        
     }
 
 
 
 
 
-    public function category ($title, $catid) {
+    public function category ($title, $catid, $start=0) {
+        $num = 1;
         $data['cat_title'] = $title;  
         $data['is_loggedin'] = $this->ion_auth->logged_in();       
-        $data['properties'] = $this->property_model->getPropertyByCategory($catid);
+        $data['properties'] = $this->property_model->getPropertyByCategory($catid,$num,$start);
+        $config['base_url'] = base_url().'property-category/'.$title.'/'.$catid;
+        $config['total_rows'] = $this->property_model->getTotalPropertiesByCategory($catid);
         
+        $config['per_page'] = $num;
+        $config['uri_segment'] = 4;
+        $config['full_tag_open'] = '<ul class="pagination">';
+        $config['full_tag_close'] = '</ul>';
+        // $config['cur_tag_open'] = '<li class="active">';
+        // $config['cur_tag_close'] = '</a></li>';
+        $config['display_pages'] = TRUE;
+
+        $cur_page = $this->pagination->cur_page;
+        $total = $this->property_model->getTotalProperties();
+        $data['s_val'] = $start + 1;
+        $check = $start + $num;
+        if($check > $total ){
+            $data['num'] = $total;
+        }else{
+        $data['num'] = $start + $num;
+        }
+        $this->pagination->initialize($config);
+        $data['pages'] = $this->pagination->create_links();
+        $data['total'] = $total;
+        $data['per_page'] = $num;
         $this->load->view("property/list" , $data);
     }
 
@@ -183,8 +233,20 @@ class Property extends CI_Controller {
         $data['property'] = $this->property_model->getPropertyById($propertyid);
         $data['images'] = $this->property_images->getImagesByPropertyId($propertyid);
         $data['facilities'] = $this->property_facility_map_model->getPropertyFacilities($propertyid);
+        if(!$data['property']){
+            if($this->ion_auth->logged_in()){
+                $this->session->set_flashdata('message', "Property ".$title.' is not listed or published');   
+                 redirect('/user/properties', 'refresh');
+
+            }else{
+                $this->session->set_flashdata('message', "Property ".$title.' is not listed or published');   
+                redirect('/all-properties', 'refresh');
+            }
+            
+        }else{
+            $this->load->view("property/view" , $data);
+        }
         
-        $this->load->view("property/view" , $data);
     }
 
 
@@ -306,7 +368,7 @@ class Property extends CI_Controller {
                 if($this->ion_auth->is_admin()){ 
                     redirect('/admin/properties', 'refresh');
                 }else{
-                    redirect('/properties', 'refresh');
+                    redirect('/user/properties', 'refresh');
                 }
               
                 

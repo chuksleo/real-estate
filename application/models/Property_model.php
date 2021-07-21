@@ -31,9 +31,8 @@ class Property_model extends CI_Model {
     // public $DateModified;
 
     
-    public function get_all_properties(){
-        $num = 20;
-        $start = 0;
+    public function get_all_properties($num, $start){
+                
         $pub ="Published";
          
         $this->db->select()->from('properties AS p')->limit($num, $start)->where('p.property_status =',$pub)->order_by('last_updated','desc');
@@ -42,6 +41,17 @@ class Property_model extends CI_Model {
         $this->db->join('property_images AS im', 'im.property_id = p.pid','left')->group_by('p.pid');
         $query = $this->db->get();
         return $query->result();
+    }
+
+
+
+     public function getTotalProperties(){
+        $pub ="Published";
+       $this->db->select()->from('properties as p')->where('p.property_status =',$pub);
+
+        $query = $this->db->get();
+        return $query->num_rows();
+
     }
 
 
@@ -59,9 +69,12 @@ class Property_model extends CI_Model {
     }
 
 
-    public function getTotalProperties(){
+   
 
-       $this->db->select()->from('properties');
+    public function getTotalPropertyForLocation($lid){
+        $status = "Published";
+        $this->db->select()->from('properties AS p')->where('p.location_id =',$lid);
+        $this->db->where('p.property_status =',$status);
 
         $query = $this->db->get();
         return $query->num_rows();
@@ -69,9 +82,12 @@ class Property_model extends CI_Model {
     }
 
 
+    
+ 
+
     public function getTotalUserproperties($uid){
 
-       $this->db->select()->from('properties AS c')->where('c.UserId =',$uid);
+       $this->db->select()->from('properties AS c')->where('c.uid =',$uid);
 
         $query = $this->db->get();
         return $query->num_rows();
@@ -113,16 +129,19 @@ class Property_model extends CI_Model {
 
 
      public function user_properties($uid){
-         $this->db->select()->from('properties AS c')->where('c.UserId =',$uid);
-         $this->db->join('campaign_statuses AS cs', 'cs.CampaignStatusId = c.StatusId');
-         $this->db->join('categories AS ca', 'ca.catId = c.CategoryId','left')->group_by('c.CampaignId');
+         $this->db->select()->from('properties AS p')->where('p.uid =',$uid);
+         $this->db->join('users AS u', 'u.id = p.uid');
+        $this->db->join('locations AS l', 'l.lid = p.location_id','left');
+        $this->db->join('property_images AS im', 'im.property_id = p.pid','left')->group_by('p.pid');
+        
          $query = $this->db->get();
         return $query->result();
     }
     
     public function getPropertyById($id) {
-
+            $status = "Published";
             $this->db->select()->from('properties AS p')->where('p.pid =',$id);
+            $this->db->where('p.property_status =',$status);
             $this->db->join('users AS u', 'u.id = p.uid');
             $this->db->join('locations AS l', 'l.lid = p.location_id','left');
 
@@ -133,23 +152,35 @@ class Property_model extends CI_Model {
       
     }
     
-    public function getPropertyByCategory($catId) {
+    public function getPropertyByCategory($catId, $num, $start) {
         $sid = 1;
-        $this->db->select()->from('properties AS c')->where('c.category_id =',$catId);
-                $this->db->join('users AS u', 'u.id = c.uid');
-                $this->db->join('locations AS l', 'l.lid = c.location_id','left')->group_by('c.id');
+        $status = "Published";
+        $this->db->select()->from('properties AS p')->limit($num, $start)->where('p.category_id =',$catId);
+        $this->db->where('p.property_status =',$status);
+                $this->db->join('users AS u', 'u.id = p.uid');
+                $this->db->join('locations AS l', 'l.lid = p.location_id','left')->group_by('p.pid');
         $query = $this->db->get();
         return $query->result();
     }
 
 
+    public function getTotalPropertiesByCategory($catId){
+       $pub ="Published";
+       $this->db->select()->from('properties as p')->where('p.category_id =',$catId);
+       $this->db->where('p.property_status =',$pub);
 
+        $query = $this->db->get();
+        return $query->num_rows();
+
+    }
 
     public function getPropertyByLocation($locationid) {
         $sid = 1;
-        $this->db->select()->from('properties AS c')->where('c.location_id =',$locationid);
-                $this->db->join('users AS u', 'u.id = c.uid');
-                $this->db->join('locations AS l', 'l.lid = c.location_id','left')->group_by('c.id');
+        $status = "Published";
+        $this->db->select()->from('properties AS p')->where('p.location_id =',$locationid);
+        $this->db->where('p.property_status =',$status);
+                $this->db->join('users AS u', 'u.id = p.uid');
+                $this->db->join('locations AS l', 'l.lid = p.location_id','left')->group_by('p.pid');
         $query = $this->db->get();
         return $query->result();
     }
@@ -276,7 +307,7 @@ class Property_model extends CI_Model {
     public  function getPropertySearchResult($s_data)  
     {  
 
-        print_r($s_data);
+       
 
 
         $this->db->select('p.*, l.*, u.*');

@@ -48,7 +48,7 @@ class Admin extends CI_Controller {
 
        
         $this->load->view("section/admin/header");
-        $this->load->view("admin/index", $data);
+        $this->load->view("section/dashboard", $data);
         $this->load->view("section/admin/footer");
     }
 

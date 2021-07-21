@@ -123,14 +123,14 @@ class CI_Pagination {
 	 *
 	 * @var	string
 	 */
-	protected $next_link = '&gt;';
+	protected $next_link = '';
 
 	/**
 	 * Previous link
 	 *
 	 * @var	string
 	 */
-	protected $prev_link = '&lt;';
+	protected $prev_link = '';
 
 	/**
 	 * Last link
@@ -165,28 +165,28 @@ class CI_Pagination {
 	 *
 	 * @var	string
 	 */
-	protected $first_tag_open = '';
+	protected $first_tag_open = '<li>';
 
 	/**
 	 * First tag close
 	 *
 	 * @var	string
 	 */
-	protected $first_tag_close = '';
+	protected $first_tag_close = '</li>';
 
 	/**
 	 * Last tag open
 	 *
 	 * @var	string
 	 */
-	protected $last_tag_open = '';
+	protected $last_tag_open = '<li>';
 
 	/**
 	 * Last tag close
 	 *
 	 * @var	string
 	 */
-	protected $last_tag_close = '';
+	protected $last_tag_close = '</li>';
 
 	/**
 	 * First URL
@@ -202,28 +202,28 @@ class CI_Pagination {
 	 *
 	 * @var	string
 	 */
-	protected $cur_tag_open = '<strong>';
+	protected $cur_tag_open = '<li class="active"><a>';
 
 	/**
 	 * Current tag close
 	 *
 	 * @var	string
 	 */
-	protected $cur_tag_close = '</strong>';
+	protected $cur_tag_close = '</a></li>';
 
 	/**
 	 * Next tag open
 	 *
 	 * @var	string
 	 */
-	protected $next_tag_open = '';
+	protected $next_tag_open = '<li>';
 
 	/**
 	 * Next tag close
 	 *
 	 * @var	string
 	 */
-	protected $next_tag_close = '';
+	protected $next_tag_close = '</li>';
 
 	/**
 	 * Previous tag open
@@ -244,14 +244,14 @@ class CI_Pagination {
 	 *
 	 * @var	string
 	 */
-	protected $num_tag_open = '';
+	protected $num_tag_open = '<li>';
 
 	/**
 	 * Number tag close
 	 *
 	 * @var	string
 	 */
-	protected $num_tag_close = '';
+	protected $num_tag_close = '</li>';
 
 	/**
 	 * Page query string flag
@@ -566,8 +566,8 @@ class CI_Pagination {
 			// Take the general parameters, and squeeze this pagination-page attr in for JS frameworks.
 			$attributes = sprintf('%s %s="%d"', $this->_attributes, $this->data_page_attr, 1);
 
-			$output .= $this->first_tag_open.'<a href="'.$first_url.'"'.$attributes.$this->_attr_rel('start').'>'
-				.$this->first_link.'</a>'.$this->first_tag_close;
+			$output .= $this->first_tag_open.'<li><a href="'.$first_url.'"'.$attributes.$this->_attr_rel('start').'>'
+				.$this->first_link.'</a></li>'.$this->first_tag_close;
 		}
 
 		// Render the "Previous" link.
@@ -580,14 +580,14 @@ class CI_Pagination {
 			if ($i === $base_page)
 			{
 				// First page
-				$output .= $this->prev_tag_open.'<a href="'.$first_url.'"'.$attributes.$this->_attr_rel('prev').'>'
-					.$this->prev_link.'</a>'.$this->prev_tag_close;
+				$output .= $this->prev_tag_open.'<li><a href="'.$first_url.'"'.$attributes.$this->_attr_rel('prev').'>'
+					.$this->prev_link.'</a></li>'.$this->prev_tag_close;
 			}
 			else
 			{
 				$append = $this->prefix.$i.$this->suffix;
-				$output .= $this->prev_tag_open.'<a href="'.$base_url.$append.'"'.$attributes.$this->_attr_rel('prev').'>'
-					.$this->prev_link.'</a>'.$this->prev_tag_close;
+				$output .= $this->prev_tag_open.'<li><a href="'.$base_url.$append.'"'.$attributes.$this->_attr_rel('prev').'>'
+					.$this->prev_link.'</a></li>'.$this->prev_tag_close;
 			}
 
 		}

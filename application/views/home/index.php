@@ -10,7 +10,7 @@
     <div class="hero-slider flexslider clearfix" data-autoplay="yes" data-pagination="no" data-arrows="yes" data-style="fade" data-pause="yes">
       <ul class="slides">
       <?php foreach($banners as $banner):?>
-        <li class=" parallax" style="background-image:url(<?php echo base_url() ?>assets/uploads/banners/<?php echo $banner->banner_image ?>);"> <p>dfsfsdfhksdfbksd sdfksdfbksdbfksdf sd fksd fsdk f</p>
+        <li class=" parallax" style="background-image:url(<?php echo base_url() ?>assets/uploads/banners/<?php echo $banner->banner_image ?>);"> <p class="banner-text"><?php echo $banner->title?></p>
         </li>
       <?php endforeach ?>
 
@@ -227,6 +227,8 @@
               </ul>
           </div>
         </div>
+
+        <a href="<?php echo base_url() ?>all-properties" class="btn btn-primary btn-block btn-lg  btn-call-toaction">Buy Your Own Property </a>
       </div>
       <div id="featured-properties">
         <div class="container">
@@ -301,10 +303,10 @@
                                  <?php }else{ ?>
                                   <img style="width: 100%; height: 400px" src="<?php echo base_url() ?>assets/uploads/location/<?php echo $location->banner_image ?>" alt="">
                                   <?php } ?>
-
+                                  <?php $num = $this->property_model->getTotalPropertyForLocation($location->lid) ?>
                                  
                                   <div class="normal-text">
-                                      <p class="">200</p>
+                                      <p class=""><?php if(!$num){echo "0";}else{echo $num;}?></p>
                                       <h4 class="team-name"><?php echo $location->location_title ?> Properties</h4>
                                       
                                   </div>

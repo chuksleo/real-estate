@@ -61,12 +61,15 @@ $this->load->view('section/header', $data);
     <!-- End Page Header -->
   </div>
   <!-- Start Content -->
+
   <div class="main" role="main">
     <div id="content" class="content full">
       <div class="container">
         <div class="row">
           <div class="col-md-8">
             <div class="single-property">
+            
+
               <h2 class="page-title"><?= $property->title ?>, <span class="location"><?= $property->location_title ?></span></h2>
               <div class="price"><strong>$</strong><span><?= $price = $this->property_model->getMoneyFormat($property->price) ?></span></div>
               <div class="property-amenities clearfix"> <span class="area"><strong>For</strong>Sale</span> <span class="area"><strong><?= $property->size_sqm ?></strong>Area</span> <span class="baths"><strong><?= $property->bathrooms ?></strong>Baths</span> <span class="beds"><strong><?= $property->bedrooms ?></strong>Beds</span> <span class="parking"><strong><?= $property->agreement_fee ?></strong>Fees</span> </div>
