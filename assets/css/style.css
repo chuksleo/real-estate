@@ -913,8 +913,9 @@ html[xmlns] .slides {
 	width:100%;
 	overflow:hidden;
 	position:static;
-	background-attachment:scroll!important
-}
+	background-attachment:scroll!important;
+	background-size: cover;
+} 
 .flex-caption{
 	display:none;
 	margin:0 auto;
@@ -3580,7 +3581,7 @@ span.progress-bar-tooltip:after {
     font-size: 70px;
     line-height: 108px;
     text-align: center;
-    margin-top: 8%;
+    
     color: #fff;
     font-weight: bold;
 
@@ -3595,4 +3596,11 @@ span.progress-bar-tooltip:after {
     margin-bottom: 25px;
     width: 337px;
 
+}
+
+.bg-content {
+
+	height: 100%;
+	background:rgba(0,0,0,0.5);
+	padding-top: 10%
 }
