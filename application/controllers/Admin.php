@@ -5,7 +5,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+ 
 /**
  * Description of Admin
  *
@@ -282,12 +282,11 @@ class Admin extends CI_Controller {
             }else{
                 $image = $pic['file_name'];
             }
-            
+             
 
             
             $this->banners_model->setBanner(
-                $this->input->post('title'), 
-                $this->input->post('slug'), 
+                $this->input->post('title'),               
                 $image,
                 $this->input->post('status'));
 
@@ -310,35 +309,35 @@ class Admin extends CI_Controller {
      public function banneredit($bid) {
             
        if($this->ion_auth->logged_in() == true){
-            $data['banner'] = $this->banner_model->getLocationById($lid);
+            $data['banner'] = $this->banners_model->getBannerById($bid);
 
             if($this->input->post()){
            
             
-            $uid = $this->ion_auth->get_user_id();
-            $config['upload_path'] = './assets/uploads/banners/';
-            $config['allowed_types'] = 'gif|jpg|png|jpeg';
-            $config['max_size'] = 20048; // Need to define properly              
-            $config['file_name'] = time().$uid;       
-            $this->load->library('upload', $config);
-            $this->upload->do_upload('userfile1');
-            $image = "";
-            $pic = $this->upload->data();
-            if($_FILES['userfile1']['size'] == 0){
-                $image = $data['loc']->banner_image;
-            }else{
-                $image = $pic['file_name'];
-            }
+                $uid = $this->ion_auth->get_user_id();
+                $config['upload_path'] = './assets/uploads/banners/';
+                $config['allowed_types'] = 'gif|jpg|png|jpeg';
+                $config['max_size'] = 20048; // Need to define properly              
+                $config['file_name'] = time().$uid;       
+                $this->load->library('upload', $config);
+                $this->upload->do_upload('userfile1');
+                $image = "";
+                $pic = $this->upload->data();
+                if($_FILES['userfile1']['size'] == 0){
+                    $image = $data['banner']->banner_image;
+                }else{
+                    $image = $pic['file_name'];
+                }
 
 
 
-           $this->banners_model->updateBanner(
-                $this->input->post('title'), 
-                $this->input->post('slug'), 
-                $image);
-            
+                $this->banners_model->updateBanner(
+                $bid,
+                $this->input->post('title'),                 
+                $image,
+                $this->input->post('status'));            
 
-            redirect('/admin/front-banners', 'refresh');
+            redirect('/admin/banners', 'refresh');
         }else{
             $data['action'] = "edit";            
                       

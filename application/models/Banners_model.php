@@ -23,11 +23,22 @@ class Banners_model extends CI_Model {
         return $query->result();
     }
 
+
+
+    public function getBannerById($bid){
+       
+        $this->db->select()->from('front_banners AS fb')->where('fb.banner_id =',$bid);
+       
+        $query = $this->db->get();
+        return $query->row();
+
+    }
+
+
     
     
-    public function setBanner($title,$slug,$banner,$status){  
-        $this->title = $title; 
-        $this->slug = $slug;
+    public function setBanner($title,$banner,$status){  
+        $this->title = $title;        
         $this->banner_image = $banner;
         $this->active = $status;
         $this->db->insert('front_banners', $this);
@@ -39,11 +50,10 @@ class Banners_model extends CI_Model {
 
 
 
-     public function updateBanner($bid, $title,$slug,$banner,$status){  
+     public function updateBanner($bid, $title,$banner,$status){  
          $data = array(
 
-                'title' => $title,
-                'slug' =>$slug,
+                'title' => $title,                
                 'banner_image' => $banner,
                 'active' => $status,
                

@@ -21,22 +21,22 @@
                   </ul>
               </div>
             <div class="col-md-3 col-sm-6 footer-widget widget">
-                <h3 class="widgettitle">Useful Links</h3>
+                <h3 class="widgettitle">Quick Links</h3>
                <ul>
-                <li><a href="submit.html">Add your listing</a></li>
-                <li><a href="login.html">Become an agent</a></li>
-                <li><a href="pricing.html">Pricing</a></li>
+                <li><a href="submit.html">Sell with us</a></li>
+                <li><a href="login.html">View All Properties</a></li>
+                <li><a href="pricing.html">Top Location Properties</a></li>
                 <li><a href="about.html">About us</a></li>
-                <li><a href="shortcodes.html">Theme features</a></li>
+               
                </ul>
            </div>
             <div class="col-md-3 col-sm-6 footer-widget widget">
-              <h3 class="widgettitle">Twitter Updates</h3>
+              <h3 class="widgettitle">Facebook Fanpage</h3>
                   <ul class="twitter-widget"></ul>
            </div>
             <div class="col-md-3 col-sm-6 footer-widget widget">
                 <h3 class="widgettitle">Our Newsletter</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla convallis egestas rhoncus. Donec facilisis fermentum sem, ac viverra ante luctus vel.</p>
+                <?php echo ($this->settings_model->getStaticContent('footer_text_one')) ?>
                 <form method="post" id="newsletterform" name="newsletterform" class="newsletter-form" action="mail/newsletter.php">
                     <input type="email" name="nl-email" id="nl-email" placeholder="Enter your email" class="form-control">
                     <input type="submit" name="nl-submit" id="nl-submit" class="btn btn-primary btn-block btn-lg" value="Subscribe">
@@ -51,7 +51,7 @@
     <div class="container">
       <div class="row">
         <div class="copyrights-col-left col-md-6 col-sm-6">
-          <p>&copy; 2014 RealSpaces. All Rights Reserved</p>
+          <p>&copy; <?php echo ($this->settings_model->getStaticContent('footer_text_two')) ?></p>
         </div>
         <div class="copyrights-col-right col-md-6 col-sm-6">
           <div class="social-icons">

@@ -245,13 +245,15 @@
                 <?php foreach($featured_properties as $property_item):?>
 
                   <li class="item property-block">
-                      <a href="property-detail.html" class="property-featured-image">
-                      <img src="<?php echo base_url() ?>assets/images/home.jpg" alt="">
+                         <?php  $link_text = $this->property_model->cleanTitle($property_item->title);?>
+                          <a href="<?= base_url() ?>property/<?= $link_text ?>/<?=  $property_item->pid ?>" class="property-featured-image">
+                     
+                      <img src="<?php echo base_url() ?>assets/uploads/property/<?php echo $property_item->image ?>" alt="">
                       <span class="images-count"><i class="fa fa-picture-o"></i> 2</span>
                       <span class="badges">Buy</span>
                       </a>
                       <div class="property-info">
-                          <h4><a href="property-detail.html"><?php echo $property_item->title ?></a></h4>
+                          <h4><a href="<?= base_url() ?>property/<?= $link_text ?>/<?=  $property_item->pid ?>"><?php echo $property_item->title ?></a></h4>
                           <span class="location"><?php echo $property_item->location_title ?></span>
                           <div class="price"><strong>$</strong><span><?php echo $property_item->price ?></span></div>
                       </div>
