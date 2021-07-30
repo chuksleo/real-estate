@@ -38,6 +38,10 @@ $config['base_url'] .= str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER
 */
 $config['index_page'] = '';
 
+
+
+	
+
 /*
 |--------------------------------------------------------------------------
 | URI PROTOCOL

@@ -1,5 +1,5 @@
 <?php
-
+  
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -38,18 +38,29 @@ class Admin extends CI_Controller {
     }
 
     public function index() {
+        if($this->ion_auth->logged_in() && $this->ion_auth->is_admin()){
+            $users = $this->ion_auth->users()->result();
+            $data['total_members'] = count($users);
 
 
-        $data['total_members'] = 20;
-        $data['total_properties'] = $this->property_model->getTotalProperties();
-        $data['total_reviews'] = $this->reviews_model->getTotalProperties();
-        $data['total_inspection_request'] = $this->inspection_request_model->getTotalInspectionRequest();
+            $data['total_properties'] = $this->property_model->getTotalProperties();
+            $data['today_total_properties'] = $this->property_model->getTotalPropertiesToday();
+            $data['total_sold'] = $this->property_model->getAllSoldProperties();
+
+            $data['total_reviews'] = $this->property_model->getTotalProperties();
+            $data['contact_messages'] = $this->message_model->getCountUnreadContactMessages();
+            $data['property_messages'] = $this->message_model->getCountUnreadPropertyMessages();
+
+            $data['properties'] = $this->property_model->get_top_view_properties();
 
 
-       
-        $this->load->view("section/admin/header");
-        $this->load->view("section/dashboard", $data);
-        $this->load->view("section/admin/footer");
+           
+            $this->load->view("section/admin/header");
+            $this->load->view("section/dashboard", $data);
+            $this->load->view("section/admin/footer");
+        }else{
+            redirect('/auth');
+        }
     }
 
 
@@ -134,6 +145,7 @@ class Admin extends CI_Controller {
                 $this->input->post('phone'), 
                 $this->input->post('phone2'), 
                 $this->input->post('work'), 
+                $this->input->post('contentcount'), 
                 $this->input->post('twitter'), 
                 $this->input->post('facebook'), 
                 $this->input->post('linkedin'), 
@@ -201,6 +213,7 @@ class Admin extends CI_Controller {
             $data['message'] = $this->message_model->getMessageById($mid);
 
             if($data['message']){
+                $this->message_model->updateMessageReadStatus($mid);
                 $this->load->view("messages/message_view" , $data);
             }else{
 

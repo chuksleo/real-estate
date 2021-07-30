@@ -63,11 +63,17 @@ $route['blog/(:num)/(:any)'] = 'blog/post/$1/$2';
 
 
 $route['all-properties'] = 'property/listProperties';
-$route['all-properties/(:num)'] = 'property/listProperties';
+$route['all-properties/(:num)'] = 'property/listProperties/$1';
 $route['property/add'] = 'property/create';
+$route['properties/search'] = 'property/search';
+$route['properties/search/(:num)'] = 'property/search/$1';
 $route['property-category/(:any)/(:num)'] = 'property/category/$1/$2';
+$route['property-category/(:any)/(:num)/(:num)'] = 'property/category/$1/$2/$3';
+
 $route['property/(:any)/(:num)'] = 'property/viewproperty/$1/$2';
 $route['property/location/(:any)/(:num)'] = 'property/locationView/$1/$2';
+$route['property/location/(:any)/(:num)/(:num)'] = 'property/locationView/$1/$2/$3';
+
 $route['user-property/edit/(:num)'] = 'property/edit/$1';
 $route['user-property/publish/(:num)'] = 'property/publish/$1';
 $route['donate/(:any)/(:num)'] = 'donation/pay/$1/$2';
@@ -77,7 +83,7 @@ $route['admin/dashboard'] = 'admin';
 
 $route['user/properties'] = 'property';
 $route['user/properties/add'] = 'property/create';
-
+$route['user/properties/edit/(:num)'] = 'property/edit/$1';
 $route['admin/properties'] = 'property/allPropertyAdmin';
 $route['admin/properties/unpublished'] = 'property/allUnPublishedPropertyAdmin';
 

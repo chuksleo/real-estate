@@ -55,7 +55,8 @@ class Property extends CI_Controller {
     public function allPropertyAdmin () {
         if ($this->ion_auth->logged_in() && $this->ion_auth->is_admin()) {
             $data['is_loggedin'] = $this->ion_auth->logged_in();       
-            $data['properties'] = $this->property_model->get_all_properties();
+            $data['properties'] = $this->property_model->get_all_properties_admin();
+            $data['page_header'] = "All Properties";
             $this->load->view("property/index" , $data);
 
 
@@ -68,6 +69,7 @@ class Property extends CI_Controller {
         if ($this->ion_auth->logged_in() && $this->ion_auth->is_admin()) {
             $data['is_loggedin'] = $this->ion_auth->logged_in();       
             $data['properties'] = $this->property_model->get_all_unpublished_properties();
+            $data['page_header'] = "Pending Properties";
             $this->load->view("property/index" , $data);
 
 
@@ -77,25 +79,75 @@ class Property extends CI_Controller {
 
 
 
-    public function locationView($title, $locationid){
+    public function locationView($title, $locationid, $start=0){
+
+        $data['title'] = "Properties in ".$title;
+        $data['is_loggedin'] = $this->ion_auth->logged_in();       
+        
+
+
+        $settings = $this->settings_model->get_all_settings();
+        $num = $settings['content_per_page'];
 
         $data['cat_title'] = $title;  
-        $data['is_loggedin'] = $this->ion_auth->logged_in();       
-        $data['properties'] = $this->property_model->getPropertyByLocation($locationid);
+        $data['is_loggedin'] = $this->ion_auth->logged_in(); 
+        $data['properties'] = $this->property_model->getPropertyByLocation($locationid,$num,$start);
+        $totalByLocation = $this->property_model->getTotalPropertyForLocation($locationid);
+        $config['base_url'] = base_url().'property/location/'.$title.'/'.$locationid;
+        $config['total_rows'] = $totalByLocation;
         
+        $config['per_page'] = $num;
+        $config['uri_segment'] = 5;
+        $config['full_tag_open'] = '<ul class="pagination">';
+        $config['full_tag_close'] = '</ul>';
+        // $config['cur_tag_open'] = '<li class="active">';
+        // $config['cur_tag_close'] = '</a></li>';
+        $config['display_pages'] = TRUE;
+
+        $cur_page = $this->pagination->cur_page;
+        $total = $totalByLocation;
+        $data['s_val'] = $start + 1;
+        $check = $start + $num;
+        if($check > $total ){
+            $data['num'] = $total;
+        }else{
+        $data['num'] = $start + $num;
+        }
+
+       
+        $this->pagination->initialize($config);
+        $data['pages'] = $this->pagination->create_links();
+        $data['total'] = $totalByLocation;
+        $data['per_page'] = $num;
         $this->load->view("property/list" , $data);
 
 
 
     }
 
+    public function setSearchValues(){
+        $s_data = array(
 
-    public function search () {
+               'category' => $this->input->get('category', TRUE), 
+               'type' => $this->input->get('type', TRUE),     
+               'location' => $this->input->get('location', TRUE), 
+               'condition' => $this->input->get('condition', TRUE),
+               'bedroom' => $this->input->get('bedroom', TRUE), 
+               'bathroom' => $this->input->get('bathroom', TRUE),       
+               'maxprice' => $this->input->get('maxprice', TRUE),
+               'minprice' => $this->input->get('minprice', TRUE));
+        return $s_data;
 
-       $data['properties'] = Null;
+    }   
 
+    public function search ($start=0) {
+
+        
+        $settings = $this->settings_model->get_all_settings();
+        $num = $settings['content_per_page'];
+        
        
-       if(!$this->input->post("ptitle")){
+        if(!$this->input->post("ptitle")){
 
             
             $location = ""; 
@@ -105,8 +157,14 @@ class Property extends CI_Controller {
                 $location = $result->lid;
             }      
             
-           
-            $s_data = array(
+            $s_data = array();
+
+            if($this->input->get('category', TRUE) or $this->input->get('type', TRUE) or $this->input->get('location', TRUE) or $this->input->get('condition', TRUE) or $this->input->get('bedroom', TRUE) or $this->input->get('maxprice', TRUE) or $this->input->get('minprice', TRUE)){
+             
+                $s_data = $this->setSearchValues();
+
+            }else if($start == 0){
+                $s_data = array(
 
                'category' => $this->input->post("propery-category"), 
                'type' => $this->input->post("types"),     
@@ -115,25 +173,78 @@ class Property extends CI_Controller {
                'bedroom' => $this->input->post("beds"), 
                'bathroom' => $this->input->post("baths"),       
                'maxprice' => $this->input->post("maxprice"),
-               'minprice' => $this->input->post("minprice"),
+               'minprice' => $this->input->post("minprice"));
+
+                if(!array_filter($s_data)){
+
+                    $s_data = $this->setSearchValues();
+
+                }
                    
+            }
+            
 
-                );
 
-            $data['properties'] = $this->property_model->getPropertySearchResult($s_data);
 
+            print_r($s_data);
+            $data['properties'] = $this->property_model->getPropertySearchResult($num, $start, $s_data);
+            $searchchResultCount = $this->property_model->getPropertySearchResultCount($s_data);
+            //$config['base_url'] = base_url().'properties/search';
+            $config['enable_query_strings'] = TRUE;
+            $config['base_url'] = base_url('properties/search');
+            $config['suffix'] = '?'.http_build_query($s_data,'',"&amp;");
+            
+            $config['total_rows'] = $searchchResultCount;
+            
+            $config['per_page'] = $num;
+            $config['uri_segment'] = 3;
+            $config['full_tag_open'] = '<ul class="pagination">';
+            $config['full_tag_close'] = '</ul>';
+            $config['display_pages'] = TRUE;
+            $cur_page = $this->pagination->cur_page;
+            $total = $searchchResultCount;
+            $data['s_val'] = $start + 1;
+            $check = $start + $num;
+            if($check > $total ){
+                $data['num'] = $total;
+            }else{
+            $data['num'] = $start + $num;
+            }
+            $this->pagination->initialize($config);
+            $data['pages'] = $this->pagination->create_links();
+            $data['total'] = $searchchResultCount;
+            $data['per_page'] = $num;
+
+            $this->load->view("property/list" , $data);
+              
 
        }else{
 
-             $s_data = array(
+            $s_data = array(
 
                'title' => $this->input->post("ptitle"),
               
 
                 );
-             $data['properties'] = $this->property_model->getPropertySearchResult($s_data);
-
-
+            $data['properties'] = $this->property_model->getPropertySearchResult($s_data,$rtype="search");
+            $searchchResultCount = $this->property_model->getPropertySearchResult($s_data, $rtype="count");
+            $type = "titleSearch";
+            
+            $cur_page = $this->pagination->cur_page;
+            
+            $data['s_val'] = $start + 1;
+            $check = $start + $num;
+            if($check > $searchchResultCount ){
+                $data['num'] = $searchchResultCount;
+            }else{
+            $data['num'] = $start + $num;
+            }
+            $this->pagination->initialize($config);
+            $data['pages'] = $this->pagination->create_links();
+            $data['total'] = $searchchResultCount;
+            $data['per_page'] = $num;
+            
+            $this->load->view("property/list" , $data);
 
        }
        
@@ -143,7 +254,7 @@ class Property extends CI_Controller {
 
 
 
-            $this->load->view("property/list" , $data);
+           
             
 
 
@@ -156,24 +267,24 @@ class Property extends CI_Controller {
 
 
      public function listProperties ($start=0) {
-      
-        $num = 1;
+
+        $settings = $this->settings_model->get_all_settings();
+        $num = $settings['content_per_page'];
         $data['is_loggedin'] = $this->ion_auth->logged_in();       
         $data['properties'] = $this->property_model->get_all_properties($num,$start);
+        $data['title'] = "Properties";
+        $totalProperties = $this->property_model->getTotalProperties();
+        $config['base_url'] = base_url('all-properties') ;    
 
-        $config['base_url'] = base_url().'all-properties';
-        $config['total_rows'] = $this->property_model->getTotalProperties();
-        
+        $config['total_rows'] = $totalProperties;        
         $config['per_page'] = $num;
         $config['uri_segment'] = 2;
         $config['full_tag_open'] = '<ul class="pagination">';
-        $config['full_tag_close'] = '</ul>';
-        // $config['cur_tag_open'] = '<li class="active">';
-        // $config['cur_tag_close'] = '</a></li>';
+        $config['full_tag_close'] = '</ul>';       
         $config['display_pages'] = TRUE;
 
         $cur_page = $this->pagination->cur_page;
-        $total = $this->property_model->getTotalProperties();
+        $total = $totalProperties;
         $data['s_val'] = $start + 1;
         $check = $start + $num;
         if($check > $total ){
@@ -181,6 +292,8 @@ class Property extends CI_Controller {
         }else{
         $data['num'] = $start + $num;
         }
+
+        
         $this->pagination->initialize($config);
         $data['pages'] = $this->pagination->create_links();
         $data['total'] = $total;
@@ -195,12 +308,15 @@ class Property extends CI_Controller {
 
 
     public function category ($title, $catid, $start=0) {
-        $num = 1;
-        $data['cat_title'] = $title;  
+        $settings = $this->settings_model->get_all_settings();
+        $num = $settings['content_per_page'];
+
+        $data['title'] = $title;  
         $data['is_loggedin'] = $this->ion_auth->logged_in();       
         $data['properties'] = $this->property_model->getPropertyByCategory($catid,$num,$start);
+        $totalByCategory = $this->property_model->getTotalPropertiesByCategory($catid);
         $config['base_url'] = base_url().'property-category/'.$title.'/'.$catid;
-        $config['total_rows'] = $this->property_model->getTotalPropertiesByCategory($catid);
+        $config['total_rows'] = $totalByCategory;
         
         $config['per_page'] = $num;
         $config['uri_segment'] = 4;
@@ -211,7 +327,7 @@ class Property extends CI_Controller {
         $config['display_pages'] = TRUE;
 
         $cur_page = $this->pagination->cur_page;
-        $total = $this->property_model->getTotalProperties();
+        $total = $totalByCategory;
         $data['s_val'] = $start + 1;
         $check = $start + $num;
         if($check > $total ){
@@ -219,9 +335,11 @@ class Property extends CI_Controller {
         }else{
         $data['num'] = $start + $num;
         }
+
+       
         $this->pagination->initialize($config);
         $data['pages'] = $this->pagination->create_links();
-        $data['total'] = $total;
+        $data['total'] = $totalByCategory;
         $data['per_page'] = $num;
         $this->load->view("property/list" , $data);
     }
@@ -420,51 +538,118 @@ class Property extends CI_Controller {
 
 
 
-    public function edit($id) {
+    public function edit ($pid) {
         $data['is_loggedin'] = $this->ion_auth->logged_in();
         $data['action'] = "edit";
-        $data['categories'] = $this->project_category_model->getCategories();
-        $data['property'] = $this->property_model->get_property_byId($id);
-        $EndDate = $data['property']->EndDate;
-       
-        $image = $data['property']->image;
-        if($this->input->post()){          
-            
-            $uid = $this->input->post('user');
-            
-            $config['upload_path'] = './uploads/property/profile/';
-            $config['allowed_types'] = 'gif|jpg|png|jpeg|mp4';
-            $config['max_size'] = 20048; // Need to define properly              
-            $config['file_name'] = time().$uid;       
-            $this->load->library('upload', $config);
-            $this->upload->do_upload('userfile1');
-            $pic = $this->upload->data();
-            if($_FILES['userfile1']['size'] == 0){
-                $image = $image;
-            }else{
-                $image = $pic['file_name'];
-            }            
-            
-            if(!$EndDate or $EndDate == "0000-00-00 00:00:00" ){
-                $EndDate = $this->getFormatedDate($this->input->post("EndDate"));
-            }
-           
-            
-            $propertyId = $this->property_model->update_property($this->input->post('title'), $this->input->post('Category'), $this->input->post('Amount'), $EndDate, $this->input->post('FullName'), $this->input->post('description'), 5, $uid, $image, $id );
-            if($this->ion_auth->is_admin()){
+        if($this->ion_auth->logged_in()){
+             if($this->input->post()){
+                $title = $this->property_model->cleanTitle($this->input->post("location"));
                
-                redirect('/admin/all-property', 'refresh');
-            }else{
+                $location = $this->location_model->getLocationByTitleKey($title);
+                
+                $uid = $this->ion_auth->get_user_id();
+                $pImages = $_POST['result'];
+                $main_image = $pImages[0];
+                
                
-                redirect('/property', 'refresh');
-            }
-        }
-        $path = './js/ckfinder';
-        $width = '850px';
+
+                $title = $this->input->post("title");            
+                $image= $main_image;
+                $end_date = new DateTime();
+                $category = $this->input->post("category");
+                $price = $this->input->post('price');
+                $description = $this->input->post("description");
+                $location_id = $location->lid;
+                $address = $this->input->post("address");
+                $property_type_id = $this->input->post("type");
+                $property_condition = $this->input->post("condition");
+                $furnishing = $this->input->post("furnishing");
+                $size_sqm = $this->input->post("size");
+                $bedrooms = $this->input->post("bedroom");
+                $bathrooms = $this->input->post("bathroom");
+                $pets = $this->input->post("pets");
+                $property_use = $this->input->post("use");
+                $smoking = $this->input->post("smoke");
+                $parties = $this->input->post("parties");
+                $negotiable = $this->input->post("negotiate");
+                $parking_space = $this->input->post("parkin_space");
+                $agent_fee = $this->input->post("agentfee");
+                $agreement_fee = $this->input->post("agfee");
+                $capacity = $this->input->post("capacity");
+                $video_link = $this->input->post("video");
+                $duration = $this->input->post("duration");
+                $property_option = $this->input->post("options");
+                 
+                $status = "Unpublished";
+                $propertyid = $this->property_model->create_property($title, $uid, $image, $end_date, $category, $price, $description, $location_id, $address, $property_type_id, $property_condition, $furnishing='Unfurnished', $size_sqm, $bedrooms, $bathrooms, $pets='No Pets', $property_use='Residential', $smoking='No Smoking', $parties='No Parties', $negotiable, $parking_space='20', $agent_fee='No', $agreement_fee='No', $capacity="100", $video_link='thisisi.mp3', $duration='None', $status);
+
+
+               
+                    $data['facilities'] = $this->Property_facility_model->getAllFacilities();
+                    foreach ($data['facilities'] as $facility) {
+                    $clean_title = $this->property_model->cleanTitle($facility->name);
+                    if($this->input->post($clean_title)){
+                        
+                        $facilityid = $this->input->post($clean_title);
+                        if(!$this->property_facility_map_model->checkFacilityMap($pid, $facilityid)){
+                            try {
+                                $this->property_facility_map_model->setFacilityMap($pid, $facilityid);
+                            } catch (Exception $e) {
+                                echo 'Message: ' .$e->getMessage();
+                            }
+                            
+
+                        }
+                     
+                    }
+                    
+                      
+                }
+
+                if($pImages){
+                    foreach($pImages as $image){
+                        try {
+                            $this->property_images->setPropertyImage($image, $pid);
+
+                        } catch (Exception $e) {
+                            echo 'Message: ' .$e->getMessage();
+                            
+                        }
+                    } 
+                }
+                
+
+                if($this->ion_auth->is_admin()){ 
+                    redirect('/admin/properties', 'refresh');
+                }else{
+                    redirect('/user/properties', 'refresh');
+                }
+              
+                
+            }else{
+
+                $path = './js/ckfinder';
+                $width = '850px';
+                $data['categories'] = $this->property_category_model->getAllCategories();
+                $this->editor($path, $width);
+                $data['locations'] = $this->location_model->mapLocation();
+                $data['facilities'] = $this->Property_facility_model->getAllFacilities();
+
+                $data['property'] = $this->property_model->getPropertyById($pid);
+                $data['images'] = $this->property_images->getImagesByPropertyId($pid);
+                $data['property_facilities'] = $this->property_facility_map_model->getPropertyFacilities($pid);
+
+                   
         
-        // print_r($data['property']);
-        $this->editor($path, $width);
-        $this->load->view("property/edit" , $data);
+                    $this->load->view("property/edit" , $data);
+            }
+        
+
+
+        }else{
+            redirect('/auth/login', 'refresh');
+        }
+       
     }
 
 
@@ -474,7 +659,11 @@ class Property extends CI_Controller {
 
             $pid = $this->input->post("pid");  
           
-            $propertyId = $this->property_model->publish_property($pid);
+            if($this->property_model->publish_property($pid)){
+                echo '<div class="alert-info">Property has been successfully published! </div>';
+            }else{
+                echo ' <div class="alert-danger"> Oops! An error occured when publishing property</div>';
+            }
             
        
       
@@ -482,10 +671,14 @@ class Property extends CI_Controller {
 
     public function unpublish() {
 
-            $pid = $this->input->post("pid");  
+        $pid = $this->input->post("pid");  
           
-            $propertyId = $this->property_model->unpublish_property($pid);
             
+        if($this->property_model->unpublish_property($pid)){
+                echo '<div class="alert-info">Property has been successfully unpublished!</div>';
+            }else{
+                echo '<div class="alert-danger">Oops! An error occured when unpublishing property</div>';
+        }
        
       
     }
@@ -576,6 +769,31 @@ successfully!</strong> Our online representative will reach out to you shortly. 
 
 
 
-     
+     // public function paginate($start, $num, $url, $totalRow) {
+
+     //    $config['base_url'] = $url;
+     //    $config['total_rows'] = $totalRow
+        
+     //    $config['per_page'] = $num;
+     //    $config['uri_segment'] = $uri_seg;
+     //    $config['full_tag_open'] = '<ul class="pagination">';
+     //    $config['full_tag_close'] = '</ul>';
+        
+     //    $config['display_pages'] = TRUE;
+
+     //    $cur_page = $this->pagination->cur_page;
+     //    $total = $totalRow;
+        
+     //    $check = $start + $num;
+     //    if($check > $total ){
+     //        $data['num'] = $total;
+     //    }else{
+     //    $data['num'] = $start + $num;
+     //    }
+
+
+     //    return $config;
+        
+     // }
 
 }

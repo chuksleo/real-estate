@@ -10,7 +10,7 @@
                       <div class="widget sidebar-widget">
                       <h3 class="widgettitle">Search Properties</h3>
                           <div class="full-search-form">
-                              <form action="<?php echo base_url() ?>property/search" method="POST">
+                              <form action="<?php echo base_url() ?>properties/search" method="POST">
                               <select id="select-category"  name="propery-category" class="form-control input-lg selectpicker" onchange="getCategoryTypes('search')">
                                 <option value="" selected>Category ... </option>
 

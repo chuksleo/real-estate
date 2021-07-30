@@ -17,7 +17,7 @@ $this->load->view('section/admin/header', $data);
                             <div class="card">
                                 <div class="card-header"><a href="<?php echo base_url() ?>admin/locations/add" class="btn btn-square btn-primary mb-2"> + Create Location </a></div>
                                 <div class="card-body">
-                                    <p class="card-title"></p>
+                                    <p id="message"></p>
                                     <table class="table table-hover" id="dataTables-example" width="100%">
                                         <thead>
                                             <tr>
@@ -29,13 +29,14 @@ $this->load->view('section/admin/header', $data);
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                         <tbody>
 
                                         <?php foreach($locations as $location):?>
+                                            <?php if($location->parentid != 0){$plocation = $this->location_model->getLocationById($location->parentid);}?>
                                             <tr>
                                                 <td><?php echo $location->location_title?></td>
                                                 <td><?php echo $location->featured?></td>
-                                                 <td><?php echo $location->parentid?></td>
+                                                 <td><?php if($location->parentid == 0){echo "Main"; }else{ echo $plocation->location_title; }?></td>
                                                 <td><?php echo $location->status?></td>
                                                 <td><?php echo $location->date_created ?></td>
                                                  

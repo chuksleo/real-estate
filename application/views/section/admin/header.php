@@ -345,7 +345,7 @@ function showInbox(){
                     <a href="<?php echo base_url() ?>admin/dashboard"><i class="fas fa-home"></i> Dashboard</a> 
                 </li>
                 <li>
-                    <a href="#pagesmenu6" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle no-caret-down"><i class="fas fa-map-marker-alt"></i> Front Banners</a>
+                    <a href="#pagesmenu6" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle no-caret-down"><i class="fas fa-map"></i> Front Banners</a>
                     <ul class="collapse list-unstyled" id="pagesmenu6">
                         <li>
                             <a href="<?php echo base_url() ?>admin/banners"><i class="fas fa-file"></i> List All Banners</a>
@@ -356,13 +356,13 @@ function showInbox(){
 
 
                 <li>
-                    <a href="#pagesmenu7" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle no-caret-down"><i class="fas fa-map-marker-alt"></i> Messages</a>
+                    <a href="#pagesmenu7" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle no-caret-down"><i class="fas fa-inbox"></i> Messages</a>
                     <ul class="collapse list-unstyled" id="pagesmenu7">
                         <li>
-                            <a href="<?php echo base_url() ?>admin/property/messages"><i class="fas fa-file"></i> Property Inbox</a>
+                            <a href="<?php echo base_url() ?>admin/property/messages"><i class="fas fa-hourglass"></i> Property Inbox</a>
                         </li>
                         <li>
-                            <a href="<?php echo base_url() ?>admin/contact-messages"><i class="fas fa-file"></i> Contact us Inbox</a>
+                            <a href="<?php echo base_url() ?>admin/contact-messages"><i class="fas fa-address-book"></i> Contact us Inbox</a>
                         </li>
                         
                     </ul>
@@ -426,14 +426,14 @@ function showInbox(){
                
 
                 <li>
-                    <a href="<?php echo base_url() ?>admin/members"><i class="fas fa-chart-bar"></i> Members</a>
+                    <a href="<?php echo base_url() ?>admin/members"><i class="fas fa-user"></i> Members</a>
                 </li>
 
                   <li>
-                    <a href="#pagesmenu2" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle no-caret-down"><i class="fas fa-copy"></i> Settings</a>
+                    <a href="#pagesmenu2" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle no-caret-down"><i class="fas fa-cog"></i> Settings</a>
                     <ul class="collapse list-unstyled" id="pagesmenu2">
                         <li>
-                            <a href="<?php echo base_url() ?>admin/settings"><i class="fas fa-cog"></i>Site Settings</a>
+                            <a href="<?php echo base_url() ?>admin/settings"><i class="fas fa-info-circle"></i>Site Settings</a>
                         </li>
                         <li>
                             <a href="<?php echo base_url() ?>admin/static_languages"><i class="fas fa-info-circle"></i> Static Languages</a>
@@ -456,7 +456,7 @@ function showInbox(){
                         <li  ><a href="<?php echo base_url()?>" class="btn btn-outline-secondary mb-2 set-btn"><i class="fas fa-home"></i> Back To Site</a></li>
 
 
-                        <li class="nav-item dropdown">
+                      <!--   <li class="nav-item dropdown">
                             <div class="nav-dropdown">
                                 <a href="" class="nav-item nav-link dropdown-toggle text-secondary" data-toggle="dropdown"><i class="fas fa-envelope"></i> <span>Messages</span> <i style="font-size: .8em;" class="fas fa-caret-down"></i></a>
                                 <div class="dropdown-menu dropdown-menu-right nav-link-menu">
@@ -469,7 +469,7 @@ function showInbox(){
                                 </div>
                             </div>
                         </li>
-
+ -->
 
 
                         <li class="nav-item dropdown">

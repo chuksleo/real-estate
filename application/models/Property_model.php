@@ -45,7 +45,21 @@ class Property_model extends CI_Model {
 
 
 
-     public function getTotalProperties(){
+
+    public function get_top_view_properties($num=6){
+                
+        $pub ="Published";
+        $count = 0;
+        $this->db->select()->from('properties AS p')->limit($num)->where('p.property_status =',$pub)->order_by('view_count','desc');
+        $this->db->where('p.view_count >', $count);
+        
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+
+
+    public function getTotalProperties(){
         $pub ="Published";
        $this->db->select()->from('properties as p')->where('p.property_status =',$pub);
 
@@ -55,6 +69,35 @@ class Property_model extends CI_Model {
     }
 
 
+    public function getTotalPropertiesToday(){
+        $pub ="Published";
+        $today = new DateTime();
+        $compare = $today->format('Y-m-d');
+        $this->db->select()->from('properties as p')->where('p.property_status =',$pub);
+        $this->db->where('date_created =',$compare);
+
+        $query = $this->db->get();
+        return $query->num_rows();
+
+    }
+
+
+    public function get_all_properties_admin(){
+                
+        $pub ="Published";
+         
+        $this->db->select()->from('properties AS p')->where('p.property_status =',$pub)->order_by('last_updated','desc');
+        $this->db->join('users AS u', 'u.id = p.uid');
+       
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+
+
+     
+
+
 
      public function get_all_unpublished_properties(){
        
@@ -62,10 +105,20 @@ class Property_model extends CI_Model {
          
         $this->db->select()->from('properties AS p')->where('p.property_status =',$pub)->order_by('last_updated','desc');
         $this->db->join('users AS u', 'u.id = p.uid');
-        $this->db->join('locations AS l', 'l.lid = p.location_id','left');
-        $this->db->join('property_images AS im', 'im.property_id = p.pid','left')->group_by('p.pid');
+       
         $query = $this->db->get();
         return $query->result();
+    }
+
+
+    public function getAllSoldProperties(){
+       
+        $pub ="Yes";
+         
+        $this->db->select()->from('properties AS p')->where('p.sold =',$pub);
+        
+        $query = $this->db->get();
+        return $query->num_rows();
     }
 
 
@@ -152,7 +205,7 @@ class Property_model extends CI_Model {
       
     }
     
-    public function getPropertyByCategory($catId, $num, $start) {
+    public function getPropertyByCategory($catId, $num, $start=0) {
         $sid = 1;
         $status = "Published";
         $this->db->select()->from('properties AS p')->limit($num, $start)->where('p.category_id =',$catId);
@@ -174,10 +227,10 @@ class Property_model extends CI_Model {
 
     }
 
-    public function getPropertyByLocation($locationid) {
+    public function getPropertyByLocation($locationid, $num, $start) {
         $sid = 1;
         $status = "Published";
-        $this->db->select()->from('properties AS p')->where('p.location_id =',$locationid);
+        $this->db->select()->from('properties AS p')->limit($num, $start)->where('p.location_id =',$locationid);
         $this->db->where('p.property_status =',$status);
                 $this->db->join('users AS u', 'u.id = p.uid');
                 $this->db->join('locations AS l', 'l.lid = p.location_id','left')->group_by('p.pid');
@@ -207,12 +260,12 @@ class Property_model extends CI_Model {
     
     public function create_property($title, $uid, $image, $end_date, $category, $price, $description, $location_id, $address, $property_type_id, $property_condition, $furnishing, $size_sqm, $bedrooms, $bathrooms, $pets, $property_use, $smoking, $parties, $negotiable, $parking_space, $agent_fee, $agreement_fee, $capacity, $video_link, $duration, $status){ 
 
-
+        $today = new DateTime();
+        $dateAdded = $today->format('Y-m-d');
 
         $this->title = $title; 
         $this->uid = $uid; 
-        $this->image = $image; 
-        $this->end_date = new DateTime();
+        $this->image = $image;         
         $this->category_id = $category; 
         $this->price = $price;       
         $this->description = $description;
@@ -236,7 +289,7 @@ class Property_model extends CI_Model {
         $this->video_link = $video_link;
 
         $this->duration = $duration;
-        $this->date_created = new DateTime();
+        $this->date_created = $dateAdded;
         $this->last_updated = new DateTime();
         $this->property_status = $status;
      
@@ -262,8 +315,7 @@ class Property_model extends CI_Model {
 
            'title' => $title, 
            'uid' => $uid,     
-           'image' => $image, 
-           'end_date' => $end_date, 
+           'image' => $image,
            'price' => $price,       
            'description' => $description,
            'location_id' => $location_id,
@@ -304,7 +356,57 @@ class Property_model extends CI_Model {
 
 
 
-    public  function getPropertySearchResult($s_data)  
+    public  function getPropertySearchResult($num, $start=0, $s_data)  
+    {  
+
+       
+
+
+        $this->db->select('p.*, l.*, u.*');
+        $this->db->from('properties as p')->limit($num, $start);        
+        $this->db->join('users as u', 'u.id = p.uid','left');
+        $this->db->join('locations as l', 'l.lid = p.location_id','left'); 
+        $this->db->join('property_images AS im', 'im.property_id = p.pid', 'left')->group_by('p.pid');
+
+        if(isset($s_data['title'])){
+            $this->db->like('p.title',$s_data['title']);
+        }else{
+            if($s_data['category'])
+               $this->db->where('p.category_id',$s_data['category']);
+            if($s_data['type'])
+               $this->db->where('p.property_type_id',$s_data['type']);
+            if($s_data['location'])
+               $this->db->where('p.location_id', $s_data['location']);
+            if($s_data['condition'] != "Any")
+               $this->db->where('p.property_condition', $s_data['condition']);
+            if($s_data['bedroom'] !="Any")
+               $this->db->where('p.bedrooms', $s_data['bedroom']);
+            if($s_data['bathroom'] !="Any")
+               $this->db->where('p.bathrooms', $s_data['bathroom']);
+            
+            if($s_data['minprice'] =="" and $s_data['maxprice'] !=""  )
+               $this->db->where('p.price <=', $s_data['maxprice']);
+            if($s_data['minprice'] !="" and $s_data['maxprice'] ==""  )
+               $this->db->where('p.price >=', $s_data['minprice']); 
+
+            if($s_data['minprice'] !="" and $s_data['maxprice'] !=""){
+                $this->db->where('p.price >=', $s_data['minprice']); 
+               $this->db->where('p.price <=', $s_data['maxprice']); 
+
+            }
+               
+
+        }   
+        
+
+        
+        $query = $this->db->get();
+        return $query->result();
+       
+        
+    }
+
+    public  function getPropertySearchResultCount($s_data)  
     {  
 
        
@@ -349,8 +451,12 @@ class Property_model extends CI_Model {
 
         
         $query = $this->db->get();
-        return $query->result();
+        return $query->num_rows();
+        
+        
     }
+
+
 
 
 
@@ -422,6 +528,32 @@ class Property_model extends CI_Model {
         $formated_price = number_format(($price), 2, '.', ',');
 
         return $formated_price;
+    }
+
+
+    public function setPageViewForProperty($pid){
+        $this->db->set('view_count', 'view_count+1', false);
+        $this->db->where('pid', $pid);
+        $this->db->update('properties'); 
+
+       
+
+    }
+
+
+    public function checkValueInFacilityArray($needle, $propertyfacilities){
+        $existVal = Null;
+        foreach ($propertyfacilities as $facility) {
+           if($facility->facilityid == $needle){
+
+                $existVal = TRUE;
+                break;
+
+           }else{
+                $existVal = FALSE;
+           }
+        }
+        return $existVal;
     }
 
 }

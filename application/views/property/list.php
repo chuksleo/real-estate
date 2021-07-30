@@ -21,7 +21,7 @@ $this->load->view('section/header', $data);
           <div class="container">
               <div class="row">
                   <div class="col-md-12">
-                      <h1>Property Simple Listing</h1>
+                      <h1>Realestate9ja - <?php echo $title?></h1>
                   </div>
              </div>
          </div>
@@ -75,7 +75,7 @@ $this->load->view('section/header', $data);
                 <?php foreach($properties as $property_item):?>
                     <?php  $link_text = $this->property_model->cleanTitle($property_item->title);?>
                 <li class="type-rent col-md-12">
-                    <div class="col-md-4"> <a href="<?= base_url() ?>property/<?= $link_text ?>/<?=  $property_item->pid ?>" class="property-featured-image"> <img src="<?php echo base_url() ?>assets/uploads/property/<?php echo $property_item->image ?>" alt=""> <span class="images-count"><i class="fa fa-picture-o"></i> 2</span> <span class="badges">Buy</span> </a> </div>
+                    <div class="col-md-4"> <a href="<?= base_url() ?>property/<?= $link_text ?>/<?=  $property_item->pid ?>" class="property-featured-image"> <img src="<?php echo base_url() ?>assets/uploads/property/<?php echo $property_item->image ?>" alt=""> <span class="images-count"><i class="fa fa-picture-o"></i> 2</span> <?php if($property_item->admin_own == "No"){?><span class="badges">Promoted</span> <?php } ?></a> </div>
                             <div class="col-md-8">
                               <div class="property-info">
                                 <div class="price"><strong>$</strong><span><?php echo $property_item->price ?></span></div>
@@ -95,15 +95,7 @@ $this->load->view('section/header', $data);
                         </ul>
                     </div>
                     <?php echo $pages ?>
-                   <!--  <ul class="pagination">
-                      <li><a href="#"><i class="fa fa-chevron-left"></i></a></li>
-                      <li class="active"><a href="#">1</a></li>
-                      <li><a href="#">2</a></li>
-                      <li><a href="#">3</a></li>
-                      <li><a href="#">4</a></li>
-                      <li><a href="#">5</a></li>
-                      <li><a href="#"><i class="fa fa-chevron-right"></i></a></li>
-                    </ul> -->
+                  
                   </div>
 
 

@@ -3,7 +3,7 @@
   <footer class="site-footer">
       <div class="container">
           <div class="row">
-            <div class="col-md-3 col-sm-6 footer-widget widget">
+            <!-- <div class="col-md-3 col-sm-6 footer-widget widget">
                 <h3 class="widgettitle">Latest News</h3>
                   <ul>
                       <li>
@@ -19,8 +19,8 @@
                           <span class="meta-data">26 February, 2014</span>
                       </li>
                   </ul>
-              </div>
-            <div class="col-md-3 col-sm-6 footer-widget widget">
+              </div> -->
+            <div class="col-md-4 col-sm-6 footer-widget widget">
                 <h3 class="widgettitle">Quick Links</h3>
                <ul>
                 <li><a href="submit.html">Sell with us</a></li>
@@ -30,7 +30,7 @@
                
                </ul>
            </div>
-            <div class="col-md-3 col-sm-6 footer-widget widget">
+            <div class="col-md-4 col-sm-6 footer-widget widget">
               <h3 class="widgettitle">Facebook Fanpage</h3>
                   <ul class="twitter-widget"></ul>
            </div>

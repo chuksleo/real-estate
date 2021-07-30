@@ -1,6 +1,6 @@
 <div class="site-showcase">
   <!-- Start Page Header -->
-  <div class="parallax page-header" style="background-image:url(http://placehold.it/1200x260&amp;text=IMAGE+PLACEHOLDER);">
+  <div class="parallax page-header" style="background-image:url(<?php echo base_url()?>assets/images/about.jpeg);">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">

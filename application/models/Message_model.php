@@ -18,9 +18,16 @@ class Message_model extends CI_Model {
 
         
     public function getAllMessages(){
-        $this->db->select()->from('messages AS fb');  
+        $this->db->select()->from('messages');  
         $query = $this->db->get();
         return $query->result();
+    }
+
+    public function getCountUnreadPropertyMessages(){
+        $stat = 'Unread';
+        $this->db->select()->from('messages AS ms')->where('ms.status =', $stat);  
+        $query = $this->db->get();
+        return $query->num_rows();
     }
 
     public function getAllContactMessages(){
@@ -57,6 +64,8 @@ class Message_model extends CI_Model {
     }
 
 
+
+
     
     
     public function createMessage($fullname,$email,$phone,$propertyid,$message){  
@@ -75,7 +84,7 @@ class Message_model extends CI_Model {
 
 
 
-     public function updateMessage($mid){  
+     public function updateMessageReadStatus($mid){  
          $data = array(
 
                 'status' => "Read",

@@ -21,15 +21,15 @@
                                         </div>
                                         <div class="col-sm-8">
                                             <div class="detail">
-                                                <p class="detail-subtitle">Properties</p>
-                                                <span class="number"><?php echo $total_properties ?></span>
+                                                <p class="detail-subtitle">Today's Properties</p>
+                                                <span class="number"><?php echo $today_total_properties ?> <span class="badge badge-pill text-white font-medium badge-danger mr-2" style="font-size: 10px">New</span></span>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="footer">
                                         <hr />
                                         <div class="stats">
-                                            <a href=""><i class="fas fa-envelope-open-text"></i> View More...</a>
+                                            <a href="<?php ?>admin/properties"><i class="fas fa-envelope-open-text"></i> View More...</a>
                                         </div>
                                     </div>
                                 </div>
@@ -51,15 +51,15 @@
                                         </div>
                                         <div class="col-sm-8">
                                             <div class="detail">
-                                                <p class="detail-subtitle">Views Today</p>
-                                                <span class="number"><?php echo $total_reviews?></span>
+                                                <p class="detail-subtitle">Property Message</p>
+                                                <span class="number"><?php echo $property_messages ?><span class="badge badge-pill text-white font-medium badge-danger mr-2" style="font-size: 10px">New</span></span></span>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="footer">
                                         <hr />
                                         <div class="stats">
-                                            <a href="<?php ?>admin/"><i class="fas fa-envelope-open-text"></i> View More...</a>
+                                            <a href="<?php echo base_url() ?>admin/property/messages"><i class="fas fa-envelope-open-text"></i> View More...</a>
                                         </div>
                                     </div>
                                 </div>
@@ -84,7 +84,7 @@
                                     <div class="footer">
                                         <hr />
                                         <div class="stats">
-                                             <a href=""><i class="fas fa-envelope-open-text"></i> View More...</a>
+                                             <a href="<?php echo base_url() ?>admin/members"><i class="fas fa-envelope-open-text"></i> View More...</a>
                                         </div>
                                     </div>
                                 </div>
@@ -101,15 +101,15 @@
                                         </div>
                                         <div class="col-sm-8">
                                             <div class="detail">
-                                                <p class="detail-subtitle">Today Messages</p>
-                                                <span class="number"><?php echo $total_inspection_request ?></span>
+                                                <p class="detail-subtitle">Build Message</p>
+                                                <span class="number"><?php echo $contact_messages ?> <span class="badge badge-pill text-white font-medium badge-danger mr-2" style="font-size: 10px">New</span></span></span>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="footer">
                                         <hr />
                                         <div class="stats">
-                                            <a href=""><i class="fas fa-envelope-open-text"></i> View More...</a>
+                                            <a href="<?php echo base_url() ?>admin/contact-messages"><i class="fas fa-envelope-open-text"></i> View More...</a>
                                         </div>
                                     </div>
                                 </div>
@@ -241,16 +241,20 @@
                                     <div class="canvas-wrapper">
                                         <table class="table no-margin bg-lighter-grey">
                                             <thead class="success">
+                                            <?php foreach($properties as $property_item):?>
+                                                <?php  $link_text = $this->property_model->cleanTitle($property_item->title);?>
                                                 <tr>
-                                                    <th>Property Title</th>
-                                                    <th class="text-right">Number of Views</th>
+                                                    <th><?php echo $property_item->title ?>
+                                                    <a href="<?= base_url() ?>property/<?= $link_text ?>/<?=  $property_item->pid ?>" target="_blank"><i class="fas fa-link blue" title="view property"></i></a>
+
+
+                                                    </th>
+                                                    <th class="text-right"><?php echo $property_item->view_count ?></th>
                                                 </tr>
+                                                 <?php endforeach  ?>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td><?php echo "My Title" ?> <a href="#"><i class="fas fa-link blue" title="view property"></i></a></td>
-                                                    <td class="text-right">8,340</td>
-                                                </tr>
+                                                
                                                
                                               
                                               </tbody>
@@ -278,8 +282,8 @@
                                     <div class="row">
                                         <div class="dfd text-center">
                                             <i class="blue large-icon mb-2 fas fa-building"></i>
-                                            <h4 class="mb-0">+21,900</h4>
-                                            <p class="text-muted">TOTAL PROPERTIES</p>
+                                            <h4 class="mb-0"><?php echo $total_properties ?></h4>
+                                            <p class="text-muted">TOTAL ACTIVE PROPERTIES</p>
                                         </div>
                                     </div>
                                 </div>
@@ -290,40 +294,28 @@
                                 <div class="content">
                                     <div class="row">
                                         <div class="dfd text-center">
-                                            <i class="orange large-icon mb-2 fas fa-eye"></i>
-                                            <h4 class="mb-0">+22,566</h4>
-                                            <p class="text-muted">TOTAL Views</p>
+                                            <i class="orange large-icon mb-2 fas fa-briefcase"></i>
+                                            <h4 class="mb-0"><?php echo $total_sold ?></h4>
+                                            <p class="text-muted">TOTAL SOLD PROPERTIES</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-6 col-md-6 col-lg-3">
+                       <!--  <div class="col-sm-6 col-md-6 col-lg-3">
                             <div class="card">
                                 <div class="content">
                                     <div class="row">
                                         <div class="dfd text-center">
-                                            <i class="grey large-icon mb-2 fas fa-envelope"></i>
+                                            <i class="grey large-icon mb-2 fas fa-briefcase"></i>
                                             <h4 class="mb-0">+15,566</h4>
                                             <p class="text-muted">TOTAL Clients</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-sm-6 col-md-6 col-lg-3">
-                            <div class="card">
-                                <div class="content">
-                                    <div class="row">
-                                        <div class="dfd text-center">
-                                            <i class="olive large-icon mb-2 fas fa-briefcase"></i>
-                                            <h4 class="mb-0">+98,601</h4>
-                                            <p class="text-muted">TOTAL Messages</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        </div> -->
+                       
                     </div>
 
 

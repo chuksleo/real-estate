@@ -27,7 +27,7 @@
         <div class="page">
           <div class="row">
             <div class="col-md-6 col-sm-6">
-              <h3>Quick Contact Form</h3>
+              <h3>Get in Touch</h3>
               <p>Please fill out this form as our online representive will answer any questions you have</p>
               <div class="row">
               <div id="contact_rmessage"></div>

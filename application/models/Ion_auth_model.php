@@ -1242,6 +1242,24 @@ class Ion_auth_model extends CI_Model
 	}
 
 	/**
+	 * Count present day users
+	 *
+	 * @return object Users
+	 * @author Chukwuka Mark
+	 **/
+	public function getUserCountToday(){
+        $pub = 1;	
+        $today = new DateTime();
+        $compare = $today->format('Y-m-d');
+        $this->db->select()->from('users as u')->where('u.active =',$pub);
+        $this->db->where('date_created =',$compare);
+
+        $query = $this->db->get();
+        return $query->num_rows();
+
+    }
+
+	/**
 	 * users
 	 *
 	 * @return object Users

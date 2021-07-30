@@ -106,6 +106,9 @@ class Location_model extends CI_Model {
     
     
     public function setLocation($title,$title_key, $banner, $parentid, $description, $featured, $status){  
+
+        $today = new DateTime();
+        $dateAdded = $today->format('Y-m-d:h:m:s');
         $this->parentid = $parentid; 
         $this->location_title = $title; 
         $this->title_key = $title_key; 
@@ -113,7 +116,7 @@ class Location_model extends CI_Model {
         $this->featured = $featured; 
         $this->status = $status; 
         $this->banner_image = $banner;        
-        $this->date_created = new DateTime();
+        $this->date_created = $dateAdded;
        
         $this->db->insert('locations', $this);
         return $this->db->insert_id();

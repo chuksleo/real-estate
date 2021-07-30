@@ -23,21 +23,10 @@ $data['page_title'] = " ";
 
 $this->load->view('section/header', $data);
 
-// $daysleft = $this->campaign_model->getDaysLeft($campaign->EndDate);
 
-//  $link_text = $this->campaign_model->cleanTitle($campaign->Title);
+$user_ip=$_SERVER['REMOTE_ADDR'];
 
-
- if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')   
-         $url = "https://";   
-    else  
-         $url = "http://";   
-    // Append the host(domain name, ip) to the URL.   
-    $url.= $_SERVER['HTTP_HOST'];   
-    
-    // Append the requested resource location to the URL   
-    $url.= $_SERVER['REQUEST_URI'];    
-
+$this->property_model->setPageViewForProperty($property->pid);
 
 ?>
 

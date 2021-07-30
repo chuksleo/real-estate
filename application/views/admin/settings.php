@@ -49,6 +49,11 @@ $this->load->view('section/admin/header', $data);
                                                 <td>Working Hours</td>
                                                 <td><?php echo $settings['working_hours']?></td>
                                             </tr>
+
+                                            <tr>
+                                                <td>Content Per Page</td>
+                                                <td><?php echo $settings['content_per_page']?></td>
+                                            </tr>
                                             <tr>
                                                 <td>Twitter</td>
                                                 <td><?php echo $settings['twitter_link']?></td>

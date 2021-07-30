@@ -16,7 +16,7 @@ echo validation_errors('<span class="error">', '</span>');
         <div class="content">
                 <div class="container">
                     <div class="page-title">
-                        <h3><?php echo ucwords($action)  ?> Location</h3>
+                        <h3><?php echo ucfirst($action)  ?> Location</h3>
                         <p> <?php echo $loc->location_title ?>
                     </div>
                     <div class="row">

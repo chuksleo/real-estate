@@ -81,6 +81,13 @@ echo validation_errors('<span class="error">', '</span>');
         </div>
 
 
+
+         <div class="form-group col-md-6">            
+        <label for="title">Content Per Page</label>
+                <input type="text" name="contentcount" placeholder="Ex:9am-5pm"  value="<?php echo isset($settings['content_per_page']) ? $settings['content_per_page'] : "" ?>" class="form-control" required>
+        </div>
+
+
         <div class="form-group col-md-6">            
         <label for="title">Twitter Link</label>
                 <input type="text" name="twitter" placeholder="Enter Twitter Link"  value="<?php echo isset($settings['twitter_link']) ? $settings['twitter_link'] : "" ?>" class="form-control" required>

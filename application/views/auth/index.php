@@ -20,7 +20,7 @@ $atts = array(
                     <div class="row">
                     		 <div class="col-md-12 col-lg-12">
                             <div class="card">
-                                <div class="card-header"><?php echo anchor('auth/create_user', lang('index_create_user_link'), 'class="btn btn-square btn-primary mb-2"')?>  <?php echo anchor('auth/create_group', lang('index_create_group_link'), 'class="btn btn-square btn-primary mb-2"')?></div>
+                                <div class="card-header"><?php echo anchor('auth/create_user', lang('index_create_user_link'), 'class="btn btn-square btn-primary mb-2"')?>  <?php //echo anchor('auth/create_group', lang('index_create_group_link'), 'class="btn btn-square btn-primary mb-2"')?></div>
                                 <div class="card-body">
                                     <p class="card-title"></p>
                                     <p></p>
