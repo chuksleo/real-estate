@@ -73,14 +73,7 @@ echo validation_errors('<span class="error">', '</span>');
           <?php endforeach ?>
            </div>  
 
-           <?php print_r($property_facilities);?>
-           <br> <br> <br> <br>
-           <?php print_r($facilities);?>
-
-
-           <?php 
-
-
+           
 
 
 
@@ -263,18 +256,18 @@ echo validation_errors('<span class="error">', '</span>');
                   <select name="location" class="form-control" required>
                                                       <option value="" selected>Choose...</option>
                                                       <?php foreach($locations as $location):?>
-                                                      <option value="<?php echo $location['location'] ?>">
+                                                      <option value="<?php echo $location['location'] ?>" <?php if($location['location'] == $property->location_title){ echo "selected";} ?> >
                                                       <?php echo $location['location'] ?></option>
 
                                                         <?php if($location['sublocation']){?>
 
 
                                                           <?php $i=0;  foreach($location['sublocation'] as $sublocation): ?>
-                                                              <option value="<?php echo $sublocation ?>">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                              <option value="<?php echo $sublocation ?>" <?php if($sublocation == $property->location_title){ echo "selected";} ?> >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                             <?php echo $sublocation ?></option>
 
                                                                 <?php $i=0;  foreach($location['lastsublocations'] as $lsublocation): ?>
-                                                              <option value="<?php echo $lsublocation ?>">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                              <option value="<?php echo $lsublocation ?>" <?php if($lsublocation == $property->location_title){ echo "selected";} ?>>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                             <?php echo $lsublocation ?></option>
 
 

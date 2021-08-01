@@ -117,7 +117,49 @@ class Pages extends CI_Controller {
         }
 
 
+   public function marketing()
+        {
 
+
+
+		$page = 'marketing';
+		$seg = $this->uri->total_segments();
+		if ( ! file_exists('application/views/pages/'.$page.'.php') || $seg > 2)
+		{
+			// Whoops, we don't have a page for that!
+			show_404();
+		}
+
+		//$data['site_description'] = lang('about_page_description');
+		$data['page_title'] = "Join Real Estate Network marketing";
+		// $data['categories'] = $this->project_category_model->getCategories($num=10);
+		$this->load->view('section/header', $data);
+		$this->load->view('pages/'.$page);
+		$this->load->view('section/footer');
+
+        }
+
+    public function build()
+        {
+
+
+
+		$page = 'build';
+		$seg = $this->uri->total_segments();
+		if ( ! file_exists('application/views/pages/'.$page.'.php') || $seg > 2)
+		{
+			// Whoops, we don't have a page for that!
+			show_404();
+		}
+
+		//$data['site_description'] = lang('about_page_description');
+		$data['page_title'] = "Lets Build For You";
+		// $data['categories'] = $this->project_category_model->getCategories($num=10);
+		$this->load->view('section/header', $data);
+		$this->load->view('pages/'.$page);
+		$this->load->view('section/footer');
+
+        }
 
 
 

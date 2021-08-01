@@ -29,7 +29,7 @@ $this->load->view('section/header', $data);
                         <div class="col-md-4 col-sm-4">
                             <div class="alert alert-default fade in">
                                 <h4>Before you Login/Register!</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam euismod sollicitudin nunc, eget pretium massa. Ut sed adipiscing enim, pellentesque ultrices erat. Integer placerat felis neque, et semper augue ullamcorper in. Pellentesque iaculis leo iaculis aliquet ultrices. Suspendisse potenti. Aenean ac magna faucibus, consectetur ligula vel, feugiat est. Nullam imperdiet semper neque eget euismod. Nunc commodo volutpat semper.</p>
+                                <p></p>
                          </div>
                         </div>
                         <div class="col-md-4 col-sm-4 login-form">
@@ -109,7 +109,9 @@ $this->load->view('section/header', $data);
 
 
                                     <div class="place_order_btn">
-                                    <?php echo form_submit('submit', lang('create_user_submit_btn') , array("class" => "btn btn-primary")); ?></div>
+                                    <?php echo form_submit('submit', lang('create_user_submit_btn') , array("class" => "btn btn-primary ")); ?></div>
+                                    <p>Already have an account?  <a href="<?php echo base_url() ?>auth/login"> Sign In</a></p>
+
 
                                     <?php echo form_close(); ?>
                                 

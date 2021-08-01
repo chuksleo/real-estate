@@ -53,10 +53,15 @@ $route['default_controller'] = 'Home';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 $route['about-us'] = "pages/about";
+$route['auth/register'] = "auth/create_user";
 
 $route['blog'] = "blog";
-$route['contact-us'] = "pages/contact";
-$route['lets-build'] = "pages/contact";
+// $route['contact-us'] = "pages/contact";
+
+
+$route['post-request'] = "pages/contact";
+$route['lets-build'] = "pages/build";
+$route['network-marketing'] = "pages/marketing";
 $route['categories'] = "category/public_list";
 $route['category/(:any)/(:num)'] = 'property/category/$1/$2';
 $route['blog/(:num)/(:any)'] = 'blog/post/$1/$2';

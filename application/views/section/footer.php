@@ -20,9 +20,9 @@
                       </li>
                   </ul>
               </div> -->
-            <div class="col-md-4 col-sm-6 footer-widget widget">
-                <h3 class="widgettitle">Quick Links</h3>
-               <ul>
+            <div class="col-md-4 col-sm-6 footer-widget widget ">
+                <h3 class="widgettitle newcolor">Quick Links</h3>
+               <ul class="newcolor">
                 <li><a href="submit.html">Sell with us</a></li>
                 <li><a href="login.html">View All Properties</a></li>
                 <li><a href="pricing.html">Top Location Properties</a></li>
@@ -31,11 +31,11 @@
                </ul>
            </div>
             <div class="col-md-4 col-sm-6 footer-widget widget">
-              <h3 class="widgettitle">Facebook Fanpage</h3>
+              <h3 class="widgettitle newcolor">Facebook Fanpage</h3>
                   <ul class="twitter-widget"></ul>
            </div>
             <div class="col-md-3 col-sm-6 footer-widget widget">
-                <h3 class="widgettitle">Our Newsletter</h3>
+                <h3 class="widgettitle newcolor">Our Newsletter</h3>
                 <?php echo ($this->settings_model->getStaticContent('footer_text_one')) ?>
                 <form method="post" id="newsletterform" name="newsletterform" class="newsletter-form" action="mail/newsletter.php">
                     <input type="email" name="nl-email" id="nl-email" placeholder="Enter your email" class="form-control">

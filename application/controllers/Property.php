@@ -39,6 +39,7 @@ class Property extends CI_Controller {
         if($this->ion_auth->logged_in() == true){
             $data['is_loggedin'] = $this->ion_auth->logged_in();
             $uid = $this->ion_auth->get_user_id();
+            $data['page_header'] = "All Properties";
             $data['properties'] = $this->property_model->user_properties($uid);
             $this->load->view("property/index" , $data);
 
@@ -183,10 +184,6 @@ class Property extends CI_Controller {
                    
             }
             
-
-
-
-            print_r($s_data);
             $data['properties'] = $this->property_model->getPropertySearchResult($num, $start, $s_data);
             $searchchResultCount = $this->property_model->getPropertySearchResultCount($s_data);
             //$config['base_url'] = base_url().'properties/search';
@@ -211,6 +208,7 @@ class Property extends CI_Controller {
             $data['num'] = $start + $num;
             }
             $this->pagination->initialize($config);
+            $data['title'] = "Properties Search Result";
             $data['pages'] = $this->pagination->create_links();
             $data['total'] = $searchchResultCount;
             $data['per_page'] = $num;

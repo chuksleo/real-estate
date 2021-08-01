@@ -6,7 +6,7 @@
       $settings = $this->settings_model->get_all_settings();
       $categories = $this->property_category_model->getAllCategories();
 
-
+     $firstname =  $this->session->userdata('firstname'); 
 ?>
 
 
@@ -175,15 +175,15 @@ function getCategoryTypes(page){
              <?php if ($this->ion_auth->logged_in() == false) { ?>
             <li><a href="<?= base_url() ?>auth/login"><i class="fa fa-check-circle"></i> Login</a></li>
              
-              <li><a href="<?= base_url() ?>auth/create_user"><i class="fa fa-check-circle"></i> Register</a></li>
+              <li><a href="<?= base_url() ?>auth/register"><i class="fa fa-check-circle"></i> Register</a></li>
 
                <?php }else{ ?>
 
-                 <li class="dropdown"><a  data-toggle="dropdown"><i class="fa fa-user"></i> Welcome Chuks <b class="caret"></b></a>
+                 <li class="dropdown"><a  data-toggle="dropdown"><i class="fa fa-user"></i> Welcome <?php echo $firstname ?> <b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                  <li><a href="my-properties.html">My properties</a></li>
-                  <li><a href="submit.html">Add a property</a></li>
-                  <li><a href="edit-agent-profile.html">My Profile</a></li>
+                  <li><a href="<?= base_url() ?>user/properties">My properties</a></li>
+                  <li><a href="<?= base_url() ?>user/property/add">Add a property</a></li>
+                  <li><a href="<?= base_url() ?>user/dashboard">My Profile</a></li>
                 </ul>
               </li>
           <?php } ?>    
@@ -245,12 +245,21 @@ function getCategoryTypes(page){
                       <?php  $link_text = $this->property_model->cleanTitle($cat->title);?>
                     <li><a href="<?= base_url() ?>property-category/<?= $link_text ?>/<?= $cat->catId ?>"><?= $cat->title ?></a></li>
                     <?php endforeach ?>
+
+                    <li class="">
+                 <a href="<?php echo base_url() ?>network-marketing"><?php  echo "Join Real Estate Network Marketing" ?></a>
+                                  
+                </li>
                     
                   </ul>
                 </li>
 
                 <li class="">
                  <a href="<?php echo base_url() ?>lets-build"><?php  echo "Lets Build For You" ?></a>
+                                  
+                </li>
+                 <li class="">
+                 <a href="<?php echo base_url() ?>post-request"><?php  echo "Post A Request" ?></a>
                                   
                 </li>
                 

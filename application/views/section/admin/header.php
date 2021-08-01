@@ -320,24 +320,24 @@ function showInbox(){
 
 
                         <li>
-                            <a href="<?php echo base_url() ?>admin/properties/add"><i class="fas fa-file"></i> Change Password</a>
+                            <a href="<?php echo base_url() ?>auth/change_password"><i class="fas fa-file"></i> Change Password</a>
                         </li>
 
                         <li>
-                            <a href="<?php echo base_url() ?>admin/properties/add"><i class="fas fa-file"></i>About Realestate9ja</a>
+                            <a href="<?php echo base_url() ?>about-us" target="_blank"><i class="fas fa-file"></i>About Realestate9ja</a>
                         </li>
 
-                        <li>
-                            <a href="<?php echo base_url() ?>admin/properties/add"><i class="fas fa-file"></i>FAQs</a>
-                        </li>
+                       <!--  <li>
+                            <a href="<?php echo base_url() ?>#"><i class="fas fa-file"></i>FAQs</a>
+                        </li> -->
                          <li>
-                            <a href="<?php echo base_url() ?>admin/properties/add"><i class="fas fa-file"></i> Logout</a>
+                            <a href="<?php echo base_url() ?>auth/logout"><i class="fas fa-file"></i> Logout</a>
                         </li>
                     </ul>
                 </li>
-                <li>
+              <!--   <li>
                     <a href="<?php echo base_url() ?>admin/dashboard"><i class="fas fa-home"></i> FAQs</a> 
-                </li>
+                </li> -->
 
 
                 <?php }else{?>
