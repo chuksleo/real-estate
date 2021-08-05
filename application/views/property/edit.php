@@ -29,7 +29,7 @@ echo validation_errors('<span class="error">', '</span>');
                         <div class="card">
                         <div class="card-header">Basic Info</div>
                         <div class="card-body">
-
+<?php print("ti spsoso"); print_r($property) ?>
 
 
 
@@ -61,7 +61,7 @@ echo validation_errors('<span class="error">', '</span>');
 
 
         <?php $attributes = array('class' => '', 'id' => 'propertyform'); ?>
-        <?= form_open_multipart(base_url() . 'property/'. $action, $attributes) ?>
+        <?= form_open_multipart(base_url() . 'user/properties/'. $action.'/'.$property->pid, $attributes) ?>
 
          <div id="uploaded_image" class="col-lg-12">  
 
@@ -77,7 +77,7 @@ echo validation_errors('<span class="error">', '</span>');
 
 
 
-            ?>
+          
         <div class="form-group">            
           <label for="title">Title</label>
           <input type="text" name="title" placeholder="Enter Title"  value="<?php echo isset($property->title) ? $property->title : "" ?>" class="form-control" required>

@@ -45,8 +45,21 @@ class Property_model extends CI_Model {
 
 
 
+     public function get_popular_properties($num=20){
+                
+        $pub ="Published";
+        $count = 0;
+        $this->db->select()->from('properties AS p')->limit($num)->where('p.property_status =',$pub)->order_by('view_count','desc');
+        $this->db->where('p.view_count >', $count);
+        $this->db->join('users AS u', 'u.id = p.uid');
+        $this->db->join('locations AS l', 'l.lid = p.location_id','left');
+        $this->db->join('property_images AS im', 'im.property_id = p.pid','left')->group_by('p.pid');
+        $query = $this->db->get();
+        return $query->result();
+    }
 
-    public function get_top_view_properties($num=6){
+
+    public function get_top_view_properties($num=20){
                 
         $pub ="Published";
         $count = 0;
@@ -148,6 +161,9 @@ class Property_model extends CI_Model {
     }
 
 
+
+
+
     
 
 
@@ -204,6 +220,35 @@ class Property_model extends CI_Model {
             return $query->row();
       
     }
+
+    public function getPropertyByIdForEdit($id) {
+            
+            $this->db->select()->from('properties AS p')->where('p.pid =',$id);
+           
+            $this->db->join('users AS u', 'u.id = p.uid');
+            $this->db->join('locations AS l', 'l.lid = p.location_id','left');
+
+            // $this->db->join('categories AS ca', 'ca.catId = c.CategoryId','left');
+            $query = $this->db->get();
+            
+            return $query->row();
+      
+    }
+    
+
+    public function getRelatedProperty($catid, $typeid, $limit) {
+            $status = "Published";
+            $this->db->select()->from('properties AS p')->limit($limit)->where('p.category_id =',$catid);
+            $this->db->where('p.property_type_id =',$typeid);
+            $this->db->where('p.property_status =',$status);            
+            $this->db->join('locations AS l', 'l.lid = p.location_id','left');
+
+            // $this->db->join('categories AS ca', 'ca.catId = c.CategoryId','left');
+            $query = $this->db->get();
+            
+            return $query->result();
+      
+    }
     
     public function getPropertyByCategory($catId, $num, $start=0) {
         $sid = 1;
@@ -258,10 +303,8 @@ class Property_model extends CI_Model {
 
 
     
-    public function create_property($title, $uid, $image, $end_date, $category, $price, $description, $location_id, $address, $property_type_id, $property_condition, $furnishing, $size_sqm, $bedrooms, $bathrooms, $pets, $property_use, $smoking, $parties, $negotiable, $parking_space, $agent_fee, $agreement_fee, $capacity, $video_link, $duration, $status){ 
-
-        $today = new DateTime();
-        $dateAdded = $today->format('Y-m-d');
+    public function create_property($title, $uid, $image, $category, $price, $description, $location_id, $address, $property_type_id, $property_condition, $furnishing, $size_sqm, $bedrooms, $bathrooms, $pets, $property_use, $smoking, $parties, $negotiable, $parking_space, $agent_fee, $agreement_fee, $capacity, $video_link, $duration, $status){ 
+        
 
         $this->title = $title; 
         $this->uid = $uid; 
@@ -301,7 +344,7 @@ class Property_model extends CI_Model {
         return $this->db->insert_id();
     }
     
-    public function update_property($title, $uid, $image, $end_date, $category, $price, $description, $location_id, $address, $property_type_id, $property_condition, $furnishing, $size_sqm, $bedrooms, $bathrooms, $pets, $property_use, $smoking, $parties, $negotiable, $parking_space, $agent_fee, $agreement_fee, $capacity, $video_link, $duration, $property_option, $date_created, $last_updated, $status){
+    public function update_property($pid, $title, $uid, $image, $category, $price, $description, $location_id, $address, $property_type_id, $property_condition, $furnishing, $size_sqm, $bedrooms, $bathrooms, $pets, $property_use, $smoking, $parties, $negotiable, $parking_space, $agent_fee, $agreement_fee, $capacity, $video_link, $duration, $status){
 
 
         $datestring = "%Y-%m-%d %h:%i:%a";
@@ -320,7 +363,7 @@ class Property_model extends CI_Model {
            'description' => $description,
            'location_id' => $location_id,
            'property_address' => $address,
-           'proproperty_perty_type_id' => $property_type_id,
+           'property_type_id' => $property_type_id,
            'property_condition' => $property_condition,
            'furnishing' => $furnishing,
            'size_sqm' => $size_sqm,
@@ -338,10 +381,10 @@ class Property_model extends CI_Model {
            'video_link' => $video_link,
 
            'duration' => $duration,
-           'property_option' => $property_option,
-           'date_created' => $date_created,
-           'last_updated' => new DateTime(),
-           'property_status' => $fullname,
+           
+           
+           
+           'property_status' => $status,
 
             );
 

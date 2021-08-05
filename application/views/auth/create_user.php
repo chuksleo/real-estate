@@ -29,7 +29,7 @@ $this->load->view('section/header', $data);
                         <div class="col-md-4 col-sm-4">
                             <div class="alert alert-default fade in">
                                 <h4>Before you Login/Register!</h4>
-                                <p></p>
+                                <?php echo($this->settings_model->getStaticContent('text_login_registration')); ?>
                          </div>
                         </div>
                         <div class="col-md-4 col-sm-4 login-form">

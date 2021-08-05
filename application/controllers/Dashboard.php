@@ -34,24 +34,25 @@ class Dashboard extends CI_Controller {
     public function index() {
         $data['total_members'] = null;
         $data['total_properties'] = null;
+        $data['total_view'] = 0;
+        $data['properties'] = null;
         $data['total_reviews'] = null;
         $data['total_inspection_request'] = null;
-       if ($this->ion_auth->logged_in() && $this->ion_auth->is_admin()) {
-            $data['total_members'] = 20;
-            $data['total_properties'] = $this->property_model->getTotalProperties();
-            $data['total_reviews'] = $this->reviews_model->getTotalProperties();
-            $data['total_inspection_request'] = $this->inspection_request_model->getTotalInspectionRequest();
-
-
-       }elseif($this->ion_auth->logged_in()){
+       if($this->ion_auth->logged_in()){
             $uid = $this->ion_auth->get_user_id();
              
             $data['total_properties'] = $this->property_model->getTotalUserProperties($uid);
+
+            $properties = $this->property_model->user_properties($uid);
+            $data['properties'] = $properties;  
+            foreach ($properties as $prop) {
+                $data['total_view'] = $data['total_view'] + $prop->view_count;
+            }
             $data['total_reviews'] = $this->reviews_model->getTotalProperties();
        }else{
             redirect("/", "refresh");
        }
-      
+       
         
 
       

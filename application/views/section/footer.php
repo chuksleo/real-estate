@@ -23,10 +23,10 @@
             <div class="col-md-4 col-sm-6 footer-widget widget ">
                 <h3 class="widgettitle newcolor">Quick Links</h3>
                <ul class="newcolor">
-                <li><a href="submit.html">Sell with us</a></li>
-                <li><a href="login.html">View All Properties</a></li>
-                <li><a href="pricing.html">Top Location Properties</a></li>
-                <li><a href="about.html">About us</a></li>
+                <li><a href="<?php echo base_url() ?>property/add">Sell with us</a></li>
+                <li><a href="<?php echo base_url() ?>all-properties">View All Properties</a></li>
+                <li><a href="<?php echo base_url() ?>properties/popular">Popular Properties</a></li>
+                <li><a href="<?php echo base_url() ?>about-us">About us</a></li>
                
                </ul>
            </div>
@@ -37,10 +37,12 @@
             <div class="col-md-3 col-sm-6 footer-widget widget">
                 <h3 class="widgettitle newcolor">Our Newsletter</h3>
                 <?php echo ($this->settings_model->getStaticContent('footer_text_one')) ?>
-                <form method="post" id="newsletterform" name="newsletterform" class="newsletter-form" action="mail/newsletter.php">
-                    <input type="email" name="nl-email" id="nl-email" placeholder="Enter your email" class="form-control">
-                    <input type="submit" name="nl-submit" id="nl-submit" class="btn btn-primary btn-block btn-lg" value="Subscribe">
-                </form>
+                <div id="submessage_footer"></div>
+               
+                    <input type="email" name="nl-email" id="email-address" placeholder="Enter your email" class="form-control">
+                    <button id="subtn" class="btn-primary btn-block btn-lg" onclick="subscribe_bottom()">Subscribe</button>
+                    
+               
                 <div class="clearfix"></div>
                 <div id="nl-message"></div>
            </div>

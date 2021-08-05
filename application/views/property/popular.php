@@ -4,8 +4,9 @@
 //Loading header
 $data['title'] = 'Login';
 $data['javascript'] = 'app.js';
-$data['page_title'] = lang('property_title');
+$data['page_title'] = lang('popular_property_title');
 $data['page_description'] = lang('pr_description');
+
 $this->load->view('section/header', $data);
 
 
@@ -66,7 +67,7 @@ $this->load->view('section/header', $data);
 
                       
                     <div class="property-listing">
-                     <p>Showing: <?php echo $s_val ?> - <?php echo $num ?> of <?php echo $total?> Total result</p>
+                     
 
                        <?php $val = $this->session->flashdata('message'); if($val){echo '<div class="alert alert-warning fade in">'.$val.'</div>'; }?>
 
@@ -96,7 +97,7 @@ $this->load->view('section/header', $data);
 
                         </ul>
                     </div>
-                    <?php echo $pages ?>
+                    
                   
                   </div>
 

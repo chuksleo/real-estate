@@ -15,7 +15,15 @@ $this->load->view('section/admin/header', $data);
                     <div class="row">
                     		 <div class="col-md-12 col-lg-12">
                             <div class="card">
-                                <div class="card-header"><a href="<?php echo base_url() ?>admin/properties/add" class="btn btn-square btn-primary mb-2"> + Add Property </a></div>
+                                <div class="card-header">
+                                 <?php if($this->ion_auth->is_admin()){?>
+                                <a href="<?php echo base_url() ?>admin/properties/add" class="btn btn-square btn-primary mb-2"> + Add Property </a>
+
+                                <?php }else{?>
+                                <a href="<?php echo base_url() ?>user/properties/add" class="btn btn-square btn-primary mb-2"> + Add Property </a>
+                                <?php } ?>
+
+                                </div>
                                 <div class="card-body">
                                    <?php $val = $this->session->flashdata('message'); echo '<div class="alert-info">'.$val.'</div>'; ?>
                                     <p id="message"></p>

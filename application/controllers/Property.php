@@ -261,6 +261,27 @@ class Property extends CI_Controller {
     }
 
 
+   
+    public function listPopularProperties () {
+
+        $settings = $this->settings_model->get_all_settings();
+        $num = $settings['content_per_page'];
+        $data['is_loggedin'] = $this->ion_auth->logged_in();  
+         $data['properties'] = $this->property_model->get_popular_properties();
+     
+        
+        $data['title'] = "Properties";
+
+       
+        
+        
+        $data['pages'] = "";
+        $data['total'] = "";
+        $data['per_page'] = "";
+        
+        $this->load->view("property/popular" , $data);
+        
+    }
 
 
 
@@ -351,6 +372,10 @@ class Property extends CI_Controller {
         $data['property'] = $this->property_model->getPropertyById($propertyid);
         $data['images'] = $this->property_images->getImagesByPropertyId($propertyid);
         $data['facilities'] = $this->property_facility_map_model->getPropertyFacilities($propertyid);
+
+        $categoryid = $data['property']->category_id;
+        $type = $data['property']->property_type_id;
+        $data['realated_properties'] = $this->property_model->getRelatedProperty($categoryid, $type, $limit=3);
         if(!$data['property']){
             if($this->ion_auth->logged_in()){
                 $this->session->set_flashdata('message', "Property ".$title.' is not listed or published');   
@@ -362,6 +387,8 @@ class Property extends CI_Controller {
             }
             
         }else{
+            $data['settings_content'] = $this->settings_model->get_all_settings();
+            $data['settings'] = $data['settings_content'];
             $this->load->view("property/view" , $data);
         }
         
@@ -538,22 +565,31 @@ class Property extends CI_Controller {
 
     public function edit ($pid) {
         $data['is_loggedin'] = $this->ion_auth->logged_in();
-        $data['action'] = "edit";
+        $data['action'] = "edit"; 
+        $data['property'] = $this->property_model->getPropertyByIdForEdit($pid);
+
         if($this->ion_auth->logged_in()){
              if($this->input->post()){
+
+
                 $title = $this->property_model->cleanTitle($this->input->post("location"));
                
                 $location = $this->location_model->getLocationByTitleKey($title);
                 
                 $uid = $this->ion_auth->get_user_id();
-                $pImages = $_POST['result'];
-                $main_image = $pImages[0];
+                if(isset($_POST['result'])){
+                    $pImages = $_POST['result'];
+                    $main_image = $pImages[0];
+
+                }else{
+                    $main_image = $data['property']->image;
+                }
+                
                 
                
 
                 $title = $this->input->post("title");            
-                $image= $main_image;
-                $end_date = new DateTime();
+                $image= $main_image;                
                 $category = $this->input->post("category");
                 $price = $this->input->post('price');
                 $description = $this->input->post("description");
@@ -579,32 +615,33 @@ class Property extends CI_Controller {
                 $property_option = $this->input->post("options");
                  
                 $status = "Unpublished";
-                $propertyid = $this->property_model->create_property($title, $uid, $image, $end_date, $category, $price, $description, $location_id, $address, $property_type_id, $property_condition, $furnishing='Unfurnished', $size_sqm, $bedrooms, $bathrooms, $pets='No Pets', $property_use='Residential', $smoking='No Smoking', $parties='No Parties', $negotiable, $parking_space='20', $agent_fee='No', $agreement_fee='No', $capacity="100", $video_link='thisisi.mp3', $duration='None', $status);
+                $propertyid = $this->property_model->update_property($pid, $title, $uid, $image, $category, $price, $description, $location_id, $address, $property_type_id, $property_condition, $furnishing='Unfurnished', $size_sqm, $bedrooms, $bathrooms, $pets='No Pets', $property_use='Residential', $smoking='No Smoking', $parties='No Parties', $negotiable, $parking_space='20', $agent_fee='No', $agreement_fee='No', $capacity="100", $video_link='thisisi.mp3', $duration='None', $status);
 
 
                
+                
                     $data['facilities'] = $this->Property_facility_model->getAllFacilities();
                     foreach ($data['facilities'] as $facility) {
-                    $clean_title = $this->property_model->cleanTitle($facility->name);
-                    if($this->input->post($clean_title)){
-                        
-                        $facilityid = $this->input->post($clean_title);
-                        if(!$this->property_facility_map_model->checkFacilityMap($pid, $facilityid)){
-                            try {
-                                $this->property_facility_map_model->setFacilityMap($pid, $facilityid);
-                            } catch (Exception $e) {
-                                echo 'Message: ' .$e->getMessage();
-                            }
+                        $clean_title = $this->property_model->cleanTitle($facility->name);
+                        if($this->input->post($clean_title)){
                             
+                            $facilityid = $this->input->post($clean_title);
+                            if(!$this->property_facility_map_model->checkFacilityMap($pid, $facilityid)){
+                                try {
+                                    $this->property_facility_map_model->setFacilityMap($pid, $facilityid);
+                                } catch (Exception $e) {
+                                    echo 'Message: ' .$e->getMessage();
+                                }
+                                
 
+                            }
+                         
                         }
-                     
+                        
+                       
                     }
-                    
-                      
-                }
 
-                if($pImages){
+                if(isset($pImages)){
                     foreach($pImages as $image){
                         try {
                             $this->property_images->setPropertyImage($image, $pid);
@@ -620,7 +657,7 @@ class Property extends CI_Controller {
                 if($this->ion_auth->is_admin()){ 
                     redirect('/admin/properties', 'refresh');
                 }else{
-                    redirect('/user/properties', 'refresh');
+                   redirect('/user/properties', 'refresh');
                 }
               
                 
@@ -633,7 +670,6 @@ class Property extends CI_Controller {
                 $data['locations'] = $this->location_model->mapLocation();
                 $data['facilities'] = $this->Property_facility_model->getAllFacilities();
 
-                $data['property'] = $this->property_model->getPropertyById($pid);
                 $data['images'] = $this->property_images->getImagesByPropertyId($pid);
                 $data['property_facilities'] = $this->property_facility_map_model->getPropertyFacilities($pid);
 

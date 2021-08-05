@@ -22,7 +22,7 @@
                     <div class="row">
                         <div class="col-md-6 col-sm-6">
                             <h3><?php echo ($this->settings_model->getStaticContent('about_header_one')) ?></h3>
-                            <?php echo ($this->settings_model->getStaticContent('about_text_one')) ?>
+                            <?php echo ($this->settings_model->getStaticContent('about_text_main')) ?>
                         </div>
                         <div class="col-md-6 col-sm-6">
                             <h3><?php echo ($this->settings_model->getStaticContent('about_header_two')) ?></h3>
@@ -55,10 +55,13 @@
                     <div class="col-md-6">
                           <div class="block-heading">
                               <h4><span class="heading-icon"><i class="fa fa-question"></i></span><?php echo ($this->settings_model->getStaticContent('about_header_three')) ?></h4>
+
+
+
                           </div>
                           <div class="accordion" id="toggleArea">
 
-                           <?php echo ($this->settings_model->getStaticContent('about_text_two')) ?>
+                           <?php echo ($this->settings_model->getStaticContent('about_mission_text')) ?>
 
                           </div>
                           <!-- End Toggle --> 
@@ -73,7 +76,7 @@
                           </div>
                           <div class="accordion" id="toggleArea">
 
-                            <?php echo ($this->settings_model->getStaticContent('about_text_three')) ?>
+                            <?php echo ($this->settings_model->getStaticContent('about_vision_text')) ?>
 
                           </div>
                           <!-- End Toggle --> 

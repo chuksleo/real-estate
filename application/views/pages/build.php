@@ -21,8 +21,8 @@
                 <div class="page">
                     <div class="row">
                         <div class="col-md-6 col-sm-6">
-                            <h3><?php echo ("") ?></h3>
-                            <?php echo ($this->settings_model->getStaticContent('about_text_one')) ?>
+                            <h3><?php echo ("Why Let us Handle you Project") ?></h3>
+                            <?php echo ($this->settings_model->getStaticContent('lets_build_text')) ?>
                         </div>
                         <div class="col-md-6 col-sm-6">
                             <h3><?php echo ($this->settings_model->getStaticContent('about_header_two')) ?></h3>

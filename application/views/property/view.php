@@ -10,6 +10,7 @@ setlocale(LC_MONETARY,"de_DE");
     {
       
       $('#number').show();
+      $('#number2').show();
       $('#view-p-text').hide();
     }
 
@@ -19,11 +20,20 @@ setlocale(LC_MONETARY,"de_DE");
 //Loading header
 $data['title'] = 'Login';
 $data['javascript'] = 'app.js';
-$data['page_title'] = " ";
+$data['page_title'] = $property->title." | RealEstate9ja.com";
+$data['page_description'] = $property->description;
 
 $this->load->view('section/header', $data);
 
-
+ if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')   
+         $url = "https://";   
+    else  
+         $url = "http://";   
+    // Append the host(domain name, ip) to the URL.   
+    $url.= $_SERVER['HTTP_HOST'];   
+    
+    // Append the requested resource location to the URL   
+    $url.= $_SERVER['REQUEST_URI'];    
 $user_ip=$_SERVER['REMOTE_ADDR'];
 
 $this->property_model->setPageViewForProperty($property->pid);
@@ -42,7 +52,7 @@ $this->property_model->setPageViewForProperty($property->pid);
           <div class="container">
               <div class="row">
                   <div class="col-md-12">
-                      <h1>Property Simple Listing</h1>
+                      <h1>Property Details</h1>
                   </div>
              </div>
          </div>
@@ -89,36 +99,21 @@ $this->property_model->setPageViewForProperty($property->pid);
             <hr>
             <div class="property-grid">
               <ul class="grid-holder col-3">
+
+              <?php foreach($realated_properties as $property_item):?>
+                <?php  $link_text = $this->property_model->cleanTitle($property_item->title);?>
                 <li class="grid-item type-rent">
-                  <div class="property-block"> <a href="#" class="property-featured-image"> <img src="http://placehold.it/600x400&amp;text=IMAGE+PLACEHOLDER" alt=""> <span class="images-count"><i class="fa fa-picture-o"></i> 2</span> <span class="badges">Rent</span> </a>
+                  <div class="property-block"> <a href="#" class="property-featured-image"> <img src="<?php echo base_url() ?>assets/uploads/property/<?php echo $property_item->image ?>" alt="<?php echo $property_item->title ?>"> <span class="images-count"><i class="fa fa-picture-o"></i> 2</span><?php if($property_item->admin_own == "No"){?> <span class="ribbon3">Promoted</span>
+    <?php } ?> </a>
                     <div class="property-info">
-                      <h4><a href="#">116 Waverly Place</a></h4>
-                      <span class="location">NYC</span>
-                      <div class="price"><strong>$</strong><span>2800 Monthly</span></div>
+                      <h4><a href="#"><?php echo $property_item->title ?></a></h4>
+                      <span class="location"><?php echo $property_item->location_title ?></span>
+                      <div class="price"><strong>$</strong><span><?php echo $property_item->price ?></span></div>
                     </div>
-                    <div class="property-amenities clearfix"> <span class="area"><strong>5000</strong>Area</span> <span class="baths"><strong>3</strong>Baths</span> <span class="beds"><strong>3</strong>Beds</span> <span class="parking"><strong>1</strong>Parking</span> </div>
+                    <div class="property-amenities clearfix"> <span class="area"><strong><?php echo $property_item->size_sqm ?></strong>Area</span> <span class="baths"><strong><?php echo $property_item->bathrooms ?></strong>Baths</span> <span class="beds"><strong><?php echo $property_item->bedrooms ?></strong>Beds</span>  </div>
                   </div>
                 </li>
-                <li class="grid-item type-buy">
-                  <div class="property-block"> <a href="#" class="property-featured-image"> <img src="http://placehold.it/600x400&amp;text=IMAGE+PLACEHOLDER" alt=""> <span class="images-count"><i class="fa fa-picture-o"></i> 2</span> <span class="badges">Buy</span> </a>
-                    <div class="property-info">
-                      <h4><a href="#">232 East 63rd Street</a></h4>
-                      <span class="location">NYC</span>
-                      <div class="price"><strong>$</strong><span>250000</span></div>
-                    </div>
-                    <div class="property-amenities clearfix"> <span class="area"><strong>5000</strong>Area</span> <span class="baths"><strong>3</strong>Baths</span> <span class="beds"><strong>3</strong>Beds</span> <span class="parking"><strong>1</strong>Parking</span> </div>
-                  </div>
-                </li>
-                <li class="grid-item type-rent">
-                  <div class="property-block"> <a href="#" class="property-featured-image"> <img src="http://placehold.it/600x400&amp;text=IMAGE+PLACEHOLDER" alt=""> <span class="images-count"><i class="fa fa-picture-o"></i> 2</span> <span class="badges">Buy</span> </a>
-                    <div class="property-info">
-                      <h4><a href="#">55 Warren Street</a></h4>
-                      <span class="location">NYC</span>
-                      <div class="price"><strong>$</strong><span>300000</span></div>
-                    </div>
-                    <div class="property-amenities clearfix"> <span class="area"><strong>5000</strong>Area</span> <span class="baths"><strong>3</strong>Baths</span> <span class="beds"><strong>3</strong>Beds</span> <span class="parking"><strong>1</strong>Parking</span> </div>
-                  </div>
-                </li>
+              <?php endforeach ?>
               </ul>
             </div>
           </div>
@@ -128,7 +123,7 @@ $this->property_model->setPageViewForProperty($property->pid);
                   <h3 class="widgettitle">Agent</h3>
 
                    <div class="col-md-12 col-sm-12 featured-block"> <img src="http://placehold.it/600x600&amp;text=IMAGE+PLACEHOLDER" alt="Search Anywhere" class="img-thumbnail">
-              <h3>Chukwuka Chime</h3>
+              <h3>RealEstate9ja</h3>
               <p></p>
               </div>
                   <div class="agent">
@@ -141,7 +136,9 @@ $this->property_model->setPageViewForProperty($property->pid);
 
 
 
-                      <a href="#" onclick="setView()" class="contact-btn btn btn-primary btn-block btn-lg pull-left"><span id="view-p-text" >View Contact</span><span id="number" style="display: none;">09087654321</span></a>
+                      <a href="#" onclick="setView()" class="contact-btn btn btn-primary btn-block btn-lg pull-left"><span id="view-p-text" >View Contact</span>
+                      <span id="number" style="display: none;"><?php echo $settings['phone'] ?></span> 
+                      <span id="number2" style="display: none;"><?php if($settings['phone2']){echo ", ". $settings['phone2'];} ?></span></a>
 
                       <br><br><br><br>
                       
@@ -212,7 +209,7 @@ $this->property_model->setPageViewForProperty($property->pid);
                           </li>            
 
 
-                        <li class="share-list"> <a href="#" target="_blank"><img src="<?php echo base_url() ?>assets/images/icon/print.png"></a>
+                        <li class="share-list"> <a href="#" onclick="window.print()"><img src="<?php echo base_url() ?>assets/images/icon/print.png"></a>
                            
                         </li>
 
@@ -226,23 +223,7 @@ $this->property_model->setPageViewForProperty($property->pid);
              
 
 
-               <div class="widget">
-                  <h3 class="widgettitle">Safty Tips</h3>
-                  <div id="description">
-                   <ul class="b-advert-safety-list">
-                      <li>Do not submit any upfront fees for a real estate inspection.</li>
-                      <li> Do not go to unfamiliar places alone.</li>
-                      <li>Double check real estate agency background and reviews </li>
-                </ul>
-                  </div>
-
-
-
-
-
-
-                  
-               </div>
+              
              
            </div>
         </div>

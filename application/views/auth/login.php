@@ -31,7 +31,7 @@ $this->load->view('section/header', $data);
                         <div class="col-md-4 col-sm-4">
                             <div class="alert alert-default fade in">
                                 <h4>Before you Login/Register!</h4>
-                                <p></p>
+                                <?php echo($this->settings_model->getStaticContent('text_login_registration')); ?>
                          </div>
                         </div>
                         <div class="col-md-4 col-sm-4 login-form">
@@ -40,7 +40,7 @@ $this->load->view('section/header', $data);
                    
                     <h1><?php echo lang('login_heading'); ?></h1>
                     <p><?php echo lang('login_subheading'); ?></p>
-
+                    <p><?php $message = $this->session->flashdata('message'); echo $message ?></p>
 
                         <?php echo form_open("auth/login"); ?>
 

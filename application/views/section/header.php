@@ -21,9 +21,21 @@
   ================================================== -->
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title><?php echo $page_title ?></title>
-<meta name="description" content="">
+<meta name="description" content="<?php echo $page_description ?>">
 <meta name="keywords" content="">
-<meta name="author" content="">
+<meta name="author" content="Realestste9ja.com">
+<meta name="robots" content="index,follow">
+ <meta property="og:type" content="website" />
+<meta property="og:image" content="https://static.hotels.ng/v7/img-og/hotels_ng_card.png"/>
+
+
+<meta property="og:title" content="<?php echo $page_title ?>"/>
+<meta property="og:description" content="<?php echo $page_description ?>">
+<meta property="og:url" content=""/>
+<meta property="og:site_name" content="Realestste9ja.com"/>
+
+
+   
 <!-- Mobile Specific Metas
   ================================================== -->
 <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
@@ -73,7 +85,7 @@ function subscribe_bottom()
 
             console.log("btn cliced");
             var email_cont = $('input#email-address').val();
-
+             $("#subtn").hide();
 
             $.ajax({
                 type: 'POST',
@@ -81,6 +93,7 @@ function subscribe_bottom()
                 data: {'email_val':email_cont},
 
                 success: function(resp) {
+                  $("#subtn").show();
                      $("#submessage_footer").html(resp);
                 }
 
@@ -182,8 +195,9 @@ function getCategoryTypes(page){
                  <li class="dropdown"><a  data-toggle="dropdown"><i class="fa fa-user"></i> Welcome <?php echo $firstname ?> <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                   <li><a href="<?= base_url() ?>user/properties">My properties</a></li>
-                  <li><a href="<?= base_url() ?>user/property/add">Add a property</a></li>
-                  <li><a href="<?= base_url() ?>user/dashboard">My Profile</a></li>
+                  <li><a href="<?= base_url() ?>property/add">Add a property</a></li>
+                  <li><a href="<?= base_url() ?>dashboard">My Profile</a></li>
+                  <li><a href="<?= base_url() ?>auth/logout">Logout</a></li>
                 </ul>
               </li>
           <?php } ?>    
@@ -241,6 +255,10 @@ function getCategoryTypes(page){
                   <ul class="dropdown">
 
                     <li><a href="<?php echo base_url() ?>all-properties">All Properties</a></li>
+                    <li class="">
+                 <a href="<?php echo base_url() ?>properties/popular"><?php  echo "Popular Properties" ?></a>
+                                  
+                </li>
                     <?php foreach ($categories as $cat): ?>
                       <?php  $link_text = $this->property_model->cleanTitle($cat->title);?>
                     <li><a href="<?= base_url() ?>property-category/<?= $link_text ?>/<?= $cat->catId ?>"><?= $cat->title ?></a></li>

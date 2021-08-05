@@ -35,7 +35,8 @@ class Home extends CI_Controller {
         // $data['testimonials'] = $this->testimonial_model->get_front_testimony();
         $data['is_loggedin'] = $this->ion_auth->logged_in();
         $data['locations'] = $this->location_model->mapLocation();
-        $data['page_title'] = "REALESTATE9JA: Africa #1 Housing Platform ";
+        $data['page_title'] = lang('home_title');
+        $data['page_description'] = lang('home_description');
          $data['banners'] = $this->banners_model->getAllBanners();
 
         $this->load->view('section/header', $data);

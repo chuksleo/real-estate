@@ -38,7 +38,7 @@ class Admin extends CI_Controller {
     }
 
     public function index() {
-        if($this->ion_auth->logged_in() && $this->ion_auth->is_admin()){
+                if($this->ion_auth->logged_in() && $this->ion_auth->is_admin()){
             $users = $this->ion_auth->users()->result();
             $data['total_members'] = count($users);
 
@@ -68,11 +68,14 @@ class Admin extends CI_Controller {
 
 
     public function static_languages() {
+        if($this->ion_auth->logged_in() && $this->ion_auth->is_admin()){
 
-
-        $data['langs'] = $this->settings_model->getStaticLang();
-    
-        $this->load->view("admin/static_lang", $data);
+            $data['langs'] = $this->settings_model->getStaticLang();
+        
+            $this->load->view("admin/static_lang", $data);
+        }else{
+            redirect('/auth');
+        }
     }
 
 
@@ -80,81 +83,91 @@ class Admin extends CI_Controller {
 
 
     public function edit_lang($id) {
-        $data['is_loggedin'] = $this->ion_auth->logged_in();
-        
-       
-        if($this->input->post()){
-           
+        if($this->ion_auth->logged_in() && $this->ion_auth->is_admin()){
+            $data['is_loggedin'] = $this->ion_auth->logged_in();
             
-            $uid = $this->ion_auth->get_user_id();           
            
-            $this->settings_model->updateStaticLang(
-                    $this->input->post('field'), 
-                    $this->input->post('value'), 
-                    $this->input->post('status'), 
-                    $id );
+            if($this->input->post()){
+               
+                
+                $uid = $this->ion_auth->get_user_id();           
+               
+                $this->settings_model->updateStaticLang(
+                        $this->input->post('field'), 
+                        $this->input->post('value'), 
+                        $this->input->post('status'), 
+                        $id );
 
-            redirect('/admin/static_languages', 'refresh');
+                redirect('/admin/static_languages', 'refresh');
+            }
+            $path = './js/ckfinder';
+            $width = '850px';
+           
+            $data['lang'] = $this->settings_model->getStaticLangById($id);
+            // print_r($data['campaign']);
+            $this->editor($path, $width);
+            $this->load->view("admin/edit_static_lang" , $data);
+        }else{
+            redirect('/auth'); 
         }
-        $path = './js/ckfinder';
-        $width = '850px';
-       
-        $data['lang'] = $this->settings_model->getStaticLangById($id);
-        // print_r($data['campaign']);
-        $this->editor($path, $width);
-        $this->load->view("admin/edit_static_lang" , $data);
     }
 
 
     public function settings() {
 
-
-        $data['settings'] = $this->settings_model->get_all_settings();
-    
-        $this->load->view("admin/settings", $data);
+        if($this->ion_auth->logged_in() && $this->ion_auth->is_admin()){
+            $data['settings'] = $this->settings_model->get_all_settings();
+        
+            $this->load->view("admin/settings", $data);
+        }else{
+            redirect('/auth');
+        }
     }
 
      public function edit_settings() {
-            
-        $data['settings'] = $this->settings_model->get_all_settings();
-        $image = $data['settings']['logo'];
-        if($this->input->post()){
-           
-            
-            $uid = $this->ion_auth->get_user_id();
-            $config['upload_path'] = './assets/uploads/files/';
-            $config['allowed_types'] = 'gif|jpg|png|jpeg';
-            $config['max_size'] = 20048; // Need to define properly              
-            $config['file_name'] = time().$uid;       
-            $this->load->library('upload', $config);
-            $this->upload->do_upload('userfile1');
+        if($this->ion_auth->logged_in() && $this->ion_auth->is_admin()){ 
+            $data['settings'] = $this->settings_model->get_all_settings();
+            $image = $data['settings']['logo'];
+            if($this->input->post()){
+               
+                
+                $uid = $this->ion_auth->get_user_id();
+                $config['upload_path'] = './assets/uploads/files/';
+                $config['allowed_types'] = 'gif|jpg|png|jpeg';
+                $config['max_size'] = 20048; // Need to define properly              
+                $config['file_name'] = time().$uid;       
+                $this->load->library('upload', $config);
+                $this->upload->do_upload('userfile1');
 
-            $pic = $this->upload->data();
-            if($_FILES['userfile1']['size'] == 0){
-                $image = $image;
-            }else{
-                $image = $pic['file_name'];
+                $pic = $this->upload->data();
+                if($_FILES['userfile1']['size'] == 0){
+                    $image = $image;
+                }else{
+                    $image = $pic['file_name'];
+                }
+                
+               
+                $this->settings_model->update_settings(
+                    $this->input->post('site'), 
+                    $image, 
+                    $this->input->post('email'), 
+                    $this->input->post('address'), 
+                    $this->input->post('phone'), 
+                    $this->input->post('phone2'), 
+                    $this->input->post('work'), 
+                    $this->input->post('contentcount'), 
+                    $this->input->post('twitter'), 
+                    $this->input->post('facebook'), 
+                    $this->input->post('linkedin'), 
+                    $this->input->post('webmail') );
+                redirect('/admin/settings', 'refresh');
             }
             
-           
-            $this->settings_model->update_settings(
-                $this->input->post('site'), 
-                $image, 
-                $this->input->post('email'), 
-                $this->input->post('address'), 
-                $this->input->post('phone'), 
-                $this->input->post('phone2'), 
-                $this->input->post('work'), 
-                $this->input->post('contentcount'), 
-                $this->input->post('twitter'), 
-                $this->input->post('facebook'), 
-                $this->input->post('linkedin'), 
-                $this->input->post('webmail') );
-            redirect('/admin/settings', 'refresh');
-        }
-        
-        
-        $this->load->view("admin/edit_settings", $data);
+            
+            $this->load->view("admin/edit_settings", $data);
+        }else{
+                redirect('/auth');
+            }
     }
 
 
@@ -163,7 +176,7 @@ class Admin extends CI_Controller {
         
        
 
-        if($this->ion_auth->logged_in() == true){
+         if($this->ion_auth->logged_in() && $this->ion_auth->is_admin()){ 
             $data['is_loggedin'] = $this->ion_auth->logged_in();
             
             
@@ -175,7 +188,7 @@ class Admin extends CI_Controller {
 
         }else{
 
-            redirect('/', 'refresh');
+            redirect('/auth', 'refresh');
         }
        
     }
@@ -185,7 +198,7 @@ class Admin extends CI_Controller {
         
        
 
-        if($this->ion_auth->logged_in() == true){
+        if($this->ion_auth->logged_in() && $this->ion_auth->is_admin()){ 
             $data['is_loggedin'] = $this->ion_auth->logged_in();
             
             
@@ -197,7 +210,7 @@ class Admin extends CI_Controller {
 
         }else{
 
-            redirect('/', 'refresh');
+            redirect('/auth', 'refresh');
         }
        
     }
@@ -207,7 +220,7 @@ class Admin extends CI_Controller {
      public function messagesView () {
         
        
-
+        if($this->ion_auth->logged_in() && $this->ion_auth->is_admin()){
       
             $mid = $this->input->post('mid');
             $data['message'] = $this->message_model->getMessageById($mid);
@@ -219,7 +232,10 @@ class Admin extends CI_Controller {
 
                 echo "Error No Item found for message";
             }
-            
+        }else{
+
+            echo "Error ! You dont have permision to perform this action";
+        }  
 
 
     }
@@ -228,7 +244,7 @@ class Admin extends CI_Controller {
 
     public function messageDelete() {
             
-       if($this->ion_auth->logged_in() == true){ 
+       if($this->ion_auth->logged_in() && $this->ion_auth->is_admin()){
 
             $mid = $this->input->post('mid_val');
             $type = $this->input->post('type_val');
@@ -242,6 +258,8 @@ class Admin extends CI_Controller {
             
 
 
+        }else{
+            echo "Error ! You dont have permision to perform this action";
         }
 
 

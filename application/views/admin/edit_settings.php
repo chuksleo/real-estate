@@ -71,7 +71,7 @@ echo validation_errors('<span class="error">', '</span>');
 
          <div class="form-group col-md-6">            
         <label for="title">Secondary Phone</label>
-                <input type="text" name="phone2" placeholder="Enter Secondary phone"  value="<?php echo isset($settings['phone2']) ? $settings['phone2'] : "" ?>" class="form-control" required>
+                <input type="text" name="phone2" placeholder="Enter Secondary phone"  value="<?php echo isset($settings['phone2']) ? $settings['phone2'] : "" ?>" class="form-control">
         </div>
 
 

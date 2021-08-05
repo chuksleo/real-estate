@@ -84,7 +84,10 @@ class Auth extends CI_Controller {
                 'type' => 'password',
             );
             // $this->data['categories'] = $this->project_category_model->getCategories();
-            $this->data['page_title'] = "Login |  ";
+            $this->data['page_title'] = "Login | Realestate9ja.com ";
+            $this->data['page_description'] = "Login and start selling Now";
+            
+            
             $this->_render_page('auth/login', $this->data);
         }
     }
@@ -468,7 +471,9 @@ class Auth extends CI_Controller {
                 'value' => $this->form_validation->set_value('password_confirm'),
             );
             // $this->data['categories'] = $this->project_category_model->getCategories();
-             $this->data['page_title'] = "Register | ";
+            $this->data['page_title'] = "Register | Realestate9ja.com";
+            $this->data['page_description'] = "Want to sell you property signup now";
+            
             $this->_render_page('auth/create_user', $this->data);
         }
     }

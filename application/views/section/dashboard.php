@@ -139,7 +139,7 @@
                                     <div class="footer">
                                         <hr />
                                         <div class="stats">
-                                            <a href=""><i class="fas fa-envelope-open-text"></i> View More...</a>
+                                            <a href="<?php echo base_url()?>user/properties"><i class="fas fa-envelope-open-text"></i> View More...</a>
                                         </div>
                                     </div>
                                 </div>
@@ -149,7 +149,7 @@
 
 
 
-                         <div class="col-sm-6 col-md-6 col-lg-3 mt-3">
+                        <!--  <div class="col-sm-6 col-md-6 col-lg-3 mt-3">
                             <div class="card">
                                 <div class="content">
                                     <div class="row">
@@ -168,11 +168,11 @@
                                     
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
 
 
 
-                         <div class="col-sm-6 col-md-6 col-lg-3 mt-3">
+                        <!--  <div class="col-sm-6 col-md-6 col-lg-3 mt-3">
                             <div class="card">
                                 <div class="content">
                                     <div class="row">
@@ -192,7 +192,7 @@
                                 </div>
                             </div>
                         </div>
-
+ -->
                          <?php } ?>
                     </div>
                     <div class="row">
@@ -214,10 +214,17 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                <?php foreach($properties as $property_item):?>
+                                                <?php  $link_text = $this->property_model->cleanTitle($property_item->title);?>
                                                 <tr>
-                                                    <td><?php echo "My Title" ?> <a href="#"><i class="fas fa-link blue" title="view property"></i></a></td>
-                                                    <td class="text-right">8,340</td>
+                                                    <th><?php echo $property_item->title ?>
+                                                    <a href="<?= base_url() ?>property/<?= $link_text ?>/<?=  $property_item->pid ?>" target="_blank"><i class="fas fa-link blue" title="view property"></i></a>
+
+
+                                                    </th>
+                                                    <th class="text-right"><?php echo $property_item->view_count ?></th>
                                                 </tr>
+                                                 <?php endforeach  ?>
                                                
                                               
                                               </tbody>

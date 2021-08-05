@@ -47,15 +47,13 @@ class Email extends CI_Controller {
 			if(!$mail_val)
 			{
 				$this->emails_model->subscribe();
-				echo '<div class="alert-box done">
-							<i class="icon-ok"></i>
-							<h4>Success! <span>You have succefuully subscribed for our mail alert</span></h4>
+				echo '<div class="alert alert-success fade in "> <a class="close" data-dismiss="alert" href="#">×</a>
+							<small><span>You have succefuully subscribed for our mail alert</span></small>
 						</div>';
 			}else
 			{
-				echo '<div class="alert-box done">
-							<i class="icon-ok"></i>
-							<h4>OOps! <span>It seems you have already subscribed</span></h4>
+				echo '<div class="alert alert-error fade in"> <a class="close" data-dismiss="alert" href="#">×</a>
+							<small>Oops! <span>It seems you have already subscribed stay tuned</span></small>
 						</div>';
 			}
 		}

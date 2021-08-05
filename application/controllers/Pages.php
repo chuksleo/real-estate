@@ -37,7 +37,8 @@ class Pages extends CI_Controller {
 		}
 	   
 		$data['site_description'] = lang('contact_page_description');
-		$data['page_title'] = ": Contact ";
+		$data['page_title'] = lang('pr_title');
+		$data['page_description'] = lang('pr_description');
 		$data['page_name'] = "Contact us";
 		$data['settings_content'] = $this->settings_model->get_all_settings();
 		$data['settings'] = $data['settings_content'];
@@ -80,7 +81,8 @@ class Pages extends CI_Controller {
 		}
 
 		//$data['site_description'] = lang('about_page_description');
-		$data['page_title'] = "About Us";
+		$data['page_title'] = lang('about_title');
+		$data['page_description'] = strip_tags(substr($this->settings_model->getStaticContent('about_text_main'), 0,120));
 		// $data['categories'] = $this->project_category_model->getCategories($num=10);
 		$this->load->view('section/header', $data);
 		$this->load->view('pages/'.$page);
@@ -131,7 +133,9 @@ class Pages extends CI_Controller {
 		}
 
 		//$data['site_description'] = lang('about_page_description');
-		$data['page_title'] = "Join Real Estate Network marketing";
+		
+		$data['page_title'] = lang('market_title');
+		$data['page_description'] = strip_tags(substr($this->settings_model->getStaticContent('market_network_text'), 0,120)) ;
 		// $data['categories'] = $this->project_category_model->getCategories($num=10);
 		$this->load->view('section/header', $data);
 		$this->load->view('pages/'.$page);
@@ -153,8 +157,8 @@ class Pages extends CI_Controller {
 		}
 
 		//$data['site_description'] = lang('about_page_description');
-		$data['page_title'] = "Lets Build For You";
-		// $data['categories'] = $this->project_category_model->getCategories($num=10);
+		$data['page_title'] = lang('lb_title');
+		$data['page_description'] = strip_tags(substr($this->settings_model->getStaticContent('lets_build_text'), 0,120));
 		$this->load->view('section/header', $data);
 		$this->load->view('pages/'.$page);
 		$this->load->view('section/footer');

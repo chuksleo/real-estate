@@ -15,7 +15,7 @@
 */
 
 // Account Creation
-$lang['account_creation_successful']            = 'Account Successfully Created';
+$lang['account_creation_successful']            = 'Account Successfully Created Please enter login details';
 $lang['account_creation_unsuccessful']          = 'Unable to Create Account';
 $lang['account_creation_duplicate_email']       = 'Email Already Used or Invalid';
 $lang['account_creation_duplicate_identity']    = 'Identity Already Used or Invalid';
@@ -39,7 +39,7 @@ $lang['activation_email_unsuccessful']       = 'Unable to Send Activation Email'
 
 // Login / Logout
 $lang['login_successful']                    = 'Logged In Successfully';
-$lang['login_unsuccessful']                  = 'Incorrect Login';
+$lang['login_unsuccessful']                  = 'Incorrect login details! Confirm username and password are correct';
 $lang['login_unsuccessful_not_active']       = 'Account is inactive';
 $lang['login_timeout']                       = 'Temporarily Locked Out.  Try again later.';
 $lang['logout_successful']                   = 'Logged Out Successfully';
