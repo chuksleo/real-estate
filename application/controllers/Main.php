@@ -14,7 +14,7 @@
 
            if(isset($_FILES["image_file"]["name"]))  
            {  
-                $config['upload_path'] = './assets/uploads/property/';  
+                $config['upload_path'] = 'assets/uploads/property/';  
                 $config['allowed_types'] = 'jpg|jpeg|png|gif'; 
                 $config['max_size'] = 20048; // Need to define properly              
                 $config['file_name'] = time().$uid; 
