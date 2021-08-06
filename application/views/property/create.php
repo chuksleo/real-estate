@@ -1,5 +1,5 @@
 <script src="<?php echo base_url() ?>js/app.js"></script>
-
+ 
 <script type="text/javascript">
 
 
@@ -47,7 +47,15 @@ echo validation_errors('<span class="error">', '</span>');
           <div class="file-upload-content">
             <img class="file-upload-image" src="#" alt="your image" />
             <div class="image-title-wrap">
-            <input type="button" name="upload" id="upload" value="Upload" class="remove-image" />  
+            
+            <input type="button" name="upload" id="upload" value="Upload" class="remove-image" /> 
+
+
+            <button id="uploading" class="remove-image" type="button" style="display: none;" disabled>
+              <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+              Uploading...
+            </button> 
+
             </div>
           </div>
      

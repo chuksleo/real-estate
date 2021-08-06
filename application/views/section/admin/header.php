@@ -49,6 +49,8 @@ $(document).on('click','#upload',function(e){
            e.preventDefault();  
            
                 var myForm = $("#upload_form")[0]
+                $("#uploading").show();
+                $("#upload").hide();
                 $.ajax({  
                      url:"<?php echo base_url(); ?>main/ajax_upload",   
                      //base_url() = http://localhost/tutorial/codeigniter  
@@ -59,7 +61,11 @@ $(document).on('click','#upload',function(e){
                      processData:false,  
                      success:function(data)  
                      {  
+                      $("#upload").show()
+                      $("#uploading").hide();
+                      
                         $('.file-upload-content').hide();
+
                         const myImage = JSON.parse(data);
 
                        var filename = myImage.filename;
@@ -68,7 +74,7 @@ $(document).on('click','#upload',function(e){
 
                         document.getElementById('uploaded_image').innerHTML += myImage.image; 
 
-                       console.log(images)
+                       
                      }  
                 });  
            
