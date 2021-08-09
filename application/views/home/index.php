@@ -44,7 +44,7 @@
                 </div>
                
                 <div class="col-md-3">
-                    <select name="plocation" id="locations" class="form-control input-lg ">
+                    <select name="plocation" id="locations" class="form-control input-lg selectpicker">
                         <option value="" selected>Set Location</option>
                     
                                                       <?php foreach($locations as $location):?>
@@ -140,19 +140,7 @@
                 <div class="col-md-2">
                   <label>Max Price</label>
                    <input type="text" class="form-control input-lg" name="maxprice" placeholder="500000">
-                   <!--  <select name="maxprice" class="form-control input-lg selectpicker">
-                      <option>Any</option>
-                      <option>$1000</option>
-                      <option>$5000</option>
-                      <option>$10000</option>
-                      <option>$50000</option>
-                      <option>$100000</option>
-                      <option>$500000</option>
-                      <option>$1000000</option>
-                      <option>$3000000</option>
-                      <option>$5000000</option>
-                      <option>$10000000</option>
-                    </select> -->
+                  
                 </div>
                 <div class="col-md-2">
                   <label>Min Area (Sq Ft)</label>
@@ -189,19 +177,57 @@
           </div>
         </div>
       </div>
-      <div class="spacer-40"></div>
-    <div class="container">
-      <div class="row">
-          <div class="property-columns" id="latest-properties">
-              <div class="col-md-12">
-                <div class="block-heading">
-                  <h4><span class="heading-icon"><i class="fa fa-leaf"></i></span>Recently Listed</h4>
-                  <a href="<?= base_url() ?>all-properties" class="btn btn-primary btn-sm pull-right">View more properties <i class="fa fa-long-arrow-right"></i></a>
-                </div>
-              </div>
-              <ul>
+
+
+
+      <div id="listproperties" class="property-listing">
+                     
+
+                      
+                   
+               <ul>
+
                 <?php foreach($properties as $property_item):?>
-                <li class="col-md-4 col-sm-6 type-rent">
+                    <?php  $link_text = $this->property_model->cleanTitle($property_item->title);?>
+                <li class="type-rent col-md-12">
+                    <div class="col-md-4"> <a href="<?= base_url() ?>property/<?= $link_text ?>/<?=  $property_item->pid ?>" class="property-featured-image"> <img src="<?php echo base_url() ?>assets/uploads/property/<?php echo $property_item->image ?>" alt=""> <span class="images-count"><i class="fa fa-picture-o"></i> 2</span> <?php if($property_item->admin_own == "No"){?> <span class="ribbon3">Promoted</span>
+    <?php } ?></a> </div>
+                            <div class="col-md-8">
+                              <div class="property-info">
+                                <div class="price"><strong>$</strong><span><?php echo $property_item->price ?></span></div>
+                                <h3><a href="<?= base_url() ?>property/<?= $link_text ?>/<?=  $property_item->pid ?>"><?php echo $property_item->title ?></a></h3>
+                                <span class="location"><?php echo $property_item->location_title ?></span>
+                                <p><?php echo $property_item->description ?></p>
+                              </div>
+                              <div class="property-amenities clearfix"> <span class="area"><strong><?php echo $property_item->size_sqm ?></strong>Area</span> <span class="baths"><strong><?php echo $property_item->bathrooms ?></strong>Baths</span> <span class="beds"><strong><?php echo $property_item->bedrooms ?></strong>Beds</span> <span class="parking"><strong>1</strong>Parking</span> </div>
+                            </div>
+
+
+
+                </li>
+            <?php endforeach  ?>
+
+
+                        </ul>
+                    </div>
+                  
+                  
+                  </div>
+
+      
+     <div id="featured-properties" class="container-first ">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="block-heading">
+                <h4><span class="heading-icon"><i class="fa fa-star"></i></span>Featured Properties</h4>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+              <ul class="owl-carousel owl-alt-controls" data-columns="4" data-autoplay="no" data-pagination="no" data-arrows="yes" data-single-item="no">
+                <?php foreach($featured_properties as $property_item):?>
+                 <li class="item property-block">
                       <div class="property-block">
                        <?php  $link_text = $this->property_model->cleanTitle($property_item->title);?>
                           <a href="<?= base_url() ?>property/<?= $link_text ?>/<?=  $property_item->pid ?>" class="property-featured-image">
@@ -225,46 +251,13 @@
             <?php endforeach  ?>
               
               </ul>
-          </div>
         </div>
-
-        <a href="<?php echo base_url() ?>all-properties" class="btn btn-primary btn-block btn-lg  btn-call-toaction">Buy Your Own Property </a>
-      </div>
-      <div id="featured-properties">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="block-heading">
-                <h4><span class="heading-icon"><i class="fa fa-star"></i></span>Featured Properties</h4>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-              <ul class="owl-carousel owl-alt-controls" data-columns="4" data-autoplay="no" data-pagination="no" data-arrows="yes" data-single-item="no">
-
-                <?php foreach($featured_properties as $property_item):?>
-
-                  <li class="item property-block">
-                         <?php  $link_text = $this->property_model->cleanTitle($property_item->title);?>
-                          <a href="<?= base_url() ?>property/<?= $link_text ?>/<?=  $property_item->pid ?>" class="property-featured-image">
-                     
-                      <img src="<?php echo base_url() ?>assets/uploads/property/<?php echo $property_item->image ?>" alt="">
-                      <span class="images-count"><i class="fa fa-picture-o"></i> 2</span>
-                      <span class="badges">Buy</span>
-                      </a>
-                      <div class="property-info">
-                          <h4><a href="<?= base_url() ?>property/<?= $link_text ?>/<?=  $property_item->pid ?>"><?php echo $property_item->title ?></a></h4>
-                          <span class="location"><?php echo $property_item->location_title ?></span>
-                          <div class="price"><strong>$</strong><span><?php echo $property_item->price ?></span></div>
-                      </div>
-                  </li>
-                  <?php endforeach  ?>
-            
-              </ul>
-          </div>
         </div>
-      </div>
+      
 
+        <a href="<?php echo base_url() ?>all-properties" class="btn btn-primary btn-block btn-lg  btn-call-toaction">View All Properties </a>
+      </div>
+    
 
       <div class="container">
           <br><br>
@@ -272,7 +265,7 @@
             <div class="col-md-12">
               <div class="block-heading">
                <h4><span class="heading-icon"><i class="fa fa-users"></i></span>Top Locations</h4>
-            <a href="about.html" class="btn btn-primary btn-sm pull-right">All Locations <i class="fa fa-long-arrow-right"></i></a>
+            
               </div>
             </div>
           </div>
@@ -359,26 +352,7 @@
 
 
 
-        <div class="container">
-         <div class="block-heading">
-            <h4><span class="heading-icon"><i class="fa fa-users"></i></span>Our Partners</h4>
-            <a href="about.html" class="btn btn-primary btn-sm pull-right">All partners <i class="fa fa-long-arrow-right"></i></a>
-         </div>
-         <div class="row">
-            <ul class="owl-carousel" id="clients-slider" data-columns="6" data-autoplay="yes" data-pagination="no" data-arrows="no" data-single-item="no" data-items-desktop="6" data-items-desktop-small="4" data-items-mobile="2" data-items-tablet="4">
-              <li class="item"> <a href="#"><img src="images/partner-1.png" alt=""></a> </li>
-              <li class="item"> <a href="#"><img src="images/partner-2.png" alt=""></a> </li>
-              <li class="item"> <a href="#"><img src="images/partner-3.png" alt=""></a> </li>
-              <li class="item"> <a href="#"><img src="images/partner-4.png" alt=""></a> </li>
-              <li class="item"> <a href="#"><img src="images/partner-5.png" alt=""></a> </li>
-              <li class="item"> <a href="#"><img src="images/partner-1.png" alt=""></a> </li>
-              <li class="item"> <a href="#"><img src="images/partner-2.png" alt=""></a> </li>
-              <li class="item"> <a href="#"><img src="images/partner-3.png" alt=""></a> </li>
-              <li class="item"> <a href="#"><img src="images/partner-4.png" alt=""></a> </li>
-              <li class="item"> <a href="#"><img src="images/partner-5.png" alt=""></a> </li>
-            </ul>
-         </div>
-      </div>
+
     </div>
   </div>
  

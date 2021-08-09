@@ -182,14 +182,14 @@ class Property_model extends CI_Model {
         }
 
 
-    public function getFeaturedProperty($num=9,$start=0)
+    public function getFeaturedProperty($num=12)
         {
 
                 
 
-                $this->db->select()->from('properties AS c')->where('c.featured', 'Yes')->limit($num, $start);
-                $this->db->join('users AS u', 'u.id = c.uid');
-                $this->db->join('locations AS l', 'l.lid = c.location_id','left')->group_by('c.location_id');
+                $this->db->select()->from('properties AS p')->where('p.featured= ', 'Yes')->limit($num);
+                $this->db->join('users AS u', 'u.id = p.uid');
+                $this->db->join('locations AS l', 'l.lid = p.location_id','left')->group_by('p.pid');
 
                 $query = $this->db->get();
                 return $query->result();

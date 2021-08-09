@@ -20,7 +20,7 @@
                       </li>
                   </ul>
               </div> -->
-            <div class="col-md-4 col-sm-6 footer-widget widget ">
+            <div id="footmenu" class="col-md-4 col-sm-6 footer-widget widget ">
                 <h3 class="widgettitle newcolor">Quick Links</h3>
                <ul class="newcolor">
                 <li><a href="<?php echo base_url() ?>property/add">Sell with us</a></li>
@@ -34,7 +34,7 @@
               <h3 class="widgettitle newcolor">Facebook Fanpage</h3>
                   <ul class="twitter-widget"></ul>
            </div>
-            <div class="col-md-3 col-sm-6 footer-widget widget">
+            <div id="footmenu" class="col-md-3 col-sm-6 footer-widget widget">
                 <h3 class="widgettitle newcolor">Our Newsletter</h3>
                 <?php echo ($this->settings_model->getStaticContent('footer_text_one')) ?>
                 <div id="submessage_footer"></div>
