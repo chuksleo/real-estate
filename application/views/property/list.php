@@ -18,7 +18,7 @@ $this->load->view('section/header', $data);
  <!-- Site Showcase -->
   <div class="site-showcase">
     <!-- Start Page Header -->
-    <div class="parallax page-header" style="background-image:url(<?= base_url() ?>assets/images/file2.jpg);">
+    <div class="parallax page-header" style="background-image:url(<?= base_url() ?>assets/images/file2.png);">
           <div class="container">
               <div class="row">
                   <div class="col-md-12">

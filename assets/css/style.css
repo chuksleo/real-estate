@@ -662,9 +662,8 @@ body.boxed .body .site-header, body.boxed .body .main-menu-wrapper{
 	height:30px;
 }
 .middle-header{
-	height:110px;
+	height:80px;
 	position:relative;
-	background-color: #3d3d3d;
 	z-index:8;
 	-webkit-box-shadow:0 1px 2px rgba(0,0,0,.1);
 	-moz-box-shadow:0 1px 2px rgba(0,0,0,.1);
@@ -730,7 +729,7 @@ body.boxed .body .site-header, body.boxed .body .main-menu-wrapper{
 	display:block;
 	font-family: 'Montserrat', sans-serif;
 	font-size:16px;
-	color:#fff;
+	color:#666;
 }
 .site-header .menu-toggle{
 	font-size:18px;
@@ -749,8 +748,7 @@ body.boxed .body .site-header, body.boxed .body .main-menu-wrapper{
 	-webkit-box-shadow:0 1px 2px rgba(0,0,0,.1);
 	-moz-box-shadow:0 1px 2px rgba(0,0,0,.1);
 	box-shadow:0 1px 2px rgba(0,0,0,.1);
-	background:#000;
-	opacity: 0.7;
+	background:#f8f8f8;
 }
 .navigation{
 	height:50px;
@@ -770,7 +768,6 @@ body.boxed .body .site-header, body.boxed .body .main-menu-wrapper{
 	display:block;
 	text-decoration:none;
 	border-right:1px solid rgba(0,0,0,.05);
-	color:#ffffff;
 }
 .navigation > ul > li:first-child > a{
 	border-left:1px solid rgba(0,0,0,.05);
@@ -789,7 +786,7 @@ body.boxed .body .site-header, body.boxed .body .main-menu-wrapper{
 	display:none;
 	min-width:100%;
 	height:auto;
-	background:#000;
+	background:#fff;
 	text-align:left;
 	box-shadow:0 2px 2px rgba(0,0,0,.3);
 }
@@ -816,7 +813,6 @@ body.boxed .body .site-header, body.boxed .body .main-menu-wrapper{
 	border-bottom:1px solid #f8f7f3;
 	white-space:nowrap;
 	text-decoration:none;
-	color: #fff;
 }
 .navigation > ul > li > ul > li:hover > a, .navigation > ul > li > ul > li > ul > li:hover > a{
 	text-decoration:none;
@@ -846,11 +842,10 @@ body.boxed .body .site-header, body.boxed .body .main-menu-wrapper{
 .is-sticky .main-menu-wrapper{
 	z-index:1000;
 	min-height:50px;
-	background-color:#000000;
+	background-color:#ffffff;
 	-webkit-box-shadow:0 1px 0 rgba(0,0,0,.1);
 	-moz-box-shadow:0 1px 0 rgba(0,0,0,.1);
 	box-shadow:0 1px 0 rgba(0,0,0,.1);
-	opacity: 0.8;
 }
 .is-sticky .navigation{
 	background:none;
@@ -1128,14 +1123,11 @@ html[xmlns] .slides {
 	left:0;
 	width: 100%;
 }
-.site-search-module-inside label{
-	color: #fff;
-}
-
-
 .site-search-module-inside{
 	padding:15px 15px 0;
-	height:175px;	
+	height:175px;
+	background:#f8f8f8;
+	border-top:3px solid rgba(0,0,0,.8);
 	border-radius:15px 15px 0 0
 }
 .site-search-module-inside .btn{
@@ -1152,8 +1144,7 @@ html[xmlns] .slides {
 }
 .main{
 	position:relative;
-	/*background-image: url(../images/file2.jpg);*/
-	background:#f5f5f5;
+	background:#ffffff;
 	-webkit-box-shadow:0 -2px 2px rgba(0,0,0,.05);
 	-moz-box-shadow:0 -2px 2px rgba(0,0,0,.05);
 	box-shadow:0 -2px 2px rgba(0,0,0,.05);
@@ -1162,13 +1153,10 @@ html[xmlns] .slides {
 	z-index:5;
 }
 .content{
-	padding:0px 0;
+	padding:50px 0;
 }
 .featured-blocks{
-	padding-top: 70px;
-	margin-bottom:0px;
-	background-color: #f5f5f5;
-	height: 450px;
+	margin-bottom:10px;
 }
 .featured-block{
 	position:relative;
@@ -1497,7 +1485,6 @@ html[xmlns] .slides {
 	padding-bottom:20px;
 	padding-left:5px;
 	padding-right:5px;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .property-listing > ul > li:hover, .agents-listing > ul > li:hover{
 	-webkit-box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.1);
@@ -1870,8 +1857,6 @@ html[xmlns] .slides {
 /* Widgets */
 .widget{
 	margin-bottom:40px;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-	margin-top: 20px;
 }
 .widget .widgettitle{
 	border-bottom:1px solid #efefef;
@@ -2229,8 +2214,8 @@ html[xmlns] .slides {
 }
 .accordion-inner {
   	padding: 16px;
-	border: 1px solid #666;
-	background: #f5f5f5;
+	border: 1px solid #efefef;
+	background: #fff;
 }
 
 /* ==================================================
@@ -3603,6 +3588,7 @@ span.progress-bar-tooltip:after {
 }
 
 
+
 .btn-call-toaction {
 
     margin-left: 35%!important;
@@ -3619,12 +3605,6 @@ span.progress-bar-tooltip:after {
 	height: 100%;
 	background:rgba(0,0,0,0.5);
 	padding-top: 10%
-}
-
-
-
-.newcolor{
-	color: #fff!important;	
 }
 
 
@@ -3922,7 +3902,6 @@ color: #fff;
    }
 }
 
-
 .container-first {
 
     background-image: url(../images/file2.jpg);
@@ -3932,7 +3911,6 @@ color: #fff;
     padding-bottom:2%;
 
 }
-
 #footmenu a{
 	color: #fff; 	
 }

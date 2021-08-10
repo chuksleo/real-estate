@@ -41,7 +41,7 @@ a.list-group-item.active,
 a.list-group-item.active:hover,
 a.list-group-item.active:focus,
 .panel-primary > .panel-heading, .carousel-indicators .active, .owl-theme .owl-controls .owl-page.active span, .owl-theme .owl-controls.clickable .owl-page:hover span, hr.sm, .flex-control-nav a:hover, .flex-control-nav a.flex-active, .accordion-heading .accordion-toggle.active, .accordion-heading:hover .accordion-toggle, .accordion-heading:hover .accordion-toggle.inactive, .nav-tabs li a:hover, .nav-tabs li a:active, .nav-tabs li.active a, .fc-event, .site-header .social-icons a, .navigation > ul > li > ul > li:hover > a, .navigation > ul > li > ul > li > ul > li:hover a, .top-header, .block-heading h4, .single-property .price, .timeline > li > .timeline-badge, .pricing-column.highlight h3, .site-footer-bottom .social-icons a:hover{
-  background-color: #f55a4e;
+  background-color: #FF0000;
 }
 .btn-primary:hover,
 .btn-primary:focus,
