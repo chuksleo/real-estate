@@ -50,44 +50,51 @@
                           <!-- End Accordion -->
                         </div>
                     </div>
+
+
+
+
+
+                
                   <div class="row">
-
                     <div class="col-md-6">
                           <div class="block-heading">
-                              <h4><span class="heading-icon"><i class="fa fa-question"></i></span><?php echo ($this->settings_model->getStaticContent('about_header_three')) ?></h4>
-
-
-
+                              <h4><span class="heading-icon"><i class="fa fa-question"></i></span><?php echo (strip_tags($this->settings_model->getStaticContent('about_header_three'))) ?></h4>
                           </div>
                           <div class="accordion" id="toggleArea">
-
-                           <?php echo ($this->settings_model->getStaticContent('about_mission_text')) ?>
-
+                            <div class="accordion-group panel">
+                            <?php echo (strip_tags($this->settings_model->getStaticContent('about_mission_text'))) ?>
+                             
+                            </div>
+                           
+                            
                           </div>
                           <!-- End Toggle --> 
-                        </div>
+                      </div>
 
 
 
 
-                    <div class="col-md-6">
+                       <div class="col-md-6">
                           <div class="block-heading">
-                              <h4><span class="heading-icon"><i class="fa fa-question"></i></span><?php echo($this->settings_model->getStaticContent('about_header_four')); ?></h4>
+                              <h4><span class="heading-icon"><i class="fa fa-question"></i></span><?php echo (strip_tags($this->settings_model->getStaticContent('about_header_four'))) ?></h4>
                           </div>
                           <div class="accordion" id="toggleArea">
-
-                            <?php echo ($this->settings_model->getStaticContent('about_vision_text')) ?>
-
+                            <div class="accordion-group panel">
+                            <?php echo (strip_tags($this->settings_model->getStaticContent('about_vision_text'))) ?>
+                             
+                            </div>
+                           
+                            
                           </div>
                           <!-- End Toggle --> 
-                        </div>
-
-
-
-                        
-
-
+                      </div>
                   </div>
+
+
+
+
+                
                 </div>
             </div>
         </div>

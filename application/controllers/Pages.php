@@ -7,6 +7,7 @@ class Pages extends CI_Controller {
 		parent::__construct();
 
 		$this->load->model('settings_model');
+		$this->load->model('property_model');
 
 
 
@@ -93,32 +94,6 @@ class Pages extends CI_Controller {
 
 
 
-	public function faqs()
-        {
-
-
-
-		$page = 'faqs';
-		$seg = $this->uri->total_segments();
-		if ( ! file_exists('application/views/pages/'.$page.'.php') || $seg > 2)
-		{
-			// Whoops, we don't have a page for that!
-			show_404();
-		}
-
-		$data['site_description'] = lang('faqs_page_description');
-		$data['site_title'] = lang('faqs_page_title');
-
-
-
-		$data['faqs'] = $this->faq_model->get_faq_contents();
-		$this->load->view('page_section/header', $data);
-		$this->load->view('pages/'.$page);
-		$this->load->view('page_section/footer');
-
-        }
-
-
    public function marketing()
         {
 
@@ -137,8 +112,9 @@ class Pages extends CI_Controller {
 		$data['page_title'] = lang('market_title');
 		$data['page_description'] = strip_tags(substr($this->settings_model->getStaticContent('market_network_text'), 0,120)) ;
 		// $data['categories'] = $this->project_category_model->getCategories($num=10);
+		$data['properties'] = $this->property_model->get_properties_limit();
 		$this->load->view('section/header', $data);
-		$this->load->view('pages/'.$page);
+		$this->load->view('pages/marketing', $data);
 		$this->load->view('section/footer');
 
         }
@@ -159,8 +135,9 @@ class Pages extends CI_Controller {
 		//$data['site_description'] = lang('about_page_description');
 		$data['page_title'] = lang('lb_title');
 		$data['page_description'] = strip_tags(substr($this->settings_model->getStaticContent('lets_build_text'), 0,120));
+		$data['properties'] = $this->property_model->get_properties_limit();
 		$this->load->view('section/header', $data);
-		$this->load->view('pages/'.$page);
+		$this->load->view('pages/build', $data);
 		$this->load->view('section/footer');
 
         }

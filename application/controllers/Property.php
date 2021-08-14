@@ -224,16 +224,24 @@ class Property extends CI_Controller {
               
 
                 );
-            $data['properties'] = $this->property_model->getPropertySearchResult($s_data,$rtype="search");
-            $searchchResultCount = $this->property_model->getPropertySearchResult($s_data, $rtype="count");
+            $data['properties'] = $this->property_model->getPropertySearchResult($num, $start, $s_data);
+            $searchchResultCount = $this->property_model->getPropertySearchResultCount($s_data);
             $type = "titleSearch";
+            $config['base_url'] = base_url('properties/search');
+            $config['suffix'] = '?'.http_build_query($s_data,'',"&amp;");
+            $config['total_rows'] = $searchchResultCount;
             
+            $config['per_page'] = $num;
+            $config['uri_segment'] = 3;
+            $config['full_tag_open'] = '<ul class="pagination">';
+            $config['full_tag_close'] = '</ul>';
+            $config['display_pages'] = TRUE;
             $cur_page = $this->pagination->cur_page;
-            
+            $total = $searchchResultCount;
             $data['s_val'] = $start + 1;
             $check = $start + $num;
-            if($check > $searchchResultCount ){
-                $data['num'] = $searchchResultCount;
+            if($check > $total ){
+                $data['num'] = $total;
             }else{
             $data['num'] = $start + $num;
             }

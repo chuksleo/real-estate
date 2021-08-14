@@ -302,7 +302,7 @@ function getCategoryTypes(page){
                   
               </ul>
 
-              <a href="<?php echo base_url() ?>property/add" class="btn btn-primary btn-block btn-lg top-btn-add">+Sell With us </a>
+              <a href="<?php echo base_url() ?>property/add" class="btn btn-primary btn-block btn-lg top-btn-add btnselltop">+Sell With us </a>
 
                   
             </nav>

@@ -3852,6 +3852,8 @@ color: #fff;
 		display: none !important;
 	}
 
+	
+
 }
 
 
@@ -3869,6 +3871,14 @@ color: #fff;
     font-size: 20px;
     line-height: 43px;
    }
+
+   .top-btn-add{
+
+	    margin-right: 106px !important;
+	    margin-bottom: 16px !important;
+	    width: 50% !important;
+
+	}
 
 
    .featured-block img {

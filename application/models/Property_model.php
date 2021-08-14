@@ -168,7 +168,7 @@ class Property_model extends CI_Model {
 
 
  
-    public function get_properties_limit($num=9,$start=0)
+    public function get_properties_limit($num=10,$start=0)
         {
 
                 

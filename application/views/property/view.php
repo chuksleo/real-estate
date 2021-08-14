@@ -103,10 +103,10 @@ $this->property_model->setPageViewForProperty($property->pid);
               <?php foreach($realated_properties as $property_item):?>
                 <?php  $link_text = $this->property_model->cleanTitle($property_item->title);?>
                 <li class="grid-item type-rent">
-                  <div class="property-block"> <a href="#" class="property-featured-image"> <img src="<?php echo base_url() ?>assets/uploads/property/<?php echo $property_item->image ?>" alt="<?php echo $property_item->title ?>"> <span class="images-count"><i class="fa fa-picture-o"></i> 2</span><?php if($property_item->admin_own == "No"){?> <span class="ribbon3">Promoted</span>
+                  <div class="property-block"> <a href="<?= base_url() ?>property/<?= $link_text ?>/<?=  $property_item->pid ?>" class="property-featured-image"> <img src="<?php echo base_url() ?>assets/uploads/property/<?php echo $property_item->image ?>" alt="<?php echo $property_item->title ?>"> <span class="images-count"><i class="fa fa-picture-o"></i> 2</span><?php if($property_item->admin_own == "No"){?> <span class="ribbon3">Promoted</span>
     <?php } ?> </a>
                     <div class="property-info">
-                      <h4><a href="#"><?php echo $property_item->title ?></a></h4>
+                      <h4><a href="<?= base_url() ?>property/<?= $link_text ?>/<?=  $property_item->pid ?>"><?php echo $property_item->title ?></a></h4>
                       <span class="location"><?php echo $property_item->location_title ?></span>
                       <div class="price"><strong>$</strong><span><?php echo $property_item->price ?></span></div>
                     </div>
