@@ -3117,6 +3117,17 @@ span.progress-bar-tooltip:after {
 		width:100%;
 	}
 }
+@media only screen and (max-width: 480px){
+
+
+.banner-text {
+
+    font-size: 35px;
+    line-height: 20px;
+   
+
+}
+}
 @media only screen and (min-width: 320px) and (max-width: 480px) {
 
 
@@ -3903,14 +3914,14 @@ color: #fff;
 
 
 
-@media (max-width: 900px){
+/*@media (max-width: 900px){
 
 	.banner-text {
 
     font-size: 50px;
     line-height: 100px;
    }
-}
+}*/
 
 .container-first {
 
