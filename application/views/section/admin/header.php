@@ -145,7 +145,7 @@ function publishProperty(pid){
 
 var pid;
 function unPublishProperty(pid){
-    console.log(page);
+    
 
    
       $.ajax({
@@ -157,6 +157,22 @@ function unPublishProperty(pid){
           document.getElementById('message').innerHTML = resp
         }
       });
+
+
+}
+
+var pid;
+function markSoldProperty(pid){
+    $.ajax({
+        type: 'POST',
+        url: '<?php echo base_url(); ?>property/marksold',
+        data: {'pid':pid},
+        success: function(resp) {
+          
+          document.getElementById('message').innerHTML = resp
+        }
+      });
+
 
 
 }

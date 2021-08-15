@@ -176,7 +176,8 @@
                           <a href="<?= base_url() ?>property/<?= $link_text ?>/<?=  $property_item->pid ?>" class="property-featured-image">
                               <img src="<?php echo base_url() ?>assets/uploads/property/<?php echo $property_item->image ?>" alt="">
                               <span class="images-count"><i class="fa fa-picture-o"></i> 2</span>
-                              <span class="badges">Buy</span>
+                              <?php if($property_item->admin_own == "No"){?> <span class="ribbon3">Promoted</span>
+    <?php } ?>
                           </a>
                       <div class="property-info">
                               <h4><a href="<?= base_url() ?>property/<?= $link_text ?>/<?=  $property_item->pid ?>" title="<?php echo $property_item->title ?>"><?php echo substr($property_item->title, 0, 30); if(strlen($property_item->title) > 30){ echo "...";}?> </a></h4>

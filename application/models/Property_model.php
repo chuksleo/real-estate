@@ -502,7 +502,23 @@ class Property_model extends CI_Model {
 
 
 
+   public function markPropertySold($pid){
 
+         $status_val = "Yes";
+         $publish_val = "Unpublished";
+            $data = array(
+
+                'sold' => $status_val,
+                'property_status' => $publish_val
+                
+
+            );
+
+       
+        $where = "pid = ".$pid."";
+        return $this->db->update('properties', $data, $where);
+       
+   }
 
 
 

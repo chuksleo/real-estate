@@ -3948,3 +3948,14 @@ button .btn-search {
     margin-left: 5%;
 
 }
+
+
+#custom-search-input .btn-search {
+
+    width: 50%;
+    margin-left: 5%;
+    background-color: #D9230F;
+    color: #fff;
+    padding: 10px;
+
+}

@@ -37,7 +37,7 @@ $this->load->view('section/admin/header', $data);
                                                 <th>Posted By</th>
                                                 <th>Status</th>
                                                 <th>Date Created</th>
-                                                <th>Last Updated</th>
+                                                <th>Sold Status</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -52,12 +52,12 @@ $this->load->view('section/admin/header', $data);
                                                 <td><?php echo $property->username?></td>
                                                 <td><?php echo $property->property_status ?></td>
                                                  <td><?php echo $property->date_created ?></td>
-                                                  <td><?php echo $property->last_updated ?></td>
+                                                  <td><?php echo $property->sold ?></td>
                                                    <td>
                                                    <?php  $link_text = $this->property_model->cleanTitle($property->title);?>
 
                                                    <?php if($this->ion_auth->is_admin()){?>
-
+                                                        <button class="btn btn-square btn-primary mb-2" onclick="markSoldProperty(<?php echo $property->pid ?>)" >Mark Sold</button>  
                                                          <?php if($property->property_status == "Unpublished" ){?>
                                                           <button class="btn btn-square btn-primary mb-2" onclick="publishProperty(<?php echo $property->pid ?>)" >Publish</button>  
                                                         <?php }else{ ?>

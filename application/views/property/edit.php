@@ -29,8 +29,6 @@ echo validation_errors('<span class="error">', '</span>');
                         <div class="card">
                         <div class="card-header">Basic Info</div>
                         <div class="card-body">
-<?php print("ti spsoso"); print_r($property) ?>
-
 
 
       <form method="post" id="upload_form" align="center" enctype="multipart/form-data">  

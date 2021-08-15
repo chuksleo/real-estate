@@ -51,16 +51,19 @@ $this->load->view('section/header', $data);
                        </div> -->
 
 
-
-                       <div id="custom-search-input">
+ <div id="custom-search-input">
                             <div class="input-group col-md-12">
                             <form action="<?php echo base_url() ?>property/search" method="POST">
+                            <div class="col-md-10 col-sm-10">
                                 <input type="text" name="ptitle" class="search-query form-control input-lg" placeholder="Search For Property for Sale" />
+                            </div>
+                             <div class="col-md-2 col-sm-2">
                                 <span class="input-group-btn">
-                                    <button class="" type="button">
+                                    <button class="btn-search btn" type="submit">
                                         <span class="fa fa-search"></span>
                                     </button>
                                 </span>
+                              </div>
                                 </form>
                             </div>
                         </div>

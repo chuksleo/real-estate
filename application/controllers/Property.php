@@ -711,6 +711,21 @@ class Property extends CI_Controller {
       
     }
 
+
+    public function marksold() {
+
+            $pid = $this->input->post("pid");  
+          
+            if($this->property_model->markPropertySold($pid)){
+                echo '<div class="alert-info">Property has been successfully marked sold! </div>';
+            }else{
+                echo ' <div class="alert-danger"> Oops! An error occured when changing statusif property</div>';
+            }
+            
+       
+      
+    }
+
     public function unpublish() {
 
         $pid = $this->input->post("pid");  
