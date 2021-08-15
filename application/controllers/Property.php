@@ -440,7 +440,7 @@ class Property extends CI_Controller {
         $data['is_loggedin'] = $this->ion_auth->logged_in();
         $data['action'] = "create";
         if($this->ion_auth->logged_in()){
-             if($this->input->post()){
+             if($this->input->post() && isset($_POST['result'])){
                 $title = $this->property_model->cleanTitle($this->input->post("location"));
                
                 $location = $this->location_model->getLocationByTitleKey($title);

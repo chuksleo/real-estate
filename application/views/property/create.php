@@ -74,7 +74,7 @@ echo validation_errors('<span class="error">', '</span>');
            </div>  
         <div class="form-group">            
           <label for="title">Title</label>
-          <input type="text" name="title" placeholder="Enter Title"  value="<?php echo isset($campaign->Title) ? $campaign->Title : "" ?>" class="form-control" required>
+          <input type="text" name="title" placeholder="Enter Title"  class="form-control" required>
         </div>
         <div class="form-row">
 
@@ -137,7 +137,7 @@ echo validation_errors('<span class="error">', '</span>');
                     <div class="input-group-prepend">
                       <div class="input-group-text">₦</div>
                     </div>
-                    <input name="price" id="price" type="text" class="form-control" value="<?php echo isset($campaign->Amount) ? $campaign->Amount : "" ?>" placeholder="0000" required>
+                    <input name="price" id="price" type="text" class="form-control" placeholder="0000" required>
                     <div class="input-group-append">
                         <div class="input-group-text">.00</div>
                     </div>

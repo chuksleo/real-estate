@@ -3939,3 +3939,12 @@ color: #fff;
 #footmenu p{
 	color: #fff; 	
 }
+
+button .btn-search {
+
+    background-color: #D9230F !important;
+    color: #fff !important;
+    padding: 10px !important;
+    margin-left: 5%;
+
+}

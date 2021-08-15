@@ -332,7 +332,7 @@ class Property_model extends CI_Model {
         $this->video_link = $video_link;
 
         $this->duration = $duration;
-        $this->date_created = $dateAdded;
+        $this->date_created = new DateTime();
         $this->last_updated = new DateTime();
         $this->property_status = $status;
      

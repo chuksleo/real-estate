@@ -156,64 +156,7 @@
   </div>
   <!-- Start Content -->
   <div class="main" role="main">
-    <div id="content" class="content full">
-      <div class="featured-blocks">
-        <div class="container">
-         <!--  <div class="row">
-          <div class="col-md-4 col-sm-4 featured-block"> <img src="<?php echo base_url() ?>assets/images/search.png" alt="Search Anywhere" class="">
-              <h3><?php echo ($this->settings_model->getStaticContent('home_header_one')) ?></h3>
-              <?php echo ($this->settings_model->getStaticContent('home_text_one')) ?>    
-            </div>
-            <div class="col-md-4 col-sm-4 featured-block"> <img src="<?php echo base_url() ?>assets/images/verify.png" alt="Friendly Agents" class="">
-              <h3><?php echo ($this->settings_model->getStaticContent('home_header_two')) ?></h3>
-               <?php echo ($this->settings_model->getStaticContent('home_text_two')) ?>
-            </div>
-            <div class="col-md-4 col-sm-4 featured-block"> <img src="<?php echo base_url() ?>assets/images/best-price.png" alt="Search Anywhere" class="">
-              <h3> <?php echo ($this->settings_model->getStaticContent('home_header_three')) ?></h3>
-               <?php echo ($this->settings_model->getStaticContent('home_text_three')) ?>
-            </div>
-
-           
-          </div> -->
-        </div>
-      </div>
-
-
-
-      <div id="listproperties" class="property-listing">
-                     
-
-                      
-                   
-               <ul>
-
-                <?php foreach($properties as $property_item):?>
-                    <?php  $link_text = $this->property_model->cleanTitle($property_item->title);?>
-                <li class="type-rent col-md-12">
-                    <div class="col-md-4"> <a href="<?= base_url() ?>property/<?= $link_text ?>/<?=  $property_item->pid ?>" class="property-featured-image"> <img src="<?php echo base_url() ?>assets/uploads/property/<?php echo $property_item->image ?>" alt=""> <span class="images-count"><i class="fa fa-picture-o"></i> 2</span> <?php if($property_item->admin_own == "No"){?> <span class="ribbon3">Promoted</span>
-    <?php } ?></a> </div>
-                            <div class="col-md-8">
-                              <div class="property-info">
-                                <div class="price"><strong>$</strong><span><?php echo $property_item->price ?></span></div>
-                                <h3><a href="<?= base_url() ?>property/<?= $link_text ?>/<?=  $property_item->pid ?>"><?php echo $property_item->title ?></a></h3>
-                                <span class="location"><?php echo $property_item->location_title ?></span>
-                                <p><?php echo $property_item->description ?></p>
-                              </div>
-                              <div class="property-amenities clearfix"> <span class="area"><strong><?php echo $property_item->size_sqm ?></strong>Area</span> <span class="baths"><strong><?php echo $property_item->bathrooms ?></strong>Baths</span> <span class="beds"><strong><?php echo $property_item->bedrooms ?></strong>Beds</span> <span class="parking"><strong>1</strong>Parking</span> </div>
-                            </div>
-
-
-
-                </li>
-            <?php endforeach  ?>
-
-
-                        </ul>
-                    </div>
-                  
-                  
-                  </div>
-
+   
       
      <div id="featured-properties" class="container-first ">
         <div class="container">
@@ -258,6 +201,46 @@
         <a href="<?php echo base_url() ?>all-properties" class="btn btn-primary btn-block btn-lg  btn-call-toaction">View All Properties </a>
       </div>
     
+
+     <div id="content" class="content full">
+     
+
+
+
+      <div id="listproperties" class="property-listing">
+                     
+
+                      
+                   
+               <ul>
+
+                <?php foreach($properties as $property_item):?>
+                    <?php  $link_text = $this->property_model->cleanTitle($property_item->title);?>
+                <li class="type-rent col-md-12">
+                    <div class="col-md-4"> <a href="<?= base_url() ?>property/<?= $link_text ?>/<?=  $property_item->pid ?>" class="property-featured-image"> <img src="<?php echo base_url() ?>assets/uploads/property/<?php echo $property_item->image ?>" alt=""> <span class="images-count"><i class="fa fa-picture-o"></i> 2</span> <?php if($property_item->admin_own == "No"){?> <span class="ribbon3">Promoted</span>
+    <?php } ?></a> </div>
+                            <div class="col-md-8">
+                              <div class="property-info">
+                                <div class="price"><strong>$</strong><span><?php echo $property_item->price ?></span></div>
+                                <h3><a href="<?= base_url() ?>property/<?= $link_text ?>/<?=  $property_item->pid ?>"><?php echo $property_item->title ?></a></h3>
+                                <span class="location"><?php echo $property_item->location_title ?></span>
+                                <p><?php echo $property_item->description ?></p>
+                              </div>
+                              <div class="property-amenities clearfix"> <span class="area"><strong><?php echo $property_item->size_sqm ?></strong>Area</span> <span class="baths"><strong><?php echo $property_item->bathrooms ?></strong>Baths</span> <span class="beds"><strong><?php echo $property_item->bedrooms ?></strong>Beds</span> <span class="parking"><strong>1</strong>Parking</span> </div>
+                            </div>
+
+
+
+                </li>
+            <?php endforeach  ?>
+
+
+                        </ul>
+                    </div>
+                  
+                  
+                  </div>
+
 
       <div class="container">
           <br><br>

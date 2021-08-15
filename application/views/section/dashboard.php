@@ -256,7 +256,7 @@
 
 
                                                     </th>
-                                                    <th class="text-right"><?php echo $property_item->view_count ?></th>
+                                                    <th class="text-right"><?php echo $property_item->view_count ?> views</th>
                                                 </tr>
                                                  <?php endforeach  ?>
                                             </thead>
