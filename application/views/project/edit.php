@@ -1,79 +1,167 @@
+<script src="<?php echo base_url() ?>js/app.js"></script>
+
+<script type="text/javascript">
+
+
+</script>
 <?php
 //Loading header
 $data['title'] = 'Login';
-$data['javascript'] = 'app.js';
-$this->load->view('shared/header', $data);
-$categories = $this->project_category_model->getCategories();
+
+$data['user'] = $this->ion_auth->user()->row();
+$this->load->view('section/admin/header', $data);
+
+
+
 ?>
 
 
-<?php $this->load->view('shared/menu'); ?>
+<?php
+echo validation_errors('<span class="error">', '</span>');
+?>
+        <div class="content">
+                <div class="container">
+                    <div class="page-title">
+                        <h3><?php echo ucfirst($action) ?> Project</h3>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                        <div class="card">
+                        <div class="card-header">Basic Info</div>
+                        <div class="card-body">
 
-<div class="columns" >
-    <div class="medium-8 medium-centered large-8 large-centered small-8 small-centered">
-        <h1>Project Edit</h1> 
-        <div>
-            <?=validation_errors()?>
+
+      <form method="post" id="upload_form" align="center" enctype="multipart/form-data">  
+
+        <div class="file-upload">
+              <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Add Image</button>
+
+           
+
+            
+            <input id="image_file" class="file-upload-input" name="image_file" type='file' onchange="readURL(this);" accept="image/*" />
+            
+            <div class="drag-text">
+              <h3>Drag and drop a file or select add Image</h3>
+            </div>
+          </div>
+          <div class="file-upload-content">
+            <img class="file-upload-image" src="#" alt="your image" />
+            <div class="image-title-wrap">
+             <input type="button" name="upload" id="projectupload" value="Upload" class="remove-image" /> 
+
+
+            <button id="uploading" class="remove-image" type="button" style="display: none;" disabled>
+              <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+              Uploading...
+            </button> 
+
+
+            </div>
+          </div>
+     
+
+
+        </form>
+
+
+
+        <?php $attributes = array('class' => '', 'id' => 'propertyform'); ?>
+        <?= form_open_multipart(base_url() . 'admin/projects/'. $action.'/'.$project->project_id, $attributes) ?>
+
+         <div id="uploaded_image" class="col-lg-12">  
+
+        
+         <?php foreach ($images as $image): ?>
+          
+
+         <img src="<?php echo base_url() ?>assets/uploads/projects/<?= $image->image ?>" class="img-thumbnail col-sm-2" />
+          <?php endforeach ?>
+           </div>  
+
+           
+
+
+
+          
+        <div class="form-group">            
+          <label for="title">Project Title</label>
+          <input type="text" name="title" placeholder="Enter Title"  value="<?php echo isset($project->project_title) ? $project->project_title : "" ?>" class="form-control" required>
         </div>
-        <?= form_open_multipart(base_url() . 'project/edit/'.$project->ProjectId) ?>
-        <?= form_hidden('userId', $user->id) ?>
-        <?= form_fieldset("Project Details", array("class" => "fieldset")) ?>
-        <?= form_label('Project Title', 'title') ?>
-        <?= form_input('title', $project->Title, array("id" => "title", "required" => "required")) ?>
-        <?= form_label('Project Phone Contact', 'contact') ?>
-        <?= form_input('telephone', $project->Telephone, array("id" => "contact", "required" => "required")) ?>
-        <?= form_label('Project Email Address', 'contact') ?>
-        <?= form_input('email', $project->Email, array("id" => "email", "required" => "required", "type" => "email")) ?>
-        <?= form_label('Project Description', 'description') ?>        
-        <!-- <?= form_textarea('description', $project->Description, array("id" => "description", "rows" => 2, "cols" => 2)) ?> -->
-        <?php echo $this->ckeditor->editor('description',$project->Description);?> <?php echo form_error('description','<p class="error">'); ?>
-        <?= form_label('Physical Address', 'address') ?>
-        <?= form_textarea('address', $project->Address, array("id" => "address", "rows" => "2", "cols" => "2")) ?>
-        <?= form_fieldset_close() ?>
-        <?= form_fieldset("Project Profile", array("class" => "fieldset")) ?>
-        <?= form_label('Project Category', 'category') ?>
-        <!--<?= form_dropdown('category', $categories, $project->CategoryId, array("id" => "category")) ?> -->
-        <select name="category">
-            <?php foreach ($categories as $cat) {?>
-            <option value="<?=$cat->CategoryId?>"><?=$cat->Title?></option>
-            <?php } ?>
-        </select>
+        <div class="form-row">
 
+            
 
-        <div class="media-object">
-            <div class="media-object-section main-section">
-                <p>Current Picture</p>
-                <p><img src="<?=base_url()?>/uploads/Projects/Profile/<?=$project->ProfilePic?> " height="150" width="150" alt="<?=$project->Title?>"/></p>
-                <?= form_label('Profile Picture', 'pro_pic', array('class' => 'button')) ?>
-                <?= form_upload('Profile Picture', 'pro_pic', array('id' => 'pro_pic', 'class' => 'show-for-sr', 'accept' => 'image/*', 'onchange' => 'previewFile()')) ?>
-  
-                    <img id="Pro_prev" src="" height="150" width="150" alt="Image preview..." class="hide thumbnail">
-  
-            </div>           
+          <div class="form-group">
+                                <?= form_label('Project Description', 'description') ?>               
+                                <?php echo $this->ckeditor->editor('description', isset($project->description) ? $project->description : ""); ?> <?php echo form_error('description', '<p class="error">'); ?>
         </div>
+
+
+
+
+                        
+         <?= form_fieldset_close() ?>
+         <div class="form-group col-md-6">
+                    <?= form_submit('submit', 'Update Project', array("class" => "btn btn-primary")) ?>
+                 <div class="form-group"> 
+                    <?= form_close() ?>
+
+                </div> 
+        </div>
+
+       
+
+
+           
+        </div>
+
 
 
         
-<div class="media-object">
-            <div class="media-object-section main-section">
-                <?= form_label('Profile Video', 'pro_vid', array('class' => 'button')) ?>
-                <?= form_upload('Profile Video', 'pro_vid', array('id' => 'pro_vid', 'class' => 'show-for-sr', 'accept' => 'video/*', 'onchange' => 'previewVideoFile()')) ?>
-                <span id="video_name"><i class="fa fa-video-camera" aria-hidden="true"></i> No video selected</span>
-<!--                <div class="thumbnail">
-                    <video id="Pro_vid" controls autoplay>
-                        <source id="Pro_prev_vid" src="" height="150" width="150">
-                    </video>  
-                </div>-->
-            </div>           
+
+         
+
         </div>
-        
-        <?= form_fieldset_close() ?>
-        <?= form_submit('submit', 'Save Changes', array("class" => "button")) ?>
-        <?= form_close() ?>
+
+
+       </div>
+
+
+
+
+
+
+
+                          
+
+
+
+
+
+
+
+
+
+
+
+           </div>
+
+
+
+
+    
+    </div> <!-- ENd Row -->
+
+
     </div>
-</div>
 
 <?php
 //Loading footer
-$this->load->view('shared/footer');
+$this->load->view('section/admin/footer');
 ?>
+<script>
+    $(function () {
+        $('#dpMonths').fdatepicker();
+    });
+</script>

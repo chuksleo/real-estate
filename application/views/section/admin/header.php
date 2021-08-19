@@ -80,7 +80,44 @@ $(document).on('click','#upload',function(e){
            
       });  
 
+ 
+ 
 
+$(document).on('click','#projectupload',function(e){
+      console.log("CLIKECC______++");
+           e.preventDefault();  
+           
+                var myForm = $("#upload_form")[0]
+                $("#uploading").show();
+                $("#projectupload").hide();
+                $.ajax({  
+                     url:"<?php echo base_url(); ?>main/project_ajax_upload",   
+                     //base_url() = http://localhost/tutorial/codeigniter  
+                     method:"POST",  
+                     data:new FormData(myForm),  
+                     contentType: false,  
+                     cache: false,  
+                     processData:false,  
+                     success:function(data)  
+                     {  
+                      $("#projectupload").show()
+                      $("#uploading").hide();
+                      
+                        $('.file-upload-content').hide();
+
+                        const myImage = JSON.parse(data);
+
+                       var filename = myImage.filename;
+                       addInputField(filename);
+
+
+                        document.getElementById('uploaded_image').innerHTML += myImage.image; 
+
+                       
+                     }  
+                });  
+           
+      });  
 
 
 
@@ -373,6 +410,24 @@ function showInbox(){
                             <a href="<?php echo base_url() ?>admin/banners"><i class="fas fa-file"></i> List All Banners</a>
                         </li>
                         
+                    </ul>
+                </li>
+
+
+                 <li>
+                    <a href="#pagesmenu8" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle no-caret-down"><i class="fas fa-home"></i> Projects</a>
+                    <ul class="collapse list-unstyled" id="pagesmenu8">
+                        <li>
+                            <a href="<?php echo base_url() ?>admin/projects"><i class="fas fa-file"></i> List Projects</a>
+                        </li>
+
+                        <li> 
+                            <a href="<?php echo base_url() ?>admin/projects/add"><i class="fas fa-file"></i> Add Project</a>
+                        </li>
+
+                       
+
+
                     </ul>
                 </li>
 

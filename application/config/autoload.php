@@ -132,4 +132,4 @@ $autoload['language'] = array('pages');
 |
 |	$autoload['model'] = array('first_model' => 'first');
 */
-$autoload['model'] = array('Ion_auth_model', 'property_category_model', 'property_model', 'settings_model');
+$autoload['model'] = array('Ion_auth_model', 'property_category_model', 'project_images', 'property_model', 'settings_model');

@@ -8,6 +8,9 @@ class Pages extends CI_Controller {
 
 		$this->load->model('settings_model');
 		$this->load->model('property_model');
+		$this->load->model('project_model');
+		
+
 
 
 
@@ -135,7 +138,8 @@ class Pages extends CI_Controller {
 		//$data['site_description'] = lang('about_page_description');
 		$data['page_title'] = lang('lb_title');
 		$data['page_description'] = strip_tags(substr($this->settings_model->getStaticContent('lets_build_text'), 0,120));
-		$data['properties'] = $this->property_model->get_properties_limit();
+		$data['projects'] = $this->project_model->getAllProjects();
+		
 		$this->load->view('section/header', $data);
 		$this->load->view('pages/build', $data);
 		$this->load->view('section/footer');

@@ -125,6 +125,12 @@ $route['admin/locations/add'] = 'admin/locationadd';
 $route['admin/locations/edit/(:num)'] = 'admin/locationedit/$1';
 $route['admin/locations/delete/(:num)'] = 'admin/locationdelete/$1';
 
+
+$route['admin/projects'] = 'admin/projectlist';
+$route['admin/projects/add'] = 'admin/projectadd';
+$route['admin/projects/edit/(:num)'] = 'admin/projectedit/$1';
+$route['admin/projects/delete/(:num)'] = 'admin/projectdelete/$1';
+
 $route['admin/banners'] = 'admin/bannerlist';
 $route['admin/banners/add'] = 'admin/banneradd';
 $route['admin/banners/edit/(:num)'] = 'admin/banneredit/$1';

@@ -18,7 +18,17 @@ class Property_category_model extends CI_Model {
 
         
     public function getAllCategories(){
-        $query = $this->db->get("property_categories");
+        $stat = "On";
+        $this->db->select()->from('property_categories AS l')->where('l.status =',$stat);
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+
+    public function getAdminAllCategories(){
+        
+        $this->db->select()->from('property_categories');
+        $query = $this->db->get();
         return $query->result();
     }
 

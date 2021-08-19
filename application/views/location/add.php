@@ -9,9 +9,6 @@ $this->load->view('section/admin/header', $data);
 ?>
 
 
-<?php
-echo validation_errors('<span class="error">', '</span>');
-?>
         <div class="content">
                 <div class="container">
                     <div class="page-title">
@@ -22,6 +19,12 @@ echo validation_errors('<span class="error">', '</span>');
                         <div class="card">
                         <div class="card-header"></div>
                         <div class="card-body">
+
+
+                        <?php echo $this->session->flashdata('location_error'); ?>
+<?php
+echo validation_errors('<span class="error">', '</span>');
+?>
 
         <?= form_open_multipart(base_url() . 'admin/locations/'. $action) ?>
 

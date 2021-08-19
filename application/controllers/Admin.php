@@ -25,7 +25,10 @@ class Admin extends CI_Controller {
         $this->load->model('property_category_model');
         $this->load->model('property_types_model');
         $this->load->model('Property_facility_model');
-                $this->load->model('message_model');
+        $this->load->model('message_model');
+        $this->load->model('project_model');
+        $this->load->model('project_images');
+
 
 
         $this->load->model('property_category_map_model');
@@ -277,7 +280,7 @@ class Admin extends CI_Controller {
         
        
 
-        if($this->ion_auth->logged_in() == true){
+        if($this->ion_auth->logged_in() && $this->ion_auth->is_admin()){
             $data['is_loggedin'] = $this->ion_auth->logged_in();
             $uid = $this->ion_auth->get_user_id();
             $data['banners'] = $this->banners_model->getAllBanners();
@@ -295,7 +298,7 @@ class Admin extends CI_Controller {
 
      public function banneradd() {
             
-       if($this->ion_auth->logged_in() == true){
+       if($this->ion_auth->logged_in() && $this->ion_auth->is_admin()){
             if($this->input->post()){
            
             
@@ -339,7 +342,7 @@ class Admin extends CI_Controller {
 
      public function banneredit($bid) {
             
-       if($this->ion_auth->logged_in() == true){
+       if($this->ion_auth->logged_in() && $this->ion_auth->is_admin()){
             $data['banner'] = $this->banners_model->getBannerById($bid);
 
             if($this->input->post()){
@@ -389,7 +392,7 @@ class Admin extends CI_Controller {
 
    public function bannerdelete($bid) {
             
-       if($this->ion_auth->logged_in() == true){ 
+       if($this->ion_auth->logged_in() && $this->ion_auth->is_admin()){
 
 
             if($this->banners_model->deleteBanner($bid)){ 
@@ -410,7 +413,7 @@ class Admin extends CI_Controller {
         
        
 
-        if($this->ion_auth->logged_in() == true){
+        if($this->ion_auth->logged_in() && $this->ion_auth->is_admin()){
             $data['is_loggedin'] = $this->ion_auth->logged_in();
             $uid = $this->ion_auth->get_user_id();
             $data['locations'] = $this->location_model->getAllLocations();
@@ -426,38 +429,62 @@ class Admin extends CI_Controller {
 
      public function locationadd() {
             
-       if($this->ion_auth->logged_in() == true){
+       if($this->ion_auth->logged_in() && $this->ion_auth->is_admin()){
             if($this->input->post()){
+                $depth = 0;
+
+                if($this->input->post('parentid') ){
+
+                   $rdepth = $this->checkLocationDepth($this->input->post('parentid'));
+                   
+                   if($rdepth == 0){
+                      $depth = 1;
+                   }elseif($rdepth == 1){
+                      $depth = 2;
+
+                   }else{
+                      $this->session->set_flashdata('location_error','Sorry the Parent Location depth Exceed required level you can only set State->city->area'); 
+                      redirect('/admin/locations/add', 'refresh');  
+
+                   }
+
+                }
+
+
+
+                    $uid = $this->ion_auth->get_user_id();
+                    $config['upload_path'] = './assets/uploads/location/';
+                    $config['allowed_types'] = 'gif|jpg|png|jpeg';
+                    $config['max_size'] = 20048; // Need to define properly              
+                    $config['file_name'] = time().$uid;       
+                    $this->load->library('upload', $config);
+                    $this->upload->do_upload('userfile1');
+                    $image = "";
+                    $pic = $this->upload->data();
+                    if($_FILES['userfile1']['size'] == 0){
+                        $image = $image;
+                    }else{
+                        $image = $pic['file_name'];
+                    }
+                    
+
+                    $title_key = $this->property_model->cleanTitle($this->input->post('title'));
+                    
+                    $this->location_model->setLocation(
+                        $this->input->post('title'), 
+                        $title_key,
+                        $image, 
+                        $this->input->post('parentid'), 
+                        $this->input->post('description'),
+                        $this->input->post('featured'), 
+                        $depth,
+                        $this->input->post('status') );
+
+                        redirect('/admin/locations', 'refresh');
+
+          
            
             
-            $uid = $this->ion_auth->get_user_id();
-            $config['upload_path'] = './assets/uploads/location/';
-            $config['allowed_types'] = 'gif|jpg|png|jpeg';
-            $config['max_size'] = 20048; // Need to define properly              
-            $config['file_name'] = time().$uid;       
-            $this->load->library('upload', $config);
-            $this->upload->do_upload('userfile1');
-            $image = "";
-            $pic = $this->upload->data();
-            if($_FILES['userfile1']['size'] == 0){
-                $image = $image;
-            }else{
-                $image = $pic['file_name'];
-            }
-            
-
-            $title_key = $this->property_model->cleanTitle($this->input->post('title'));
-           
-            $this->location_model->setLocation(
-                $this->input->post('title'), 
-                $title_key,
-                $image, 
-                $this->input->post('parentid'), 
-                $this->input->post('description'),
-                $this->input->post('featured'), 
-                $this->input->post('status') );
-
-            redirect('/admin/locations', 'refresh');
         }else{
             $data['action'] = "add";
              $path = './js/ckfinder';
@@ -477,6 +504,170 @@ class Admin extends CI_Controller {
 
 
 
+
+
+    public function projectlist () {
+        
+       
+
+        if($this->ion_auth->logged_in() && $this->ion_auth->is_admin()){
+            $data['is_loggedin'] = $this->ion_auth->logged_in(); 
+            $data['page_header'] = "All Projects";           
+            $data['projects'] = $this->project_model->getAllProjects();
+            $this->load->view("project/index" , $data);
+
+
+        }else{
+
+            redirect('/', 'refresh');
+        }
+       
+    }
+
+    public function projectdelete($pid) {
+            
+       if($this->ion_auth->logged_in() && $this->ion_auth->is_admin()){ 
+
+
+            if($this->project_model->deleteProject($pid)){ 
+                $this->project_images->deleteProjectImages($pid);
+                $this->session->set_flashdata('message','Project with id: '.$pid.' deleted succefully');
+                redirect('/admin/projects', 'refresh');
+
+            }
+            
+
+
+        }else{
+
+            redirect('/login', 'refresh');
+        }
+
+
+    }
+
+
+     public function projectadd() {
+            
+       if($this->ion_auth->logged_in() == true){
+            if($this->input->post()){
+                
+                $title_key = $this->property_model->cleanTitle($this->input->post('title'));
+                $pImages = $_POST['result'];
+ 
+                $title = $this->input->post('title');
+                $description = $this->input->post('description');
+                $pid = $this->project_model->setProject($title, $title_key, $description);
+               
+
+                if($pid){
+                    if($pImages){
+
+                        foreach($pImages as $images){
+                            try {
+                                $this->project_images->setProjectImage($images, $pid);
+                            } catch (Exception $e) {
+                                echo 'Message: ' .$e->getMessage();
+                                
+                            }
+
+                        }
+
+                    }
+
+                    
+
+                }
+              
+           
+            redirect('/admin/projects', 'refresh');   
+        }else{
+            $data['action'] = "add";
+             $path = './js/ckfinder';
+            $width = '850px';
+            $this->editor($path, $width);
+           
+            $this->load->view("project/create", $data);
+
+        }
+
+       }else{
+
+            redirect('/auth/login', 'refresh');
+        }
+
+    }
+
+
+
+
+     public function projectedit($pid) {
+        $data['is_loggedin'] = $this->ion_auth->logged_in();
+       
+        $data['project'] = $this->project_model->getProjectById($pid);
+        if($this->ion_auth->logged_in() == true){
+            if($this->input->post()){
+                $pImages = null;
+                $title_key = $this->property_model->cleanTitle($this->input->post('title'));
+                 if(isset($_POST['result'])){
+                    $pImages = $_POST['result'];
+                    $main_image = $pImages[0];
+
+                }
+ 
+                $title = $this->input->post('title');
+                $description = $this->input->post('description');
+                $this->project_model->updateProject($pid, $title, $title_key, $description);
+               
+
+                
+                    if($pImages){
+
+                        foreach($pImages as $images){
+                            try {
+                                $this->project_images->setProjectImage($images, $pid);
+                            } catch (Exception $e) {
+                                echo 'Message: ' .$e->getMessage();
+                                
+                            }
+
+                        }
+
+                    }
+
+                    
+
+               
+              
+           
+            redirect('/admin/projects', 'refresh');   
+        }else{
+            $data['action'] = "edit";
+             $path = './js/ckfinder';
+            $width = '850px';
+            $this->editor($path, $width);
+            $data['images'] = $this->project_images->getImagesByProjectId($pid);
+            $this->load->view("project/edit", $data);
+
+        }
+
+       }else{
+
+            redirect('/auth/login', 'refresh');
+        }
+   }
+
+
+
+
+    public function checkLocationDepth($lid){
+         $location = $this->location_model->getLocationById($lid);
+
+         $depth = $location->depth;
+
+         return $depth;
+
+    }   
 
 
 
@@ -569,7 +760,7 @@ class Admin extends CI_Controller {
         if($this->ion_auth->logged_in() == true){
             $data['is_loggedin'] = $this->ion_auth->logged_in();
             $uid = $this->ion_auth->get_user_id();
-            $data['categories'] = $this->property_category_model->getAllCategories();
+            $data['categories'] = $this->property_category_model->getAdminAllCategories();
             $this->load->view("category/index" , $data);
 
         }else{
