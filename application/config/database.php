@@ -126,6 +126,8 @@ $db['default'] = array(
 
 // DB CONFIG LOCAL
 
+
+
 // $db['default'] = array(
 // 	'dsn'	=> '',
 // 	'hostname' => 'localhost',
