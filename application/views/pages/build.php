@@ -1,4 +1,4 @@
-<div class="site-showcase">
+<?php $settings = $this->settings_model->get_all_settings(); ?><div class="site-showcase">
   <!-- Start Page Header -->
   <div class="parallax page-header" style="background-image:url(<?php echo base_url()?>assets/images/about.jpeg);">
         <div class="container">
@@ -12,7 +12,7 @@
   <!-- End Page Header -->
   </div>
 
-
+<?php $settings = $this->settings_model->get_all_settings(); ?>
  
 
   <div class="main" role="main">
@@ -25,8 +25,12 @@
                             <?php echo ($this->settings_model->getStaticContent('lets_build_text')); ?>
 
 
+
+                            <a class="btn btn-lg " href="https://api.whatsapp.com/send?phone=<?php echo($settings['phone']); ?>" style="display: table; background: #25d366 url('<?php echo base_url()?>assets/images/whatsapp.webp') no-repeat 2.6em center; background-size: 2.6em; padding: 20px; width:297px; color:#fff; margin-top: 90px; margin-bottom: 70px;">Contact on WhatsApp</a>
+
+
                         </div>
-                                          </div>
+                        </div>
                        
                   <!-- <div class="row"> -->
                  

@@ -156,6 +156,9 @@ $this->property_model->setPageViewForProperty($property->pid);
 
 
                        <button id="btnsending" class="btn btn-primary btn-block btn-lg pull-left" style="display: none">Sending ...</button>
+
+
+                       <a class="btn btn-lg " href="https://api.whatsapp.com/send?phone=<?php echo($settings['phone']); ?>" style="display: table; background: #25d366 url('<?php echo base_url()?>assets/images/whatsapp.webp') no-repeat 2.6em center; background-size: 2.6em; padding: 20px; width:297px; color:#fff; margin-top: 20px;">Contact on WhatsApp</a>
                         <!-- <ul>
                             <li><a href="#"><i class="fa fa-facebook"></i></a></li>
                               <li><a href="#"><i class="fa fa-twitter"></i></a></li>
