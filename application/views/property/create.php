@@ -293,11 +293,11 @@ echo validation_errors('<span class="error">', '</span>');
 
 
 
-        <div class="form-row">
+        <div id="bed-bath" class="form-row">
 
             <div class="form-group col-md-6">
               <label for="state">Bedroom(s)</label>
-                  <input name="bedroom"  type='text' id="bedroom"  value="<?php echo isset($campaign->Beneficiary) ? $campaign->Beneficiary : "" ?>" class='form-control' data-language='en'  required /> 
+                  <input name="bedroom"  type='text' id="bedroom"  value="<?php echo isset($campaign->Beneficiary) ? $campaign->Beneficiary : "" ?>" class='form-control' data-language='en'   /> 
                 
             </div>
 
@@ -305,7 +305,7 @@ echo validation_errors('<span class="error">', '</span>');
 
             <div class="form-group col-md-6">
               <label for="state">Bathroom(s)</label>
-                    <input name="bathroom"  type='text' id="bathroom"  value="<?php echo isset($campaign->Beneficiary) ? $campaign->Beneficiary : "" ?>" class='form-control' data-language='en'  required /> 
+                    <input name="bathroom"  type='text' id="bathroom"  value="<?php echo isset($campaign->Beneficiary) ? $campaign->Beneficiary : "" ?>" class='form-control' data-language='en'   /> 
                 
             </div>
 
