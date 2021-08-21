@@ -10,7 +10,7 @@
     <div class="hero-slider flexslider clearfix" data-autoplay="yes" data-pagination="no" data-arrows="yes" data-style="fade" data-pause="yes">
       <ul class="slides">
       <?php foreach($banners as $banner):?>
-        <li class=" parallax" style="background-image:url(<?php echo base_url() ?>assets/uploads/banners/<?php echo $banner->banner_image ?>);"><div class="bg-content"> <p class="banner-text"><?php echo $banner->title?></p></div>
+        <li class="parallax" style="background-image:url(<?php echo base_url() ?>assets/uploads/banners/<?php echo $banner->banner_image ?>);"><div class="bg-content"> <p class="banner-text"><?php echo $banner->title?></p></div>
         </li>
       <?php endforeach ?>
 
@@ -135,7 +135,7 @@
                       <option value="">$3000000</option>
                       <option value="">$5000000</option>
                       <option value="">$10000000</option>
-                    </select> -->
+                    <9ew1 vb> -->
                 </div>
                 <div class="col-md-2">
                   <label>Max Price</label>

@@ -313,7 +313,7 @@ class Property_model extends CI_Model {
         $this->image = $image;         
         $this->category_id = $category; 
         $this->price = $price;       
-        $this->description = $description;
+        $this->property_description = $description;
         $this->location_id = $location_id;
         $this->property_address = $address;
         $this->property_type_id = $property_type_id;
@@ -362,7 +362,7 @@ class Property_model extends CI_Model {
            'uid' => $uid,     
            'image' => $image,
            'price' => $price,       
-           'description' => $description,
+           'property_description' => $description,
            'location_id' => $location_id,
            'property_address' => $address,
            'property_type_id' => $property_type_id,
@@ -406,9 +406,10 @@ class Property_model extends CI_Model {
 
        
 
-
+        $status = "Published";
         $this->db->select('p.*, l.*, u.*');
-        $this->db->from('properties as p')->limit($num, $start);        
+        $this->db->from('properties as p')->limit($num, $start);  
+        $this->db->where('p.property_status =', $status);    
         $this->db->join('users as u', 'u.id = p.uid','left');
         $this->db->join('locations as l', 'l.lid = p.location_id','left'); 
         $this->db->join('property_images AS im', 'im.property_id = p.pid', 'left')->group_by('p.pid');
@@ -501,7 +502,24 @@ class Property_model extends CI_Model {
         
     }
 
+  public function markFeaturedProperty($pid){
+        $status_val = "Yes";
+       
+            $data = array(
 
+                'featured' => $status_val,
+                
+                
+
+            );
+
+       
+        $where = "pid = ".$pid."";
+        return $this->db->update('properties', $data, $where);
+       
+
+
+  }
 
 
    public function markPropertySold($pid){

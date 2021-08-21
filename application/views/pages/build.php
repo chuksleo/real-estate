@@ -12,7 +12,19 @@
   <!-- End Page Header -->
   </div>
 
-<?php $settings = $this->settings_model->get_all_settings(); ?>
+<?php 
+
+        $settings = $this->settings_model->get_all_settings();
+        $first = $settings['phone'][0];
+        $phone = "";
+        if($first == '0'){
+            $num = substr($settings['phone'], 1);
+            $phone = "+234".$num;
+        }
+
+
+
+?>
  
 
   <div class="main" role="main">
@@ -20,13 +32,13 @@
             <div class="container">
                 <div class="page">
                     <div class="row">
-                        <div class="col-md-6 col-sm-6">
+                        <div class="col-md-12 col-sm-12">
                             <h3><?php echo ("Why Let us Handle you Project") ?></h3>
                             <?php echo ($this->settings_model->getStaticContent('lets_build_text')); ?>
 
 
 
-                            <a class="btn btn-lg " href="https://api.whatsapp.com/send?phone=<?php echo($settings['phone']); ?>" style="display: table; background: #25d366 url('<?php echo base_url()?>assets/images/whatsapp.webp') no-repeat 2.6em center; background-size: 2.6em; padding: 20px; width:297px; color:#fff; margin-top: 90px; margin-bottom: 70px;">Contact on WhatsApp</a>
+                            <a class="btn btn-lg whatsappbtn" href="https://api.whatsapp.com/send?phone=<?php echo($phone); ?>" style="">Contact on WhatsApp</a>
 
 
                         </div>
@@ -58,7 +70,7 @@
                   </div>
                   <div class="grid-content">
                     <h4><a href="blog-post.html"><?= $project->project_title ?></a></h4>
-                    <span class="meta-data"><span><i class="fa fa-calendar"></i> 24th Nov, 2013</span><span><a href="#"><i class="fa fa-tag"></i>Uncategorized</a></span></span>
+                    
                     <?= $project->description ?>
                   </div>
                 </div>

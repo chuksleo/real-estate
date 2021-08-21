@@ -10,7 +10,19 @@
        </div>
   </div>  
  
-<?php $settings = $this->settings_model->get_all_settings(); ?>
+<?php 
+
+        $settings = $this->settings_model->get_all_settings();
+        $first = $settings['phone'][0];
+        $phone = "";
+        if($first == '0'){
+            $num = substr($settings['phone'], 1);
+            $phone = "+234".$num;
+        }
+
+
+
+?>
 
   <div class="main" role="main">
       <div id="content" class="content full">
@@ -22,7 +34,7 @@
                             <?php echo ($this->settings_model->getStaticContent('market_network_text')) ?>
 
 
-                            <a class="btn btn-lg " href="https://api.whatsapp.com/send?phone=<?php echo($settings['phone']); ?>" style="display: table; background: #25d366 url('<?php echo base_url()?>assets/images/whatsapp.webp') no-repeat 2.6em center; background-size: 2.6em; padding: 20px; width:297px; color:#fff; margin-top: 90px; margin-bottom: 70px;">Contact on WhatsApp</a>
+                            <a class="btn btn-lg whatsappbtn" href="https://api.whatsapp.com/send?phone=<?php echo($phone); ?>" >Contact on WhatsApp</a>
                     </div>
                         </div>
                         

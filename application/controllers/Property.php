@@ -213,7 +213,7 @@ class Property extends CI_Controller {
             $data['total'] = $searchchResultCount;
             $data['per_page'] = $num;
 
-            $this->load->view("property/list" , $data);
+            $this->load->view("property/list", $data);
               
 
        }else{
@@ -698,7 +698,16 @@ class Property extends CI_Controller {
     }
 
 
+    public function markFeatured(){
 
+            $pid = $this->input->post("pid");  
+          
+            if($this->property_model->markFeaturedProperty($pid)){
+                echo '<div class="alert-info">Property has been successfully Marked as Featured! </div>';
+            }else{
+                echo ' <div class="alert-danger"> Oops! An error occured when setting as featured property</div>';
+            }
+    }
 
     public function publish() {
 
