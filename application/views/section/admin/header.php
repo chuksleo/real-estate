@@ -158,14 +158,24 @@ function getCategoryTypes(page){
 
 
 }
+var pid
+function markFeaturedProperty(pid){
+      $.ajax({
+        type: 'POST',
+        url: '<?php echo base_url(); ?>property/markFeatured',
+        data: {'pid':pid},
+        success: function(resp) {
+          
+          document.getElementById('message').innerHTML = resp
+        }
+      });
 
 
+}
 
 var pid;
 function publishProperty(pid){
-    console.log(pid);
-
-   
+    
       $.ajax({
         type: 'POST',
         url: '<?php echo base_url(); ?>property/publish',
@@ -403,6 +413,48 @@ function showInbox(){
                <li>
                     <a href="<?php echo base_url() ?>admin/dashboard"><i class="fas fa-home"></i> Dashboard</a> 
                 </li>
+
+
+                 <li>
+                    <a href="#pagesmenu3" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle no-caret-down"><i class="fas fa-home"></i> Manage Property</a>
+                    <ul class="collapse list-unstyled" id="pagesmenu3">
+                        <li>
+                            <a href="<?php echo base_url() ?>admin/properties"><i class="fas fa-file"></i> List All Properties</a>
+                        </li>
+
+                         <li>
+                            <a href="<?php echo base_url() ?>admin/properties/unpublished"><i class="fas fa-file"></i> Pending Properties</a>
+                        </li>
+
+                        
+
+                        <li>
+                            <a href="<?php echo base_url() ?>admin/properties/add"><i class="fas fa-file"></i> Add Property</a>
+                        </li>
+
+                        <li>
+                            <a href="<?php echo base_url() ?>admin/properties/facilities"><i class="fas fa-file"></i> Property Facilities</a>
+                        </li>
+
+                         <li>
+                            <a href="<?php echo base_url() ?>admin/properties/categories"><i class="fas fa-file"></i> Property Categories</a>
+                        </li>
+
+
+                         <li>
+                            <a href="<?php echo base_url() ?>admin/properties/types"><i class="fas fa-file"></i>Property Types</a>
+                        </li>
+
+
+                        <li>
+                            <a href="<?php echo base_url() ?>admin/properties/category-type-map"><i class="fas fa-file"></i>Category Mapping</a>
+                        </li>
+
+
+                        
+                        
+                    </ul>
+                </li>
                 <li>
                     <a href="#pagesmenu6" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle no-caret-down"><i class="fas fa-map"></i> Front Banners</a>
                     <ul class="collapse list-unstyled" id="pagesmenu6">
@@ -459,46 +511,7 @@ function showInbox(){
 
 
 
-                <li>
-                    <a href="#pagesmenu3" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle no-caret-down"><i class="fas fa-home"></i> Manage Property</a>
-                    <ul class="collapse list-unstyled" id="pagesmenu3">
-                        <li>
-                            <a href="<?php echo base_url() ?>admin/properties"><i class="fas fa-file"></i> List All Properties</a>
-                        </li>
-
-                         <li>
-                            <a href="<?php echo base_url() ?>admin/properties/unpublished"><i class="fas fa-file"></i> Pending Properties</a>
-                        </li>
-
-                        
-
-                        <li>
-                            <a href="<?php echo base_url() ?>admin/properties/add"><i class="fas fa-file"></i> Add Property</a>
-                        </li>
-
-                        <li>
-                            <a href="<?php echo base_url() ?>admin/properties/facilities"><i class="fas fa-file"></i> Property Facilities</a>
-                        </li>
-
-                         <li>
-                            <a href="<?php echo base_url() ?>admin/properties/categories"><i class="fas fa-file"></i> Property Categories</a>
-                        </li>
-
-
-                         <li>
-                            <a href="<?php echo base_url() ?>admin/properties/types"><i class="fas fa-file"></i>Property Types</a>
-                        </li>
-
-
-                        <li>
-                            <a href="<?php echo base_url() ?>admin/properties/category-type-map"><i class="fas fa-file"></i>Category Mapping</a>
-                        </li>
-
-
-                        
-                        
-                    </ul>
-                </li>
+               
 
                
 
