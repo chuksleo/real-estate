@@ -3975,3 +3975,21 @@ button .btn-search {
 	margin-top: 90px; 
 	margin-bottom: 70px;
 }
+.stat_page_text{
+
+	line-height: 70px;
+	font-size: 30px; 	
+}
+
+
+#statpage p{
+
+	font-size: 30px !important;
+	line-height: 70px !important;
+}
+
+
+#statpage h3 {
+    font-size: 43px;
+    font-weight: bold;
+}
