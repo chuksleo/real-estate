@@ -22,7 +22,7 @@ $data['title'] = 'Login';
 $data['javascript'] = 'app.js';
 $data['page_title'] = $property->title." | RealEstate9ja.com";
 $data['page_description'] = $property->description;
-
+$settings = $this->settings_model->get_all_settings();
 $this->load->view('section/header', $data);
 
  if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')   
@@ -136,8 +136,8 @@ $this->property_model->setPageViewForProperty($property->pid);
               <div class="widget">
                   <h3 class="widgettitle">Agent</h3>
 
-                   <div class="col-md-12 col-sm-12 featured-block"> <img src="http://placehold.it/600x600&amp;text=IMAGE+PLACEHOLDER" alt="Search Anywhere" class="img-thumbnail">
-              <h3>RealEstate9ja</h3>
+                   <div class="col-md-12 col-sm-12 featured-block"> <img src="<?php echo base_url()?>assets/uploads/files/<?php echo($settings['logo']); ?>" alt="<?php echo($settings['site_name']); ?>" class="">
+              <h3>RealEstate9ja Agent</h3>
               <p></p>
               </div>
                   <div class="agent">

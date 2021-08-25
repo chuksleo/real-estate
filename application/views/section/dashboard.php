@@ -101,7 +101,7 @@
                                         </div>
                                         <div class="col-sm-8">
                                             <div class="detail">
-                                                <p class="detail-subtitle">Build Message</p>
+                                                <p class="detail-subtitle">Requests</p>
                                                 <span class="number"><?php echo $contact_messages ?> <span class="badge badge-pill text-white font-medium badge-danger mr-2" style="font-size: 10px">New</span></span></span>
                                             </div>
                                         </div>

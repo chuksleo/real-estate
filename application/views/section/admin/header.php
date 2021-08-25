@@ -159,11 +159,12 @@ function getCategoryTypes(page){
 
 }
 var pid
-function markFeaturedProperty(pid){
+var status
+function markFeaturedProperty(pid, status){
       $.ajax({
         type: 'POST',
         url: '<?php echo base_url(); ?>property/markFeatured',
-        data: {'pid':pid},
+        data: {'pid':pid, 'status':status},
         success: function(resp) {
           
           document.getElementById('message').innerHTML = resp
