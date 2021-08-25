@@ -44,6 +44,10 @@ echo validation_errors('<span class="error">', '</span>');
                 <input type="text" name="title" placeholder="Enter Title"  value="<?php echo isset($banner->title) ? $banner->title : "" ?>" class="form-control" required>
         </div>
 
+        <div class="form-group col-md-6">            <label for="title">Slug Text</label>
+                <input type="text" name="slug" placeholder="Enter Slug Text"  value="<?php echo isset($banner->slug) ? $banner->slug : "" ?>" class="form-control" >
+        </div>
+
          
 
 
