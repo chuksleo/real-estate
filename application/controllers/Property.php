@@ -213,7 +213,7 @@ class Property extends CI_Controller {
             $data['total'] = $searchchResultCount;
             $data['per_page'] = $num;
 
-            $this->load->view("property/list" , $data);
+            $this->load->view("property/list", $data);
               
 
        }else{
@@ -248,6 +248,7 @@ class Property extends CI_Controller {
             $this->pagination->initialize($config);
             $data['pages'] = $this->pagination->create_links();
             $data['total'] = $searchchResultCount;
+            $data['title'] = "Properties Search Result";
             $data['per_page'] = $num;
             
             $this->load->view("property/list" , $data);
@@ -479,14 +480,14 @@ class Property extends CI_Controller {
                 $property_option = $this->input->post("options");
                  
                 $status = "Unpublished";
-                $propertyid = $this->property_model->create_property($title, $uid, $image, $end_date, $category, $price, $description, $location_id, $address, $property_type_id, $property_condition, $furnishing='Unfurnished', $size_sqm, $bedrooms, $bathrooms, $pets='No Pets', $property_use='Residential', $smoking='No Smoking', $parties='No Parties', $negotiable, $parking_space='20', $agent_fee='No', $agreement_fee='No', $capacity="100", $video_link='thisisi.mp3', $duration='None', $status);
+                $propertyid = $this->property_model->create_property($title, $uid, $image,$category, $price, $description, $location_id, $address, $property_type_id, $property_condition, $furnishing='Unfurnished', $size_sqm, $bedrooms, $bathrooms, $pets='No Pets', $property_use='Residential', $smoking='No Smoking', $parties='No Parties', $negotiable, $parking_space='20', $agent_fee='No', $agreement_fee='No', $capacity="100", $video_link='thisisi.mp3', $duration='None', $status);
 
 
                 if($propertyid){
                     $data['facilities'] = $this->Property_facility_model->getAllFacilities();
                     foreach ($data['facilities'] as $facility) {
                     $clean_title = $this->property_model->cleanTitle($facility->name);
-                    if($this->input->post($clean_title)){
+                    if($this->input->post($clean_title) != null){
                         
                         $facilityid = $this->input->post($clean_title);
                         if(!$this->property_facility_map_model->checkFacilityMap($propertyid, $facilityid)){
@@ -518,8 +519,11 @@ class Property extends CI_Controller {
                 
 
                 }
+
+
+
                 if($this->ion_auth->is_admin()){ 
-                    redirect('/admin/properties', 'refresh');
+                    redirect('/admin/unpublished', 'refresh');
                 }else{
                     redirect('/user/properties', 'refresh');
                 }
@@ -695,7 +699,17 @@ class Property extends CI_Controller {
     }
 
 
+    public function markFeatured(){
 
+            $pid = $this->input->post("pid"); 
+            $status = $this->input->post("status");  
+          
+            if($this->property_model->markFeaturedProperty($pid, $status)){
+                echo '<div class="alert-info">Property has been successfully Marked as Featured! </div>';
+            }else{
+                echo ' <div class="alert-danger"> Oops! An error occured when setting as featured property</div>';
+            }
+    }
 
     public function publish() {
 

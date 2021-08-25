@@ -103,7 +103,8 @@ function subscribe_bottom()
 
 function contact_us()
         {
-            //$('input#loader').show();
+            $('#sendingm').show();
+            $('#sendm').hide();
             var fname = $('input#contact_fname').val();
             var email = $('input#contact_email').val();
             var phone = $('input#contact_phone').val();
@@ -114,7 +115,8 @@ function contact_us()
                 data: {'fname_val':fname,'email_val':email,'phone_val':phone,'message_val':message},
                 success: function(resp) {
 
-                    //$('#prog').hide();
+                    $('#sendingm').hide();
+                    $('#sendm').show(); 
                      $("#contact_rmessage").html(resp);
                 }
 
@@ -217,7 +219,7 @@ function getCategoryTypes(page){
       <div class="container">
         <div class="row">
           <div class="col-md-4 col-sm-8 col-xs-8">
-            <h1 class="logo"> <a href="<?php echo base_url() ?>"><img src="<?php echo base_url()?>assets/uploads/files/<?php echo($settings['logo']); ?>" alt="<?php echo($settings['site_name']); ?>"></a> </h1>
+            <h1 class="logo"> <a href="<?php echo base_url() ?>"><img src="<?php echo base_url()?>assets/uploads/files/<?php echo($settings['logo']); ?>" class="logo-img" alt="<?php echo($settings['site_name']); ?>"></a> </h1>
           </div>
           <div class="col-md-8 col-sm-4 col-xs-4">
               <div class="contact-info-blocks hidden-sm hidden-xs">
@@ -289,16 +291,6 @@ function getCategoryTypes(page){
                 </li>
                                 
 
-                <!--  <li class="">
-                      <a href="<?php echo base_url() ?>contact-us""><?php  echo "Contact us" ?></a>
-                                  
-                 </li>
- -->
-                <!--  <li class="">
-                 <a href="<?php echo base_url() ?>blog"><?php  echo "Blog" ?></a>
-                                  
-                </li> -->
-                
                   
               </ul>
 

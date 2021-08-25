@@ -662,7 +662,7 @@ body.boxed .body .site-header, body.boxed .body .main-menu-wrapper{
 	height:30px;
 }
 .middle-header{
-	height:80px;
+	height:107px;
 	position:relative;
 	z-index:8;
 	-webkit-box-shadow:0 1px 2px rgba(0,0,0,.1);
@@ -887,7 +887,7 @@ html[xmlns] .slides {
 }  
 .slider-mask{
 	width:100%;
-	height:450px;
+	height:680px;
 	position:absolute;
 	z-index:5;
 	display:block;
@@ -909,7 +909,7 @@ html[xmlns] .slides {
 	height:100%;
 }
 .hero-slider.flexslider ul.slides li{
-	height:450px;
+	height:680px;
 	width:100%;
 	overflow:hidden;
 	position:static;
@@ -1192,6 +1192,7 @@ html[xmlns] .slides {
 }
 .property-featured-image img, .agent-featured-image img{
 	min-width:100%;
+	min-height: 235px;	
 }
 .overlay{
 	width:100%;
@@ -3589,12 +3590,14 @@ span.progress-bar-tooltip:after {
 
 .banner-text {
 
-    font-size: 70px;
-    line-height: 108px;
+    font-size: 50px;
+    line-height: 100px;
     text-align: center;
     
     color: #fff;
     font-weight: bold;
+    margin-left: 5%;
+    margin-right: 5%;
 
 }
 
@@ -3615,7 +3618,7 @@ span.progress-bar-tooltip:after {
 
 	height: 100%;
 	background:rgba(0,0,0,0.5);
-	padding-top: 10%
+	padding-top: 4%
 }
 
 
@@ -3958,4 +3961,40 @@ button .btn-search {
     color: #fff;
     padding: 10px;
 
+}
+.whatsappbtn{
+
+
+
+	display: table; 
+	background: #25d366 url('../../assets/images/whatsapp.webp') no-repeat 2.6em center; 
+	background-size: 2.6em; 
+	padding: 20px; 
+	width:320px; 
+	color:#fff; 
+	margin-top: 90px; 
+	margin-bottom: 70px;
+}
+.stat_page_text{
+
+	line-height: 70px;
+	font-size: 30px; 	
+}
+
+
+#statpage p{
+
+	font-size: 30px !important;
+	line-height: 70px !important;
+}
+
+
+#statpage h3 {
+    font-size: 43px;
+    font-weight: bold;
+}
+
+
+.logo-img{
+	width: 69%;
 }

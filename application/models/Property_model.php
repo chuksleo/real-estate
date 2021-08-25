@@ -86,8 +86,7 @@ class Property_model extends CI_Model {
         $pub ="Published";
         $today = new DateTime();
         $compare = $today->format('Y-m-d');
-        $this->db->select()->from('properties as p')->where('p.property_status =',$pub);
-        $this->db->where('date_created =',$compare);
+        $this->db->select()->from('properties as p')->where('date_created =',$compare);
 
         $query = $this->db->get();
         return $query->num_rows();
@@ -99,7 +98,7 @@ class Property_model extends CI_Model {
                 
         $pub ="Published";
          
-        $this->db->select()->from('properties AS p')->where('p.property_status =',$pub)->order_by('last_updated','desc');
+        $this->db->select()->from('properties AS p')->where('p.property_status =',$pub)->order_by('p.pid','desc');
         $this->db->join('users AS u', 'u.id = p.uid');
        
         $query = $this->db->get();
@@ -305,13 +304,15 @@ class Property_model extends CI_Model {
     
     public function create_property($title, $uid, $image, $category, $price, $description, $location_id, $address, $property_type_id, $property_condition, $furnishing, $size_sqm, $bedrooms, $bathrooms, $pets, $property_use, $smoking, $parties, $negotiable, $parking_space, $agent_fee, $agreement_fee, $capacity, $video_link, $duration, $status){ 
         
-
+        $datestring = "%Y-%m-%d";
+        $time = time();
+        $cur_date = mdate($datestring, $time);
         $this->title = $title; 
         $this->uid = $uid; 
         $this->image = $image;         
         $this->category_id = $category; 
         $this->price = $price;       
-        $this->description = $description;
+        $this->property_description = $description;
         $this->location_id = $location_id;
         $this->property_address = $address;
         $this->property_type_id = $property_type_id;
@@ -332,7 +333,7 @@ class Property_model extends CI_Model {
         $this->video_link = $video_link;
 
         $this->duration = $duration;
-        $this->date_created = new DateTime();
+        $this->date_created = $cur_date;
         $this->last_updated = new DateTime();
         $this->property_status = $status;
      
@@ -360,7 +361,7 @@ class Property_model extends CI_Model {
            'uid' => $uid,     
            'image' => $image,
            'price' => $price,       
-           'description' => $description,
+           'property_description' => $description,
            'location_id' => $location_id,
            'property_address' => $address,
            'property_type_id' => $property_type_id,
@@ -404,9 +405,10 @@ class Property_model extends CI_Model {
 
        
 
-
+        $status = "Published";
         $this->db->select('p.*, l.*, u.*');
-        $this->db->from('properties as p')->limit($num, $start);        
+        $this->db->from('properties as p')->limit($num, $start);  
+        $this->db->where('p.property_status =', $status);    
         $this->db->join('users as u', 'u.id = p.uid','left');
         $this->db->join('locations as l', 'l.lid = p.location_id','left'); 
         $this->db->join('property_images AS im', 'im.property_id = p.pid', 'left')->group_by('p.pid');
@@ -499,7 +501,24 @@ class Property_model extends CI_Model {
         
     }
 
+  public function markFeaturedProperty($pid, $status){
+        
+       
+            $data = array(
 
+                'featured' => $status,
+                
+                
+
+            );
+
+       
+        $where = "pid = ".$pid."";
+        return $this->db->update('properties', $data, $where);
+       
+
+
+  }
 
 
    public function markPropertySold($pid){

@@ -57,7 +57,18 @@ $this->load->view('section/admin/header', $data);
                                                    <?php  $link_text = $this->property_model->cleanTitle($property->title);?>
 
                                                    <?php if($this->ion_auth->is_admin()){?>
-                                                        <button class="btn btn-square btn-primary mb-2" onclick="markSoldProperty(<?php echo $property->pid ?>)" >Mark Sold</button>  
+                                                        <button class="btn btn-square btn-primary mb-2" onclick="markSoldProperty(<?php echo $property->pid ?>)" >Mark Sold</button> 
+
+
+                                                        <?php if($property->featured == "Yes" ){?>
+                                                         <button class="btn btn-square btn-primary mb-2" onclick="markFeaturedProperty(<?php echo $property->pid ?>, 'No')" >Unmark Featured</button>
+
+
+                                                        <?php }else{ ?>
+                                                            <button class="btn btn-square btn-primary mb-2" onclick="markFeaturedProperty(<?php echo $property->pid ?>, 'Yes')" >Mark Featured</button>
+
+                                                        <?php }?>
+                                                        
                                                          <?php if($property->property_status == "Unpublished" ){?>
                                                           <button class="btn btn-square btn-primary mb-2" onclick="publishProperty(<?php echo $property->pid ?>)" >Publish</button>  
                                                         <?php }else{ ?>

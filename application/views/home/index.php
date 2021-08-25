@@ -10,7 +10,7 @@
     <div class="hero-slider flexslider clearfix" data-autoplay="yes" data-pagination="no" data-arrows="yes" data-style="fade" data-pause="yes">
       <ul class="slides">
       <?php foreach($banners as $banner):?>
-        <li class=" parallax" style="background-image:url(<?php echo base_url() ?>assets/uploads/banners/<?php echo $banner->banner_image ?>);"><div class="bg-content"> <p class="banner-text"><?php echo $banner->title?></p></div>
+        <li class="parallax" style="background-image:url(<?php echo base_url() ?>assets/uploads/banners/<?php echo $banner->banner_image ?>);"><div class="bg-content"> <p class="banner-text"><?php echo $banner->title?></p></div>
         </li>
       <?php endforeach ?>
 
@@ -135,7 +135,7 @@
                       <option value="">$3000000</option>
                       <option value="">$5000000</option>
                       <option value="">$10000000</option>
-                    </select> -->
+                    <9ew1 vb> -->
                 </div>
                 <div class="col-md-2">
                   <label>Max Price</label>
@@ -180,7 +180,7 @@
     <?php } ?>
                           </a>
                       <div class="property-info">
-                              <h4><a href="<?= base_url() ?>property/<?= $link_text ?>/<?=  $property_item->pid ?>" title="<?php echo $property_item->title ?>"><?php echo substr($property_item->title, 0, 30); if(strlen($property_item->title) > 30){ echo "...";}?> </a></h4>
+                              <h4><a href="<?= base_url() ?>property/<?= $link_text ?>/<?=  $property_item->pid ?>" title="<?php echo $property_item->title ?>"><?php echo substr($property_item->title, 0, 25); if(strlen($property_item->title) > 25){ echo "...";}?> </a></h4>
                               <span class="location"><?php echo $property_item->location_title ?></span>
                               <div class="price"><strong>N</strong><span><?php echo $property_item->price ?></span></div>
                       </div>
@@ -222,8 +222,8 @@
     <?php } ?></a> </div>
                             <div class="col-md-8">
                               <div class="property-info">
-                                <div class="price"><strong>$</strong><span><?php echo $property_item->price ?></span></div>
-                                <h3><a href="<?= base_url() ?>property/<?= $link_text ?>/<?=  $property_item->pid ?>"><?php echo $property_item->title ?></a></h3>
+                                <div class="price"><strong>$</strong><span><?= $price = $this->property_model->getMoneyFormat($property_item->price) ?></span></div>
+                                <h3><a href="<?= base_url() ?>property/<?= $link_text ?>/<?=  $property_item->pid ?>"><?php echo substr($property_item->title, 0, 25); if(strlen($property_item->title) > 25){ echo "...";}?></a></h3>
                                 <span class="location"><?php echo $property_item->location_title ?></span>
                                 <p><?php echo $property_item->description ?></p>
                               </div>

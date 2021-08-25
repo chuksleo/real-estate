@@ -1,4 +1,4 @@
-<div class="site-showcase">
+<?php $settings = $this->settings_model->get_all_settings(); ?><div class="site-showcase">
   <!-- Start Page Header -->
   <div class="parallax page-header" style="background-image:url(<?php echo base_url()?>assets/images/about.jpeg);">
         <div class="container">
@@ -12,7 +12,19 @@
   <!-- End Page Header -->
   </div>
 
+<?php 
 
+        $settings = $this->settings_model->get_all_settings();
+        $first = $settings['phone'][0];
+        $phone = "";
+        if($first == '0'){
+            $num = substr($settings['phone'], 1);
+            $phone = "+234".$num;
+        }
+
+
+
+?>
  
 
   <div class="main" role="main">
@@ -20,13 +32,18 @@
             <div class="container">
                 <div class="page">
                     <div class="row">
-                        <div class="col-md-6 col-sm-6">
+                        <div id="statpage" class="col-md-12 col-sm-12">
                             <h3><?php echo ("Why Let us Handle you Project") ?></h3>
-                            <?php echo ($this->settings_model->getStaticContent('lets_build_text')); ?>
+                            
+                           <?php echo ($this->settings_model->getStaticContent('lets_build_text')); ?>
+
+
+                           
+                            <a class="btn btn-lg whatsappbtn" href="https://api.whatsapp.com/send?phone=<?php echo($phone); ?>" style="">Contact on WhatsApp</a>
 
 
                         </div>
-                                          </div>
+                        </div>
                        
                   <!-- <div class="row"> -->
                  
@@ -54,7 +71,7 @@
                   </div>
                   <div class="grid-content">
                     <h4><a href="blog-post.html"><?= $project->project_title ?></a></h4>
-                    <span class="meta-data"><span><i class="fa fa-calendar"></i> 24th Nov, 2013</span><span><a href="#"><i class="fa fa-tag"></i>Uncategorized</a></span></span>
+                    
                     <?= $project->description ?>
                   </div>
                 </div>

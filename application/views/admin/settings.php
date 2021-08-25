@@ -27,7 +27,7 @@ $this->load->view('section/admin/header', $data);
                                             </tr>
                                             <tr>
                                                 <td>Logo</td>
-                                                <td><img src="<?php echo base_url()?>assets/uploads/files/<?php echo $settings['logo']?>"> </td>
+                                                <td><img style="width: 35%" src="<?php echo base_url()?>assets/uploads/files/<?php echo $settings['logo']?>"> </td>
                                             </tr>
                                             <tr>
                                                 <td>Email</td>

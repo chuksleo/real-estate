@@ -22,7 +22,7 @@ $this->load->view('section/header', $data);
           <div class="container">
               <div class="row">
                   <div class="col-md-12">
-                      <h1>Realestate9ja - <?php echo $title?></h1>
+                      <h1>Realestate9ja - <?php echo $title ?></h1>
                   </div>
              </div>
          </div>
@@ -87,7 +87,7 @@ $this->load->view('section/header', $data);
                                 <div class="price"><strong>$</strong><span><?php echo $property_item->price ?></span></div>
                                 <h3><a href="<?= base_url() ?>property/<?= $link_text ?>/<?=  $property_item->pid ?>"><?php echo $property_item->title ?></a></h3>
                                 <span class="location"><?php echo $property_item->location_title ?></span>
-                                <p><?php echo $property_item->description ?></p>
+                                <p><?php echo $property_item->property_description ?></p>
                               </div>
                               <div class="property-amenities clearfix"> <span class="area"><strong><?php echo $property_item->size_sqm ?></strong>Area</span> <span class="baths"><strong><?php echo $property_item->bathrooms ?></strong>Baths</span> <span class="beds"><strong><?php echo $property_item->bedrooms ?></strong>Beds</span> <span class="parking"><strong>1</strong>Parking</span> </div>
                             </div>

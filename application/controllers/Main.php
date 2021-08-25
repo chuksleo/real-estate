@@ -28,11 +28,11 @@
                 {  
                      $data = $this->upload->data(); 
 
-                     $configer =  array(
+                      $configer =  array(
                             'image_library'   => 'gd2',
                             'source_image'    =>  $data['full_path'],
                             'maintain_ratio'  =>  TRUE,
-                            'width'           =>  600,
+                            'height'           =>  400,
                             
                     );
                     $this->image_lib->clear();
@@ -78,7 +78,7 @@
                             'image_library'   => 'gd2',
                             'source_image'    =>  $data['full_path'],
                             'maintain_ratio'  =>  TRUE,
-                            'width'           =>  600,
+                            'height'           =>  500,
                             
                     );
                     $this->image_lib->clear();

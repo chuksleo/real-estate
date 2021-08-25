@@ -311,6 +311,16 @@ class Admin extends CI_Controller {
             $this->upload->do_upload('userfile1');
             $image = "";
             $pic = $this->upload->data();
+            $configer =  array(
+                            'image_library'   => 'gd2',
+                            'source_image'    =>  $pic['full_path'],
+                            'maintain_ratio'  =>  TRUE,
+                            'height'           =>  400,
+                            
+                    );
+                    $this->image_lib->clear();
+                    $this->image_lib->initialize($configer);
+                    $this->image_lib->resize();
             if($_FILES['userfile1']['size'] == 0){
                 $image = $image;
             }else{
