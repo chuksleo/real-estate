@@ -662,7 +662,7 @@ body.boxed .body .site-header, body.boxed .body .main-menu-wrapper{
 	height:30px;
 }
 .middle-header{
-	height:80px;
+	height:107px;
 	position:relative;
 	z-index:8;
 	-webkit-box-shadow:0 1px 2px rgba(0,0,0,.1);
@@ -3992,4 +3992,9 @@ button .btn-search {
 #statpage h3 {
     font-size: 43px;
     font-weight: bold;
+}
+
+
+.logo-img{
+	width: 69%;
 }

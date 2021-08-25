@@ -248,6 +248,7 @@ class Property extends CI_Controller {
             $this->pagination->initialize($config);
             $data['pages'] = $this->pagination->create_links();
             $data['total'] = $searchchResultCount;
+            $data['title'] = "Properties Search Result";
             $data['per_page'] = $num;
             
             $this->load->view("property/list" , $data);
@@ -522,7 +523,7 @@ class Property extends CI_Controller {
 
 
                 if($this->ion_auth->is_admin()){ 
-                    redirect('/admin/properties', 'refresh');
+                    redirect('/admin/unpublished', 'refresh');
                 }else{
                     redirect('/user/properties', 'refresh');
                 }
@@ -700,9 +701,10 @@ class Property extends CI_Controller {
 
     public function markFeatured(){
 
-            $pid = $this->input->post("pid");  
+            $pid = $this->input->post("pid"); 
+            $status = $this->input->post("status");  
           
-            if($this->property_model->markFeaturedProperty($pid)){
+            if($this->property_model->markFeaturedProperty($pid, $status)){
                 echo '<div class="alert-info">Property has been successfully Marked as Featured! </div>';
             }else{
                 echo ' <div class="alert-danger"> Oops! An error occured when setting as featured property</div>';

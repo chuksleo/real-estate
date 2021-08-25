@@ -86,8 +86,7 @@ class Property_model extends CI_Model {
         $pub ="Published";
         $today = new DateTime();
         $compare = $today->format('Y-m-d');
-        $this->db->select()->from('properties as p')->where('p.property_status =',$pub);
-        $this->db->where('date_created =',$compare);
+        $this->db->select()->from('properties as p')->where('date_created =',$compare);
 
         $query = $this->db->get();
         return $query->num_rows();
@@ -99,7 +98,7 @@ class Property_model extends CI_Model {
                 
         $pub ="Published";
          
-        $this->db->select()->from('properties AS p')->where('p.property_status =',$pub)->order_by('last_updated','desc');
+        $this->db->select()->from('properties AS p')->where('p.property_status =',$pub)->order_by('p.pid','desc');
         $this->db->join('users AS u', 'u.id = p.uid');
        
         $query = $this->db->get();
@@ -502,12 +501,12 @@ class Property_model extends CI_Model {
         
     }
 
-  public function markFeaturedProperty($pid){
-        $status_val = "Yes";
+  public function markFeaturedProperty($pid, $status){
+        
        
             $data = array(
 
-                'featured' => $status_val,
+                'featured' => $status,
                 
                 
 
