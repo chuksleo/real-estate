@@ -51,8 +51,12 @@
 <!-- Color Style -->
 <link href="<?php echo base_url()?>assets/colors/color1.css" rel="stylesheet" type="text/css">
 <!-- SCRIPTS
+
+
   ================================================== -->
-<script src="js/modernizr.js"></script><!-- Modernizr -->
+
+  <script src="<?php echo base_url()?>assets/js/responsiveslides.min.js"></script>
+<script src="<?php echo base_url()?>assets/js/modernizr.js"></script><!-- Modernizr -->
 
 <script>
 var contactForm = document.getElementById('contactForm');

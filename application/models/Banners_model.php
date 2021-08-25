@@ -37,8 +37,9 @@ class Banners_model extends CI_Model {
 
     
     
-    public function setBanner($title,$banner,$status){  
-        $this->title = $title;        
+    public function setBanner($title,$slug,$banner,$status){  
+        $this->title = $title;
+        $this->slug = $slug;        
         $this->banner_image = $banner;
         $this->active = $status;
         $this->db->insert('front_banners', $this);
