@@ -43,6 +43,9 @@ echo validation_errors('<span class="error">', '</span>');
         <div class="form-group col-md-6">            <label for="title">Title</label>
                 <input type="text" name="title" placeholder="Enter Title"  value="<?php echo isset($campaign->Title) ? $campaign->Title : "" ?>" class="form-control" required>
         </div>
+         <div class="form-group col-md-6">            <label for="title">Slug Text</label>
+                <input type="text" name="slug" placeholder="Enter slug text"  value="<?php echo isset($campaign->Title) ? $campaign->Title : "" ?>" class="form-control" >
+        </div>
 
         
 

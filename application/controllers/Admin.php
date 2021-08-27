@@ -330,7 +330,8 @@ class Admin extends CI_Controller {
 
             
             $this->banners_model->setBanner(
-                $this->input->post('title'),               
+                $this->input->post('title'),
+                $this->input->post('slug'),                
                 $image,
                 $this->input->post('status'));
 
@@ -377,7 +378,8 @@ class Admin extends CI_Controller {
 
                 $this->banners_model->updateBanner(
                 $bid,
-                $this->input->post('title'),                 
+                $this->input->post('title'), 
+                $this->input->post('slug'),                
                 $image,
                 $this->input->post('status'));            
 

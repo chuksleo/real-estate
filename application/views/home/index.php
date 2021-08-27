@@ -6,11 +6,24 @@
   <!-- Site Showcase -->
   <div class="site-showcase">
     <div class="slider-mask overlay-transparent"></div>
+
+<!-- 
+     <ul class="rslides" id="slider1">
+      <li><img src="images/1.jpg" alt=""></li>
+      <li><img src="images/2.jpg" alt=""></li>
+      <li><img src="images/3.jpg" alt=""></li>
+    </ul> -->
     <!-- Start Hero Slider -->
+
     <div class="hero-slider flexslider clearfix" data-autoplay="yes" data-pagination="no" data-arrows="yes" data-style="fade" data-pause="yes">
       <ul class="slides">
       <?php foreach($banners as $banner):?>
-        <li class="parallax" style="background-image:url(<?php echo base_url() ?>assets/uploads/banners/<?php echo $banner->banner_image ?>);"><div class="bg-content"> <p class="banner-text"><?php echo $banner->title?></p></div>
+        <li class="parallax" style="background-image:url(<?php echo base_url() ?>assets/uploads/banners/<?php echo $banner->banner_image ?>);"><div class="bg-content"> <h1 class="banner-text"><?php echo $banner->title?></h1> 
+
+        <p class="banner-slug"><?php echo $banner->slug ?> </p>
+
+
+        </div>
         </li>
       <?php endforeach ?>
 

@@ -50,11 +50,39 @@
 <!--[if lte IE 9]><link rel="stylesheet" type="text/css" href="css/ie.css" media="screen" /><![endif]-->
 <!-- Color Style -->
 <link href="<?php echo base_url()?>assets/colors/color1.css" rel="stylesheet" type="text/css">
+<link href="<?php echo base_url()?>assets/css/responsiveslides.css" rel="stylesheet" type="text/css">
+<!-- <link href="<?php echo base_url()?>assets/css/demo.css" rel="stylesheet" type="text/css">
+ -->
 <!-- SCRIPTS
+
+
   ================================================== -->
-<script src="js/modernizr.js"></script><!-- Modernizr -->
+<script src="<?php echo base_url()?>assets/js/jquery-2.0.0.min.js"></script> <!-- Jquery Library Call --> 
+  <script src="<?php echo base_url()?>assets/js/responsiveslides.js"></script>
+<script src="<?php echo base_url()?>assets/js/modernizr.js"></script><!-- Modernizr -->
 
 <script>
+
+// Wrap every letter in a span
+var textWrapper = document.querySelector('.ml9 .letters');
+textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
+
+anime.timeline({loop: true})
+  .add({
+    targets: '.ml9 .letter',
+    scale: [0, 1],
+    duration: 1500,
+    elasticity: 600,
+    delay: (el, i) => 45 * (i+1)
+  }).add({
+    targets: '.ml9',
+    opacity: 0,
+    duration: 1000,
+    easing: "easeOutExpo",
+    delay: 1000
+  });
+
+  
 var contactForm = document.getElementById('contactForm');
 contactForm.addEventListener('submit', contact_us, false);
 
