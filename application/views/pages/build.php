@@ -33,7 +33,7 @@
                 <div class="page">
                     <div class="row">
                         <div id="statpage" class="col-md-12 col-sm-12">
-                            <h3><?php echo ("Why Let us Handle you Project") ?></h3>
+                            <h3><?php echo ("Why Let us Handle your Project") ?></h3>
                             
                            <?php echo ($this->settings_model->getStaticContent('lets_build_text')); ?>
 
