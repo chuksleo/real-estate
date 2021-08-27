@@ -18,7 +18,7 @@
         namespace = vars.namespace,
         touch = ("ontouchstart" in window) || window.DocumentTouch && document instanceof DocumentTouch,
         eventType = (touch) ? "touchend" : "click",
-        vertical = vars.direction === "vertical",
+        vertical = vars.direction === "",
         reverse = vars.reverse,
         carousel = (vars.itemWidth > 0),
         fade = vars.animation === "fade",

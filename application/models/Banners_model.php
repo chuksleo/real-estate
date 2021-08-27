@@ -51,10 +51,11 @@ class Banners_model extends CI_Model {
 
 
 
-     public function updateBanner($bid, $title,$banner,$status){  
+     public function updateBanner($bid, $title,$slug,$banner,$status){  
          $data = array(
 
-                'title' => $title,                
+                'title' => $title,  
+                'slug' => $slug,              
                 'banner_image' => $banner,
                 'active' => $status,
                
