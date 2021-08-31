@@ -21,7 +21,8 @@ class Project extends CI_Controller {
         $this->load->library('form_validation');
         $this->load->helper('form');
         $this->load->model('project_model');
-        $this->load->model('campaign_model');
+        $this->load->model('project_images');
+        
 //        if (!$this->ion_auth->logged_in()) {
 //            $data['is_loggedin'] = $this->ion_auth->logged_in();
 //            $this->load->view("auth/login", $data);
@@ -44,7 +45,7 @@ class Project extends CI_Controller {
     public function details_public($id) {
         $data['is_loggedin'] = $this->ion_auth->logged_in();
         $data['projectId'] = $id;
-        $data['project'] = $this->project_model->get_project($id);
+        $data['project'] = $this->project_model->getProjectById($id);
         $data['campaigns'] = $this->campaign_model->get_project_campaigns($id);
        
         // Checking if user is logged in
@@ -239,6 +240,22 @@ class Project extends CI_Controller {
         $this->ckeditor->config['width'] = $width;
         //configure ckfinder with ckeditor config 
         $this->ckfinder->SetupCKEditor($this->ckeditor, $path);
+    }
+
+
+
+
+    public function projectdetails($pid){
+
+
+        $data['project'] = $this->project_model->getProjectById($pid);
+        $data['images'] = $this->project_images->getImagesByProjectId($pid);
+        $data['page_title'] = lang('lb_title');
+        $data['page_description'] = strip_tags(substr($this->settings_model->getStaticContent('lets_build_text'), 0,120));
+        $this->load->view('section/header', $data);
+        $this->load->view('pages/project_detail', $data);
+        $this->load->view('section/footer');
+
     }
 
 }

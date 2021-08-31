@@ -79,7 +79,6 @@
 <script src="<?php echo base_url()?>assets/js/bootstrap.js"></script> <!-- UI --> 
 <script src="<?php echo base_url()?>assets/js/waypoints.js"></script> <!-- Waypoints --> 
 <script src="<?php echo base_url()?>assets/js/init.js"></script> <!-- All Scripts -->
-<script src="<?php echo base_url()?>assets/js/init.js"></script> 
 <!--[if lte IE 9]><script src="js/script_ie.js"></script><![endif]-->
 </body>
 </html>

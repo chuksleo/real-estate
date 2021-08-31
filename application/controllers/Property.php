@@ -74,6 +74,8 @@ class Property extends CI_Controller {
             $this->load->view("property/index" , $data);
 
 
+        }else{
+            redirect('/');
         }
        
     }
@@ -523,7 +525,7 @@ class Property extends CI_Controller {
 
 
                 if($this->ion_auth->is_admin()){ 
-                    redirect('/admin/unpublished', 'refresh');
+                    redirect('/admin/properties/unpublished', 'refresh');
                 }else{
                     redirect('/user/properties', 'refresh');
                 }

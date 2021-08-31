@@ -14,7 +14,7 @@
 
 <?php 
 
-        $settings = $this->settings_model->get_all_settings();
+        
         $first = $settings['phone'][0];
         $phone = "";
         if($first == '0'){
@@ -46,41 +46,65 @@
                         </div>
                        
                   <!-- <div class="row"> -->
-                 
-          <div class="col-md-12 jk">
 
-          <h1>A Tour On Our Projects</h1>
-            <ul class="grid-holder col-3" style="overflow: unset !important;">
-             
-            
-            <?php foreach ($projects as $project):?>
-             
-             <?php $images = $this->project_images->getImagesByProjectId($project->project_id);?>
-              <li class="grid-item post format-gallery">
-                <div class="grid-item-inner">
-                  <div class="media-box">
-                    <div class="flexslider" data-autoplay="yes" data-pagination="yes" data-arrows="yes" data-style="slide" data-pause="yes">
-                      <ul class="slides">
-                        <?php foreach($images as $imag):?>
-                        <li class="item"><a href="<?php echo base_url() ?>assets/uploads/projects/<?= $imag->image ?>" data-rel="prettyPhoto[postname]"><img src="<?php echo base_url() ?>assets/uploads/projects/<?= $imag->image ?>" alt="" ></a></li>
-                       
 
-                      <?php endforeach ?>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="grid-content">
-                    <h4><a href="blog-post.html"><?= $project->project_title ?></a></h4>
-                    
-                    <?= $project->description ?>
-                  </div>
+
+
+                <div class="spacer-40"></div>
+    <div class="container">
+      <div class="row">
+          <div class="property-columns" id="latest-properties">
+              <div class="col-md-12">
+                <div class="block-heading">
+                  <h4><span class="heading-icon"><i class="fa fa-leaf"></i></span>A Tour on Our Projects</h4>
+                  <a href="simple-listing-fw.html" class="btn btn-primary btn-sm pull-right"> <i class="fa fa-long-arrow-right"></i></a>
                 </div>
-              </li>
-             <?php endforeach ?>
-            </ul>
-            
-           
+              </div>
+              <ul>
+
+                 <?php foreach ($projects as $project):?>
+                  <?php $images = $this->project_images->getImagesByProjectId($project->project_id);?>
+
+                  <?php  $link_text  = $this->property_model->cleanTitle($project->project_title);?>
+
+                <li class="col-md-4 col-sm-6 type-rent">
+                      <div class="property-block">
+                          <a href="#" class="property-featured-image">
+                              <img src="<?php echo base_url() ?>assets/uploads/projects/<?= $images[0]->image ?>" alt="">
+                              
+                          </a>
+                      <div class="property-info">
+                              <h4><a href="property-detail.html"><?= $project->project_title ?></a></h4>
+                             
+                            <p><?php echo strip_tags(substr($project->description, 0, 500 )) ?></p>
+                      </div>
+                        <div class="">
+                          <a href="<?php echo base_url() ?>lets-build/<?= $link_text ?>/<?= $project->project_id ?>" class="btn btn-primary btn-block">Tour Now </a>
+
+                        </div>
+                          
+
+
+
+                          </div>
+                </li>
+     
+             
+         <?php endforeach ?>
+                
+              
+              </ul>
           </div>
+        </div>
+      </div>
+
+
+
+
+
+
+                 
+      
           <!-- </div> -->
 
                       

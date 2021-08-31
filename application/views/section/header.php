@@ -281,23 +281,23 @@ function getCategoryTypes(page){
             <nav class="navigation">
               <ul class="sf-menu">
                 <li><a href="<?php echo base_url() ?>">Home</a></li>
+
+
+                
                  <li><a href="javascript:;">Properties</a>
                   <ul class="dropdown">
 
                     <li><a href="<?php echo base_url() ?>all-properties">All Properties</a></li>
                     <li class="">
-                 <a href="<?php echo base_url() ?>properties/popular"><?php  echo "Popular Properties" ?></a>
-                                  
-                </li>
+                      <a href="<?php echo base_url() ?>properties/popular"><?php  echo "Popular Properties" ?></a> </li>
                     <?php foreach ($categories as $cat): ?>
                       <?php  $link_text = $this->property_model->cleanTitle($cat->title);?>
                     <li><a href="<?= base_url() ?>property-category/<?= $link_text ?>/<?= $cat->catId ?>"><?= $cat->title ?></a></li>
                     <?php endforeach ?>
 
-                    <li class="">
-                 <a href="<?php echo base_url() ?>network-marketing"><?php  echo "Join Real Estate Network Marketing" ?></a>
+                    <li class=""><a href="<?php echo base_url() ?>network-marketing"><?php  echo "Join Real Estate Network Marketing" ?></a>
                                   
-                </li>
+                    </li>
                     
                   </ul>
                 </li>
