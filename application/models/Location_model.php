@@ -25,11 +25,24 @@ class Location_model extends CI_Model {
     }
 
 
+    // public function isParent($lid){
+    //     $this->db->select()->from('locations AS l')->where('l.lid =',$lid);
+    //     $query = $this->db->get();
+    //     $result = $query->row();
+    //     if($result->lid == 0){
+    //         return True;
+    //     }else{
+    //         return False;
+    //     }
+
+
+    // }
+
     public function isParent($lid){
         $this->db->select()->from('locations AS l')->where('l.lid =',$lid);
         $query = $this->db->get();
         $result = $query->row();
-        if($result->lid == 0){
+        if($result->parentid == 0){
             return True;
         }else{
             return False;
@@ -37,6 +50,23 @@ class Location_model extends CI_Model {
 
 
     }
+
+
+
+
+    public function hasChild($lid){
+        $this->db->select()->from('locations AS l')->where('l.parentid =',$lid);
+        $query = $this->db->get();
+        $result = $query->num_rows();
+        if($result >  0){
+            return True;
+        }else{
+            return False;
+        }
+
+
+    }
+
 
     public function getAllParentLocations(){
         $pid = 0;

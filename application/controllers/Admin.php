@@ -681,7 +681,7 @@ class Admin extends CI_Controller {
 
     }   
 
-
+    
 
     public function locationedit($lid) {
             
@@ -689,7 +689,33 @@ class Admin extends CI_Controller {
             $data['loc'] = $this->location_model->getLocationById($lid);
 
             if($this->input->post()){
-           
+                $depth = 0;
+
+                if($this->input->post('parentid') ){
+
+                   $rdepth = $this->checkLocationDepth($this->input->post('parentid'));
+                   
+                   if($rdepth == 0){
+                      $depth = 1;
+                   }elseif($rdepth == 1){
+                      $depth = 2;
+
+                   }else{
+                      $this->session->set_flashdata('location_error','Sorry the Parent Location depth Exceed required level you can only set State->city->area'); 
+                      redirect('/admin/locations', 'refresh');  
+
+                   }
+
+
+
+                    if($this->input->post('parentid') == $lid){
+                        $this->session->set_flashdata('location_error','Sorry the Location Parent Cannot be set to itself!!'); 
+                        redirect('/admin/locations', 'refresh');
+                        exit();
+
+                    }
+
+                }
             
             $uid = $this->ion_auth->get_user_id();
             $config['upload_path'] = './assets/uploads/location/';
@@ -715,6 +741,7 @@ class Admin extends CI_Controller {
                 $this->input->post('parentid'), 
                 $this->input->post('description'),
                 $this->input->post('featured'), 
+                $depth,
                 $this->input->post('status'),
                 $this->input->post('dateval'));
 
@@ -745,12 +772,21 @@ class Admin extends CI_Controller {
             
        if($this->ion_auth->logged_in() == true){ 
 
+            if($this->location_model->hasChild($lid)){
 
-            if($this->location_model->deleteLocation($lid)){ 
-
+                $this->session->set_flashdata('location_error','Oops! Parent Location cannot be deleted.. Location  has dependencies'); 
                 redirect('/admin/locations', 'refresh');
+            }else{
+
+                if($this->location_model->deleteLocation($lid)){ 
+
+                    redirect('/admin/locations', 'refresh');
+
+                }
+
 
             }
+            
             
 
 

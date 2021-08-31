@@ -3,22 +3,70 @@
 
 
 ?>
+<link href="<?php echo base_url() ?>/assets/assets/css/animate.min.css" rel="stylesheet" media="all">
+
+
+        <!-- Bootstrap bootstrap-touch-slider Slider Main Style Sheet -->
+<link href="<?php echo base_url() ?>/assets/assets/css/bootstrap-touch-slider.css" rel="stylesheet" media="all">
   <!-- Site Showcase -->
   <div class="site-showcase">
-    <div class="slider-mask overlay-transparent"></div>
 
-<!-- 
-     <ul class="rslides" id="slider1">
-      <li><img src="images/1.jpg" alt=""></li>
-      <li><img src="images/2.jpg" alt=""></li>
-      <li><img src="images/3.jpg" alt=""></li>
-    </ul> -->
-    <!-- Start Hero Slider -->
 
-    <div class="hero-slider flexslider clearfix" data-autoplay="yes" data-pagination="no" data-arrows="yes" data-style="fade" data-pause="yes">
+        <div id="bootstrap-touch-slider" class="carousel bs-slider fade  control-round indicators-line" data-ride="carousel" data-autoplay="yes" data-pause="hover" data-interval="5000" >
+
+      
+
+            <!-- Wrapper For Slides -->
+            <div class="carousel-inner" role="listbox">
+              <?php $i = 0; foreach($banners as $banner):?>
+                <!-- Third Slide -->
+                <div class="item <?php if($i==0){echo "active";}?>">
+
+                    <!-- Slide Background -->
+                    <img src="<?php echo base_url() ?>assets/uploads/banners/<?php echo $banner->banner_image ?>" alt="Bootstrap Touch Slider"  class="slide-image"/>
+                    <div class="bs-slider-overlay"></div>
+
+                    <div class="container">
+                        <div class="row">
+                            <!-- Slide Text Layer -->
+                            <div class="slide-text slide_style_center">
+                                <h1 data-animation="animated zoomInRight"><?php echo $banner->title?></h1>
+                                <p data-animation="animated fadeInLeft"><?php echo $banner->slug ?></p>
+                               
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+                <!-- End of Slide -->
+                 <?php $i++; endforeach ?>
+
+                <!-- Second Slide -->
+               
+
+            </div><!-- End of Wrapper For Slides -->
+
+            <!-- Left Control -->
+            <a class="left carousel-control" href="#bootstrap-touch-slider" role="button" data-slide="prev">
+                <span class="fa fa-angle-left" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+
+            <!-- Right Control -->
+            <a class="right carousel-control" href="#bootstrap-touch-slider" role="button" data-slide="next">
+                <span class="fa fa-angle-right" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+
+        </div> <!-- End  bootstrap-touch-slider Slider -->
+
+
+
+    <!-- <div class="slider-mask overlay-transparent"></div> -->
+
+   <!--  <div class="hero-slider flexslider clearfix" data-autoplay="yes"  data-pagination="no" data-arrows="yes" data-style="fade" data-pause="yes">
       <ul class="slides">
       <?php foreach($banners as $banner):?>
-        <li class="parallax" style="background-image:url(<?php echo base_url() ?>assets/uploads/banners/<?php echo $banner->banner_image ?>);"><div class="bg-content"> <h1 class="banner-text"><?php echo $banner->title?></h1> 
+        <li class="parallax" style="background-image:url(<?php echo base_url() ?>assets/uploads/banners/<?php echo $banner->banner_image ?>);"><div class="bg-content"> <h1 class="banner-text" fade in><?php echo $banner->title?></h1> 
 
         <p class="banner-slug"><?php echo $banner->slug ?> </p>
 
@@ -29,7 +77,7 @@
 
 
       </ul>
-    </div>
+    </div> -->
     <!-- End Hero Slider --> 
     <!-- Site Search Module -->
     <div class="site-search-module">
@@ -180,6 +228,7 @@
               </div>
             </div>
           </div>
+
           <div class="row">
               <ul class="owl-carousel owl-alt-controls" data-columns="4" data-autoplay="no" data-pagination="no" data-arrows="yes" data-single-item="no">
                 <?php foreach($featured_properties as $property_item):?>
@@ -216,8 +265,7 @@
       </div>
     
 
-     <div id="content" class="content full">
-     
+     <div id="content" class="content full">     
 
 
 
@@ -352,4 +400,9 @@
 
     </div>
   </div>
- 
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.touchswipe/1.6.18/jquery.touchSwipe.min.js"></script>
+   <script src="<?php echo base_url() ?>assets/js/bootstrap-touch-slider.js"></script>
+        
+        <script type="text/javascript">
+            $('#bootstrap-touch-slider').bsTouchSlider();
+        </script>

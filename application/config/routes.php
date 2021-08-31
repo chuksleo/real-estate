@@ -131,6 +131,9 @@ $route['admin/projects/add'] = 'admin/projectadd';
 $route['admin/projects/edit/(:num)'] = 'admin/projectedit/$1';
 $route['admin/projects/delete/(:num)'] = 'admin/projectdelete/$1';
 
+
+$route['lets-build/(:any)/(:num)'] = 'project/projectdetails/$2';
+
 $route['admin/banners'] = 'admin/bannerlist';
 $route['admin/banners/add'] = 'admin/banneradd';
 $route['admin/banners/edit/(:num)'] = 'admin/banneredit/$1';
