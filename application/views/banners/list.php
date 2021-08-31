@@ -40,7 +40,7 @@ $this->load->view('section/admin/header', $data);
                                                
                                                    <td>
                                                    <?php  $link_text = $this->property_model->cleanTitle($banner->title);?>
-                                                  <a href="<?php echo base_url() ?>admin/banners/edit/<?php echo $banner->banner_id ?>" class="btn btn-square btn-primary mb-2" target="_blank"> Edit</a>  
+                                                  <a href="<?php echo base_url() ?>admin/banners/edit/<?php echo $banner->banner_id ?>" class="btn btn-square btn-primary mb-2"> Edit</a>  
 
 
                                                    <a href="<?php echo base_url() ?>admin/banners/delete/<?php echo $banner->banner_id ?>" class="btn btn-square btn-primary mb-2"> Delete</a></td>
