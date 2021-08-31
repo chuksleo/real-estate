@@ -303,7 +303,7 @@ function getCategoryTypes(page){
                 </li>
 
                 <li class="">
-                 <a href="<?php echo base_url() ?>lets-build"><?php  echo "Lets Build For You" ?></a>
+                 <a href="<?php echo base_url() ?>lets-build"><?php  echo "Let's Build For You" ?></a>
                                   
                 </li>
                  <li class="">
