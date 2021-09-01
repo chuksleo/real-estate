@@ -45,7 +45,7 @@
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
-                      <textarea cols="6" rows="5" id="contact_message" name="comments" class="form-control input-lg" placeholder="Message"></textarea>
+                      <textarea cols="6" rows="5" id="contact_message" name="comments" class="form-control input-lg" placeholder="Describe your choice property and we shall revert with same in 72hours"></textarea>
                       <button id="sentm" type="button" class="btn btn-primary btn-lg btn-block" onclick="contact_us()"> Send Message</button>
 
                        <button id="sendingm" type="button" class="btn btn-primary btn-lg btn-block" style="display: none;" > Sending Message ...</button>
@@ -60,7 +60,7 @@
             <div class="col-md-6 col-sm-6">
                 <h3>Our Location</h3>
               <div class="padding-as25 lgray-bg">
-                    <p class="big"><?php echo $settings['address'] ?></p>
+                    <!-- <p class="big"><?php echo $settings['address'] ?></p> -->
                   <p>Email us at <a href="mailto:<?php echo $settings['email'] ?>"><strong><?php echo $settings['email'] ?></strong></a> or Call us on <strong><?php echo $settings['phone'] ?></strong></p>
               </div>
             </div>
