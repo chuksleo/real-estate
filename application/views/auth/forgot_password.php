@@ -2,7 +2,6 @@
 //Loading header
 $data['title'] = 'Login';
 $data['javascript'] = 'app.js';
-$data['catregories'] = $categories;
 $this->load->view('section/header', $data);
 ?>
 
@@ -26,9 +25,10 @@ $this->load->view('section/header', $data);
       	<?php echo form_input($identity);?>
       </p>
 
-      <p><?php echo form_submit('submit', lang('forgot_password_submit_btn'), array("class" => "button"));?></p>
+      <p><?php echo form_submit('submit', lang('forgot_password_submit_btn'), array("class" => "btn btn-primary btn-block btn-lg top-btn-add"));?></p>
 
 <?php echo form_close();?>
+<div class="spacer-40"></div>
          </div>
 </div></div></div></section>
 <?php

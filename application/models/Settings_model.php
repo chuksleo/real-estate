@@ -61,7 +61,7 @@ class Settings_model extends CI_Model {
 
 
 
-	 public function update_settings($sitename, $logo, $email, $address, $phone, $phone2, $worktime, $contentcount, $twitter, $facebook, $linkedin, $webmail){
+	 public function update_settings($sitename, $logo, $email, $address, $phone, $phone2, $worktime, $contentcount, $twitter, $facebook, $linkedin, $instagram, $webmail){
 	 	$id = 1;
         $this->site_name = $sitename;
         $this->logo = $logo; 
@@ -74,6 +74,7 @@ class Settings_model extends CI_Model {
         $this->twitter_link = $twitter;
         $this->fb_link = $facebook;
         $this->linkedin_link = $linkedin;
+        $this->insta_link = $instagram;
         $this->webmail_link = $webmail;
         return $this->db->update("settings", $this, array("id" => $id));
     }

@@ -107,6 +107,11 @@ echo validation_errors('<span class="error">', '</span>');
                 <input type="text" name="linkedin" placeholder="Enter Facebook Link"  value="<?php echo isset($settings['linkedin_link']) ? $settings['linkedin_link'] : "" ?>" class="form-control" required>
         </div>
 
+        <div class="form-group col-md-6">            
+        <label for="title">Instagram Link</label>
+                <input type="text" name="instagram" placeholder="Enter Instagram Link"  value="<?php echo isset($settings['insta_link']) ? $settings['insta_link'] : "" ?>" class="form-control" required>
+        </div>
+
 
 
 
