@@ -1,4 +1,4 @@
-<?php $settings = $this->settings_model->get_all_settings(); ?><div class="site-showcase">
+  <?php $settings = $this->settings_model->get_all_settings(); ?><div class="site-showcase">
   <!-- Start Page Header -->
   <div class="parallax page-header" style="background-image:url(<?php echo base_url()?>assets/images/about.jpeg);">
         <div class="container">
@@ -70,11 +70,12 @@
                 <li class="col-md-4 col-sm-6 type-rent">
                       <div class="property-block">
                           <a href="#" class="property-featured-image">
+                          <?php if($images):?>
                               <img src="<?php echo base_url() ?>assets/uploads/projects/<?= $images[0]->image ?>" alt="">
-                              
+                            <?php endif ?>
                           </a>
                       <div class="property-info">
-                              <h4><a href="property-detail.html"><?= $project->project_title ?></a></h4>
+                              <h4><a href="<?php echo base_url() ?>lets-build/<?= $link_text ?>/<?= $project->project_id ?>"><?= $project->project_title ?></a></h4>
                              
                             <p><?php echo strip_tags(substr($project->description, 0, 500 )) ?></p>
                       </div>

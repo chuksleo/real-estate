@@ -162,6 +162,7 @@ class Admin extends CI_Controller {
                     $this->input->post('twitter'), 
                     $this->input->post('facebook'), 
                     $this->input->post('linkedin'), 
+                    $this->input->post('instagram'), 
                     $this->input->post('webmail') );
                 redirect('/admin/settings', 'refresh');
             }

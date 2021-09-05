@@ -188,7 +188,7 @@ class Auth extends CI_Controller {
             $this->data['type'] = $this->config->item('identity', 'ion_auth');
             // setup the input
             $this->data['identity'] = array('name' => 'identity',
-                'id' => 'identity',
+                'id' => 'identity', 'class' => 'form-control',
             );
 
             if ($this->config->item('identity', 'ion_auth') != 'email') {
@@ -196,11 +196,11 @@ class Auth extends CI_Controller {
             } else {
                 $this->data['identity_label'] = $this->lang->line('forgot_password_email_identity_label');
             }
-
+ 
             // set any errors and display the form
             $this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
-            $this->data['categories'] = $this->project_category_model->getCategories();
-            $this->data['page_title'] = "Forgot Password | DONOFUND: Africa #1 Fundraising Platform for Crowdfunding ";
+            $this->data['page_title'] = "Forgot Password | Realestate9ja";
+            $this->data['page_description'] = "Recover your Password";
             $this->_render_page('auth/forgot_password', $this->data);
         } else {
             $identity_column = $this->config->item('identity', 'ion_auth');

@@ -66,6 +66,10 @@ $this->load->view('section/admin/header', $data);
                                                 <td>Linkedin</td>
                                                 <td><?php echo $settings['linkedin_link']?></td>
                                             </tr>
+                                             <tr>
+                                                <td>Instagram</td>
+                                                <td><?php echo $settings['insta_link']?></td>
+                                            </tr>
                                             <tr>
                                                 <td>Webmail</td>
                                                 <td><?php echo $settings['webmail_link']?></td>
