@@ -11,7 +11,7 @@ $lang['home_description'] = 'Find and buy the best properties and apartments at 
 
 
 
-$lang['lb_title'] = 'Lets Build For You: Africa #1 housing platform';
+$lang['lb_title'] = "Let's Build For You: Africa #1 housing platform";
 $lang['lb_description'] = 'Find and buy the best properties and apartments at the cheapest/ best rates in any city around Nigeria. Get better prices online and pay at your convinience.';
 
 

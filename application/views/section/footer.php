@@ -1,4 +1,8 @@
-<?php //$categories = $this->project_category_model->getCategories($num=4);?>
+<?php 
+      $settings = $this->settings_model->get_all_settings();
+      
+?>
+
  <!-- Start Site Footer -->
   <footer class="site-footer">
       <div class="container">
@@ -53,15 +57,14 @@
     <div class="container">
       <div class="row">
         <div class="copyrights-col-left col-md-6 col-sm-6">
-          <p>&copy; <?php echo ($this->settings_model->getStaticContent('footer_text_two')) ?></p>
+          <p style="color: #fff!important;"> <?php echo ($this->settings_model->getStaticContent('footer_text_two')) ?></p>
         </div>
         <div class="copyrights-col-right col-md-6 col-sm-6">
           <div class="social-icons">
-              <a href="https://www.facebook.com/" target="_blank"><i class="fa fa-facebook"></i></a>
-             <a href="https://twitter.com/" target="_blank"><i class="fa fa-twitter"></i></a>
-             <a href="http://www.pinterest.com/" target="_blank"><i class="fa fa-pinterest"></i></a>
-             <a href="https://plus.google.com/" target="_blank"><i class="fa fa-google-plus"></i></a>
-             <a href="http://www.pinterest.com/" target="_blank"><i class="fa fa-youtube"></i></a>
+              <a href="<?php echo($settings['fb_link']); ?>" target="_blank"><i class="fa fa-facebook"></i></a>
+             <a href="<?php echo($settings['twitter_link']); ?>" target="_blank"><i class="fa fa-twitter"></i></a>
+             <a href="<?php echo($settings['insta_link']); ?>" target="_blank"><i class="fa fa-instagram"></i></a>
+             
              <a href="#"><i class="fa fa-rss"></i></a>
           </div>
         </div>

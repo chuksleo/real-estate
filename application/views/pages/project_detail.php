@@ -25,7 +25,7 @@
 
           <?php foreach($images as $img):?>
             <li class="col-md-6 col-sm-6 gallery-item format-image">
-              <div class="grid-item-inner"> <a href="<?php echo base_url()?>assets/uploads/projects/<?= $img->image ?>" data-rel="prettyPhoto[gallery]" class="media-box"> <img src="<?php echo base_url()?>assets/uploads/projects/<?= $img->image?>" alt=""> </a> </div>
+              <div class="grid-item-inner"> <a href="<?php echo base_url()?>assets/uploads/projects/<?= $img->image ?>" data-rel="prettyPhoto[gallery]" class="media-box"> <img src="<?php echo base_url()?>assets/uploads/projects/<?= $img->image ?>" alt="<?= $project->project_title ?>"> </a> </div>
             </li>
             <?php endforeach ?>
           </ul>

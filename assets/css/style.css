@@ -1253,6 +1253,10 @@ html[xmlns] .slides {
 	padding:15px;
 	display:block;
 	border-bottom:1px solid #efefef;
+	overflow-wrap: break-word;
+}
+.widgettitle.newcolor {
+    color: #fff;
 }
 .property-amenities{
 	background:#f8f8f8;
@@ -1454,6 +1458,7 @@ html[xmlns] .slides {
 .site-footer-bottom p{
 	margin-bottom:0;
 	font-size:12px;
+	color: #fff;
 }
 .site-header .social-icons{
 	margin-top:30px;
@@ -3128,6 +3133,7 @@ span.progress-bar-tooltip:after {
 
 	font-size: 12px !important;
 	line-height: 25px !important;
+	color: #666666 !important ;
 }
 
 
