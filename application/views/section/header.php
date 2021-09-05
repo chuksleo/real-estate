@@ -235,7 +235,7 @@ function getCategoryTypes(page){
           </div>
           <div class="col-md-8 col-sm-6">
             <ul class="horiz-nav pull-right">
-                  <li><a href="<?php echo($settings['fb_link']); ?>" target="_blank"><i class="fa fa-instagram"></i></a></li>
+                  <li><a href="<?php echo($settings['insta_link']); ?>" target="_blank"><i class="fa fa-instagram"></i></a></li>
                   <li><a href="<?php echo($settings['fb_link']); ?>" target="_blank"><i class="fa fa-facebook"></i></a></li>
                   <li><a href="<?php echo($settings['twitter_link']); ?>" target="_blank"><i class="fa fa-twitter"></i></a></li>
               </ul>
