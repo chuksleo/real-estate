@@ -208,8 +208,18 @@ function getCategoryTypes(page){
   <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
 <![endif]-->
 <div class="body">
+
   <!-- Start Site Header -->
   <header class="site-header">
+   
+
+   <div id="top-social" class="col-md-8 col-sm-12 mobile-social-horizontal">
+    <span>follow us on: </span><ul class="horiz-nav pull-right">
+                  <li><a href="<?php echo($settings['insta_link']); ?>" target="_blank"><i class="fa fa-instagram"></i></a></li>
+                  <li><a href="<?php echo($settings['fb_link']); ?>" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                  <li><a href="<?php echo($settings['twitter_link']); ?>" target="_blank"><i class="fa fa-twitter"></i></a></li>
+              </ul>
+   </div> 
     <div class="top-header hidden-xs">
       <div class="container">
         <div class="row">
@@ -269,6 +279,9 @@ function getCategoryTypes(page){
         </div>
       </div>
     </div>
+
+
+
     <div class="main-menu-wrapper">
       <div class="container">
         <div class="row">

@@ -84,7 +84,7 @@ $this->property_model->setPageViewForProperty($property->pid);
             
 
               <h2 class="page-title"><?= $property->title ?>, <span class="location"><?= $property->location_title ?></span></h2>
-              <div class="price"><strong>$</strong><span><?= $price = $this->property_model->getMoneyFormat($property->price) ?></span></div>
+              <div class="price"><strong>&#x20A6;</strong><span><?= $price = $this->property_model->getMoneyFormat($property->price) ?></span></div>
               <div class="property-amenities clearfix"> <span class="area"><strong>For</strong>Sale</span> <span class="area"><strong><?= $property->size_sqm ?></strong>Area</span> <span class="baths"><strong><?= $property->bathrooms ?></strong>Baths</span> <span class="beds"><strong><?= $property->bedrooms ?></strong>Beds</span> <span class="parking"><strong><?= $property->agreement_fee ?></strong>Fees</span> </div>
               <div class="property-slider">
                 <div id="property-images" class="flexslider">
