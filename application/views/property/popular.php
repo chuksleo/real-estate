@@ -84,10 +84,10 @@ $this->load->view('section/header', $data);
     <?php } ?></a> </div>
                             <div class="col-md-8">
                               <div class="property-info">
-                                <div class="price"><strong>$</strong><span><?php echo $property_item->price ?></span></div>
+                                <div class="price"><strong>&#x20A6;</strong><span><?= $price = $this->property_model->getMoneyFormat($property_item->price) ?></span></div>
                                 <h3><a href="<?= base_url() ?>property/<?= $link_text ?>/<?=  $property_item->pid ?>"><?php echo $property_item->title ?></a></h3>
                                 <span class="location"><?php echo $property_item->location_title ?></span>
-                                <p><?php echo $property_item->property_description ?></p>
+                                <p><?php echo substr(strip_tags($property_item->property_description), 0, 150)  ?>....</p>
                               </div>
                               <div class="property-amenities clearfix"> <span class="area"><strong><?php echo $property_item->size_sqm ?></strong>Area</span> <span class="baths"><strong><?php echo $property_item->bathrooms ?></strong>Baths</span> <span class="beds"><strong><?php echo $property_item->bedrooms ?></strong>Beds</span> <span class="parking"><strong>1</strong>Parking</span> </div>
                             </div>
