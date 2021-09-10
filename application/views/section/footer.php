@@ -35,8 +35,17 @@
                </ul>
            </div>
             <div class="col-md-4 col-sm-6 footer-widget widget">
-              <h3 class="widgettitle newcolor">Facebook Fanpage</h3>
-                  <ul class="twitter-widget"></ul>
+              <h3 class="widgettitle newcolor">Follow Our Social Handles</h3>
+                   <div class="wrp">
+
+
+                            <a class="icon icon-twitter" href="<?php echo($settings['twitter_link']); ?>" target="_blank"><i class="fa fa-twitter ico-ico"></i></a>
+
+                            <a class="icon icon-facebook" href="<?php echo($settings['fb_link']); ?>" target="_blank"><i class="fa fa-facebook ico-ico"></i></a>
+
+                            <a class="icon icon-instagram" href="<?php echo($settings['insta_link']); ?>" target="_blank"><i class="fa fa-instagram ico-ico"></i></a>
+
+                            </div>
            </div>
             <div id="footmenu" class="col-md-3 col-sm-6 footer-widget widget">
                 <h3 class="widgettitle newcolor">Our Newsletter</h3>

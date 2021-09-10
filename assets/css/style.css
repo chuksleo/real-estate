@@ -3125,6 +3125,10 @@ span.progress-bar-tooltip:after {
 	}
 }
 @media only screen and (max-width: 480px){
+
+
+
+
 #statpage h3 {
     font-size: 22px!important;
 }
@@ -3871,6 +3875,9 @@ color: #fff;
   text-align: center;
 }
 @media (min-width: 500px) {
+	#top-social{
+	display: none;
+}
   .ribbons-wrapper {
     display: flex;
     flex-wrap: wrap;
@@ -3879,6 +3886,27 @@ color: #fff;
   .ribbon {
     width: 48%;
   }
+}
+
+@media (max-width: 490px) {
+
+	#top-social{
+		display: block;
+		background-color: #dc0024;
+		height: 30px;
+		padding-top: 2px;
+	}	
+	#top-social span {
+	    color: #000;
+	    margin: auto;
+	    font-weight: bold;
+	    padding-top: ;
+	}
+	.accordion-inner p {
+    font-size: 18px!important;
+    line-height: 30px !important;
+}
+
 }
 
 
@@ -4409,4 +4437,157 @@ button .btn-search {
         display: none;
     }
 
+}
+
+
+.accordion-inner p {
+    font-size: 22px;
+    line-height: 40px;
+}
+
+
+.accordion-heading .accordion-toggle.active h3 {
+    color: #fff !important;
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+   wrp {
+  text-align: center;
+  height: 100%;
+  width: 100%;
+}
+.wrp::before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
+
+.icon {
+    display: inline-block;
+    font-size: 32px;
+    line-height: 60px;
+    height: 60px;
+    width: 60px;
+    margin-right: 20px;
+    color: #4099ff;
+    border-radius: 100%;
+    position: relative;
+}
+
+.icon::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-radius: 100%;
+  background: rgba(0,0,0,0.1);
+  z-index: -1;
+}
+.icon::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  vertical-align: middle;
+  width: 100%;
+  height: 100%;
+  transform: scale(0);
+  background: #4099ff;
+  border-radius: 100%;
+  z-index: -1;
+}
+.ico-ico{
+  margin-left: 25%;
+}
+.icon:hover {
+  animation-name: bubble2;
+  animation-duration: 0.5s;
+  animation-delay: 0.1s;
+  animation-fill-mode: forwards;
+}
+.icon:hover::after {
+  animation-name: bubble;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+.icon-twitter {
+  color: #4099ff;
+}
+.icon-twitter::after {
+  background: #4099ff;
+}
+.icon-facebook {
+  color: #3b5998;
+}
+.icon-facebook::after {
+  background: #3b5998;
+}
+.icon-instagram {
+  color: #3f729b;
+}
+.icon-instagram::after {
+  background: #3f729b;
+}
+.icon-gplus {
+  color: #dc4e41;
+}
+.icon-gplus::after {
+  background: #dc4e41;
+}
+@-moz-keyframes bubble {
+  100% {
+    transform: scale(1);
+  }
+}
+@-webkit-keyframes bubble {
+  100% {
+    transform: scale(1);
+  }
+}
+@-o-keyframes bubble {
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes bubble {
+  100% {
+    transform: scale(1);
+  }
+}
+@-moz-keyframes bubble2 {
+  100% {
+    color: #fff;
+  }
+}
+@-webkit-keyframes bubble2 {
+  100% {
+    color: #fff;
+  }
+}
+@-o-keyframes bubble2 {
+  100% {
+    color: #fff;
+  }
+}
+@keyframes bubble2 {
+  100% {
+    color: #fff;
+  }
 }
