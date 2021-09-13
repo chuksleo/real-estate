@@ -4049,6 +4049,14 @@ button .btn-search {
 }
 
 
+#statabtpage p{
+
+	font-size: 20px ;
+	line-height: 34px;
+	color: #666666 !important ;
+}
+
+
 #statpage h3 {
     font-size: 43px;
     font-weight: bold;
@@ -4462,8 +4470,8 @@ button .btn-search {
 
 
 
-   wrp {
-  text-align: center;
+.wrp {
+  margin-bottom: 10%;	
   height: 100%;
   width: 100%;
 }
