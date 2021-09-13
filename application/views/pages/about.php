@@ -29,7 +29,7 @@
             <div class="container">
                 <div class="page">
                     <div class="row">
-                        <div id="statpage" class="col-md-6 col-sm-6">
+                        <div id="statabtpage" class="col-md-6 col-sm-6">
                             <h3><?php echo ($this->settings_model->getStaticContent('about_header_one')) ?></h3>
                             <?php echo ($this->settings_model->getStaticContent('about_text_main')) ?>
 
@@ -84,7 +84,7 @@
                               <h4><span class="heading-icon"><i class="fa fa-question"></i></span><?php echo (strip_tags($this->settings_model->getStaticContent('about_header_three'))) ?></h4>
                           </div>
                           <div class="accordion" id="toggleArea">
-                            <div class="accordion-group panel" style="font-size: 24px;">
+                            <div class="accordion-group panel" style="font-size: 22px;line-height: 30px;">
                             <?php echo (strip_tags($this->settings_model->getStaticContent('about_mission_text'))) ?>
                              
                             </div>
@@ -102,7 +102,7 @@
                               <h4><span class="heading-icon"><i class="fa fa-question"></i></span><?php echo (strip_tags($this->settings_model->getStaticContent('about_header_four'))) ?></h4>
                           </div>
                           <div class="accordion" id="toggleArea">
-                            <div class="accordion-group panel" style="font-size: 24px;">
+                            <div class="accordion-group panel" style="font-size: 22px;line-height: 30px;">
                             <?php echo (strip_tags($this->settings_model->getStaticContent('about_vision_text'))) ?>
                              
                             </div>
