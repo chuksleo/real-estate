@@ -5,7 +5,7 @@
 <div class="site-showcase"> 
     <!-- Start Page Header -->
     <div class="parallax page-header" id="contact-map">
-         <iframe width="100%" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=100%20king%20street%20west,%20suite%205700%20Toronto,%20ON%20M5x%201c7&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+       <!--   <iframe width="100%" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=100%20king%20street%20west,%20suite%205700%20Toronto,%20ON%20M5x%201c7&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe> -->
     </div>
     <!-- End Page Header --> 
   </div>
@@ -58,7 +58,7 @@
               <div id="message"></div>
             </div>
             <div class="col-md-6 col-sm-6">
-                <h3>Our Location</h3>
+                <h3>Contact Info</h3>
               <div class="padding-as25 lgray-bg">
                     <!-- <p class="big"><?php echo $settings['address'] ?></p> -->
                   <p>Email us at <a href="mailto:<?php echo $settings['email'] ?>"><strong><?php echo $settings['email'] ?></strong></a> or Call us on <strong><?php echo $settings['phone'] ?></strong></p>

@@ -603,7 +603,7 @@ class Property_model extends CI_Model {
     public  function getMoneyFormat($price) {
         
         setlocale(LC_MONETARY,"de_DE");
-        $formated_price = number_format(($price), 2, '.', ',');
+        $formated_price = number_format(($price), 0, '.', ',');
 
         return $formated_price;
     }
