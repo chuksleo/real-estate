@@ -115,14 +115,17 @@ $this->property_model->setPageViewForProperty($property->pid);
               <ul class="grid-holder col-3">
 
               <?php foreach($realated_properties as $property_item):?>
-                <?php  $link_text = $this->property_model->cleanTitle($property_item->title);?>
+                <?php  $link_text = $this->property_model->cleanTitle($property_item->title);
+
+                  $img_count = $this->property_images->getImagesCountByPropertyId($property_item->pid);
+                ?>
                 <li class="grid-item type-rent">
-                  <div class="property-block"> <a href="<?= base_url() ?>property/<?= $link_text ?>/<?=  $property_item->pid ?>" class="property-featured-image"> <img src="<?php echo base_url() ?>assets/uploads/property/<?php echo $property_item->image ?>" alt="<?php echo $property_item->title ?>"> <span class="images-count"><i class="fa fa-picture-o"></i> 2</span><?php if($property_item->admin_own == "No"){?> <span class="ribbon3">Promoted</span>
+                  <div class="property-block"> <a href="<?= base_url() ?>property/<?= $link_text ?>/<?=  $property_item->pid ?>" class="property-featured-image"> <img src="<?php echo base_url() ?>assets/uploads/property/<?php echo $property_item->image ?>" alt="<?php echo $property_item->title ?>"> <span class="images-count"><i class="fa fa-picture-o"></i> <?php echo $img_count ?></span><?php if($property_item->admin_own == "No"){?> <span class="ribbon3">Promoted</span>
     <?php } ?> </a>
                     <div class="property-info">
                       <h4><a href="<?= base_url() ?>property/<?= $link_text ?>/<?=  $property_item->pid ?>"><?php echo $property_item->title ?></a></h4>
                       <span class="location"><?php echo $property_item->location_title ?></span>
-                      <div class="price"><strong>$</strong><span><?php echo $property_item->price ?></span></div>
+                      <div class="price"><strong>&#x20A6;</strong><span><?= $price = $this->property_model->getMoneyFormat($property_item->price) ?></span></div>
                     </div>
                     <div class="property-amenities clearfix"> <span class="area"><strong><?php echo $property_item->size_sqm ?></strong>Area</span> <span class="baths"><strong><?php echo $property_item->bathrooms ?></strong>Baths</span> <span class="beds"><strong><?php echo $property_item->bedrooms ?></strong>Beds</span>  </div>
                   </div>

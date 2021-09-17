@@ -24,7 +24,7 @@ class Property extends CI_Controller {
         $this->load->model('Property_facility_model');
         $this->load->model('property_facility_map_model');
         $this->load->model('property_category_model');
-        $this->load->model('property_images');
+        // $this->load->model('property_images');
          $this->load->model('message_model');
 
         $this->load->model('inspection_request_model');

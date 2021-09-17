@@ -27,6 +27,19 @@ class Property_images extends CI_Model {
         return $query->result();
       
     }
+
+
+
+    public function getImagesCountByPropertyId($id) {
+
+        $this->db->select()->from('property_images AS l')->where('l.property_id =',$id);
+            
+            
+        $query = $this->db->get();
+            
+        return $query->num_rows();
+      
+    }
     
 
     

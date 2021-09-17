@@ -50,12 +50,17 @@
                             <h3><?php echo ($this->settings_model->getStaticContent('about_header_two')) ?></h3>
                           <!-- Start Accordion -->
                           <div class="accordion" id="accordionArea">
+
+
+
                             <div class="accordion-group panel">
                               <div class="accordion-heading accordionize"> <a class="accordion-toggle active" data-toggle="collapse" data-parent="#accordionArea" href="#oneArea"> <?php echo ($this->settings_model->getStaticContent('home_header_one')) ?> <i class="fa fa-angle-down"></i> </a> </div>
-                              <div id="oneArea" class="accordion-body in collapse">
+                              <div id="oneArea" class="accordion-body  collapse">
                                 <div class="accordion-inner"><?php echo ($this->settings_model->getStaticContent('home_text_one')) ?></div>
                               </div>
                             </div>
+
+
                             <div class="accordion-group panel">
                               <div class="accordion-heading accordionize"> <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordionArea" href="#twoArea"> <?php echo ($this->settings_model->getStaticContent('home_header_two')) ?> <i class="fa fa-angle-down"></i> </a> </div>
                               <div id="twoArea" class="accordion-body collapse">
