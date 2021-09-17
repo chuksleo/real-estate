@@ -71,7 +71,7 @@ $this->load->view('section/header', $data);
                             </label>
                         </div>
                         </p>
-                        <p>Don't have an account?  <a href="<?php echo base_url() ?>auth/register"> Sign up</a></p>
+                        <p>Don't have an account?  <a href="<?php echo base_url() ?>auth/register" class="btn btn-primary"> Sign up</a></p>
 
 
                          <div class="place_order_btn">

@@ -78,9 +78,12 @@ $this->load->view('section/header', $data);
                         <ul>
 
                 <?php foreach($properties as $property_item):?>
-                    <?php  $link_text = $this->property_model->cleanTitle($property_item->title);?>
+                    <?php  $link_text = $this->property_model->cleanTitle($property_item->title);
+
+                      $img_count = $this->property_images->getImagesCountByPropertyId($property_item->pid);
+                    ?>
                 <li class="type-rent col-md-12">
-                    <div class="col-md-4"> <a href="<?= base_url() ?>property/<?= $link_text ?>/<?=  $property_item->pid ?>" class="property-featured-image"> <img src="<?php echo base_url() ?>assets/uploads/property/<?php echo $property_item->image ?>" alt=""> <span class="images-count"><i class="fa fa-picture-o"></i> 2</span> <?php if($property_item->admin_own == "No"){?> <span class="ribbon3">Promoted</span>
+                    <div class="col-md-4"> <a href="<?= base_url() ?>property/<?= $link_text ?>/<?=  $property_item->pid ?>" class="property-featured-image"> <img src="<?php echo base_url() ?>assets/uploads/property/<?php echo $property_item->image ?>" alt=""> <span class="images-count"><i class="fa fa-picture-o"></i> <?php echo $img_count ?></span> <?php if($property_item->admin_own == "No"){?> <span class="ribbon3">Promoted</span>
     <?php } ?></a> </div>
                             <div class="col-md-8">
                               <div class="property-info">
