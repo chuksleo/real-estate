@@ -1,0 +1,93 @@
+<?php 
+
+
+echo '<?xml version="1.0" encoding="utf-8" ?>';
+
+
+?>
+<?php header("Content-Type:text/xml"); ?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+<url>
+  <loc><?php echo base_url() ?></loc>
+  <changefreq>daily </changefreq>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc><?php echo base_url() ?>about-us</loc>
+  <changefreq>daily </changefreq>
+  <priority>1.00</priority>
+</url>
+
+
+<url>
+  <loc><?php echo base_url() ?>post-request</loc>
+  <changefreq>daily </changefreq>
+  <priority>1.00</priority>
+</url>
+
+
+<url>
+  <loc><?php echo base_url() ?>lets-build</loc>
+  <changefreq>daily </changefreq>
+  <priority>1.00</priority>
+</url>
+
+
+<url>
+  <loc><?php echo base_url() ?>properties/popular</loc>
+  <changefreq>daily </changefreq>
+  <priority>1.00</priority>
+</url>
+
+<url>
+  <loc><?php echo base_url() ?>all-properties</loc>
+  <changefreq>daily </changefreq>
+  <priority>1.00</priority>
+</url>
+
+<url>
+  <loc><?php echo base_url() ?>network-marketing</loc>
+  <changefreq>daily </changefreq>
+  <priority>1.00</priority>
+</url>
+
+
+<url>
+  <loc><?php echo base_url() ?>auth/register</loc>
+  <changefreq>daily </changefreq>
+  <priority>1.00</priority>
+</url>
+
+
+<url>
+  <loc><?php echo base_url() ?>auth/login</loc>
+  <changefreq>daily </changefreq>
+  <priority>1.00</priority>
+</url>
+
+
+
+
+
+
+
+<?php foreach($properties as $property_item){?>
+   
+      <url>
+          <loc><?php echo base_url() ?>property/<?php echo ( str_replace(' ', '-', strtolower($property_item->title)))?>/<?php echo $property_item->pid ?></loc>
+          <changefreq>always</changefreq>
+          <priority>1.00</priority>
+      </url>
+ <?php  } ?>
+
+  
+ 
+ 
+
+</urlset>
