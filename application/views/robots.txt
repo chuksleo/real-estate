@@ -1,14 +1,13 @@
 <?php header("Content-Type:text"); ?>
-User-agent: *
-Disallow: /
-
-
 #User-agent: *
-#Disallow: /cgi-bin/
-#Disallow: /tmp/
-#Disallow: /uploads
-#Disallow: /assets/*
-#Allow: https://realestate9ja.com/
-#Allow: http://realestate9ja.com/
+#Disallow: /
 
-#Sitemap: https://realestate9ja.com/sitemap.xml
+
+User-agent: *
+Disallow: /cgi-bin/
+Disallow: /tmp/
+Disallow: /uploads
+Disallow: /assets/*
+Allow: http://realestate9ja.com/
+
+Sitemap: http://realestate9ja.com/sitemap.xml
