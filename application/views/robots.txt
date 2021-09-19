@@ -1,4 +1,5 @@
 <?php header("Content-Type:text"); ?>
+
 User-agent: *
 Disallow: /
 
@@ -8,7 +9,6 @@ Disallow: /
 #Disallow: /tmp/
 #Disallow: /uploads
 #Disallow: /assets/*
-#Allow: https://realestate9ja.com/
 #Allow: http://realestate9ja.com/
 
-#Sitemap: https://realestate9ja.com/sitemap.xml
+#Sitemap: http://realestate9ja.com/sitemap.xml
