@@ -45,7 +45,7 @@
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
-                      <textarea cols="6" rows="5" id="contact_message" name="comments" class="form-control input-lg" placeholder="Describe your choice property and we shall revert with same in 72hours"></textarea>
+                      <textarea cols="6" rows="5" id="contact_message" name="comments" class="form-control input-lg" placeholder="Describe your choice property and we shall revert with same in 72hours or less"></textarea>
                       <button id="sentm" type="button" class="btn btn-primary btn-lg btn-block" onclick="contact_us()"> Send Message</button>
 
                        <button id="sendingm" type="button" class="btn btn-primary btn-lg btn-block" style="display: none;" > Sending Message ...</button>
