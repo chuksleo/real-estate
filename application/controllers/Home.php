@@ -37,7 +37,9 @@ class Home extends CI_Controller {
         $data['locations'] = $this->location_model->mapLocation();
         $data['page_title'] = lang('home_title');
         $data['page_description'] = lang('home_description');
-         $data['banners'] = $this->banners_model->getAllBanners();
+        $data['banners'] = $this->banners_model->getAllBanners();
+        $data['ogimage'] = base_url().'assets/images/deafult.png';
+        $data['ogurl'] = base_url();
 
         $this->load->view('section/header', $data);
         $this->load->view('home/index', $data);

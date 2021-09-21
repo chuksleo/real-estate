@@ -6,6 +6,8 @@ $data['title'] = 'Login';
 $data['javascript'] = 'app.js';
 $data['page_title'] = lang('property_title');
 $data['page_description'] = lang('pr_description');
+$data['ogimage'] = base_url().'assets/images/deafult.png';
+$data['ogurl'] = base_url().'all-properties'; 
 $this->load->view('section/header', $data);
 
 
