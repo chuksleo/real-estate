@@ -23,6 +23,9 @@ $data['javascript'] = 'app.js';
 $data['page_title'] = $property->title." | RealEstate9ja.com";
 $data['page_description'] = $property->description;
 $settings = $this->settings_model->get_all_settings();
+
+$data['ogimage'] = base_url().'assets/uploads/property/'.$property->image;
+$data['ogurl'] = base_url().$link;
 $this->load->view('section/header', $data);
 
  if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')   
