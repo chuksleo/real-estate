@@ -5,7 +5,7 @@
 <?php 
       $settings = $this->settings_model->get_all_settings();
       $categories = $this->property_category_model->getAllCategories();
-
+     
      $firstname =  $this->session->userdata('firstname'); 
 ?>
 
@@ -26,12 +26,12 @@
 <meta name="author" content="Realestste9ja.com">
 <meta name="robots" content="index,follow">
  <meta property="og:type" content="website" />
-<meta property="og:image" content="https://static.hotels.ng/v7/img-og/hotels_ng_card.png"/>
+<meta property="og:image" content="<?= $ogimage ?>"/>
 
 
 <meta property="og:title" content="<?php echo $page_title ?>"/>
 <meta property="og:description" content="<?php echo $page_description ?>">
-<meta property="og:url" content=""/>
+<meta property="og:url" content="<?= $ogurl ?>"/>
 <meta property="og:site_name" content="Realestste9ja.com"/>
 
 
@@ -257,7 +257,7 @@ function getCategoryTypes(page){
       <div class="container">
         <div class="row">
           <div class="col-md-4 col-sm-8 col-xs-8">
-            <h1 class="logo"> <a href="<?php echo base_url() ?>"><img src="<?php echo base_url()?>assets/uploads/files/<?php echo($settings['logo']); ?>" class="logo-img" alt="<?php echo($settings['site_name']); ?>"></a> </h1>
+            <h1 class="logo"> <a href="<?php echo base_url() ?>"> <img src="<?php echo base_url()?>assets/uploads/files/<?php echo($settings['logo']); ?>" class="logo-img" alt="<?php echo($settings['site_name']); ?>"></a> </h1>
           </div>
           <div class="col-md-8 col-sm-4 col-xs-4">
               <div class="contact-info-blocks hidden-sm hidden-xs">

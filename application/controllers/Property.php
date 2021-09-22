@@ -289,6 +289,7 @@ class Property extends CI_Controller {
         $data['pages'] = "";
         $data['total'] = "";
         $data['per_page'] = "";
+
         
         $this->load->view("property/popular" , $data);
         
@@ -400,6 +401,8 @@ class Property extends CI_Controller {
         }else{
             $data['settings_content'] = $this->settings_model->get_all_settings();
             $data['settings'] = $data['settings_content'];
+            $data['link'] = 'property/'.$title.'/'.$propertyid;
+
             $this->load->view("property/view" , $data);
         }
         

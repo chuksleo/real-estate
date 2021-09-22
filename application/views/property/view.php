@@ -23,6 +23,9 @@ $data['javascript'] = 'app.js';
 $data['page_title'] = $property->title." | RealEstate9ja.com";
 $data['page_description'] = $property->description;
 $settings = $this->settings_model->get_all_settings();
+
+$data['ogimage'] = base_url().'assets/uploads/property/'.$property->image;
+$data['ogurl'] = base_url().$link;
 $this->load->view('section/header', $data);
 
  if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')   
@@ -218,7 +221,7 @@ $this->property_model->setPageViewForProperty($property->pid);
                         <li class="share-list">
 
 
-                              <a  href="http://twitter.com/share?url=<?php echo $url ?>&text=<?php echo $property->title ?>&hashtags=impactalifethroughDonofund" target="_blank"><img src="<?php echo base_url() ?>assets/images/icon/twitter.png"></a>
+                              <a  href="http://twitter.com/share?url=<?php echo $url ?>&text=<?php echo $property->title ?>&hashtags=RealEstate9jaProperties" target="_blank"><img src="<?php echo base_url() ?>assets/images/icon/twitter.png"></a>
                               
                         </li>
 
