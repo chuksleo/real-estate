@@ -221,7 +221,7 @@ $this->property_model->setPageViewForProperty($property->pid);
                         <li class="share-list">
 
 
-                              <a  href="http://twitter.com/share?url=<?php echo $url ?>&text=<?php echo $property->title ?>&hashtags=impactalifethroughDonofund" target="_blank"><img src="<?php echo base_url() ?>assets/images/icon/twitter.png"></a>
+                              <a  href="http://twitter.com/share?url=<?php echo $url ?>&text=<?php echo $property->title ?>&hashtags=RealEstate9jaProperties" target="_blank"><img src="<?php echo base_url() ?>assets/images/icon/twitter.png"></a>
                               
                         </li>
 
