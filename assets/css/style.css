@@ -4599,3 +4599,14 @@ button .btn-search {
     color: #fff;
   }
 }
+
+
+
+
+
+@media (min-width: 591px) and (max-width: 992px) {
+
+	.logo-img {
+    width: 40% !important;
+}
+}
