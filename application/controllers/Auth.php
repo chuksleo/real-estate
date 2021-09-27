@@ -86,7 +86,9 @@ class Auth extends CI_Controller {
             // $this->data['categories'] = $this->project_category_model->getCategories();
             $this->data['page_title'] = "Login | Realestate9ja.com ";
             $this->data['page_description'] = "Login and start selling Now";
-            
+            $data['ogimage'] = base_url().'assets/images/deafult.png';
+        $data['ogurl'] = base_url().str_replace("/", "", $_SERVER['REQUEST_URI']);  
+        
             
             $this->_render_page('auth/login', $this->data);
         }
@@ -201,6 +203,9 @@ class Auth extends CI_Controller {
             $this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
             $this->data['page_title'] = "Forgot Password | Realestate9ja";
             $this->data['page_description'] = "Recover your Password";
+            $data['ogimage'] = base_url().'assets/images/deafult.png';
+            $data['ogurl'] = base_url().str_replace("/", "", $_SERVER['REQUEST_URI']);  
+        
             $this->_render_page('auth/forgot_password', $this->data);
         } else {
             $identity_column = $this->config->item('identity', 'ion_auth');
@@ -473,7 +478,9 @@ class Auth extends CI_Controller {
             // $this->data['categories'] = $this->project_category_model->getCategories();
             $this->data['page_title'] = "Register | Realestate9ja.com";
             $this->data['page_description'] = "Want to sell you property signup now";
-            
+            $data['ogimage'] = base_url().'assets/images/deafult.png';
+            $data['ogurl'] = base_url().str_replace("/", "", $_SERVER['REQUEST_URI']);  
+        
             $this->_render_page('auth/create_user', $this->data);
         }
     }
