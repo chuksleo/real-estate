@@ -101,6 +101,7 @@ $query_builder = TRUE;
 
 // DB CONFIG DEVELOP
 
+
 $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'localhost',
@@ -126,14 +127,12 @@ $db['default'] = array(
 
 // DB CONFIG LOCAL
 
-
-
 // $db['default'] = array(
 // 	'dsn'	=> '',
 // 	'hostname' => 'localhost',
-// 	'username' => 'root',
-// 	'password' => 'pass',
-// 	'database' => 'real',
+// 	'username' => 'renaijauser',
+// 	'password' => 'edisf4@pass',
+// 	'database' => 'demoDb',
 // 	'dbdriver' => 'mysqli',
 // 	'dbprefix' => '',
 // 	'pconnect' => FALSE,
