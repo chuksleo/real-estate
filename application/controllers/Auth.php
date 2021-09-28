@@ -478,8 +478,7 @@ class Auth extends CI_Controller {
             // $this->data['categories'] = $this->project_category_model->getCategories();
             $this->data['page_title'] = "Register | Realestate9ja.com";
             $this->data['page_description'] = "Want to sell you property signup now";
-            $data['ogimage'] = base_url().'assets/images/deafult.png';
-            $data['ogurl'] = base_url().str_replace("/", "", $_SERVER['REQUEST_URI']);  
+            
         
             $this->_render_page('auth/create_user', $this->data);
         }

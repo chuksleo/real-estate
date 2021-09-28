@@ -3,6 +3,8 @@
 //Loading header
 $data['title'] = 'Login';
 $data['javascript'] = 'app.js';
+$data['ogimage'] = base_url().'assets/images/deafult.png';
+$data['ogurl'] = base_url().str_replace("/", "", $_SERVER['REQUEST_URI']);  
 $this->load->view('section/admin/header', $data);
 ?>
 
