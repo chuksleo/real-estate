@@ -4,13 +4,13 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h1>Join RealEstate Network Marketing</h1>
+                    <h1>Join Real Estate Network Marketing</h1>
                 </div>
            </div>
        </div>
-  </div>  
- 
-<?php 
+  </div>
+
+<?php
 
         $settings = $this->settings_model->get_all_settings();
         $first = $settings['phone'][0];
@@ -30,16 +30,16 @@
                 <div class="page">
                     <div class="row">
                         <div id="statpage" class="col-md-12  col-sm-12">
-                            <h3><?php echo ("Why Join Our Realestate Network Marketing")?></h3>
+                            <h3><?php echo ("Why Join Our Real Estate Network Marketing")?></h3>
                             <?php echo ($this->settings_model->getStaticContent('market_network_text')) ?>
 
 
                             <a class="btn btn-lg whatsappbtn" href="https://api.whatsapp.com/send?phone=<?php echo($phone); ?>" >Contact on WhatsApp</a>
                     </div>
                         </div>
-                        
 
-                     
+
+
 
 
                   <div class="row">
@@ -73,13 +73,13 @@
 
 
                         </ul>
-                  
+
 
 </div>
 
-                   
 
-                        
+
+
 
 
                   </div>
