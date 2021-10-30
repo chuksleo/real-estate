@@ -31,6 +31,7 @@ class Admin extends CI_Controller {
 
 
 
+
         $this->load->model('property_category_map_model');
 
         if (!$this->ion_auth->logged_in() && !$this->ion_auth->is_admin()) {
@@ -1024,10 +1025,6 @@ class Admin extends CI_Controller {
 
 
     }
-
-
-
-
 
      public function propertyTypeList () {
         
