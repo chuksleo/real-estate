@@ -237,7 +237,7 @@ function deleteType(typeid){
       $.ajax({
         type: 'POST',
         url: '<?php echo base_url(); ?>category/delete_type',
-         data: {'typeid_val':typeid,'catid_val':catId},
+        data: {'typeid_val':typeid,'catid_val':catId},
         success: function(resp) {
          
           document.getElementById('response').innerHTML = resp
@@ -267,6 +267,21 @@ function deleteMessage(mid, type){
       });
 }
 
+
+
+var imagid;
+function deleteImage(imagid){
+  var filename = $('input#image-name').val();
+  console.log(filename);
+      $.ajax({
+        type: 'POST',
+        url: '<?php echo base_url(); ?>property/deleteImage',
+        data: {'img_val':imagid, 'file_val':filename,},
+        success: function(resp) {
+          $('.item-'+imagid).hide();
+        }
+      });
+}
 
 
 function subCatList()

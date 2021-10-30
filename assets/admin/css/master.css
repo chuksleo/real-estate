@@ -742,6 +742,13 @@ table.dataTable>tbody>tr.child ul.dtr-details {
 
 
 
+
+.delete{
+  position: absolute !important;
+  z-index: 1 !important;
+  right: 0;
+}
+
 @media only screen and (max-width: 490px){
     .file-upload {
     
