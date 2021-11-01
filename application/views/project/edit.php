@@ -64,7 +64,13 @@ echo validation_errors('<span class="error">', '</span>');
 
         </form>
 
-
+<style type="text/css">
+  .delete{
+  position: relative;
+  z-index: 1;
+  right: 0;
+}
+</style>
 
         <?php $attributes = array('class' => '', 'id' => 'propertyform'); ?>
         <?= form_open_multipart(base_url() . 'admin/projects/'. $action.'/'.$project->project_id, $attributes) ?>
@@ -74,8 +80,13 @@ echo validation_errors('<span class="error">', '</span>');
         
          <?php foreach ($images as $image): ?>
           
+        <span>
+        <span class="delete" onclick='deleteImage(<?=  $image->imgid ?>)'><i class="fas fa-window-close" ></i></span>
+                 <input type="hidden" id="image-name" name="image" value="<?=  "$image->filename" ?>">
 
          <img src="<?php echo base_url() ?>assets/uploads/projects/<?= $image->image ?>" class="img-thumbnail col-sm-2" />
+         
+         </span>
           <?php endforeach ?>
            </div>  
 
