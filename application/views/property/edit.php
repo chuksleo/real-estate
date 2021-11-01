@@ -78,7 +78,7 @@ echo validation_errors('<span class="error">', '</span>');
 
         
          <?php foreach ($images as $image): ?>
-         <span class="delete" onclick='deleteImage(<?=  $image->imgid ?>)'><i class="fas fa-window-close" ></i></span>
+         <span id="delete-<?=  $image->imgid ?>" class="delete" onclick='deleteImage(<?=  $image->imgid ?>)'><i class="fas fa-window-close" ></i></span>
          <input type="hidden" id="image-name" name="image" value="<?=  "$image->filename" ?>">
          <img src="<?php echo base_url() ?>assets/uploads/property/<?= $image->filename ?>" class="img-thumbnail col-sm-2 item-<?php echo $image->imgid ?>" />
           <?php endforeach ?>
