@@ -672,7 +672,7 @@ class Property extends CI_Controller {
 
 
                 if($this->ion_auth->is_admin()){
-                    redirect('/admin/properties', 'refresh');
+                    redirect('/admin/properties/unpublished', 'refresh');
                 }else{
                    redirect('/user/properties', 'refresh');
                 }
