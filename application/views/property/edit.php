@@ -50,6 +50,13 @@ echo validation_errors('<span class="error">', '</span>');
             <div class="image-title-wrap">
             <input type="button" name="upload" id="upload" value="Upload" class="remove-image" />  
             </div>
+
+
+
+               <button id="uploading" class="remove-image" type="button" style="display: none;" disabled>
+              <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+              Uploading...
+            </button> 
           </div>
      
 
