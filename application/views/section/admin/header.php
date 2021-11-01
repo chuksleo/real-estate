@@ -279,6 +279,7 @@ function deleteImage(imagid){
         data: {'img_val':imagid, 'file_val':filename,},
         success: function(resp) {
           $('.item-'+imagid).hide();
+          $('#delete-'+imagid).hide();
         }
       });
 }
