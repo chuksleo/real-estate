@@ -185,8 +185,9 @@ class Property_model extends CI_Model {
         {
 
                 
-
+                $pub = 'Published';
                 $this->db->select()->from('properties AS p')->where('p.featured= ', 'Yes')->limit($num);
+                $this->db->where('p.property_status =',$pub)
                 $this->db->join('users AS u', 'u.id = p.uid');
                 $this->db->join('locations AS l', 'l.lid = p.location_id','left')->group_by('p.pid');
 
