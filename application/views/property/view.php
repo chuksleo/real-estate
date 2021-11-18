@@ -126,7 +126,7 @@ $this->property_model->setPageViewForProperty($property->pid);
                   <div class="property-block"> <a href="<?= base_url() ?>property/<?= $link_text ?>/<?=  $property_item->pid ?>" class="property-featured-image"> <img src="<?php echo base_url() ?>assets/uploads/property/<?php echo $property_item->image ?>" alt="<?php echo $property_item->title ?>"> <span class="images-count"><i class="fa fa-picture-o"></i> <?php echo $img_count ?></span><?php if($property_item->admin_own == "No"){?> <span class="ribbon3">Promoted</span>
     <?php } ?> </a>
                     <div class="property-info">
-                      <h4><a href="<?= base_url() ?>property/<?= $link_text ?>/<?=  $property_item->pid ?>"><?php echo $property_item->title ?></a></h4>
+                      <h4><a href="<?= base_url() ?>property/<?= $link_text ?>/<?=  $property_item->pid ?>"><?php echo substr($property_item->title, 0, 25); if(strlen($property_item->title) > 25){ echo "...";}?></a></h4>
                       <span class="location"><?php echo $property_item->location_title ?></span>
                       <div class="price"><strong>&#x20A6;</strong><span><?= $price = $this->property_model->getMoneyFormat($property_item->price) ?></span></div>
                     </div>
