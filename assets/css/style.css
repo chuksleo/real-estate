@@ -1193,7 +1193,8 @@ html[xmlns] .slides {
 }
 .property-featured-image img, .agent-featured-image img{
 	min-width:100%;
-	min-height: 235px;	
+	min-height: 235px;
+	height: 260px !important;
 }
 .overlay{
 	width:100%;

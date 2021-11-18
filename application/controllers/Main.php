@@ -4,7 +4,7 @@
       //functions
       function image_upload()
       {
-           $data['title'] = "Upload Image using Ajax JQuery in CodeIgniter";
+           $data['title'] = "Upload Image";
            $this->load->view('image_upload', $data);
       }
       function ajax_upload()
@@ -74,19 +74,19 @@
            // print($_FILES["image_file"]["name"]);
       }
 
-      function resize_image($data){
+      // function resize_image($data){
 
-         $configer =  array(
-                'image_library'   => 'gd2',
-                'source_image'    =>  $data['full_path'],
-                'maintain_ratio'  =>  TRUE,
-                'height'           =>  500,
+      //    $configer =  array(
+      //           'image_library'   => 'gd2',
+      //           'source_image'    =>  $data['full_path'],
+      //           'maintain_ratio'  =>  TRUE,
+      //           'height'           =>  500,
 
-        );
-        $this->image_lib->clear();
-        $this->image_lib->initialize($configer);
-        $this->image_lib->resize();
+      //   );
+      //   $this->image_lib->clear();
+      //   $this->image_lib->initialize($configer);
+      //   $this->image_lib->resize();
 
 
-      }
+      // }
  }
