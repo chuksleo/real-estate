@@ -163,7 +163,7 @@
                             <div class="property-info">
                               <h4><a href="<?= base_url() ?>property/<?= $link_text ?>/<?=  $property_item->pid ?>"><?php echo $property_item->title ?></a></h4>
                               <span class="location"><?php echo $property_item->location_title ?></span>
-                              <div class="price"><strong>$</strong><span><?php echo $property_item->price ?></span></div>
+                              <div class="price"><strong>&#x20A6;</strong><span><?= $price = $this->property_model->getMoneyFormat($property_item->price) ?></span></div>
                             </div>
                           </li>
                            <?php endforeach  ?>
