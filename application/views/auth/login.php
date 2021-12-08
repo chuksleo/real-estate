@@ -71,13 +71,18 @@ $this->load->view('section/header', $data);
                             </label>
                         </div>
                         </p>
-                        <p>Don't have an account?  <a href="<?php echo base_url() ?>auth/register" class="btn btn-primary"> Sign up</a></p>
+                       
 
 
                          <div class="place_order_btn">
                          <?php echo form_submit('submit', lang('login_submit_btn'), array("class" => "btn btn-primary btn-block btn-lg top-btn-add")); ?></div>
 
                         <?php echo form_close(); ?>
+
+
+
+                        <br><br><br>
+                         <p>Don't have an account?  <a href="<?php echo base_url() ?>auth/register" class="btn btn-primary"> Sign up</a></p>
 
                         <p><a href="forgot_password" class="button"><?php echo lang('login_forgot_password'); ?></a></p>
 

@@ -861,7 +861,29 @@ successfully!</strong> Our online representative will reach out to you shortly. 
 
     }
 
-
+    // function add_count($slug)
+    // {
+    // // load cookie helper
+    //     $this->load->helper('cookie');
+    // // this line will return the cookie which has slug name
+    //   $check_visitor = $this->input->cookie(urldecode($slug), FALSE);
+    // // this line will return the visitor ip address
+    //     $ip = $this->input->ip_address();
+    // // if the visitor visit this article for first time then //
+    //  //set new cookie and update article_views column  ..
+    // //you might be notice we used slug for cookie name and ip 
+    // //address for value to distinguish between articles  views
+    //     if ($check_visitor == false) {
+    //         $cookie = array(
+    //             "name"   => urldecode($slug),
+    //             "value"  => "$ip",
+    //             "expire" =>  time() + 7200,
+    //             "secure" => false
+    //         );
+    //         $this->input->set_cookie($cookie);
+    //         $this->news->update_counter(urldecode($slug));
+    //     }
+    // }
 
 
      // public function paginate($start, $num, $url, $totalRow) {
