@@ -77,7 +77,7 @@ $this->property_model->setPageViewForProperty($property->pid);
     <!-- End Page Header -->
   </div>
   <!-- Start Content -->
-
+<?php print_r($images)?>
   <div class="main" role="main">
     <div id="content" class="content full">
       <div class="container">

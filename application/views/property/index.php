@@ -6,6 +6,7 @@ $this->load->view('section/admin/header', $data);
 ?>
 
 
+<!-- Modal -->
 
       <div class="content">
                 <div class="container">
@@ -43,7 +44,7 @@ $this->load->view('section/admin/header', $data);
                                         </thead>
                                         <tbody>
                                         <?php foreach($properties as $property):?>
-                                            <tr>
+                                            <tr id="<?php echo "property_".$property->pid ?>">
                                                
                                                 <td><?php echo $property->title ?></td>
                                                  <td><?php echo $property->price?></td>
@@ -75,6 +76,9 @@ $this->load->view('section/admin/header', $data);
                                                         <a href="#" onclick="unPublishProperty(<?php echo $property->pid ?>)" class="btn btn-square btn-primary mb-2"> Unpublish</a>
 
                                                           <?php } }?>
+                                                          <button class="btn btn-square btn-primary mb-2" onclick="showDeleteDialogue(<?php echo $property->pid ?>)" >Delete</button>  
+
+
                                                   <a href="<?php echo base_url() ?>property/<?php echo $link_text ?>/<?php echo $property->pid ?>" class="btn btn-square btn-primary mb-2" target="_blank"> View</a>  
 
 
@@ -83,8 +87,33 @@ $this->load->view('section/admin/header', $data);
                                                   <?php }else{ ?>
                                                      <a href="<?php echo base_url() ?>user/properties/edit/<?php echo $property->pid ?>" class="btn btn-square btn-primary mb-2"> Edit</a></td>
                                                 <?php } ?>
+
+
+
+                                            <div class="modal fade" id="<?php echo "property_".$property->pid ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                              <div class="modal-content">
+                                                <div class="modal-header">
+                                                  <h5 class="modal-title" id="exampleModalLabel">Delete Property</h5>
+                                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                  </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                 <p>You are about to permanently delete property: <?php echo $property->title ?> </p>
+                                                 <p>Do you wish to Continue?</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                                                  <button type="button" class="btn btn-primary" onclick="deleteProperty(<?php echo $property->pid ?>)">Yes</button>
+                                                </div>
+                                              </div>
+                                            </div>
+                                        </div>
+
                                             </tr>
                                          <?php endforeach ?> 
+                               
 
                                         </tbody>
                                     </table>
@@ -98,7 +127,24 @@ $this->load->view('section/admin/header', $data);
                     </div></div>
 
 
+<script type="text/javascript">
+   let formModal = null
+    function closeForm(){
+        $('.modal').modal('hide');
+        formModal.hide(false);
+    }
+    var pid
+    function showDeleteDialogue(pid){
+        
+        formModal = $('#property_'+pid).modal({backdrop: 'static', keyboard: false, show: true});
+
+    }
+
+
+
+</script>
 <?php
+
 //Loading footer
 $this->load->view('section/admin/footer');
 ?>
