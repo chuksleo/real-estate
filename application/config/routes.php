@@ -74,6 +74,7 @@ $route['blog/(:num)/(:any)'] = 'blog/post/$1/$2';
 
 
 $route['all-properties'] = 'property/listProperties';
+$route['featured-properties'] = 'property/featuredProperties';
 $route['properties/popular'] = 'property/listPopularProperties';
 
 $route['all-properties/(:num)'] = 'property/listProperties/$1';

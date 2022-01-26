@@ -32,6 +32,8 @@ class Home extends CI_Controller {
         $data['featured_location'] = $this->location_model->getFeturedLocation();
         $data['properties'] = $this->property_model->get_properties_limit();
         $data['featured_properties'] = $this->property_model->getFeaturedProperty();
+
+        $data['featured_properties_mobile'] = $this->property_model->getFeaturedPropertyMobile();
         // $data['testimonials'] = $this->testimonial_model->get_front_testimony();
         $data['is_loggedin'] = $this->ion_auth->logged_in();
         $data['locations'] = $this->location_model->mapLocation();

@@ -76,9 +76,9 @@ class Property_images extends CI_Model {
 
 
 
-    public function deletePropertyImage($imgid){  
+    public function deletePropertyImage($pid){  
          
-            $where = "imgid = ".$imgid."";
+            $where = "property_id = ".$pid."";
 
             return $this->db->delete('property_images', $where);
     }
