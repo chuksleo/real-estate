@@ -281,7 +281,7 @@
                    
                <ul>
 
-                <?php foreach($properties as $property_item):?>
+                <?php foreach($featured_properties_mobile as $property_item):?>
                     <?php  $link_text = $this->property_model->cleanTitle($property_item->title);
 
                       $img_count = $this->property_images->getImagesCountByPropertyId($property_item->pid);
@@ -306,9 +306,12 @@
 
 
                         </ul>
+
+
+
                     </div>
-                  
-                  
+                  <br><br>
+                  <a href="<?php echo base_url() ?>featured-properties" class="btn btn-primary btn-block btn-lg  ">View All Featured Properties </a>
                   </div>
 
 

@@ -302,6 +302,8 @@ function getCategoryTypes(page){
 
                     <li><a href="<?php echo base_url() ?>all-properties">All Properties</a></li>
                     <li class="">
+                      <a href="<?php echo base_url() ?>featured-properties"><?php  echo "Featured Properties" ?></a> </li>
+                    <li class="">
                       <a href="<?php echo base_url() ?>properties/popular"><?php  echo "Popular Properties" ?></a> </li>
                     <?php foreach ($categories as $cat): ?>
                       <?php  $link_text = $this->property_model->cleanTitle($cat->title);?>

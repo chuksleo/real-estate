@@ -191,6 +191,27 @@ function publishProperty(pid){
 }
 
 
+
+var pid;
+function deleteProperty(pid){
+    
+      $.ajax({
+        type: 'POST',
+        url: '<?php echo base_url(); ?>property/delete',
+        data: {'pid':pid},
+        success: function(resp) {
+          
+          document.getElementById('message').innerHTML = resp
+          $("#property_"+pid).hide();
+          $('.modal').modal('hide');
+          formModal.hide(false);
+        }
+      });
+
+
+}
+
+
 var pid;
 function unPublishProperty(pid){
     

@@ -338,6 +338,49 @@ class Property extends CI_Controller {
 
 
 
+     public function featuredProperties ($start=0) {
+
+        $settings = $this->settings_model->get_all_settings();
+        $num = $settings['content_per_page'];
+        $data['is_loggedin'] = $this->ion_auth->logged_in();
+        $data['properties'] = $this->property_model->getFeaturedProperty($num,$start);
+        $data['title'] = "Properties";
+        $totalProperties = $this->property_model->getTotalFeaturedProperties();
+        $config['base_url'] = base_url('featured-properties') ;
+
+        $config['total_rows'] = $totalProperties;
+        $config['per_page'] = $num;
+        $config['uri_segment'] = 2;
+        $config['full_tag_open'] = '<ul class="pagination">';
+        $config['full_tag_close'] = '</ul>';
+        $config['display_pages'] = TRUE;
+
+        $cur_page = $this->pagination->cur_page;
+        $total = $totalProperties;
+        $data['s_val'] = $start + 1;
+        $check = $start + $num;
+        if($check > $total ){
+            $data['num'] = $total;
+        }else{
+        $data['num'] = $start + $num;
+        }
+
+
+        $this->pagination->initialize($config);
+        $data['pages'] = $this->pagination->create_links();
+        $data['total'] = $total;
+        $data['per_page'] = $num;
+
+        $this->load->view("property/list" , $data);
+
+    }
+
+
+
+
+
+
+
     public function category ($title, $catid, $start=0) {
         $settings = $this->settings_model->get_all_settings();
         $num = $settings['content_per_page'];
@@ -382,6 +425,7 @@ class Property extends CI_Controller {
     public function viewproperty ($title, $propertyid) {
         $data['is_loggedin'] = $this->ion_auth->logged_in();
         $data['property'] = $this->property_model->getPropertyById($propertyid);
+
         $data['images'] = $this->property_images->getImagesByPropertyId($propertyid);
         $data['facilities'] = $this->property_facility_map_model->getPropertyFacilities($propertyid);
 
@@ -761,6 +805,46 @@ class Property extends CI_Controller {
 
 
 
+    public function delete() {
+
+        $pid = $this->input->post("pid");
+
+
+        if($this->property_model->deleteProperty($pid)){
+            $propertyImages = $this->property_images->getImagesByPropertyId($pid);
+            if($propertyImages){
+                foreach ($propertyImages as $images) {
+
+                    $this->deleteImage($images->filename);
+                }
+                $this->property_images->deletePropertyImage($pid);
+
+            }
+            
+            echo '<div class="alert-info">Property has been successfully Deleted!</div>';
+        }else{
+            echo '<div class="alert-danger">Oops! An error occured when deleting property</div>';
+        }
+
+
+    }
+
+
+ public function deleteImage($image_name) {
+            
+       if($this->ion_auth->logged_in() == true){ 
+           
+               $fpath = realpath($_SERVER["DOCUMENT_ROOT"]).'/assets/uploads/property/'.$image_name;
+               
+               unlink($fpath);
+
+        }
+
+
+    }
+
+
+
 
 
     public function reported_property () {
@@ -840,26 +924,9 @@ successfully!</strong> Our online representative will reach out to you shortly. 
     }
 
 
-    public function deleteImage() {
-            
-       if($this->ion_auth->logged_in() == true){ 
-            $imgid = $this->input->post('img_val');
-            $filename = $this->input->post('file_val');
-            $img_path = base_url().'assets/uploads/property/';
-            if($this->property_images->deletePropertyImage($imgid)){ 
-               echo $img_path;
-               if (is_file($img_path.$filename)) {
-                    unlink($img_path.$filename);
-                 }
-
-            }
-            
+   
 
 
-        }
-
-
-    }
 
     // function add_count($slug)
     // {

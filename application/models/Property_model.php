@@ -180,8 +180,19 @@ class Property_model extends CI_Model {
                 return $query->result();
         }
 
+    public function getTotalFeaturedProperties(){
 
-    public function getFeaturedProperty($num=12)
+        $pub = 'Published';
+        $this->db->select()->from('properties AS p')->where('p.featured= ', 'Yes');
+        $this->db->where('p.property_status =',$pub);
+
+        $query = $this->db->get();
+        return $query->num_rows();
+
+    }
+
+
+    public function getFeaturedProperty($num=12, $start=0)
         {
 
                 
@@ -194,6 +205,24 @@ class Property_model extends CI_Model {
                 $query = $this->db->get();
                 return $query->result();
         }
+
+
+    public function getFeaturedPropertyMobile($num=1)
+        {
+
+                
+                $pub = 'Published';
+                $this->db->select()->from('properties AS p')->where('p.featured= ', 'Yes')->limit($num);
+                $this->db->where('p.property_status =',$pub);
+                $this->db->join('users AS u', 'u.id = p.uid');
+                $this->db->join('locations AS l', 'l.lid = p.location_id','left')->group_by('p.pid');
+
+                $query = $this->db->get();
+                return $query->result();
+        }
+
+
+
 
 
 
@@ -583,7 +612,12 @@ class Property_model extends CI_Model {
        
     }
 
+    public function deleteProperty($pid){  
+         
+            $where = "pid = ".$pid."";
 
+            return $this->db->delete('properties', $where);
+    }
 
 
 
