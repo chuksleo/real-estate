@@ -411,7 +411,7 @@ class Auth extends CI_Controller {
             // check to see if we are creating the user
             // redirect them back to the admin page
             $this->session->set_flashdata('message', $this->ion_auth->messages());
-            redirect("auth", 'refresh');
+           redirect("auth", 'refresh');
         } else {
             // display the create user form
             // set the flash data error message if there is one
