@@ -310,9 +310,9 @@ function getCategoryTypes(page){
                     <li><a href="<?= base_url() ?>property-category/<?= $link_text ?>/<?= $cat->catId ?>"><?= $cat->title ?></a></li>
                     <?php endforeach ?>
 
-                    <li class=""><a href="<?php echo base_url() ?>network-marketing"><?php  echo "Join Real Estate Network Marketing" ?></a>
+                    <!-- <li class=""><a href="<?php echo base_url() ?>network-marketing"><?php  echo "Join Real Estate Network Marketing" ?></a>
                                   
-                    </li>
+                    </li> -->
                     
                   </ul>
                 </li>
